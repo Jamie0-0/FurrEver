@@ -1,6 +1,8 @@
 package tw.idv.tibame.pet.controller;
 
 
+import java.io.Console;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,13 +25,15 @@ public class AddPetController {
 	
 	@PostMapping
 	public ResponseEntity<?> add(@RequestBody List<Pet> petlist) {
+//		System.out.println(petlist);
+		List<Pet> addedPets = new ArrayList<>();
 		for (Pet pet2 : petlist) {
 			Pet result = petService.add(pet2);
-			if(result != null) {
-				return ResponseEntity.ok(result);
-			}		
+			if(result == null) {
+				return new ResponseEntity<>("錯誤", HttpStatus.BAD_REQUEST);				
+			}	
+			addedPets.add(result);
 		}
-	
-		return new ResponseEntity<>("錯誤", HttpStatus.BAD_REQUEST);
+		return ResponseEntity.ok(addedPets);
 	}
 }
