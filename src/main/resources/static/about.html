@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>about</title>
+    <!-- bootstrap css -->
+    <link id="rtl-link" rel="stylesheet" type="text/css" href="../assets/css/vendors/bootstrap.css">
+
+    <!-- font-awesome css -->
+    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/font-awesome.css">
+
+    <!-- feather icon css -->
+    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/feather-icon.css">
+
+    <!-- Template css -->
+    <link id="color-link" rel="stylesheet" type="text/css" href="../assets/css/style.css">
+
+    <!-- 自己的css -->
+    <link rel="stylesheet" href="../assets/css/styleGuide.css">
+    <style>
+        .team-member img {
+            max-width: 150px;
+            max-height: 150px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header Start -->
+    <header class="pb-md-4 pb-0">
+        <div class="top-nav top-header sticky-header">
+            <div class="container-fluid-lg">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="navbar-top">
+                            <button class="navbar-toggler d-xl-none d-inline navbar-menu-button" type="button"
+                                data-bs-toggle="offcanvas" data-bs-target="#primaryMenu">
+                                <span class="navbar-toggler-icon">
+                                    <i class="fa-solid fa-bars"></i>
+                                </span>
+                            </button>
+                            <a href="index.html" class="web-logo nav-logo">
+                                <img src="../assets/images/logo/1.png" class="img-fluid blur-up lazyload" alt="">
+                            </a>
+                            <div class="rightside-box">
+                                <ul class="right-side-menu">
+                                    <li class="right-side">
+
+                                    </li>
+                                    <!-- 小鈴鐺 -->
+                                    <li class="right-side">
+                                        <a href="#" class="delivery-login-box">
+                                            <div class="delivery-icon">
+                                                <i class="fas fa-bell fa-2x fas-icon"></i>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <!-- 購物車 -->
+                                    <li class="right-side">
+                                        <div class="onhover-dropdown header-badge">
+                                            <button type="button" class="btn p-0 position-relative header-wishlist">
+                                                <i data-feather="shopping-cart"></i>
+                                                <span class="position-absolute top-0 start-100 translate-middle badge">2
+                                                    <span class="visually-hidden">unread messages</span>
+                                                </span>
+                                            </button>
+
+                                            <div class="onhover-div">
+                                                <ul class="cart-list">
+                                                    <li class="product-box-contain">
+                                                        <div class="drop-cart">
+                                                            <a href="product-left-thumbnail.html" class="drop-image">
+                                                                <img src="../assets/images/vegetable/product/1.png"
+                                                                    class="blur-up lazyload" alt="">
+                                                            </a>
+
+                                                            <div class="drop-contain">
+                                                                <a href="product-left-thumbnail.html">
+                                                                    <h5>Fantasy Crunchy Choco Chip Cookies</h5>
+                                                                </a>
+                                                                <h6><span>1 x</span> $80.58</h6>
+                                                                <button class="close-button close_button">
+                                                                    <i class="fa-solid fa-xmark"></i>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+
+                                                    <li class="product-box-contain">
+                                                        <div class="drop-cart">
+                                                            <a href="product-left-thumbnail.html" class="drop-image">
+                                                                <img src="../assets/images/vegetable/product/2.png"
+                                                                    class="blur-up lazyload" alt="">
+                                                            </a>
+
+                                                            <div class="drop-contain">
+                                                                <a href="product-left-thumbnail.html">
+                                                                    <h5>Peanut Butter Bite Premium Butter Cookies 600 g
+                                                                    </h5>
+                                                                </a>
+                                                                <h6><span>1 x</span> $25.68</h6>
+                                                                <button class="close-button close_button">
+                                                                    <i class="fa-solid fa-xmark"></i>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+
+                                                <div class="price-box">
+                                                    <h5>Total :</h5>
+                                                    <h4 class="theme-color fw-bold">$106.58</h4>
+                                                </div>
+
+                                                <div class="button-group">
+                                                    <a href="cart.html" class="btn btn-sm cart-button">View Cart</a>
+                                                    <a href="checkout.html" class="btn btn-sm cart-button theme-bg-color
+                                                    text-white">Checkout</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <!-- 聊天室 -->
+                                    <li class="right-side">
+                                        <a href="#" class="btn p-0 position-relative header-wishlist">
+                                            <i class="fab fa-rocketchat fas-icon"></i>
+                                        </a>
+                                    </li>
+                                    <!-- 個人中心 -->
+                                    <li class="right-side onhover-dropdown">
+                                        <div class="delivery-login-box">
+                                            <div class="delivery-icon">
+                                                <i data-feather="user"></i>
+                                            </div>
+                                            <div class="delivery-detail">
+                                                <h6>Hello,</h6>
+                                                <h5>My Account</h5>
+                                            </div>
+                                        </div>
+
+                                        <div class="onhover-div onhover-div-login">
+                                            <ul class="user-box-name">
+                                                <li class="product-box-contain">
+                                                    <i></i>
+                                                    <a href="login.html">登入</a>
+                                                </li>
+
+                                                <li class="product-box-contain">
+                                                    <a href="sign-up.html">註冊</a>
+                                                </li>
+
+                                                <li class="product-box-contain">
+                                                    <a href="forgot.html">忘記密碼</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid-lg">
+            <div class="row">
+                <div class="col-12">
+                    <div class="header-nav">
+                        <div class="header-nav-middle">
+                            <div class="main-nav navbar navbar-expand-xl navbar-light navbar-sticky">
+                                <div class="offcanvas offcanvas-collapse order-xl-2" id="primaryMenu">
+                                    <div class="offcanvas-body">
+                                        <ul class="navbar-nav">
+                                            <li class="nav-item dropdown trip">
+                                                <a class="nav-link dropdown-toggle" href="javascript:void(0)"
+                                                    data-bs-toggle="dropdown">出遊</a>
+                                                <ul class="dropdown-menu">
+                                                    <li>
+                                                        <a class="dropdown-item" href="#">舉辦活動</a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="dropdown-item" href="#">參加活動</a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+
+                                            <li class="nav-item dropdown">
+                                                <a class="nav-link" href="#">團購</a>
+                                            </li>
+
+                                            <li class="nav-item dropdown">
+                                                <a class="nav-link" href="#">商城</a>
+                                            </li>
+
+                                            <li class="nav-item dropdown">
+                                                <a class="nav-link" href="#">交流天地</a>
+                                            </li>
+
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="/template/front-end/about.html">關於我們</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Header End -->
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="team-member">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="img-container">
+                                <img src="/img/08.jpg" alt="Person 1" class="img-thumbnail rounded-circle img-fluid">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h3 class="h3">08徐瑋呈</h3>
+                            <p>簡短介紹成員 1 的文字。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="team-member">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="img-container">
+                                <img src="/img/13.jpg" alt="Person 2" class="img-thumbnail rounded-circle img-fluid">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h3 class="h3">13張雅儀</h3>
+                            <p>簡短介紹成員 2 的文字。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="team-member">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="img-container">
+                                <img src="/img/18.jpg" alt="Person 1" class="img-thumbnail rounded-circle img-fluid ">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h3 class="h3">18顏廷瑋</h3>
+                            <p>簡短介紹成員 3 的文字。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="team-member">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="img-container">
+                                <img src="/img/17.jpg" alt="Person 2" class="img-thumbnail rounded-circle img-fluid">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h3 class="h3">17余靜璇</h3>
+                            <p>簡短介紹成員 4 的文字。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="team-member">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="img-container">
+                                <img src="/img/28.png" alt="Person 5" class="img-thumbnail rounded-circle img-fluid">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h3 class="h3">28羅宸康</h3>
+                            <p>簡短介紹成員 5 的文字。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="team-member">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="img-container">
+                                <img src="/img/30.png" alt="Person 6" class="img-thumbnail rounded-circle img-fluid">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h3 class="h3">30謝惇羽</h3>
+                            <p>簡短介紹成員 6 的文字。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+     <!-- Bg overlay Start -->
+     <div class="bg-overlay"></div>
+     <!-- Bg overlay End -->
+ 
+     <!-- latest jquery-->
+     <script src="../assets/js/jquery-3.6.0.min.js"></script>
+ 
+     <!-- jquery ui-->
+     <script src="../assets/js/jquery-ui.min.js"></script>
+ 
+     <!-- Bootstrap js-->
+     <script src="../assets/js/bootstrap/bootstrap.bundle.min.js"></script>
+     <script src="../assets/js/bootstrap/bootstrap-notify.min.js"></script>
+     <script src="../assets/js/bootstrap/popper.min.js"></script>
+ 
+     <!-- feather icon js-->
+     <script src="../assets/js/feather/feather.min.js"></script>
+     <script src="../assets/js/feather/feather-icon.js"></script>
+ 
+     <!-- Lazyload Js -->
+     <script src="../assets/js/lazysizes.min.js"></script>
+ 
+     <!-- Slick js-->
+     <script src="../assets/js/slick/slick.js"></script>
+     <script src="../assets/js/slick/slick-animation.min.js"></script>
+     <script src="../assets/js/slick/custom_slick.js"></script>
+ 
+     <!-- Auto Height Js -->
+     <script src="../assets/js/auto-height.js"></script>
+ 
+     <!-- Timer Js -->
+     <script src="../assets/js/timer1.js"></script>
+ 
+     <!-- Fly Cart Js -->
+     <script src="../assets/js/fly-cart.js"></script>
+ 
+     <!-- Quantity js -->
+     <script src="../assets/js/quantity-2.js"></script>
+ 
+     <!-- WOW js -->
+     <script src="../assets/js/wow.min.js"></script>
+     <script src="../assets/js/custom-wow.js"></script>
+ 
+     <!-- script js -->
+     <script src="../assets/js/script.js"></script>
+</body>
+
+</html>
