@@ -17,14 +17,6 @@ public class PetServiceImpl implements PetService {
 
 	@Override
 	public Pet add(Pet pet) {
-//		Integer petType = pet.getPetType();
-//		Integer petAge = pet.getPetAge();
-//		Integer petPerson = pet.getPetPerson();
-//		String petBreed = pet.getPetBreed();
-//		String petName = pet.getPetName();
-//		String petSex = pet.getPetSex();
-//		byte[] petPic = pet.getPetPic();
-//		Integer petUid = pet.getPetUid();
 		return petDao.save(pet);
 	}
 

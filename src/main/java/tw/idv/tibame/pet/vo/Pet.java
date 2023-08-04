@@ -1,10 +1,6 @@
 package tw.idv.tibame.pet.vo;
 
 
-
-
-import org.springframework.data.annotation.Transient;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.persistence.Column;

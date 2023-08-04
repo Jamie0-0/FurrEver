@@ -26,8 +26,18 @@ target/
 /nbdist/
 /.nb-gradle/
 build/
-!**/src/main/**/build/
-!**/src/test/**/build/
+
 
 ### VS Code ###
 .vscode/
+spring.log
+spring.log.2023-08-02.0.gz
+bin/
+
+src/main/resources/
+spring.log.2023-08-03.0.gz
+src/main/java/tw/idv/tibame/trip/controller/findTripController.java
+src/main/java/tw/idv/tibame/trip/dao/TripDao.java
+src/main/java/tw/idv/tibame/trip/service/TripService.java
+src/main/java/tw/idv/tibame/trip/service/impl/TripServiceImpl.java
+src/main/java/tw/idv/tibame/trip/vo/Trip.java

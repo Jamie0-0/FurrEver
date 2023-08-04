@@ -1,5 +1,8 @@
 package tw.idv.tibame.master.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,14 +20,25 @@ public class LoginMasterController {
 
 	@Autowired
 	private MasterService masterService;
-	
+
 	@GetMapping("/{mEmail}/{mPwd}")
 	public ResponseEntity<?> login(HttpSession session, @PathVariable String mEmail, @PathVariable String mPwd) {
 		Integer loginMaster = masterService.login(mEmail, mPwd);
-		if(loginMaster == null) {
+		if (loginMaster == null) {
 			return new ResponseEntity<>("查無帳號或密碼錯誤", HttpStatus.BAD_REQUEST);
 		}
 		session.setAttribute("mid", loginMaster);
-		return ResponseEntity.ok(loginMaster);
+		String location = (String) session.getAttribute("location");
+
+		if (location == null || location.isBlank()) {
+			location = "/index.html";
+		}
+
+		session.removeAttribute("location");
+
+		Map<String, Object> response = new HashMap<>();
+		response.put("loginMaster", loginMaster);
+		response.put("location", location);
+		return ResponseEntity.ok(response);
 	}
 }

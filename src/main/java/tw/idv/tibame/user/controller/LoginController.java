@@ -1,5 +1,8 @@
 package tw.idv.tibame.user.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +28,17 @@ public class LoginController {
 			return new ResponseEntity<>("查無帳號或密碼錯誤", HttpStatus.BAD_REQUEST);
 		}
 		session.setAttribute("uid", loginUser);
-		return ResponseEntity.ok(loginUser);
+		String location = (String) session.getAttribute("location");
+		
+		if(location == null || location.isBlank()) {
+			location = "/index.html";
+		}
+		
+		session.removeAttribute("location");
+		
+		Map<String, Object> response = new HashMap<>();
+	    response.put("loginUser", loginUser);
+	    response.put("location", location);
+		return ResponseEntity.ok(response);
 	}
 }
