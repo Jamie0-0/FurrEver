@@ -17,4 +17,14 @@
     <servlet-name>ProductServlet</servlet-name>
     <url-pattern>/pro.do</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>MyServlet</display-name>
+    <servlet-name>MyServlet</servlet-name>
+    <servlet-class>tw.idv.tibame.articles.controller.MyServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MyServlet</servlet-name>
+    <url-pattern>/MyServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

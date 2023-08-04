@@ -149,9 +149,9 @@ function fctSearch(data) {
 function init() {
 	
 	$.ajax({
-		url: "forum",
+		url: "forum/hot",
 		type: "GET",
-		data: { order: "hot", page: "1" },
+		data: { page: 1 , size: 3},
 		dataType: "json",
 		success: function(data) {
 			// 存全部文章去Redis
