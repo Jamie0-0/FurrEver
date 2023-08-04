@@ -31,3 +31,16 @@ build/
 
 ### VS Code ###
 .vscode/
+spring.log
+bin/.gitignore
+bin/mvnw
+bin/mvnw.cmd
+bin/pom.xml
+bin/README.md
+bin/.mvn/wrapper/maven-wrapper.jar
+bin/.mvn/wrapper/maven-wrapper.properties
+bin/src/main/java/tw/idv/tibame/FurrEverApplication.class
+bin/src/main/java/tw/idv/tibame/ServletInitializer.class
+bin/src/main/resources/application.properties
+bin/src/main/webapp/index.html
+bin/src/test/java/tw/idv/tibame/FurrEverApplicationTests.class
