@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @SpringBootApplication
 @ComponentScan("tw.idv.tibame.*.*")
-@EnableJpaRepositories("tw.idv.tibame.articles.dao")
+@EnableJpaRepositories("tw.idv.tibame.*.*")
 @EnableTransactionManagement
 public class FurrEverApplication {
 
