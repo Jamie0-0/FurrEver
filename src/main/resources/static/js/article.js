@@ -8,15 +8,15 @@ let urlArtId = 0;
 function fetchComment() {
 	fetch("comment").then(response => response.json()).
 		then(data => {
-
+			console.log(data);
 			for (let i = 0; i < data.length; i++) {
-				let dataId = data[i].com_id;
+				let dataId = data[i].comId;
 				comTotal = data.length;
 				const responseItem = `
 			<div class="com_wrapper_inner">
 				<div class="card w-100">
 					<div class="comment-report position-absolute top-0 end-0 me-1">
-						<i type="button" class="fa-solid fa-flag com-report" comId="${data[i].com_id}"
+						<i type="button" class="fa-solid fa-flag com-report" comId="${data[i].comId}"
 							data-bs-toggle="modal" data-bs-target="#staticBackdrop"></i>
 					</div>
 					<div class="card-body">
@@ -26,16 +26,16 @@ function fetchComment() {
 									class="list-group list-group-horizontal d-flex justify-content-start">
 									<li class="list-group-item border-0">
 										<img alt="Avatar" class="avatar rounded-circle img-fluid"
-											src="avatar?uid=${data[i].com_user_id}">
+											src="avatar?uid=${data[i].comUserId}">
 									</li>
 									<li class="list-group-item border-0 com_username">
-										${data[i].user.u_name}
+										${data[i].artUser.uname}
 									</li>
 									<li class="list-group-item com_time border-0 d-none d-md-block">
-										${data[i].com_date_time}
+										${data[i].comDateTime}
 									</li>
-									<li class="list-group-item border-0 card-text fw-bold fs-5 my-2">
-										${data[i].com_content}
+									<li class="list-group-item com-content border-0 card-text fw-bold fs-5 my-2">
+										${data[i].comContent}
 									</li>
 								</ul>
 							</div>
@@ -50,18 +50,16 @@ function fetchComment() {
 				</div>
 			</div>
     `;
+ 
 				$("#com_wrapper").append(responseItem);
-
 				// 擴充: 回覆的回覆
 				$(`.com-reply-btn${dataId}`).on("click", function () {
-
-					$(`div.com-reply-wrapper${dataId}`).toggleClass(" d-none");
 					// 要發送的 replyComId
 					let replyComId = dataId;
-					let url = "reply?reply_com_id=" + replyComId;
+					let url = "reply?replyComId=" + replyComId;
 					const comReplyWrapper = $(`.com-reply-wrapper${dataId}`);
-					comReplyWrapper.empty();
 
+					if($(`div.com-reply-wrapper${dataId}`).hasClass("d-none")){
 
 					//  添加reply的留言區塊
 					const replybutt = `
@@ -71,19 +69,15 @@ function fetchComment() {
 										<button class="card-link btn btn-secondary post-button"
 											type="submit" style="float:right;">回覆</button>
 									</div>
-									<input name="replyComId" type="hidden" value="${reply_com_id}">
+									<input name="replyComId" type="hidden" value="${replyComId}">
 									<input name="replyUserId" type="hidden" value="1">
 								</form>
 								`;
 
 
 					let that = $(this).closest("div.card-body").find("div").last();
-					if (that.find("button").length == 0) {
 						that.after(replybutt);
 						that.find("button").attr("replyComId", replyComId);
-					} else {
-						$(this).closest("div.card-body").find("form").remove();
-					}
 					
 					//  添加reply的留言區塊 end
 
@@ -100,22 +94,22 @@ function fetchComment() {
                     <img alt="Avatar"
                         class="avatar rounded-circle img-fluid"
                         alt="./images/Avatar.png"
-                        src="avatar?uid=${data[k].reply_user_id}">
+                        src="avatar?uid=${data[k].replyUserId}">
                 </div>
                 <div class="reply_username border-0 col-2 col-sm-2">
-                    ${data[k].user.u_name}
+                    ${data[k].artUser.uname}
                 </div>
                 <p class="reply_time d-none d-sm-block border-0 col-1 col-sm-2">
-                    ${data[k].reply_date_time}
+                    ${data[k].replyDateTime}
                 </p>
-                <div class="reply border-0 col col-sm">
-                    ${data[k].reply_content}
+                <div class="reply-content border-0 col col-sm fw-bold fs-6">
+                    ${data[k].replyContent}
                 </div>
             </div>
             <i type="button"
                 class="fa-solid fa-flag reply-report position-absolute end-0 top-0 d-none d-md-block"
                 data-bs-toggle="modal" data-bs-target="#staticBackdrop"
-                replyId="${data[k].reply_id}"></i>
+                replyId="${data[k].replyId}"></i>
         </div>
     </div>
 </div>
@@ -128,18 +122,26 @@ function fetchComment() {
 					// reply report button
 					$(`.com-reply-wrapper${dataId}`).on("click", "i.reply-report", function (e) {
 						e.stopPropagation();
-						let reply_id = $(this).attr("replyId");
+						let replyId = $(this).attr("replyId");
 						$("#report-submit").attr("replyId", replyId);
 						$("#report-submit").attr("artId", 0);
 						$("#report-submit").attr("comId", 0);
 						// 傳id去 $("#report-submit")
 					});
+					$(`div.com-reply-wrapper${dataId}`).removeClass(" d-none");
+						
+						}else{
+							$(`div.com-reply-wrapper${dataId}`).addClass(" d-none");
+							$(this).closest("div.card-body").find("form").remove();  //移除發言區塊
+							comReplyWrapper.empty();   // 移除留言
+						}
 				});  // 擴充 end						
 			}  // 大迴圈 end
 
 			// 避免YT影響RWD
 			$("iframe").removeAttr("width").removeAttr("height");
 			$("iframe").addClass("mw-100").css("aspect-ratio", "16/9");
+			$("li.com-content p").addClass(" fs-5");
 		});  // fetch end
 
 }
@@ -178,19 +180,18 @@ function buildArticle() {
 				setTimeout(function () {
 					$(window).attr('location', 'forum.html');
 				}, 2000);
-
-
 			} else {
-				$(".author").text(data[0].u_name);    // 登入的人  暫定抓發文人
-				$(".author").attr("uid", data[0].uid);  // 登入的人 暫定抓發文人
-				$("time.post-time").text(data[0].art_po_time);
-				$("button.blog-button").attr("artId", data[0].art_id);
-				$("#article-title").text(data[0].art_title);
-				$("#article-content").append(data[0].art_content);
-				$("i.fa-heart").text(data[0].art_like);
-				$("#ownerAvatar").attr("src", "avatar?uid=" + data[0].uid);
-				$("#article-report").attr("artId", data[0].art_id)
-				urlArtId = data[0].art_id;
+				$(".author").text(data.artUser.uname); 
+				$(".author").attr("uid", data.artUserId); 
+				$("time.post-time").text(data.artPoTime);
+				$("button.blog-button").attr("artId", data.artId);
+				$("#article-title").text(data.artTitle);
+				$("#article-content").append(data.artContent);
+				$("i.fa-heart").text(data.artLike);
+				$("#ownerAvatar").attr("src", "avatar?uid=" + data.artUserId);
+				$("#article-report").attr("artId", data.artId)
+				urlArtId = data.artId;
+				console.log("urlArtId"+urlArtId)
 
 				// Like
 				$("#article-like").on("click", function (e) {
@@ -198,7 +199,7 @@ function buildArticle() {
 					e.stopPropagation();
 					$(this).css("pointer-events", "none");
 
-					fetch(`artLike?artId=${data[0].art_id}&uid=3`)
+					fetch(`artLike?artId=${data.artId}&uid=3`)
 						.then(response => response.json())
 						.then(data => {
 							if (data === -1) {
@@ -219,7 +220,7 @@ function buildArticle() {
 				// Share button
 				$("#share-tooltip").on("click", () => {
 
-					let url = "localhost:8081/TirTirCat/articleXxx?artId=" + urlArtId;
+					let url = "localhost:8080/FurrEver/articleXxx?artId=" + urlArtId;
 					navigator.clipboard.writeText(url);
 					alert(`文章網址${url}已複製成功`);
 				})
@@ -244,13 +245,15 @@ function buildArticle() {
 
 $(document).ready(function () {
 	$("#summer2").on("click", function () {
+		console.log("comArtId="+urlArtId);
 		var markupStr = $('#summernote2').val();
 		$.ajax({
 			url: "commentInsert",
-			type: "POST",
+			type: "GET",
+			contentType: "application/json", 
 			data: {
-				comArtId: urlArtId
-				, comUserId: "1"  // 屆時填入發文者id
+				"comArtId": urlArtId
+				, comUserId: 1
 				, comContent: markupStr
 			},
 			dataType: "json",
@@ -294,45 +297,50 @@ $(document).ready(function () {
 
 		$("#post-new").on("click", function () {
 
-			content_value = $('#summernote1').val();
-			title_value = $(".title_post").val();
-			formData = new FormData();  // 洗掉之前的formData; 因為是全域變數 不new會越來越多
-			formData.append('artUserId', 1); // 暫定1 應為登入者
-			formData.append('artTitle', title_value);
-			formData.append('artContent', content_value);
-
-			for (let i = 0; i < imgFilesLength; i++) {
-				formData.append('image', imgFiles[i]);
+			content_value = $('#summernote1').val().trim();
+			title_value = $(".title_post").val().trim();
+			
+			// 有時間再處理僅換行也可以發文的問題
+			if(content_value == "" || title_value == ""){
+				alert("標題以及跟內容跟毛小孩一樣不能走失喔!")
+			}else{
+				formData = new FormData();  // 洗掉之前的formData; 因為是全域變數 不new會越來越多
+			//	formData.append('artUserId', 1); // 暫定1 應為登入者	
+				formData.append('artTitle', title_value);
+				formData.append('artContent', content_value);
+	
+				for (let i = 0; i < imgFilesLength; i++) {
+					formData.append('images', imgFiles[i]);
+				}
+	
+				$.ajax({
+					url: "insertArticle",
+					type: "POST",
+					data: formData,
+					processData: false,
+					contentType: false,
+					success: function (data) {
+	
+						if (data === 1) {
+							alert("發文成功")
+							fetch("refresh")
+								.then(response => response.json())
+								.then(data => {
+									console.log("refresh=" + data);
+								});
+							$(window).attr("location", "forum.html")
+	
+						} else {
+							alert("發文失敗")
+						}
+					},
+				});
 			}
-
-			$.ajax({
-				url: "ArtInsert",
-				type: "POST",
-				data: formData,
-				processData: false,
-				contentType: false,
-				success: function (data) {
-
-					if (data === 1) {
-						alert("發文成功")
-						fetch("refresh")
-							.then(response => response.json())
-							.then(data => {
-								console.log("refresh=" + data);
-							});
-						$(window).attr("location", "forum.html")
-
-					} else {
-						alert("更新失敗")
-					}
-				},
-			});
 		});
-
 
 	} else {
 		for (let i = 1; i <= 5; i++) {
-			$(`#carouPic${i}`).attr("src", `carousel?picOrder=${i}`);
+			$(`#carouPic${i}`).attr("src", `carousel?picOrder=${i-1}`);
 		}
 
 		buildArticle();
@@ -384,13 +392,14 @@ $(document).ready(function () {
 					formData.append('artId', urlArtId);
 					formData.append('artTitle', title_value);
 					formData.append('artContent', content_value);
+					formData.append('artLike',$("i.fa-heart").text())
 
 					for (let i = 0; i < imgFilesLength; i++) {
-						formData.append('image', imgFiles[i]);
+						formData.append('images', imgFiles[i]);
 					}
 
 					$.ajax({
-						url: "articleUpdate",
+						url: "insertArticle",
 						type: "POST",
 						data: formData,
 						processData: false,
@@ -436,6 +445,7 @@ $("#article-comment").on("click", function () {
 $("#com_wrapper").on("click", "i.com-report", function (e) {
 	e.stopPropagation();
 	let comId = $(this).attr("comId");
+	console.log(comId);
 	$("#report-submit").attr("comId", comId);
 	$("#report-submit").attr("artId", 0);
 	$("#report-submit").attr("replyId", 0);
