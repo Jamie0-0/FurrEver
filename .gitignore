@@ -44,3 +44,7 @@ bin/src/main/java/tw/idv/tibame/ServletInitializer.class
 bin/src/main/resources/application.properties
 bin/src/main/webapp/index.html
 bin/src/test/java/tw/idv/tibame/FurrEverApplicationTests.class
+src/main/resources/static/
+spring.log.2023-08-04.0.gz
+spring.log.2023-08-05.0.gz
+spring.log.2023-08-06.0.gz

@@ -1,5 +1,8 @@
 package tw.idv.tibame.user.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,7 +19,7 @@ import jakarta.servlet.http.HttpSession;
 public class LogoutController {
 
 	@PostMapping
-	public ResponseEntity<String> logout(HttpSession session, HttpServletResponse response, HttpServletRequest request) {
+	public ResponseEntity<?> logout(HttpSession session, HttpServletResponse response, HttpServletRequest request) {
 		// 清除 Session 中的用戶相關資訊
 		session.invalidate();
 
@@ -27,7 +30,10 @@ public class LogoutController {
 				cookie.setMaxAge(0);
 				response.addCookie(cookie);
 			}
+
 		}
-		return new ResponseEntity<>("登出成功", HttpStatus.OK);
+		Map<String, Object> responseMap = new HashMap<>();
+		responseMap.put("logoutsuccess", 1);
+		return  ResponseEntity.ok(responseMap);
 	}
 }

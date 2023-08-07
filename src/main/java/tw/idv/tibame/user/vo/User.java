@@ -60,6 +60,7 @@ public class User {
 	@JsonProperty("uGender")
 	private String uGender;
 
+	@Transient
 	@Column(name = "u_reg", insertable = false)
 	private Timestamp uReg;
 
@@ -74,9 +75,11 @@ public class User {
 	@Transient
 	private Integer uStatus;
 
+	@Transient
 	@Column(name = "gm_id")
 	private Integer gmId;
 
+	@Transient
 	@Column(name = "gm_date")
 	private Timestamp gmDate;
 
@@ -84,9 +87,11 @@ public class User {
 	@JsonProperty("uAbout")
 	private String uAbout;
 
+	@Transient
 	@Column(name = "u_2")
 	private String u2;
 
+	@Transient
 	@Column(name = "u_3")
 	private String u3;
 
