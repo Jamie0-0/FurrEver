@@ -13,4 +13,6 @@ public interface UserService {
 	User findUser(Integer uid);
 	
 	Integer updateUser(User user);
+	
+	User findUserName(String uEmail);
 }

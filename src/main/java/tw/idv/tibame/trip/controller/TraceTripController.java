@@ -16,8 +16,8 @@ import tw.idv.tibame.trip.service.TripService;
 import tw.idv.tibame.trip.vo.Trip;
 
 @RestController
-@RequestMapping("findtrip")
-public class findTripController {
+@RequestMapping("tracetrip")
+public class TraceTripController {
 
 	@Autowired
 	private TripService tripService;
@@ -27,13 +27,13 @@ public class findTripController {
 		Integer uid = (Integer) session.getAttribute("uid");
 		Map<String, Object> response = new HashMap<>();
 		if (uid != null) {
-			List<Trip> triplist = tripService.findTrip(uid);
+			List<Trip> triplist = tripService.findTraceTrips(uid);
 			if (triplist.isEmpty()) {
-				response.put("noAct",0);
+				response.put("noAct", 0);
 				return ResponseEntity.ok(response);
 			}
-			
-			return ResponseEntity.ok(triplist);
+			response.put("activity", triplist);
+			return ResponseEntity.ok(response);
 		}
 		response.put("noUser", 0);
 		return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
