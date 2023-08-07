@@ -42,7 +42,10 @@ public class ArticlesServiceImpl implements ArticlesService {
 		Article article = Article.builder().artId(artId).artUserId(2).artTitle(artTitle).artContent(artContent)
 				.artLike(artLike).build();
 
-		Article existingArticle = dao1.findById(artId).orElse(null);
+		Article existingArticle = new Article();
+		if (artId != null) {
+			existingArticle = dao1.findById(artId).orElse(null);
+		}
 
 		if (existingArticle != null) {
 			article.setArtRepCount(existingArticle.getArtRepCount());
