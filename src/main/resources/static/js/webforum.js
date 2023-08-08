@@ -23,6 +23,7 @@ function addArt(data) {
 				// 留言預覽功能
 				$("ul.comment-list").eq(i).append(`<li class="list-group-item">${data[i].comments[k].artUser.uname}說:${data[i].comments[k].comContent}</li>`);
 			}
+			$(document).off("click", "div.blog-contain i.fa-comment"); // 解除之前绑定的事件 這樣重綁$(document)才會生效
 			$(document).on("click", "div.blog-contain i.fa-comment", function(e) {
 				let index = $("div.blog-contain i.fa-comment").index(this);
 				let commentList = $("ul.comment-list").eq(index)
