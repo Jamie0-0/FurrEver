@@ -27,23 +27,26 @@ public class LoginController {
 		Integer loginUser = userService.login(uEmail, uPwd);
 		User userlist = userService.findUserName(uEmail);
 		String userName = userlist.getUName();
-		if(loginUser == null) {
+		if (loginUser == null) {
 			return new ResponseEntity<>("查無帳號或密碼錯誤", HttpStatus.BAD_REQUEST);
 		}
 		session.setAttribute("uid", loginUser);
 		session.setAttribute("uName", userName);
 		String location = (String) session.getAttribute("location");
-		
-		if(location == null || location.isBlank()) {
-			location = "/index.html";
+		System.out.println(location);
+		if (location == null || location.isBlank()) {
+			location = "";
 		}
-		
+		else {
+			location = "index.html";
+		}
+
 		session.removeAttribute("location");
-		
+
 		Map<String, Object> response = new HashMap<>();
-	    response.put("loginUser", loginUser);
-	    response.put("location", location);
-	    response.put("userName", userName);
+		response.put("loginUser", loginUser);
+		response.put("location", location);
+		response.put("userName", userName);
 		return ResponseEntity.ok(response);
 	}
 }

@@ -11,6 +11,6 @@ import tw.idv.tibame.trip.vo.ActLike;
 public interface ActLikeDao extends CrudRepository<ActLike, Integer>{
 	
 	@Modifying
-	@Query(value = "delete from act_like where t_act_id = ?1 and uid = ?2", nativeQuery = true)
+	@Query(value = "delete from act_like where t_act_id = ?1 and uid = ?2 ", nativeQuery = true)
 	Integer deledeleteByTActIdAndUid(Integer tActId, Integer uid);
 }

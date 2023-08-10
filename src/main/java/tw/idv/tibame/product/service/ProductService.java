@@ -9,4 +9,6 @@ public interface ProductService {
 	List<Product> showMyProduct(Integer uid);
 	
 	Integer deleteMyProductLike(Integer plUid, Integer plPId);
+	
+	List<Product> selectMyProduct(Integer uid);
 }

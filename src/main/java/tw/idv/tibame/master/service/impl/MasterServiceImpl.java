@@ -30,4 +30,13 @@ public class MasterServiceImpl implements MasterService{
 		return result;
 	}
 
+	@Override
+	public Master findMasterName(String mEmail) {
+		Master result = masterDao.findBymEmail(mEmail);
+		if(result == null) {
+			return result;
+		}
+		return null;
+	}
+
 }

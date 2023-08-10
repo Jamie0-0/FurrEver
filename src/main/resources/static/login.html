@@ -243,6 +243,12 @@
 							<h3>登入</h3>
 
 						</div>
+						<label>
+							<input type="radio" name="loginType" value="user" checked> 會員登入
+						</label>
+						<label>
+							<input type="radio" name="loginType" value="master"> 廠商登入
+						</label>
 						<div id="error-messages"></div>
 						<div class="input-box">
 							<div class="col-12">
@@ -388,7 +394,8 @@
 			document.querySelector('#loginBtn').addEventListener("click", function () {
 				let email_el = $("#email").val();
 				let pwd_el = $("#password").val();
-
+				let loginType = document.querySelector('input[name="loginType"]:checked').value;
+				console.log(loginType);
 				const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 				if (email_el.trim() === '' || !emailRegex.test(email_el)) {
 					document.getElementById('error_email').style.color = "red";
@@ -406,50 +413,65 @@
 				} else {
 					document.getElementById('error_pwd').innerText = ''; // 清除錯誤訊息
 				}
-
-				const userurl = `login/${encodeURIComponent(email_el)}/${encodeURIComponent(pwd_el)}`;
-				// console.log(url);
-				fetch(userurl, {
-					method: "GET",
-					headers: {
-						"Content-Type": "application/json",
-					},
-				})
-					.then((response) => response.json())
-					.then((data) => {
-						// 登入請求成功後的處理				
-						sessionStorage.removeItem("mid");
-						sessionStorage.setItem("uid", data);
-						document.getElementById('error_pwd').innerText = ''; // 清除錯誤訊息
-						location.href = data.location;
+				
+				if (loginType === 'user') {
+					const userurl = `login/${encodeURIComponent(email_el)}/${encodeURIComponent(pwd_el)}`;
+					// console.log(url);
+					fetch(userurl, {
+						method: "GET",
+						headers: {
+							"Content-Type": "application/json",
+						},
 					})
-					.catch((error) => {
-						document.getElementById('error_pwd').style.color = "red";
-						document.getElementById('error_pwd').innerText = '查無帳號或密碼錯誤';
-					});
+						.then((response) => response.json())
+						.then((data) => {
+							// 登入請求成功後的處理				
 
+							sessionStorage.removeItem("mid");
+							sessionStorage.removeItem('companyName')
+							sessionStorage.setItem("uid", data.loginUser);
+							sessionStorage.setItem("username", data.userName)
+							console.log(data.location);
+							document.getElementById('error_pwd').innerText = ''; // 清除錯誤訊息
+							if(data.location === ''){
+								location.href = "member_center.html";
+							}
+							// else{
+							// 	location.href = 'https://www.google.com';
+							// }
+						})
+						.catch((error) => {
+							document.getElementById('error_pwd').style.color = "red";
+							document.getElementById('error_pwd').innerText = '查無帳號或密碼錯誤';
+						});
+				}
 
-				const masterurl = `loginMaster/${encodeURIComponent(email_el)}/${encodeURIComponent(pwd_el)}`;
-				// console.log(url);
-				fetch(masterurl, {
-					method: "GET",
-					headers: {
-						"Content-Type": "application/json",
-					},
-				})
-					.then((response) => response.json())
-					.then((data) => {
-						// 登入請求成功後的處理				
-						sessionStorage.removeItem("uid");
-						sessionStorage.setItem("mid", data);
-						document.getElementById('error_pwd').innerText = ''; // 清除錯誤訊息
-						location.href = data.location;
+				if (loginType === 'master') {
+					const masterurl = `loginMaster/${encodeURIComponent(email_el)}/${encodeURIComponent(pwd_el)}`;
+					// console.log(url);
+					fetch(masterurl, {
+						method: "GET",
+						headers: {
+							"Content-Type": "application/json",
+						},
 					})
-					.catch((error) => {
-						document.getElementById('error_pwd').style.color = "red";
-						document.getElementById('error_pwd').innerText = '查無帳號或密碼錯誤';
-					});
-
+						.then((response) => response.json())
+						.then((data) => {
+							// 登入請求成功後的處理		
+							if (data.status === 'success') {
+								sessionStorage.removeItem("uid");
+								sessionStorage.removeItem('username');
+								sessionStorage.setItem("mid", data.Masterid);
+								sessionStorage.setItem('companyName', data.companyName);
+								document.getElementById('error_pwd').innerText = ''; // 清除錯誤訊息
+								// location.href = data.location;
+							}
+						})
+						.catch((error) => {
+							document.getElementById('error_pwd').style.color = "red";
+							document.getElementById('error_pwd').innerText = '查無帳號或密碼錯誤';
+						});
+				}
 			});
 		});
 	</script>

@@ -13,22 +13,22 @@ import tw.idv.tibame.trip.service.TripService;
 import tw.idv.tibame.trip.vo.Trip;
 
 @Component
-public class TripServiceImpl implements TripService{
+public class TripServiceImpl implements TripService {
 
 	@Autowired
 	private TripDao tripDao;
-	
+
 	@Autowired
 	private ActLikeDao actLikeDao;
-	
+
 	@Autowired
 	private TripJdbcDao tripJdbcDao;
 
 	@Override
-	public List<Trip> findTrip(Integer uid) {
-		return tripJdbcDao.findByUid(uid);
+	public List<Trip> selectMyEndTrip(Integer uid) {
+		return tripJdbcDao.findMyEndTripByUid(uid);
 	}
-	
+
 	@Transactional
 	@Override
 	public Integer edit(Integer tId, Integer uid) {
@@ -39,20 +39,36 @@ public class TripServiceImpl implements TripService{
 	@Transactional
 	@Override
 	public Integer cancle(Integer uid, Integer tActId) {
-		
+
 		return tripDao.updateByUidAndPActId(uid, tActId);
 	}
 
 	@Override
 	public List<Trip> findTraceTrips(Integer uid) {
-		return tripDao.findByAUid(uid);
+		return tripJdbcDao.findTraceTripByUid(uid);
 	}
 
 	@Override
 	@Transactional
-	public Integer deleteMyTripLike(Integer tActId, Integer uid ) {
+	public Integer deleteMyTripLike(Integer uid, Integer tActId) {
+		System.out.println("tActId:" + tActId);
 		return actLikeDao.deledeleteByTActIdAndUid(tActId, uid);
-		
+
+	}
+
+	@Override
+	public List<Trip> selectMyHoldTrip(Integer uid) {
+		return tripJdbcDao.findMyHoldTripByUid(uid);
+	}
+
+	@Override
+	public List<Trip> selectJoinTrip(Integer uid) {
+		return tripJdbcDao.findJoinTripByUid(uid);
+	}
+
+	@Override
+	public List<Trip> selectHistoryJoinTrip(Integer uid) {
+		return tripJdbcDao.findJoinHistoryTripByUid(uid);
 	}
 
 }

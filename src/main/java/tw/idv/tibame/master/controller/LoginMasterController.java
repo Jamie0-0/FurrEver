@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.servlet.http.HttpSession;
 import tw.idv.tibame.master.service.MasterService;
+import tw.idv.tibame.master.vo.Master;
 
 @RestController
 @RequestMapping("loginMaster")
@@ -24,8 +25,22 @@ public class LoginMasterController {
 	@GetMapping("/{mEmail}/{mPwd}")
 	public ResponseEntity<?> login(HttpSession session, @PathVariable String mEmail, @PathVariable String mPwd) {
 		Integer loginMaster = masterService.login(mEmail, mPwd);
+		String companyName = "";
+		Map<String, Object> response = new HashMap<>();
+		
+		Master masterlist = masterService.findMasterName(mEmail);
+		if(masterlist != null) {
+			 companyName = masterlist.getMName();			
+		}
+		else {
+			response.put("status", "error");
+			return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+		}
+		
+		
 		if (loginMaster == null) {
-			return new ResponseEntity<>("查無帳號或密碼錯誤", HttpStatus.BAD_REQUEST);
+			response.put("status", "error");
+			return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
 		}
 		session.setAttribute("mid", loginMaster);
 		String location = (String) session.getAttribute("location");
@@ -36,8 +51,10 @@ public class LoginMasterController {
 
 		session.removeAttribute("location");
 
-		Map<String, Object> response = new HashMap<>();
-		response.put("loginMaster", loginMaster);
+		
+		response.put("status", "success");
+		response.put("Masterid", loginMaster);
+		response.put("companyName", companyName);
 		response.put("location", location);
 		return ResponseEntity.ok(response);
 	}

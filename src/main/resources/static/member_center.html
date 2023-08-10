@@ -533,7 +533,8 @@
 
             //  ============登出====================//
 
-            $("a#logout").on("click", function () {
+            $("a#logout").on("click", function (e) {
+                e.preventDefault();
                 fetch("logout", {
                     method: "POST",
                     headers: {
@@ -542,15 +543,16 @@
                 })
                     .then(responce => responce.json())
                     .then(data => {
-                        alert("登出成功");
-                        sessionStorage.clear();
-                        location.href = "login.html";
+                        if (data.logoutsuccess === 1) {
+
+                            alert("登出成功");
+                            sessionStorage.clear();
+                            location.href = "login.html";
+                        }
 
                     })
-                    .catch(error => {
-                        console.log("請求錯誤");
-                    });
             })
+
         });
 
     </script>

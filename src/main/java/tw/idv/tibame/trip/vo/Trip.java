@@ -105,10 +105,10 @@ public class Trip {
 	private Integer count;
 	
 	@OneToMany(mappedBy = "participants")
-	@JsonManagedReference
+	@JsonIgnoreProperties("likeactivity")
     private List<Participant> participants;
 
     @OneToMany(mappedBy = "likeactivity")
-    @JsonManagedReference
+    @JsonIgnoreProperties("participants")
     private List<ActLike> actLikes;
 }

@@ -6,7 +6,7 @@ import tw.idv.tibame.trip.vo.Trip;
 
 public interface TripService {
 
-	List<Trip> findTrip(Integer uid);
+	List<Trip> selectMyEndTrip(Integer uid);
 	
 	Integer edit(Integer tId, Integer uid);
 
@@ -15,4 +15,10 @@ public interface TripService {
 	List<Trip> findTraceTrips(Integer uid);
 	
 	Integer deleteMyTripLike(Integer tActId, Integer uid );
+	
+	List<Trip> selectMyHoldTrip(Integer uid);
+	
+	List<Trip> selectJoinTrip(Integer uid);
+	
+	List<Trip> selectHistoryJoinTrip(Integer uid);
 }

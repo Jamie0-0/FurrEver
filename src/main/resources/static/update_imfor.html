@@ -552,10 +552,10 @@
                 const month = (today.getMonth() + 1).toString().padStart(2, '0'); // 因為月份是從0開始，所以需要+1
                 const day = today.getDate().toString().padStart(2, '0');
 
-                const dateString = `${year}-${month}-${day}`;
+                // const dateString = `${year}-${month}-${day}`;
 
                 const birth = document.getElementById('birthday');
-                birth.value = dateString;
+                // birth.value = dateString;
                 const todaymax = new Date().toISOString().split('T')[0];
                 birth.max = todaymax;
 

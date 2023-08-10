@@ -1,5 +1,8 @@
 package tw.idv.tibame.trip.vo;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -19,6 +22,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @IdClass(ActLikeId.class)
+@JsonIgnoreProperties("likeactivity")
 public class ActLike {
 
 	@Id

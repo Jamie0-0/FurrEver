@@ -26,17 +26,16 @@ public class FindMyProductController {
 	public ResponseEntity<?> findMyProduct(HttpSession session) {
 		Integer uid = (Integer) session.getAttribute("uid");
 		Map<String, Object> response = new HashMap<>();
-//		if (uid != null) {
-			List<Product> products = productService.showMyProduct(uid);
-//			if (products.isEmpty()) {
-//				response.put("noPro", 0);
-//				return ResponseEntity.ok(response);
-//			}
+		if (uid != null) {
+			List<Product> products = productService.selectMyProduct(uid);
+			if (products.isEmpty()) {
+				response.put("noProduct", 0);
+				return ResponseEntity.ok(response);
+			}
 			response.put("product", products);
 			return ResponseEntity.ok(response);
-//		}
-//		response.put("noUser", 0);
-//		return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
-//		return ResponseEntity.ok(products);
+		}
+		response.put("noUser", 0);
+		return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
 	}
 }
