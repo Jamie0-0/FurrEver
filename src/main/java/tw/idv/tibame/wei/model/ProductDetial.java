@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-package com.wei.model;
-=======
 package tw.idv.tibame.wei.model;
->>>>>>> TonyYen
 
 public class ProductDetial {
 	private Integer p_id;

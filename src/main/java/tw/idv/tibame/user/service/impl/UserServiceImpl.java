@@ -69,10 +69,7 @@ public class UserServiceImpl implements UserService {
 		return result;
 	}
 
-<<<<<<< HEAD
-=======
 	@Override
->>>>>>> TonyYen
 	public User findUserName(String uEmail) {
 		return userDao.findByuEmail(uEmail);
 		}

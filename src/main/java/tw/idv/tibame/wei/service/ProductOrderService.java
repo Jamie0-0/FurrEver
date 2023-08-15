@@ -1,24 +1,14 @@
-<<<<<<< HEAD
-package com.wei.service;
-=======
 package tw.idv.tibame.wei.service;
->>>>>>> TonyYen
 
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestParam;
 
-<<<<<<< HEAD
-import com.wei.model.PersonOrderDetial;
-import com.wei.model.ProductDetial;
-import com.wei.model.Product_order;
-=======
 import tw.idv.tibame.wei.model.GbOrder;
 import tw.idv.tibame.wei.model.PersonOrderDetial;
 import tw.idv.tibame.wei.model.ProductDetial;
 import tw.idv.tibame.wei.model.Product_order;
->>>>>>> TonyYen
 
 public interface ProductOrderService {
 
@@ -27,10 +17,7 @@ public interface ProductOrderService {
 	List<ProductDetial> getDetailSearchById(Integer so_m_id, Integer order_uid, Integer order_s, Integer order_id);
 	List<PersonOrderDetial> getPersonInfo(Integer so_m_id, Integer order_uid, Integer order_s, Integer order_id);
 	Integer updateStatus(Integer order_id);
-<<<<<<< HEAD
-=======
 
 	List<GbOrder> getGbOrderById(Integer p_m_id);
 	List<GbOrder> getGbSearchById(Integer p_m_id, Integer gb_id, Integer gb_s);
->>>>>>> TonyYen
 }

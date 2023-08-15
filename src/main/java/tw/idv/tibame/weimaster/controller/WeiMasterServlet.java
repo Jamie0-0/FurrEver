@@ -1,22 +1,3 @@
-<<<<<<<< HEAD:src/main/java/tw/idv/tibame/master/controller/MasterServlet.java
-package master.controller;
-
-import java.io.*;
-import java.sql.*;
-import java.util.*;
-
-import javax.servlet.*;
-import javax.servlet.annotation.MultipartConfig;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.*;
-import static core.util.CommonUtil.writePojo2Json;
-import static core.util.Constants.GSON;
-
-import master.model.*;
-import tools.*;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-========
 package tw.idv.tibame.weimaster.controller;
 
 import java.io.IOException;
@@ -27,7 +8,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
->>>>>>>> TonyYen:src/main/java/tw/idv/tibame/weimaster/controller/WeiMasterServlet.java
 
 import tw.idv.tibame.weimaster.model.MasterService;
 import tw.idv.tibame.weimaster.model.MasterVO;

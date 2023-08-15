@@ -1,10 +1,4 @@
-<<<<<<< HEAD
-package com.wei.model;
-
-import java.time.LocalDateTime;
-=======
 package tw.idv.tibame.wei.model;
->>>>>>> TonyYen
 
 public class PersonOrderDetial {
 

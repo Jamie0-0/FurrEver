@@ -8,14 +8,6 @@ import java.util.Base64;
 import java.util.LinkedList;
 import java.util.List;
 
-<<<<<<< HEAD
-import javax.servlet.*;
-import javax.servlet.annotation.MultipartConfig;
-import javax.servlet.http.*;
-
-import product.model.*;
-import tools.*;
-=======
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -23,7 +15,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
->>>>>>> TonyYen
 
 import tw.idv.tibame.product.model.ProductService;
 import tw.idv.tibame.product.model.ProductVO;

@@ -1,19 +1,3 @@
-<<<<<<< HEAD
-package com.wei.dao;
-
-import java.sql.Types;
-import java.util.*;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.stereotype.Component;
-
-import com.wei.model.PersonOrderDetial;
-import com.wei.model.ProductDetial;
-import com.wei.model.Product_order;
-import com.wei.pRowMapper.*;
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
-=======
 package tw.idv.tibame.wei.dao;
 
 import java.sql.Types;
@@ -34,7 +18,6 @@ import tw.idv.tibame.wei.pRowMapper.GbOrderMapper;
 import tw.idv.tibame.wei.pRowMapper.PersonDetialMapper;
 import tw.idv.tibame.wei.pRowMapper.ProductDetialMapper;
 import tw.idv.tibame.wei.pRowMapper.ProductOrderRowMapper;
->>>>>>> TonyYen
 
 
 @Component
@@ -168,8 +151,6 @@ public class ProductOrderDAOImpl implements ProductOrderDAO{
 	        return null;
 	    }
 	}
-<<<<<<< HEAD
-=======
 
 	@Override
 	public List<GbOrder> getGbOrderById(Integer p_m_id) {
@@ -221,5 +202,4 @@ public class ProductOrderDAOImpl implements ProductOrderDAO{
 	    }
 	}
 	
->>>>>>> TonyYen
 }

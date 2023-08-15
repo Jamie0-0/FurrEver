@@ -28,11 +28,7 @@ public class LoginController {
 		Integer loginUser = userService.login(uEmail, uPwd);
 		User userlist = userService.findUserName(uEmail);
 		String userName = userlist.getUName();
-<<<<<<< HEAD
-		if(loginUser == null) {
-=======
 		if (loginUser == null) {
->>>>>>> TonyYen
 			return new ResponseEntity<>("查無帳號或密碼錯誤", HttpStatus.BAD_REQUEST);
 		}
 		session.setAttribute("uid", loginUser);
@@ -51,15 +47,9 @@ public class LoginController {
 		session.removeAttribute("location");
 
 		Map<String, Object> response = new HashMap<>();
-<<<<<<< HEAD
-	    response.put("loginUser", loginUser);
-	    response.put("location", location);
-	    response.put("userName", userName);
-=======
 		response.put("loginUser", loginUser);
 		response.put("location", location);
 		response.put("userName", userName);
->>>>>>> TonyYen
 		return ResponseEntity.ok(response);
 	}
 }

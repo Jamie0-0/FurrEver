@@ -3,22 +3,6 @@ package tw.idv.tibame.mytrip.vo;
 import java.time.LocalDateTime;
 import java.util.List;
 
-<<<<<<< HEAD:src/main/java/tw/idv/tibame/trip/vo/Trip.java
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Lob;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
-import jakarta.persistence.Transient;
-=======
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -31,7 +15,6 @@ import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
->>>>>>> TonyYen:src/main/java/tw/idv/tibame/mytrip/vo/MyTrip.java
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -120,19 +103,10 @@ public class MyTrip {
 	private Integer count;
 	
 	@OneToMany(mappedBy = "participants")
-<<<<<<< HEAD:src/main/java/tw/idv/tibame/trip/vo/Trip.java
-	@JsonManagedReference
-    private List<Participant> participants;
-
-    @OneToMany(mappedBy = "likeactivity")
-    @JsonManagedReference
-    private List<ActLike> actLikes;
-=======
 	@JsonIgnoreProperties("likeactivity")
     private List<MyParticipant> participants;
 
     @OneToMany(mappedBy = "likeactivity")
     @JsonIgnoreProperties("participants")
     private List<MyActLike> actLikes;
->>>>>>> TonyYen:src/main/java/tw/idv/tibame/mytrip/vo/MyTrip.java
 }
