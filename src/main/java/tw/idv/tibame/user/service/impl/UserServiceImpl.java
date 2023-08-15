@@ -20,6 +20,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public Integer login(String uEmail, String uPwd) {
 		Integer result = userDao.findByuEmailAndUPwd(uEmail, uPwd);
+		
 		return result;
 	}
 
@@ -61,12 +62,13 @@ public class UserServiceImpl implements UserService {
 		String uAbout = user.getUAbout();
 		byte[] uPic = user.getUPic();
 		Integer uid= user.getUid();
-//		System.out.println(uPic);
-//		System.out.println(uEmail);
+
 		Integer result = userDao.updateByuid(uEmail, uName, uPwd, uPhone, uBirth, uAbout,uPic, uid);
 		
 		return result;
 	}
 
-
+	public User findUserName(String uEmail) {
+		return userDao.findByuEmail(uEmail);
+		}
 }

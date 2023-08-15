@@ -12,8 +12,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-@Component
-@WebFilter(filterName = "LoginFilter", urlPatterns = "/*")
+//@Component
+//@WebFilter(filterName = "LoginFilter", urlPatterns = "/*")
 public class LoginFilter extends HttpFilter {
 
 	private static final long serialVersionUID = 2576427519315890522L;
@@ -42,20 +42,20 @@ public class LoginFilter extends HttpFilter {
 		}
 
 		String requestUrl = request.getRequestURI();
-
+		System.out.println(requestUrl);
 		if (uid == null) {
 			session.setAttribute("location", requestUrl);
 			response.sendRedirect(request.getContextPath() + "/login.html");
-		} else {
-			chain.doFilter(request, response);
-		}
-
-		if (mid == null) {
+			return;
+		} else if (mid == null) {
 			session.setAttribute("location", requestUrl);
 			response.sendRedirect(request.getContextPath() + "/login.html");
+			return;
 		} else {
 			chain.doFilter(request, response);
+
 		}
+
 	}
 
 }
