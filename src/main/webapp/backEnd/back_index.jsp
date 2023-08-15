@@ -3,6 +3,7 @@
 <%@page import="tw.idv.tibame.weimaster.model.MasterPicVO"%>
 <%@page import="tw.idv.tibame.product.model.ProductVO"%>
 <%@page import="tw.idv.tibame.product.model.ProductDAO"%>
+<%@page import="tw.idv.tibame.payStatus.model.PayStatusService"%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
@@ -11,14 +12,16 @@
 <%
 ApplicationContext applicationContext = WebApplicationContextUtils.getWebApplicationContext(application);
 ProductDAO dao = applicationContext.getBean(ProductDAO.class);
+PayStatusService payStatusSvc = applicationContext.getBean(PayStatusService.class);
+request.setAttribute("payStatusSvc", payStatusSvc);
+
 ProductVO iValue = dao.indexValue(1);
 
 List<MasterPicVO> list1 = dao.indexNatrix1(1);
 List<MasterPicVO2> list2 = dao.indexNatrix2();
+request.setAttribute("list1", list1);
+request.setAttribute("list2", list2);
 %>
-
-
-
 
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -408,9 +411,9 @@ List<MasterPicVO2> list2 = dao.indexNatrix2();
 															<td>
 																<div class="product-detail-box">
 																	<h6>付款狀態</h6>
-  																	<jsp:useBean id="payStatusSvc" scope="page"
-  																	class="tw.idv.tibame.payStatus.model.PayStatusService" />
- 																	<c:forEach var="payStatusVO" items="${payStatusSvc.getAll()}">
+<%--   																	<jsp:useBean id="payStatusSvc" scope="page" --%>
+<%--   																	class="tw.idv.tibame.payStatus.model.PayStatusService" /> --%>
+ 																	<c:forEach var="payStatusVO" items="${payStatusSvc.all}">
  																		<h5>${productVO2.order_pay.equals(payStatusVO.pa_id) ? payStatusVO.pa_name : ''}</h5>
  																	</c:forEach>
 																</div> 

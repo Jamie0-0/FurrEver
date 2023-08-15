@@ -175,7 +175,7 @@ public class ProductDAO implements ProductDAO_interface {
 				}
 				masterPicVO2 = new MasterPicVO2.Builder().setOrder_r_name(rs.getString(1))
 						.setOrder_r_phone(rs.getString(2)).setOrder_r_addr(rs.getString(3)).setOrder_t(rs.getString(4))
-						.setOrder_pay(rs.getString(5)).setU_pic(p1).build();
+						.setOrder_pay(rs.getInt(5)).setU_pic(p1).build();
 				list.add(masterPicVO2);
 			}
 
