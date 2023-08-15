@@ -36,6 +36,10 @@
             color: #bfb9fc;
             ;
         }
+
+        button {
+            margin-right: 5px;
+        }
     </style>
 </head>
 
@@ -156,7 +160,7 @@
                                             <ul class="user-box-name">
                                                 <li class="product-box-contain">
                                                     <i></i>
-                                                    <a href="#" id="logout">登出</a>
+                                                    <a href="login.html" id="logout">登出</a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -225,20 +229,15 @@
             <div class="col pet_infor h5">
                 <a href="pet.html">毛孩資訊</a>
             </div>
-            <div class="col friend h5">
-                <a href="freind.html">好友列表</a>
-            </div>
+
             <div class="col act_list h5">
                 <a href="trip.html">活動清單</a>
             </div>
             <div class="col tra_list h5">
                 <a href="collect.html">追蹤清單</a>
             </div>
-            <div class="col order h5">
-                <a href="#">訂單</a>
-            </div>
-            <div class="col article h5">
-                <a href="#">文章管理</a>
+            <div class="col order_list h5">
+                <a href="myOrder.html">訂單</a>
             </div>
 
         </div>
@@ -249,26 +248,16 @@
         <div class="row mb-3">
             <div class="col-md-12">
                 <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-primary" id="btn-filter-ongoing">正在舉辦</button>
-                    <button type="button" class="btn btn-primary" id="btn-filter-history">舉辦歷史</button>
+                    <button onclick="showOngoingActivities()" class="btn btn-warning rounded-pill">正在舉辦</button>
+                    <button onclick="showHistoryActivities()" class="btn btn-warning rounded-pill">舉辦歷史</button>
+                    <button onclick="showInProgressActivities()" class="btn btn-warning rounded-pill">正在進行</button>
+                    <button onclick="showParticipationHistory()" class="btn btn-warning rounded-pill">參加歷史</button>
                 </div>
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>活動名稱</th>
-                            <th>活動日期</th>
-                            <th>活動狀態</th>
-                            <th>操作</th>
-                        </tr>
-                    </thead>
-                    <tbody id="activity-list">
-                        <!-- 動態生成的活動資料將插入到這裡 -->
-                    </tbody>
-                </table>
+            <div id="activitiesContainer" class="col-md-12">
+
             </div>
         </div>
     </div>
@@ -393,86 +382,326 @@
     <script src="assets/js/script.js"></script>
 
     <script>
+        const uid = sessionStorage.getItem("uid");
+        const username = sessionStorage.getItem("username");
+        $("h5").text(username);
+        const activitiesContainer = document.getElementById("activitiesContainer");
 
-        $(function () {
-            const uid = sessionStorage.getItem("uid");
-            fetch("findTrip", {
+        function showOngoingActivities() {
+            activitiesContainer.innerHTML = "";
+            fetch('findholdtrip', {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    uId: uid
-                }),
+                    uid: uid
+                }
+                ),
             })
                 .then(response => response.json())
                 .then(data => {
-                    // 獲取活動列表的容器元素
-                    var activityList = $("#activity-list");
-
-                    // 生成活動清單的函式
-                    function generateActivityList(activities) {
-                        // 清空活動列表
-                        activityList.empty();
-
-                        // 使用迴圈動態生成活動資料的表格行
-                        for (var i = 0; i < activities.length; i++) {
-                            var activity = activities[i];
-
-                            var row = $("<tr>");
-                            var nameCell = $("<td>").text(activity.name);
-                            var dateCell = $("<td>").text(activity.date);
-                            var statusCell = $("<td>").text(activity.status);
-                            var actionCell = $("<td>");
-
-                            var viewButton = $("<button>").text("查看活動").addClass("btn btn-primary btn-sm rounded-pill");
-                            var sendNotificationButton = $("<button>").text("發送成團通知").addClass("btn btn-success btn-sm rounded-pill");
-                            var cancelButton = $("<button>").text("取消活動").addClass("btn btn-danger btn-sm rounded-pill");
-
-                            actionCell.append(viewButton, sendNotificationButton, cancelButton);
-                            row.append(nameCell, dateCell, statusCell, actionCell);
-                            activityList.append(row);
-                        }
+                    // 在這裡處理從後端獲取到的活動資料
+                    console.log(data);
+                    if (data.noAct === 0) {
+                        alert("查無活動");
+                        return
                     }
+                    showActivities(data, true, true, false, true, true, true, false);
+                })
+                .catch(error => {
+                    console.error('發生錯誤：', error);
+                });
+            // showActivities(ongoingActivitiesData, true, true, true, false);
+        }
 
-                    // 初始顯示所有活動
-                    generateActivityList(activities);
-
-                    // 篩選正在舉辦的活動
-                    $("#btn-filter-ongoing").on("click", function () {
-                        var ongoingActivities = activities.filter(function (activity) {
-                            return activity.status === "進行中";
-                        });
-
-                        generateActivityList(ongoingActivities);
-                    });
-
-                    // 篩選舉辦歷史的活動
-                    $("#btn-filter-history").on("click", function () {
-                        var historyActivities = activities.filter(function (activity) {
-                            return activity.status === "已結束";
-                        });
-
-                        generateActivityList(historyActivities);
-                    });
+        function showHistoryActivities() {
+            activitiesContainer.innerHTML = "";
+            fetch('findhistorytrip', {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    uid: uid
+                }
+                ),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    // 在這裡處理從後端獲取到的活動資料
+                    console.log(data);
+                    if (data.noAct === 0) {
+                        alert("查無活動");
+                        return
+                    }
+                    showActivities(data, true, true, false, true, false, false, false);
 
                 })
                 .catch(error => {
-                    console.log("請求錯誤");
+                    console.error('發生錯誤：', error);
                 });
+
+            // showActivities(historyActivitiesData, true, false, false, false);
+        }
+
+        function showInProgressActivities() {
+            activitiesContainer.innerHTML = "";
+            fetch('findjointrip', {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    uid: uid
+                }
+                ),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    // 在這裡處理從後端獲取到的活動資料
+                    console.log(data);
+                    if (data.noAct === 0) {
+                        alert("查無活動");
+                        return
+                    }
+                    showActivities(data, true, true, true, true, false, false, true);
+
+                })
+                .catch(error => {
+                    console.error('發生錯誤：', error);
+                });
+            // showActivities(inProgressActivitiesData, true, false, false, true);
+        }
+
+        function showParticipationHistory() {
+            activitiesContainer.innerHTML = "";
+            fetch('findjoinhistory', {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    uid: uid
+                }
+                ),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    // 在這裡處理從後端獲取到的活動資料
+                    console.log(data);
+                    if (data.noAct === 0) {
+                        alert("查無活動");
+                        return
+                    }
+                    showActivities(data, false, false, false, true, false, false, false);
+
+                })
+                .catch(error => {
+                    console.error('發生錯誤：', error);
+                });
+            // showActivities(participationHistoryData, true, false, false, false);
+        }
+
+        function showActivities(activitiesData, showtactStatus, showcount, showtactPpl, showViewButton, showNotifyButton, showCancelButton, showExitButton) {
+            console.log(activitiesData);
+            activitiesData.forEach(activity => {
+                // const activity = activitiesData[key];
+                const timeformat = timeFormat(activity.tactTime);
+
+                const activityElement = document.createElement("div");
+                activityElement.className = "activity";
+
+                const titleElement = document.createElement("h2");
+                titleElement.classList.add("my-4");
+                titleElement.textContent = activity.tactName;
+                activityElement.appendChild(titleElement);
+
+                const dateElement = document.createElement("p");
+
+                dateElement.textContent = `日期：${timeformat}`;
+                activityElement.appendChild(dateElement);
+
+                if (showtactStatus) {
+                    const statusElement = document.createElement("p");
+                    if (activity.tactStatus === '0') {
+                        statusElement.textContent = `狀態：未成團`;
+                    }
+                    else if (activity.tactStatus === '1') {
+                        statusElement.textContent = `狀態：已成團`;
+                    }
+                    else if (activity.tactStatus === '2') {
+                        statusElement.textContent = `狀態：尚未截止報名`;
+                    }
+                    else if (activity.tactStatus === '3') {
+                        statusElement.textContent = `狀態：報名期限已截止`;
+                    }
+
+                    activityElement.appendChild(statusElement);
+                }
+
+                if (showcount) {
+                    const participantsElement = document.createElement("p");
+                    participantsElement.textContent = `參加人數：${activity.count}`;
+                    activityElement.appendChild(participantsElement);
+                }
+
+                if (showtactPpl) {
+                    const participantsElement = document.createElement("p");
+                    participantsElement.textContent = `預設人數：${activity.tactPpl}`;
+                    activityElement.appendChild(participantsElement);
+                }
+
+                if (showViewButton) {
+                    const viewButton = document.createElement("button");
+                    viewButton.classList.add("btn", "btn-secondary", "rounded-pill", "d-inline", "border");
+
+                    viewButton.textContent = "查看活動頁面";
+                    viewButton.addEventListener("click", () => {
+                        // 在這裡處理查看活動頁面的操作
+
+                        alert("查看活動頁面:", activity.tactName);
+
+                        // 假設您的活動頁面 URL 是 activity.html，並且 activityId 是活動的 ID
+                        const activityUrl = `activity.html?id=${activity.tActId}`;
+
+                        // 使用location.href 跳轉至活動頁面
+                        location.href = activityUrl;
+                    });
+                    activityElement.appendChild(viewButton);
+                }
+
+                if (showNotifyButton) {
+                    const notifyButton = document.createElement("button");
+                    notifyButton.classList.add("btn", "btn-info", "rounded-pill", "d-inline", "border");
+
+                    notifyButton.textContent = "發送成團通知";
+                    notifyButton.addEventListener("click", () => {
+                        // 在這裡處理發送成團通知的操作
+                        if (confirm("確定發送通知?")) {
+                            alert("已發送成團通知給參加者:", activity.tactName);
+                        }
+                    });
+                    activityElement.appendChild(notifyButton);
+                }
+
+                if (showCancelButton) {
+                    const cancelButton = document.createElement("button");
+                    cancelButton.classList.add("btn", "btn-danger", "rounded-pill", "d-inline", "border");
+                    cancelButton.textContent = "取消活動";
+                    cancelButton.addEventListener("click", () => {
+                        // 在這裡處理取消活動的操作
+                        if (confirm("確定取消該活動?")) {
+                            console.log("已發送取消通知給參加者" + activity.tactName);
+                            console.log(activity.tactId);
+                            const tid = activity.tactId;
+                            fetch('cancletrip?tActId=' + tid, {
+                                method: "POST",
+                                headers: {
+                                    "Content-Type": "application/json"
+                                },
+                                body: JSON.stringify({
+                                    tActId: tid,
+                                    uid: uid
+                                }),
+                            })
+                                .then(response => response.json())
+                                .then(data => {
+                                    // console.log(data);  
+                                    // showActivities(data, false, false, false, true, false, false, false);
+                                    location.reload();
+                                })
+                                .catch(error => {
+                                    console.error('發生錯誤：', error);
+                                });
+                        }
+                    });
+                    activityElement.appendChild(cancelButton);
+                }
+
+                if (showExitButton) {
+                    const exitButton = document.createElement("button");
+                    exitButton.classList.add("btn", "btn-danger", "rounded-pill", "d-inline", "border");
+
+                    exitButton.textContent = "退出活動";
+                    exitButton.addEventListener("click", () => {
+                        // 在這裡處理退出活動的操作
+                        if (confirm("確定取消該活動?")) {
+                            console.log("退出活動:", activity.tactName);
+                            const tid = activity.tactId;
+                            alert("退出活動");
+                            fetch('outtrip?tActId=' + tid, {
+                                method: "POST",
+                                headers: {
+                                    "Content-Type": "application/json"
+                                },
+                                body: JSON.stringify({
+                                    uid: uid,
+                                    tActId: tid
+                                }),
+                            })
+                                .then(response => response.json())
+                                .then(data => {
+                                    // 在這裡處理從後端獲取到的活動資料
+                                    // console.log(data);
+
+                                    // showActivities(data, false, false, false, true, false, false, false);
+                                    location.reload();
+                                })
+                                .catch(error => {
+                                    console.error('發生錯誤：', error);
+                                });
+                        }
+
+                    });
+                    activityElement.appendChild(exitButton);
+                }
+
+                activitiesContainer.appendChild(activityElement);
+            });
+
+
+        }
+
+        function timeFormat(timeString) {
+            // 使用Date物件解析日期時間字串
+            const date = new Date(timeString);
+
+            // 取得日期部分
+            const year = date.getFullYear();
+            const month = date.getMonth() + 1; // 注意月份是從0開始的，所以要加1
+            const day = date.getDate();
+
+            // 以所需格式組合日期
+            const formattedDate = `${year}-${month < 10 ? '0' + month : month}-${day < 10 ? '0' + day : day}`;
+
+            // 回傳格式化後的日期
+            return formattedDate;
+        }
+
+
+        $("a#logout").on("click", function (e) {
+            e.preventDefault();
+            fetch("logout", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                }
+            })
+                .then(responce => responce.json())
+                .then(data => {
+                    if (data.logoutsuccess === 1) {
+
+                        alert("登出成功");
+                        sessionStorage.clear();
+                        location.href = "login.html";
+                    }
+
+                })
         })
-        // 假設有一個包含活動資料的陣列
-        var activities = [
-            // { name: "活動1", date: "2023-08-01", status: "進行中" },
-            // { name: "活動2", date: "2023-08-05", status: "已結束" },
-            // 其他活動資料
-        ];
-
-
 
 
     </script>
-
 
 </body>
 

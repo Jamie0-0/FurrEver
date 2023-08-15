@@ -1,4 +1,4 @@
-package com.wei.model;
+package tw.idv.tibame.wei.model;
 
 import java.time.LocalDateTime;
 

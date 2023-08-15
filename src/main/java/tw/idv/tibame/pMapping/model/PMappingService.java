@@ -1,11 +1,6 @@
-package pMapping.model;
+package tw.idv.tibame.pMapping.model;
 
-import java.time.LocalDateTime;
 import java.util.List;
-
-import product.model.ProductDAO;
-import product.model.ProductDAO_interface;
-import product.model.ProductVO;
 
 public class PMappingService {
 

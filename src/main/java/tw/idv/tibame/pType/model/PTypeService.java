@@ -1,10 +1,6 @@
-package pType.model;
+package tw.idv.tibame.pType.model;
 
 import java.util.List;
-
-import pMapping.model.PMappingDAO;
-import pMapping.model.PMappingDAO_interface;
-import pMapping.model.PMappingVO;
 
 public class PTypeService {
 

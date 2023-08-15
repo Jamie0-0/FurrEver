@@ -1,13 +1,15 @@
-package com.wei.service;
+package tw.idv.tibame.wei.service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import com.wei.dao.*;
-import com.wei.model.PersonOrderDetial;
-import com.wei.model.ProductDetial;
-import com.wei.model.Product_order;
+
+import tw.idv.tibame.wei.dao.*;
+import tw.idv.tibame.wei.model.GbOrder;
+import tw.idv.tibame.wei.model.PersonOrderDetial;
+import tw.idv.tibame.wei.model.ProductDetial;
+import tw.idv.tibame.wei.model.Product_order;
 
 @Component
 public class ProductOrderServiceImpl implements ProductOrderService{
@@ -39,4 +41,16 @@ public class ProductOrderServiceImpl implements ProductOrderService{
 	public Integer updateStatus(Integer order_id) {
 		return productOrderDAO.updateStatus(order_id);
 	}
+
+	@Override
+	public List<GbOrder> getGbOrderById(Integer p_m_id) {
+		return productOrderDAO.getGbOrderById(p_m_id);
+	}
+	
+	
+	@Override
+	public List<GbOrder> getGbSearchById(Integer p_m_id, Integer gb_id, Integer gb_s) {
+		return productOrderDAO.getGbSearchById(p_m_id,gb_id,gb_s);
+	}
+	
 }

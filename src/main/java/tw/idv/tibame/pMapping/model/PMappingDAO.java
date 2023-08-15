@@ -1,21 +1,16 @@
-package pMapping.model;
+package tw.idv.tibame.pMapping.model;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
-
-
-import product.model.ProductVO;
 
 public class PMappingDAO implements PMappingDAO_interface {
 	private static DataSource ds = null;
@@ -31,7 +26,7 @@ public class PMappingDAO implements PMappingDAO_interface {
 	private static final String INSERT_STMT = "INSERT INTO prodMapping (pm_name) VALUES (?)";
 	private static final String GET_ALL_STMT = "SELECT pm_id , pm_name FROM prodMapping";
 	private static final String GET_ONE_STMT = "SELECT pm_id , pm_name FROM prodMapping where pm_id = ?";
-	
+
 	@Override
 	public void insert(PMappingVO pMappingVO) {
 
@@ -46,8 +41,7 @@ public class PMappingDAO implements PMappingDAO_interface {
 			pstmt.executeUpdate();
 
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
+			throw new RuntimeException("A database error occured. " + se.getMessage());
 		} finally {
 			if (pstmt != null) {
 				try {
@@ -66,7 +60,6 @@ public class PMappingDAO implements PMappingDAO_interface {
 		}
 
 	}
-
 
 	@Override
 	public PMappingVO findByPrimaryKey(Integer pm_id) {
@@ -94,8 +87,7 @@ public class PMappingDAO implements PMappingDAO_interface {
 
 			// Handle any SQL errors
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
+			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
 		} finally {
 			if (rs != null) {
@@ -145,8 +137,7 @@ public class PMappingDAO implements PMappingDAO_interface {
 				list.add(pMappingVO);
 			}
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
+			throw new RuntimeException("A database error occured. " + se.getMessage());
 		} finally {
 			if (rs != null) {
 				try {

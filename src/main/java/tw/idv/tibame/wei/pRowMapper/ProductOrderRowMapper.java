@@ -1,10 +1,11 @@
-package com.wei.pRowMapper;
+package tw.idv.tibame.wei.pRowMapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.swing.tree.RowMapper;
-import com.wei.model.Product_order;
+
+import tw.idv.tibame.wei.model.Product_order;
 
 public class ProductOrderRowMapper implements org.springframework.jdbc.core.RowMapper<Product_order>{
 

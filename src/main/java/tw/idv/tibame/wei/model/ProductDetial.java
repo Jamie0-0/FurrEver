@@ -1,4 +1,4 @@
-package com.wei.model;
+package tw.idv.tibame.wei.model;
 
 public class ProductDetial {
 	private Integer p_id;

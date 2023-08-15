@@ -1,8 +1,9 @@
-package com.wei.pRowMapper;
+package tw.idv.tibame.wei.pRowMapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import com.wei.model.ProductDetial;
+
+import tw.idv.tibame.wei.model.ProductDetial;
 
 public class ProductDetialMapper implements org.springframework.jdbc.core.RowMapper<ProductDetial>{
 	@Override

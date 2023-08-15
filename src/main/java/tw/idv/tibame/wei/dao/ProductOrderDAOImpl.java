@@ -1,17 +1,23 @@
-package com.wei.dao;
+package tw.idv.tibame.wei.dao;
 
 import java.sql.Types;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
 
-import com.wei.model.PersonOrderDetial;
-import com.wei.model.ProductDetial;
-import com.wei.model.Product_order;
-import com.wei.pRowMapper.*;
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import tw.idv.tibame.wei.model.GbOrder;
+import tw.idv.tibame.wei.model.PersonOrderDetial;
+import tw.idv.tibame.wei.model.ProductDetial;
+import tw.idv.tibame.wei.model.Product_order;
+import tw.idv.tibame.wei.pRowMapper.GbOrderMapper;
+import tw.idv.tibame.wei.pRowMapper.PersonDetialMapper;
+import tw.idv.tibame.wei.pRowMapper.ProductDetialMapper;
+import tw.idv.tibame.wei.pRowMapper.ProductOrderRowMapper;
 
 
 @Component
@@ -145,4 +151,55 @@ public class ProductOrderDAOImpl implements ProductOrderDAO{
 	        return null;
 	    }
 	}
+
+	@Override
+	public List<GbOrder> getGbOrderById(Integer p_m_id) {
+		String sql = "select a.gb_id,count(*) as people,gb_c_max,gb_s_price,gb_time_end,gb_s"
+				+ " from gb_order a,gb b,product"
+				+ " where a.gb_id = b.gb_id"
+				+ " and b.gb_p_id=p_id"
+				+ " and p_m_id = :p_m_id"
+				+ " and gb_satus = 0"
+				+ " group by a.gb_id,gb_c_max";
+
+	    MapSqlParameterSource paramMap = new MapSqlParameterSource();
+	    paramMap.addValue("p_m_id", p_m_id);
+
+	    List<GbOrder> gbDetialList = namedParameterJdbcTemplate.query(sql, paramMap, new GbOrderMapper());
+	    
+	    if (gbDetialList.size() > 0) {
+	        return gbDetialList;
+	    } else {
+	        return null;
+	    }
+	}
+
+	@Override
+	public List<GbOrder> getGbSearchById(Integer p_m_id, Integer gb_id, Integer gb_s) {
+		String sql = "select a.gb_id,count(*) as people,gb_c_max,gb_s_price,gb_time_end,gb_s"
+				+ " from gb_order a,gb b,product"
+				+ " where a.gb_id = b.gb_id"
+				+ " and b.gb_p_id=p_id"
+				+ " and p_m_id = "+p_m_id;
+
+				if(gb_id != null && String.valueOf(gb_id).length() > 0) {
+					sql = sql + " and a.gb_id = "+gb_id;
+				}
+
+				if(gb_s == 2) {
+					
+				} else {
+					sql = sql + " and gb_s = '"+String.valueOf(gb_s)+"'";
+				}
+				sql = sql + " group by a.gb_id,gb_c_max,gb_s_price,gb_time_end,gb_s";
+
+	    List<GbOrder> gbDetialList = namedParameterJdbcTemplate.query(sql, new GbOrderMapper());
+	    
+	    if (gbDetialList.size() > 0) {
+	        return gbDetialList;
+	    } else {
+	        return null;
+	    }
+	}
+	
 }

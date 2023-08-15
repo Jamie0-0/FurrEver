@@ -296,33 +296,33 @@
                                         <input type="email" id="member_email" class="form-control" placeholder=""
                                             aria-label="Useremail" aria-describedby="basic-addon1" required>
                                     </div>
-                                    <p id="error_email"></p>
+                                    <p id="error_email" class="error-msg"></p>
                                     <div class="input-group mb-3">
                                         <span class="input-group-text" id="basic-addon1">密碼:</span>
                                         <input type="password" name="password" id="member_pwd" class="form-control"
                                             placeholder="" aria-label="Userpwd" aria-describedby="basic-addon1"
                                             required>
                                     </div>
-                                    <p id="error_pwd"></p>
+                                    <p id="error_pwd" class="error-msg"></p>
                                     <div class="input-group mb-3">
                                         <span class="input-group-text" id="basic-addon1">再次輸入密碼:</span>
                                         <input type="password" id="member_pwd2" name="password2" class="form-control"
                                             placeholder="" aria-label="Userpwd" aria-describedby="basic-addon1"
                                             required>
                                     </div>
-                                    <p id="error_pwd2"></p>
+                                    <p id="error_pwd2" class="error-msg"></p>
                                     <div class="input-group mb-3">
                                         <span class="input-group-text" id="basic-addon1">姓名:</span>
                                         <input type="text" id="member_name" class="form-control" placeholder=""
                                             aria-label="Username" aria-describedby="basic-addon1" required>
                                     </div>
-                                    <p id="error_name"></p>
+                                    <p id="error_name" class="error-msg"></p>
                                     <div class="input-group mb-3">
                                         <span class="input-group-text" id="basic-addon1">手機:</span>
                                         <input type="phone" id="member_phone" class="form-control" placeholder=""
                                             aria-label="Userphone" aria-describedby="basic-addon1">
                                     </div>
-                                    <p id="error_phone"></p>
+                                    <p id="error_phone" class="error-msg"></p>
                                     <div class="input-group mb-3">
                                         <span class="input-group-text" id="basic-addon1">性別：</span>
                                         <select class="form-select" id="member_gender" aria-label="下拉式選項">
@@ -341,9 +341,17 @@
                                         <input type="text" id="member_addr" class="form-control" placeholder=""
                                             aria-label="Useraddr" aria-describedby="basic-addon1" required>
                                     </div>
-                                    <!-- <p id="error_addr"></p> -->
+                                    <p id="error_addr" class="error-msg"></p>
                                     <textarea class="form-control" id="aboutMe" rows="3" placeholder="關於我"></textarea>
 
+                                    <div class="my-3">
+                                        <td class="tds">驗證碼：</td>
+                                        <td id="validimg">
+                                            <input type="text" name="valistr" class="my-2" id="member-captchaInput">
+                                            <img id="yzm_img" src="" style="cursor: pointer" />
+                                            <span id="member-valistr_msg"></span>
+                                        </td>
+                                    </div>
                                     <button type="button" id="create_member_btn"
                                         class="btn-create rounded-pill w-100 btn-lg">註冊</button>
                                 </div>
@@ -358,27 +366,27 @@
                                                 <input type="text" id="company-gui" class="form-control" placeholder=""
                                                     aria-label="Companycount" aria-describedby="basic-addon1" required>
                                             </div>
-                                            <p id="error_gui"></p>
+                                            <p id="error_gui" class="error-msg"></p>
                                             <div class="input-group mb-3">
                                                 <span class="input-group-text" id="basic-addon1">公司名稱:</span>
                                                 <input type="text" id="company-name" class="form-control" placeholder=""
                                                     aria-label="Companyname" aria-describedby="basic-addon1" required>
                                             </div>
-                                            <p id="error_company_name"></p>
+                                            <p id="error_company_name" class="error-msg"></p>
                                             <div class="input-group mb-3">
                                                 <span class="input-group-text" id="basic-addon1">密碼:</span>
                                                 <input type="password" id="company-pwd" class="form-control"
                                                     placeholder="" aria-label="Companypwd"
                                                     aria-describedby="basic-addon1" required>
                                             </div>
-                                            <p id="error_com_pwd"></p>
+                                            <p id="error_com_pwd" class="error-msg"></p>
                                             <div class="input-group mb-3">
                                                 <span class="input-group-text" id="basic-addon1">再次輸入密碼:</span>
                                                 <input type="password" id="company-pwd2" class="form-control"
                                                     placeholder="" aria-label="Companypwd"
                                                     aria-describedby="basic-addon1" required>
                                             </div>
-                                            <p id="error_com_pwd2"></p>
+                                            <p id="error_com_pwd2" class="error-msg"></p>
                                             <div class="input-group mb-3">
                                                 <span class="input-group-text" id="basic-addon1">銀行行號：</span>
                                                 <select class="form-select" aria-label="下拉式選項" name="bank-id">
@@ -401,42 +409,51 @@
                                                     placeholder="" aria-label="Companyaccount"
                                                     aria-describedby="basic-addon1" required>
                                             </div>
-                                            <p id="error_com_account"></p>
+                                            <p id="error_com_account" class="error-msg"></p>
                                             <div class="input-group mb-3">
                                                 <span class="input-group-text" id="basic-addon1">廠商地址:</span>
                                                 <input type="text" id="company-addr" class="form-control" placeholder=""
                                                     aria-label="Companyaccount" aria-describedby="basic-addon1"
                                                     required>
                                             </div>
-                                            <p id="error_com_addr"></p>
+                                            <p id="error_com_addr" class="error-msg"></p>
                                             <div class="input-group mb-3">
                                                 <span class="input-group-text" id="basic-addon1">負責人身份證字號:</span>
                                                 <input type="text" id="company-manId" class="form-control"
                                                     placeholder="" aria-label="Companyaccount"
                                                     aria-describedby="basic-addon1" required>
                                             </div>
-                                            <p id="error_com_manId"></p>
+                                            <p id="error_com_manId" class="error-msg"></p>
                                             <div class="input-group mb-3">
                                                 <span class="input-group-text" id="basic-addon1">聯絡人姓名:</span>
                                                 <input type="text" id="company-mann-name" class="form-control"
                                                     placeholder="" aria-label="Company_connect_name"
                                                     aria-describedby="basic-addon1" required>
                                             </div>
-                                            <p id="error_com_mName"></p>
+                                            <p id="error_com_mName" class="error-msg"></p>
                                             <div class="input-group mb-3">
                                                 <span class="input-group-text" id="basic-addon1">聯絡人E-mail:</span>
                                                 <input type="email" id="company-man-email" class="form-control"
                                                     placeholder="" aria-label="Company_connect_email"
                                                     aria-describedby="basic-addon1" required>
                                             </div>
-                                            <p id="error_com_mEmail"></p>
+                                            <p id="error_com_mEmail" class="error-msg"></p>
                                             <div class="input-group mb-3">
                                                 <span class="input-group-text" id="basic-addon1">聯絡人電話：</span>
                                                 <input type="text" id="company-man-phone" class="form-control"
                                                     placeholder="" aria-label="Company_connect_phone"
                                                     aria-describedby="basic-addon1" required>
                                             </div>
-                                            <p id="error_com_mPhone"></p>
+                                            <p id="error_com_mPhone" class="error-msg"></p>
+                                            <div class="my-3">
+                                                <td class="tds">驗證碼：</td>
+                                                <td id="validimg">
+                                                    <input type="text" name="valistr" class="my-2"
+                                                        id="company-captchaInput">
+                                                    <img id="company-yzm_img" src="" style="cursor: pointer" />
+                                                    <span id="company-valistr_msg"></span>
+                                                </td>
+                                            </div>
                                             <button type="button" id="create_master_btn"
                                                 class="btn-create rounded-pill w-100 btn-lg">註冊</button>
                                         </div>
@@ -571,6 +588,108 @@
 
     <script>
         $(function () {
+
+
+            // 點擊事件：當點擊 "會員註冊" 時生成驗證碼圖片
+            const memberTab = document.getElementById("nav-home-tab");
+            const memberCaptchaImg = document.getElementById("yzm_img");
+            const member_captchaInput = document.getElementById("member-captchaInput");
+
+
+            memberTab.addEventListener("click", function () {
+                changeYZM(memberCaptchaImg);
+            });
+
+            document.getElementById("member-captchaInput").addEventListener('blur', function () {
+                const userInput = member_captchaInput.value.trim();
+                checkCaptchaAndNull(userInput, "member-valistr_msg");
+            })
+
+            memberCaptchaImg.addEventListener("click", function () {
+                changeYZM(memberCaptchaImg);
+            });
+
+
+            // 點擊事件：當點擊 "廠商註冊" 時生成驗證碼圖片
+            const companyTab = document.getElementById("nav-profile-tab");
+            const companyCaptchaImg = document.getElementById("company-yzm_img");
+            const company_captchaInput = document.getElementById("company-captchaInput");
+
+
+            companyTab.addEventListener("click", function () {
+                // console.log(companyCaptchaImg);
+                changeYZM(companyCaptchaImg);
+            });
+            document.getElementById("company-captchaInput").addEventListener('blur', function () {
+                const companyInput = company_captchaInput.value.trim();
+                // console.log(companyInput);
+                checkCaptchaAndNull(companyInput, "company-valistr_msg");
+            })
+
+            companyCaptchaImg.addEventListener("click", function () {
+                changeYZM(companyCaptchaImg);
+            });
+
+
+
+
+            function initializeCaptchaImage() {
+                changeYZM(memberCaptchaImg);
+            }
+
+            function changeYZM(img) {
+                fetch("generate-captcha")
+                    .then(response => response.blob())
+                    .then(blob => {
+                        console.log(blob);
+                        const imgUrl = URL.createObjectURL(blob);
+                        img.src = imgUrl;
+                    })
+                    .catch(error => console.error("Error fetching captcha:", error));
+            }
+
+
+            initializeCaptchaImage();
+
+            function checkCaptchaAndNull(inputValue, errorMsgId) {
+                // console.log(inputValue);
+                const valistrMsg = document.getElementById(errorMsgId);
+                if (inputValue === "") {
+
+                    valistrMsg.textContent = "驗證碼不能為空！";
+                    valistrMsg.style.color = "red";
+                } else {
+
+                    fetch("check-captcha", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                            userInput: inputValue,
+                        }),
+                    })
+                        .then((response) => response.json())
+                        .then((data) => {
+
+                            if (data.valid) {
+
+                                valistrMsg.textContent = "";
+                            } else {
+
+                                valistrMsg.textContent = "驗證碼不正確！";
+                                valistrMsg.style.color = "red";
+
+                            }
+                        })
+                        .catch((error) => {
+                            console.error("Error checking captcha:", error);
+                        });
+                }
+            }
+
+
+
             //  =================   清空錯誤訊息    ======================
             $("#nav-profile-tab").on("click", function () {
                 $("div#error-messages").text("");
@@ -718,32 +837,62 @@
                 } else if (bankId === "808 玉山銀行") {
                     bankId = '11';
                 }
-                fetch("registerMaster", {
-                    method: "POST",
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        mName: companyName,
-                        mPwd: companyPwd,
-                        mGui: companyGui,
-                        mBankName: bankId,
-                        mBankId: companyAccount,
-                        mAddress: companyAddr,
-                        mManId: companyManId,
-                        mManName: companyManName,
-                        mEmail: companyManEmail,
-                        mPhone: companyManPhone
+                const paragraphs = document.querySelectorAll('.error-msg');
+                let allEmpty = true;
 
-                    }),
-                })
-                    .then(response => response.json())
-                    .then(data => {
+                for (let i = 0; i < paragraphs.length; i++) {
+                    if (paragraphs[i].innerText.trim() !== '') {
+                        // console.log(paragraphs[i].innerText);
+                        allEmpty = false;
+                        break;
+                    }
+                }
 
+                if (allEmpty) {
+                    fetch("registerMaster", {
+                        method: "POST",
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            mName: companyName,
+                            mPwd: companyPwd,
+                            mGui: companyGui,
+                            mBankName: bankId,
+                            mBankId: companyAccount,
+                            mAddress: companyAddr,
+                            mManId: companyManId,
+                            mManName: companyManName,
+                            mEmail: companyManEmail,
+                            mPhone: companyManPhone
+
+                        }),
                     })
-                    .catch(error => {
-                        console.log("請求錯誤");
-                    });
+                        .then(response => response.json())
+                        .then(data => {
+                            alert("註冊成功，按下確認後，跳到登入畫面");
+                            // setTimeout("location.href='http://localhost:8081/TirTirCat/login.html'",3000); // 3秒後跳轉頁面
+                            // location.href = "login.html";
+                        })
+                        .catch(error => {
+                            console.log("請求錯誤");
+                        });
+                } else {
+                    var inputs = document.getElementsByTagName("input");
+                    for (var i = 0; i < inputs.length; i++) {
+                        let index = i;
+                        inputs[i].addEventListener("click", function () {
+                            removeAllErrorMessages();
+                        });
+                    }
+                    console.log("至少有一個 <p> 標籤有文字內容");
+                }
+                // 在外部一次性移除所有錯誤訊息
+                function removeAllErrorMessages() {
+                    for (let i = 0; i < paragraphs.length; i++) {
+                        paragraphs[i].innerText = "";
+                    }
+                }
             });
 
             // ============== 註冊會員資料  ===========================
@@ -768,6 +917,7 @@
                 let birth_el = $("#member_birth").val();
                 let addr_el = $("#member_addr").val();
                 let about_el = $("#aboutMe").val();
+
 
                 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
                 if (email_el.trim() === '' || !emailRegex.test(email_el)) {
@@ -818,39 +968,77 @@
                 if (!phonePattern.test(phone_el)) {
                     document.getElementById('error_phone').style.color = "red";
                     document.getElementById('error_phone').innerText = '手機格式不正確';
-                    ;
+
                 } else {
                     document.getElementById('error_phone').innerText = ''; // 清除錯誤訊息
                 }
-                fetch("register", {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        uEmail: email_el,
-                        uPwd: pwd_el,
-                        password2: pwd2_el,
-                        uName: name_el,
-                        uPhone: phone_el,
-                        uGender: gender_el,
-                        uBirth: birth_el,
-                        uAddress: addr_el,
-                        uAbout: about_el
-                    })
-                })
-                    .then(resp => resp.json())
-                    .then(data => {
 
-                        alert("註冊成功，按下確認後，跳到登入畫面");
-                        // setTimeout("location.href='http://localhost:8081/TirTirCat/login.html'",3000); // 3秒後跳轉頁面
-                        location.href = "login.html";
+                if (addr_el.trim() === '') {
+                    document.getElementById('error_addr').style.color = "red";
+                    document.getElementById('error_addr').innerText = '地址不得為空';
+                } else {
+                    document.getElementById('error_addr').innerText = ''; // 清除錯誤訊息
+                }
 
+                // console.log(document.getElementsByTagName('p')[0].innerText);
+
+                const paragraphs = document.querySelectorAll('.error-msg');
+                let allEmpty = true;
+
+                for (let i = 0; i < paragraphs.length; i++) {
+                    if (paragraphs[i].innerText.trim() !== '') {
+                        console.log(paragraphs[i].innerText);
+                        allEmpty = false;
+                        break;
+                    }
+                }
+
+                if (allEmpty) {
+                    fetch("register", {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            uEmail: email_el,
+                            uPwd: pwd_el,
+                            password2: pwd2_el,
+                            uName: name_el,
+                            uPhone: phone_el,
+                            uGender: gender_el,
+                            uBirth: birth_el,
+                            uAddress: addr_el,
+                            uAbout: about_el
+                        })
                     })
-                    .catch(error => {
-                        document.getElementById('error_email').style.color = "red";
-                        document.getElementById('error_email').innerText = '帳號重複';
-                    });
+                        .then(resp => resp.json())
+                        .then(data => {
+
+                            alert("註冊成功，按下確認後，跳到登入畫面");
+                            // setTimeout("location.href='http://localhost:8081/TirTirCat/login.html'",3000); // 3秒後跳轉頁面
+                            location.href = "login.html";
+
+                        })
+                        .catch(error => {
+                            document.getElementById('error_email').style.color = "red";
+                            document.getElementById('error_email').innerText = '帳號重複';
+                        });
+                } else {
+                    var inputs = document.getElementsByTagName("input");
+                    for (var i = 0; i < inputs.length; i++) {
+                        let index = i;
+                        inputs[i].addEventListener("click", function () {
+                            removeAllErrorMessages();
+                        });
+                    }
+                    console.log("至少有一個 <p> 標籤有文字內容");
+                }
+                // 在外部一次性移除所有錯誤訊息
+                function removeAllErrorMessages() {
+                    for (let i = 0; i < paragraphs.length; i++) {
+                        paragraphs[i].innerText = "";
+                    }
+                }
             });
         });
 

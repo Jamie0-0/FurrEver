@@ -9,8 +9,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import jakarta.transaction.Transactional;
 import tw.idv.tibame.articles.dao.ArticlesDao;
 import tw.idv.tibame.articles.dao.ArticlesLikeDao;
 import tw.idv.tibame.articles.vo.Article;
@@ -42,7 +42,10 @@ public class ArticlesServiceImpl implements ArticlesService {
 		Article article = Article.builder().artId(artId).artUserId(2).artTitle(artTitle).artContent(artContent)
 				.artLike(artLike).build();
 
-		Article existingArticle = dao1.findById(artId).orElse(null);
+		Article existingArticle = new Article();
+		if (artId != null) {
+			existingArticle = dao1.findById(artId).orElse(null);
+		}
 
 		if (existingArticle != null) {
 			article.setArtRepCount(existingArticle.getArtRepCount());

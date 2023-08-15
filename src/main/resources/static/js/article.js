@@ -1,5 +1,5 @@
 let content_html = '<textarea class="content_update" id="summernote1"></textarea>';
-let title_html = '<input type="text" class="title_post w-50" placeholder="輸入標題">';
+let title_html = '<input type="text" class="title_post w-100" placeholder="輸入標題">';
 let imgFiles = null;
 let imgFilesLength = 0;
 let formData = new FormData();
@@ -353,7 +353,7 @@ $(document).ready(function () {
 			let article_content = $("#article-content").find("*");
 			let article_title = $("#article-title").text();
 			content_html = `<textarea class="content_update" id="summernote1" value="${article_content}"></textarea>`;
-			title_html = '<input type="text" class="title_update w-50" placeholder="輸入標題" value="' + article_title + '">';
+			title_html = '<input type="text" class="title_update w-100" placeholder="輸入標題" value="' + article_title + '">';
 
 			imgFiles = addUpload();
 

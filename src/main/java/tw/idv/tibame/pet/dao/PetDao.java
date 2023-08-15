@@ -8,7 +8,6 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
 import tw.idv.tibame.pet.vo.Pet;
-import tw.idv.tibame.pet.vo.PetSex;
 
 public interface PetDao extends CrudRepository<Pet, Integer>{
 	
