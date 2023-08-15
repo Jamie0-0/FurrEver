@@ -33,14 +33,12 @@ public class LoginMasterController {
 			 companyName = masterlist.getMName();			
 		}
 		else {
-			response.put("status", "error");
-			return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>("查無帳號或密碼錯誤", HttpStatus.BAD_REQUEST);
 		}
 		
 		
 		if (loginMaster == null) {
-			response.put("status", "error");
-			return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>("查無帳號或密碼錯誤", HttpStatus.BAD_REQUEST);
 		}
 		session.setAttribute("mid", loginMaster);
 		String location = (String) session.getAttribute("location");

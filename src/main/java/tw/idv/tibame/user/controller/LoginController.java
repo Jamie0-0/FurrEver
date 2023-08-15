@@ -33,7 +33,9 @@ public class LoginController {
 		session.setAttribute("uid", loginUser);
 		session.setAttribute("uName", userName);
 		String location = (String) session.getAttribute("location");
+		
 		System.out.println(location);
+		
 		if (location == null || location.isBlank()) {
 			location = "";
 		}

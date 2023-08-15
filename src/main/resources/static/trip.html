@@ -505,9 +505,9 @@
                 });
             // showActivities(participationHistoryData, true, false, false, false);
         }
-        
+
         function showActivities(activitiesData, showtactStatus, showcount, showtactPpl, showViewButton, showNotifyButton, showCancelButton, showExitButton) {
-           console.log(activitiesData);
+            console.log(activitiesData);
             activitiesData.forEach(activity => {
                 // const activity = activitiesData[key];
                 const timeformat = timeFormat(activity.tactTime);
@@ -564,6 +564,12 @@
                         // 在這裡處理查看活動頁面的操作
 
                         alert("查看活動頁面:", activity.tactName);
+
+                        // 假設您的活動頁面 URL 是 activity.html，並且 activityId 是活動的 ID
+                        const activityUrl = `activity.html?id=${activity.tActId}`;
+
+                        // 使用location.href 跳轉至活動頁面
+                        location.href = activityUrl;
                     });
                     activityElement.appendChild(viewButton);
                 }

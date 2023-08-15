@@ -588,10 +588,23 @@
 
         //當登出被點擊時
         $("a#logout").on("click", function (e) {
-            // console.log("123");
             e.preventDefault();
-            sessionStorage.removeItem("uid");
-            location.href = "login.html";
+            fetch("logout", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                }
+            })
+                .then(responce => responce.json())
+                .then(data => {
+                    if (data.logoutsuccess === 1) {
+
+                        alert("登出成功");
+                        sessionStorage.clear();
+                        location.href = "login.html";
+                    }
+
+                })
         })
 
         const chineseOrEnglishRegex = /^[\u4e00-\u9fa5a-zA-Z]+$/;
@@ -639,7 +652,7 @@
                 petSex: petSexValue,
                 petPerson: petPersonValue,
                 petPic: base64UserPic,
-                petUid : uid
+                petUid: uid
             };
 
             // 將靜態產生的寵物資料加入到allPetData陣列中
@@ -704,7 +717,7 @@
                 .then(data => {
                     console.log(data);
                     alert("新增成功");
-                    location.href="member_center.html";
+                    location.href = "member_center.html";
                 })
                 .catch(error => {
                     console.log("請求錯誤");

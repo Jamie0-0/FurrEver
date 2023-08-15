@@ -343,7 +343,12 @@
                                     </div>
                                     <!-- <p id="error_addr"></p> -->
                                     <textarea class="form-control" id="aboutMe" rows="3" placeholder="關於我"></textarea>
-
+                                    <td class="tds">驗證碼：</td>
+                                    <td id="validimg">
+                                        <input type="text" name="valistr" onblur="checkNull('valistr','驗證碼不能為空！')">
+                                        <img id="yzm_img" src="" style="cursor: pointer" onclick="changeYZM(this)" />
+                                        <span id="valistr_msg"></span>
+                                    </td>
                                     <button type="button" id="create_member_btn"
                                         class="btn-create rounded-pill w-100 btn-lg">註冊</button>
                                 </div>
@@ -437,6 +442,14 @@
                                                     aria-describedby="basic-addon1" required>
                                             </div>
                                             <p id="error_com_mPhone"></p>
+                                            <td class="tds">驗證碼：</td>
+                                            <td id="validimg">
+                                                <input type="text" name="valistr"
+                                                    onblur="checkNull('valistr','驗證碼不能為空！')">
+                                                <img id="yzm_img" src="" style="cursor: pointer"
+                                                    onclick="changeYZM(this)" />
+                                                <span id="valistr_msg"></span>
+                                            </td>
                                             <button type="button" id="create_master_btn"
                                                 class="btn-create rounded-pill w-100 btn-lg">註冊</button>
                                         </div>
@@ -571,6 +584,68 @@
 
     <script>
         $(function () {
+            // let validimg_el = $("td#validimg");
+            // console.log(validimg_el);
+            // validimg_el.innerHTML = `  
+            //         <input type="text" name="valistr" onblur="checkNull('valistr','驗證碼不能為空！')">
+            //         <img id="yzm_img" src="${pageContext.request.contextPath}/servlet/ValiImgServlet" style="cursor: pointer" onclick="changeYZM(this)" />
+            //         <span id="valistr_msg"></span>
+            //         `
+
+            function checkNull(name, msg) {
+                setMsg(name, "");
+                var v = $(`[name="${name}"]`).val();
+                if (v == "") {
+                    setMsg(name, msg);
+                    return false;
+                }
+                return true;
+            }
+
+            function setMsg(name, msg) {
+                var span = $(`#${name}_msg`);
+                span.html(`<font color='red'>${msg}</font>`);
+            }
+
+            // function changeYZM(imgObj) {
+            //     imgObj.src = "${pageContext.request.contextPath}/servlet/ValiImgServlet?time=" + new Date().getTime();
+            // }
+
+            // var yzmImg = document.getElementById("yzm_img");
+
+            // // 初始圖片 URL
+            // console.log(pageContext.request.contextPath);
+            // var initialImgUrl = "${pageContext.request.contextPath}/valiimg";
+
+            // // 設定圖片初始 URL
+            // yzmImg.src = initialImgUrl;
+
+            function changeYZM(imgObj) {
+                // 請求驗證碼圖片的 URL
+                const imgUrl = "/valiimg";
+
+                // 使用 AJAX 請求來獲取圖片
+                fetch(imgUrl, {
+                    method: "GET"
+                })
+                    .then((response) => {
+                        console.log(response.blob());
+                        return response.blob();                    
+                    })
+                    .then((blob) => {
+                        // 使用 Blob URL 將圖片設置到 img 元素的 src 屬性
+                        // console.log(blob);
+                        imgObj.src = URL.createObjectURL(blob);
+                        // console.log(URL.createObjectURL(blob));
+                    })
+                    .catch((error) => {
+                        console.error("Error fetching verification code image:", error);
+                    });
+            }
+            const vaimg = $("umg#yzm_img");
+            changeYZM(vaimg);
+            checkNull();
+            setMsg();
             //  =================   清空錯誤訊息    ======================
             $("#nav-profile-tab").on("click", function () {
                 $("div#error-messages").text("");
@@ -769,6 +844,7 @@
                 let addr_el = $("#member_addr").val();
                 let about_el = $("#aboutMe").val();
 
+
                 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
                 if (email_el.trim() === '' || !emailRegex.test(email_el)) {
                     document.getElementById('error_email').style.color = "red";
@@ -822,6 +898,8 @@
                 } else {
                     document.getElementById('error_phone').innerText = ''; // 清除錯誤訊息
                 }
+
+
                 fetch("register", {
                     method: 'POST',
                     headers: {

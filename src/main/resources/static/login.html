@@ -395,7 +395,9 @@
 				let email_el = $("#email").val();
 				let pwd_el = $("#password").val();
 				let loginType = document.querySelector('input[name="loginType"]:checked').value;
+
 				console.log(loginType);
+
 				const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 				if (email_el.trim() === '' || !emailRegex.test(email_el)) {
 					document.getElementById('error_email').style.color = "red";
@@ -413,7 +415,7 @@
 				} else {
 					document.getElementById('error_pwd').innerText = ''; // 清除錯誤訊息
 				}
-				
+
 				if (loginType === 'user') {
 					const userurl = `login/${encodeURIComponent(email_el)}/${encodeURIComponent(pwd_el)}`;
 					// console.log(url);
@@ -433,7 +435,7 @@
 							sessionStorage.setItem("username", data.userName)
 							console.log(data.location);
 							document.getElementById('error_pwd').innerText = ''; // 清除錯誤訊息
-							if(data.location === ''){
+							if (data.location === '') {
 								location.href = "member_center.html";
 							}
 							// else{
@@ -441,12 +443,13 @@
 							// }
 						})
 						.catch((error) => {
+							console.log(error);
 							document.getElementById('error_pwd').style.color = "red";
 							document.getElementById('error_pwd').innerText = '查無帳號或密碼錯誤';
 						});
 				}
 
-				if (loginType === 'master') {
+				else if (loginType === 'master') {
 					const masterurl = `loginMaster/${encodeURIComponent(email_el)}/${encodeURIComponent(pwd_el)}`;
 					// console.log(url);
 					fetch(masterurl, {
