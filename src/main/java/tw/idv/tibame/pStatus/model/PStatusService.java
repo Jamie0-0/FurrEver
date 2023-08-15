@@ -1,4 +1,4 @@
-package pStatus.model;
+package tw.idv.tibame.pStatus.model;
 
 import java.util.List;
 

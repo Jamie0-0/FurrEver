@@ -1,7 +1,8 @@
 package tw.idv.tibame.pet.controller;
 
 import java.util.List;
-import java.util.Optional;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,7 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import jakarta.servlet.http.HttpSession;
 import tw.idv.tibame.pet.service.PetService;
 import tw.idv.tibame.pet.vo.Pet;
 

@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 package com.wei.proOrderController;
+=======
+package tw.idv.tibame.wei.proOrderController;
+>>>>>>> TonyYen
 
 import java.util.List;
 
@@ -12,10 +16,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+<<<<<<< HEAD
 import com.wei.model.PersonOrderDetial;
 import com.wei.model.ProductDetial;
 import com.wei.model.Product_order;
 import com.wei.service.ProductOrderService;
+=======
+import tw.idv.tibame.wei.model.GbOrder;
+import tw.idv.tibame.wei.model.PersonOrderDetial;
+import tw.idv.tibame.wei.model.ProductDetial;
+import tw.idv.tibame.wei.model.Product_order;
+import tw.idv.tibame.wei.service.ProductOrderService;
+>>>>>>> TonyYen
 
 @RestController
 @RequestMapping("/backEnd")
@@ -25,8 +37,13 @@ public class ProductOrderController {
 	private ProductOrderService productOrderService;
 
 	@PostMapping("order-listValue")
+<<<<<<< HEAD
 	public ResponseEntity<List<Product_order>> getProductOrderById(@RequestParam Integer order_id) {
 	    List<Product_order> productOrder = productOrderService.getProduct_orderById(order_id);
+=======
+	public ResponseEntity<List<Product_order>> getProductOrderById(@RequestParam Integer so_m_id) {
+	    List<Product_order> productOrder = productOrderService.getProduct_orderById(so_m_id);
+>>>>>>> TonyYen
 	    if (productOrder != null) {
 	        return ResponseEntity.ok(productOrder);
 	    }
@@ -70,4 +87,28 @@ public class ProductOrderController {
 	    }
 	    return null;
 	}
+<<<<<<< HEAD
+=======
+	
+	
+	
+	@PostMapping("gb-listValue")
+	public ResponseEntity<List<GbOrder>> getGbOrderById(@RequestParam Integer p_m_id) {
+	    List<GbOrder> gbOrder = productOrderService.getGbOrderById(p_m_id);
+	    if (gbOrder != null) {
+	        return ResponseEntity.ok(gbOrder);
+	    }
+	    return ResponseEntity.notFound().build();
+	}
+	
+	
+	@PostMapping("gb-Search")
+	public ResponseEntity<List<GbOrder>> getGbSearchById(@RequestParam Integer p_m_id,Integer gb_id,Integer gb_s) {
+	    List<GbOrder> gbOrder = productOrderService.getGbSearchById(p_m_id,gb_id,gb_s);
+	    if (gbOrder != null) {
+	        return ResponseEntity.ok(gbOrder);
+	    }
+	    return ResponseEntity.notFound().build();
+	}
+>>>>>>> TonyYen
 }

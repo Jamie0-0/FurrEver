@@ -1,10 +1,19 @@
+<<<<<<< HEAD
 package com.wei.pRowMapper;
+=======
+package tw.idv.tibame.wei.pRowMapper;
+>>>>>>> TonyYen
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+<<<<<<< HEAD
 import com.wei.model.PersonOrderDetial;
 import com.wei.model.ProductDetial;
+=======
+import tw.idv.tibame.wei.model.PersonOrderDetial;
+import tw.idv.tibame.wei.model.ProductDetial;
+>>>>>>> TonyYen
 
 public class PersonDetialMapper implements org.springframework.jdbc.core.RowMapper<PersonOrderDetial> {
 	@Override

@@ -3,6 +3,8 @@ package tw.idv.tibame.user.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +13,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import jakarta.servlet.http.HttpSession;
 import tw.idv.tibame.user.service.UserService;
 import tw.idv.tibame.user.vo.User;
 
@@ -27,23 +28,38 @@ public class LoginController {
 		Integer loginUser = userService.login(uEmail, uPwd);
 		User userlist = userService.findUserName(uEmail);
 		String userName = userlist.getUName();
+<<<<<<< HEAD
 		if(loginUser == null) {
+=======
+		if (loginUser == null) {
+>>>>>>> TonyYen
 			return new ResponseEntity<>("查無帳號或密碼錯誤", HttpStatus.BAD_REQUEST);
 		}
 		session.setAttribute("uid", loginUser);
 		session.setAttribute("uName", userName);
 		String location = (String) session.getAttribute("location");
 		
-		if(location == null || location.isBlank()) {
-			location = "/index.html";
+		System.out.println(location);
+		
+		if (location == null || location.isBlank()) {
+			location = "";
 		}
-		
+//		else {
+//			location = "index.html";
+//		}
+
 		session.removeAttribute("location");
-		
+
 		Map<String, Object> response = new HashMap<>();
+<<<<<<< HEAD
 	    response.put("loginUser", loginUser);
 	    response.put("location", location);
 	    response.put("userName", userName);
+=======
+		response.put("loginUser", loginUser);
+		response.put("location", location);
+		response.put("userName", userName);
+>>>>>>> TonyYen
 		return ResponseEntity.ok(response);
 	}
 }

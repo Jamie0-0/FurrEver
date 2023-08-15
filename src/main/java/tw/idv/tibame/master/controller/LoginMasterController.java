@@ -3,6 +3,8 @@ package tw.idv.tibame.master.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,8 +13,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import jakarta.servlet.http.HttpSession;
 import tw.idv.tibame.master.service.MasterService;
+import tw.idv.tibame.master.vo.Master;
 
 @RestController
 @RequestMapping("loginMaster")
@@ -23,7 +25,22 @@ public class LoginMasterController {
 
 	@GetMapping("/{mEmail}/{mPwd}")
 	public ResponseEntity<?> login(HttpSession session, @PathVariable String mEmail, @PathVariable String mPwd) {
+//		System.out.println(mEmail);
 		Integer loginMaster = masterService.login(mEmail, mPwd);
+		String companyName = "";
+		Map<String, Object> response = new HashMap<>();
+		
+		Master masterlist = masterService.findMasterName(mEmail);
+		System.out.println(masterlist);
+		
+		if(masterlist != null) {
+			 companyName = masterlist.getMName();			
+		}
+		else {
+			return new ResponseEntity<>("查無帳號或密碼錯誤", HttpStatus.BAD_REQUEST);
+		}
+		
+		
 		if (loginMaster == null) {
 			return new ResponseEntity<>("查無帳號或密碼錯誤", HttpStatus.BAD_REQUEST);
 		}
@@ -36,8 +53,10 @@ public class LoginMasterController {
 
 		session.removeAttribute("location");
 
-		Map<String, Object> response = new HashMap<>();
-		response.put("loginMaster", loginMaster);
+		
+		response.put("status", "success");
+		response.put("Masterid", loginMaster);
+		response.put("companyName", companyName);
 		response.put("location", location);
 		return ResponseEntity.ok(response);
 	}

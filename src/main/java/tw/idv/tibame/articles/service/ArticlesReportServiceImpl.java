@@ -4,8 +4,8 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import jakarta.transaction.Transactional;
 import tw.idv.tibame.articles.dao.ArticlesDao;
 import tw.idv.tibame.articles.dao.ArticlesReportDao;
 import tw.idv.tibame.articles.dao.CommentDao;

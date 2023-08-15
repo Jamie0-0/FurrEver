@@ -283,9 +283,7 @@
             <div class="col pet_infor h5">
                 <a href="pet.html">毛孩資訊</a>
             </div>
-            <div class="col friend h5">
-                <a href="freind.html">好友列表</a>
-            </div>
+
             <div class="col act_list h5">
                 <a href="trip.html">活動清單</a>
             </div>
@@ -293,11 +291,9 @@
                 <a href="#">追蹤清單</a>
             </div>
             <div class="col order h5">
-                <a href="#">訂單</a>
+                <a href="myOrder.html">訂單</a>
             </div>
-            <div class="col article h5">
-                <a href="myarticle.html">文章管理</a>
-            </div>
+
         </div>
     </div>
 
@@ -552,10 +548,10 @@
                 const month = (today.getMonth() + 1).toString().padStart(2, '0'); // 因為月份是從0開始，所以需要+1
                 const day = today.getDate().toString().padStart(2, '0');
 
-                const dateString = `${year}-${month}-${day}`;
+                // const dateString = `${year}-${month}-${day}`;
 
                 const birth = document.getElementById('birthday');
-                birth.value = dateString;
+                // birth.value = dateString;
                 const todaymax = new Date().toISOString().split('T')[0];
                 birth.max = todaymax;
 
@@ -644,7 +640,8 @@
 
             //  ============登出====================//
 
-            $("a#logout").on("click", function () {
+            $("a#logout").on("click", function (e) {
+                e.preventDefault();
                 fetch("logout", {
                     method: "POST",
                     headers: {
@@ -653,9 +650,12 @@
                 })
                     .then(responce => responce.json())
                     .then(data => {
-                        alert("登出成功");
-                        sessionStorage.clear();
-                        location.href = "login.html";
+                        if (data.logoutsuccess === 1) {
+
+                            alert("登出成功");
+                            sessionStorage.clear();
+                            location.href = "login.html";
+                        }
 
                     })
             })

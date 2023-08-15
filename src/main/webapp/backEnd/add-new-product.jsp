@@ -1,6 +1,6 @@
+<%@page import="tw.idv.tibame.product.model.ProductVO"%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="product.model.*"%>
 
 <%
 ProductVO proVO = (ProductVO) request.getAttribute("proVO");
@@ -13,10 +13,8 @@ ProductVO proVO = (ProductVO) request.getAttribute("proVO");
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description"
-	content="Furrever admin is super flexible, powerful, clean &amp; modern responsive bootstrap 5 admin template with unlimited possibilities.">
-<meta name="keywords"
-	content="admin template, Furrever admin template, dashboard template, flat admin template, responsive admin template, web app">
+<meta name="description" content="Furrever admin is super flexible, powerful, clean &amp; modern responsive bootstrap 5 admin template with unlimited possibilities.">
+<meta name="keywords" content="admin template, Furrever admin template, dashboard template, flat admin template, responsive admin template, web app">
 <meta name="author" content="Tha102G3">
 <link rel="icon"
 	href="<%=request.getContextPath()%>/backEnd/assets/images/favicon.png"
@@ -124,20 +122,18 @@ ProductVO proVO = (ProductVO) request.getAttribute("proVO");
 					<div class="logo-wrapper logo-wrapper-center">
 						<a href="<%=request.getContextPath()%>/backEnd/back_index.jsp" data-bs-original-title="" title="">
 							<img class="img-fluid for-white"
-							src="<%=request.getContextPath()%>/backEnd/assets/images/logo/full-white.png"
-							alt="logo">
+							src="<%=request.getContextPath()%>/backEnd/assets/images/logo/full-white.png" alt="logo">
 						</a>
 						<div class="back-btn">
 							<i class="fa fa-angle-left"></i>
 						</div>
 					</div>
 					<div class="logo-icon-wrapper">
-						<a href="<%=request.getContextPath()%>/backEnd/back_index.jsp"> <img
-							class="img-fluid main-logo main-white"
-							src="<%=request.getContextPath()%>/backEnd/assets/images/logo/logo.png"
-							alt="logo"> <img class="img-fluid main-logo main-dark"
-							src="<%=request.getContextPath()%>/backEnd/assets/images/logo/logo-white.png"
-							alt="logo">
+						<a href="<%=request.getContextPath()%>/backEnd/back_index.jsp"> 
+						<img class="img-fluid main-logo main-white"
+							src="<%=request.getContextPath()%>/backEnd/assets/images/logo/logo.png" alt="logo"> 
+						<img class="img-fluid main-logo main-dark"
+							src="<%=request.getContextPath()%>/backEnd/assets/images/logo/logo-white.png" alt="logo">
 						</a>
 					</div>
 					<nav class="sidebar-main">
@@ -154,8 +150,8 @@ ProductVO proVO = (ProductVO) request.getAttribute("proVO");
 									href="<%=request.getContextPath()%>/backEnd/back_index.jsp"> <i class="ri-home-line"></i> <span>主頁</span>
 								</a></li>
 
-								<li class="sidebar-list"><a
-									class="linear-icon-link sidebar-link sidebar-title"
+								<li class="sidebar-list">
+								<a class="linear-icon-link sidebar-link sidebar-title"
 									href="javascript:void(0)"> <i class="ri-store-3-line"></i>
 										<span>產品</span>
 								</a>
@@ -163,7 +159,8 @@ ProductVO proVO = (ProductVO) request.getAttribute("proVO");
 										<li><a href="<%=request.getContextPath()%>/backEnd/products.jsp">所有產品</a></li>
 
 										<li><a href="<%=request.getContextPath()%>/backEnd/add-new-product.jsp">添加產品</a></li>
-									</ul></li>
+									</ul>
+								</li>
 
 								<li class="sidebar-list"><a
 									class="sidebar-link sidebar-title" href="javascript:void(0)">

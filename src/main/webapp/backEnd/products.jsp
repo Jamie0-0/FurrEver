@@ -1,4 +1,5 @@
-<%@page import="product.model.*"%>
+<%@page import="tw.idv.tibame.product.model.ProductJDBCDAO"%>
+<%@page import="tw.idv.tibame.product.model.ProductVO"%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
@@ -8,7 +9,7 @@
 List<ProductVO> list = (List<ProductVO>) request.getAttribute("list");
 
 if (list == null) {
-		ProductJDBCDAO dao = new ProductJDBCDAO();
+	ProductJDBCDAO dao = new ProductJDBCDAO();
 		list = dao.getAll();
 		
 	}

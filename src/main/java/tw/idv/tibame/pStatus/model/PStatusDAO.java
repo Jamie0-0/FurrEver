@@ -1,4 +1,4 @@
-package pStatus.model;
+package tw.idv.tibame.pStatus.model;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -26,7 +26,7 @@ public class PStatusDAO implements PStatusDAO_interface {
 	private static final String INSERT_STMT = "INSERT INTO pStatus (ps_name) VALUES (?)";
 	private static final String GET_ALL_STMT = "SELECT ps_id , ps_name FROM pStatus";
 	private static final String GET_ONE_STMT = "SELECT ps_id , ps_name FROM pStatus where ps_id = ?";
-	
+
 	@Override
 	public void insert(PStatusVO pStatusVO) {
 
@@ -41,8 +41,7 @@ public class PStatusDAO implements PStatusDAO_interface {
 			pstmt.executeUpdate();
 
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
+			throw new RuntimeException("A database error occured. " + se.getMessage());
 		} finally {
 			if (pstmt != null) {
 				try {
@@ -60,7 +59,6 @@ public class PStatusDAO implements PStatusDAO_interface {
 			}
 		}
 	}
-
 
 	@Override
 	public PStatusVO findByPrimaryKey(Integer ps_id) {
@@ -85,7 +83,7 @@ public class PStatusDAO implements PStatusDAO_interface {
 
 			}
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "+ se.getMessage());
+			throw new RuntimeException("A database error occured. " + se.getMessage());
 		} finally {
 			if (rs != null) {
 				try {
@@ -134,7 +132,7 @@ public class PStatusDAO implements PStatusDAO_interface {
 				list.add(pStatusVO);
 			}
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "+ se.getMessage());
+			throw new RuntimeException("A database error occured. " + se.getMessage());
 		} finally {
 			if (rs != null) {
 				try {

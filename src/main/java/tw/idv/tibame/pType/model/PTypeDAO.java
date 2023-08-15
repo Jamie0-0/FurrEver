@@ -1,4 +1,4 @@
-package pType.model;
+package tw.idv.tibame.pType.model;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -6,13 +6,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-
-public class PTypeDAO implements PTypeDAO_interface  {
+public class PTypeDAO implements PTypeDAO_interface {
 	private static DataSource ds = null;
 	static {
 		try {
@@ -26,7 +26,7 @@ public class PTypeDAO implements PTypeDAO_interface  {
 	private static final String INSERT_STMT = "INSERT INTO pType (pm_name) VALUES (?)";
 	private static final String GET_ALL_STMT = "SELECT pt_id , pt_name FROM pType";
 	private static final String GET_ONE_STMT = "SELECT pt_id , pt_name FROM pType where pt_id = ?";
-	
+
 	@Override
 	public void insert(PTypeVO pTypeVO) {
 		Connection con = null;
@@ -40,8 +40,7 @@ public class PTypeDAO implements PTypeDAO_interface  {
 			pstmt.executeUpdate();
 
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
+			throw new RuntimeException("A database error occured. " + se.getMessage());
 		} finally {
 			if (pstmt != null) {
 				try {
@@ -59,7 +58,6 @@ public class PTypeDAO implements PTypeDAO_interface  {
 			}
 		}
 	}
-
 
 	@Override
 	public PTypeVO findByPrimaryKey(Integer pt_id) {
@@ -83,7 +81,7 @@ public class PTypeDAO implements PTypeDAO_interface  {
 
 			}
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "+ se.getMessage());
+			throw new RuntimeException("A database error occured. " + se.getMessage());
 		} finally {
 			if (rs != null) {
 				try {
@@ -132,8 +130,7 @@ public class PTypeDAO implements PTypeDAO_interface  {
 				list.add(pTypeVO);
 			}
 		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
+			throw new RuntimeException("A database error occured. " + se.getMessage());
 		} finally {
 			if (rs != null) {
 				try {

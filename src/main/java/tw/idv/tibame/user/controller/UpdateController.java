@@ -1,5 +1,8 @@
 package tw.idv.tibame.user.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,11 +24,14 @@ public class UpdateController {
 	@PostMapping
 	public ResponseEntity<?> update(@RequestBody User user){
 		int result = userService.updateUser(user);
-		System.out.println(user.getUPic());
+		Map<String, Object> response = new HashMap<>();
+		
 		if(result > 0) {
-			return ResponseEntity.ok(result);
+			response.put("status", "success");
+			return ResponseEntity.ok(response);
 		}
-		return new ResponseEntity<>("更新失敗", HttpStatus.BAD_REQUEST);
+		response.put("status", "error");
+		return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
 		
 	}
 }
