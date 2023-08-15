@@ -5,7 +5,7 @@ public class MasterPicVO2 {
 	private String order_r_phone;
 	private String order_r_addr;
 	private String order_t;
-	private String order_pay;
+	private Integer order_pay;
 	private String u_pic;
 
 	public String getOrder_r_name() {
@@ -24,7 +24,7 @@ public class MasterPicVO2 {
 		return order_t;
 	}
 
-	public String getOrder_pay() {
+	public Integer getOrder_pay() {
 		return order_pay;
 	}
 
@@ -50,7 +50,7 @@ public class MasterPicVO2 {
 		private String order_r_phone = "";
 		private String order_r_addr = "";
 		private String order_t = "";
-		private String order_pay = "";
+		private Integer order_pay = -1;
 		private String u_pic = "";
 
 		public MasterPicVO2.Builder setOrder_r_name(String order_r_name) {
@@ -73,7 +73,7 @@ public class MasterPicVO2 {
 			return this;
 		}
 
-		public MasterPicVO2.Builder setOrder_pay(String order_pay) {
+		public MasterPicVO2.Builder setOrder_pay(Integer order_pay) {
 			this.order_pay = order_pay;
 			return this;
 		}
