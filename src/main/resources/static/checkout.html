@@ -117,67 +117,11 @@
                                     </li>
                                     <!-- 購物車 -->
                                     <li class="right-side">
-                                        <div class="onhover-dropdown header-badge">
+                                        <div>
                                             <button type="button" class="btn p-0 position-relative header-wishlist">
-                                                <i data-feather="shopping-cart"></i>
-                                                <span class="position-absolute top-0 start-100 translate-middle badge">2
-                                                    <span class="visually-hidden">unread messages</span>
-                                                </span>
+                                                <a href="cart.html"><i data-feather="shopping-cart"></i>
+                                                </a>
                                             </button>
-
-                                            <div class="onhover-div">
-                                                <ul class="cart-list">
-                                                    <li class="product-box-contain">
-                                                        <div class="drop-cart">
-                                                            <a href="product-left-thumbnail.html" class="drop-image">
-                                                                <img src="./assets/images/vegetable/product/1.png"
-                                                                    class="blur-up lazyload" alt="">
-                                                            </a>
-
-                                                            <div class="drop-contain">
-                                                                <a href="product-left-thumbnail.html">
-                                                                    <h5>Fantasy Crunchy Choco Chip Cookies</h5>
-                                                                </a>
-                                                                <h6><span>1 x</span> $80.58</h6>
-                                                                <button class="close-button close_button">
-                                                                    <i class="fa-solid fa-xmark"></i>
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-
-                                                    <li class="product-box-contain">
-                                                        <div class="drop-cart">
-                                                            <a href="product-left-thumbnail.html" class="drop-image">
-                                                                <img src="./assets/images/vegetable/product/2.png"
-                                                                    class="blur-up lazyload" alt="">
-                                                            </a>
-
-                                                            <div class="drop-contain">
-                                                                <a href="product-left-thumbnail.html">
-                                                                    <h5>Peanut Butter Bite Premium Butter Cookies 600 g
-                                                                    </h5>
-                                                                </a>
-                                                                <h6><span>1 x</span> $25.68</h6>
-                                                                <button class="close-button close_button">
-                                                                    <i class="fa-solid fa-xmark"></i>
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-
-                                                <div class="price-box">
-                                                    <h5>Total :</h5>
-                                                    <h4 class="theme-color fw-bold">$106.58</h4>
-                                                </div>
-
-                                                <div class="button-group">
-                                                    <a href="cart.html" class="btn btn-sm cart-button">View Cart</a>
-                                                    <a href="checkout.html" class="btn btn-sm cart-button theme-bg-color
-                                                    text-white">Checkout</a>
-                                                </div>
-                                            </div>
                                         </div>
                                     </li>
                                     <!-- 聊天室 -->
@@ -357,6 +301,7 @@
                                         <div class="checkout-title">
                                             <h4>宅配資訊</h4>
                                         </div>
+                                        <span id="error_msgs"></span>
 
                                         <div class="checkout-detail">
                                             <div class="row g-4">
@@ -369,17 +314,15 @@
 
                                                             <div class="form-group mb-2">
                                                                 <label for="r_name">收件人姓名</label>
-                                                                <input class="form-control" id="r_name" value="內湖薩摩耶">
+                                                                <input class="form-control" id="r_name">
                                                             </div>
                                                             <div class="form-group mb-2">
                                                                 <label for="r_phone">連絡電話</label>
-                                                                <input class="form-control" id="r_phone"
-                                                                    value="09xxxxxxxx">
+                                                                <input class="form-control" id="r_phone" type="number">
                                                             </div>
                                                             <div class="form-group mb-2">
                                                                 <label for="r_address">收件地址</label>
-                                                                <input class="form-control" id="r_address"
-                                                                    value="台北市內湖區薩摩耶路5號">
+                                                                <input class="form-control" id="r_address">
                                                             </div>
 
                                                         </form>
@@ -409,15 +352,15 @@
                                     <li>
                                         <img src="./assets/images/vegetable/product/1.png"
                                             class="img-fluid blur-up lazyloaded checkout-image" alt="">
-                                        <h4>潔牙骨 <span>X 1</span></h4>
-                                        <h4 class="price">$200</h4>
+                                        <h4><span>X 1</span></h4>
+                                        <h4 class="price">$</h4>
                                     </li>
                                 </ul>
 
                                 <ul class="summery-total">
                                     <li>
                                         <h4>商品總額</h4>
-                                        <h4 id="subTotal" class="price">$750</h4>
+                                        <h4 id="subTotal" class="price">$</h4>
                                     </li>
 
                                     <li>
@@ -437,31 +380,42 @@
 
                                     <li class="list-total mt-4">
                                         <h4>結帳金額</h4>
-                                        <h4 id="total" class="price">$870</h4>
+                                        <h4 id="total" class="price">$</h4>
                                     </li>
 
                                 </ul>
 
                             </div>
 
-                            <button id="checkout_btn" onclick="openModal()"
+                            <button id="checkout_btn"
                                 class="btn theme-bg-color text-white btn-md w-100 mt-4 fw-bold">結帳</button>
                             <div id="myModal" class="modal">
                                 <div class="modal-content w-25">
-                                    <h2 style="text-align:center">下單成功</h2>
-                                    <!-- <p>成團與否請待簡訊通知</p> -->
+                                    <h2 style="text-align:center" id="modal_text">訊息</h2>
                                     <button class="btn theme-bg-color text-white btn-md w-50 mt-4 fw-bold mx-auto"
                                         onclick="closeModal()">確認</button>
                                 </div>
                             </div>
 
+                            <script>
+                                function openModal(message) {
+                                    var modal = document.getElementById("myModal");
+                                    var modalTextElement = document.getElementById("modal_text");
+                                    modalTextElement.innerText = message;
+                                    modal.style.display = "block";
+                                }
 
+                                function closeModal() {
+                                    var modal = document.getElementById("myModal");
+                                    modal.style.display = "none";
+                                }
+                            </script>
 
 
                             <script>
                                 // 當網頁載入完成後，向後端獲取購物車內容
                                 window.addEventListener('DOMContentLoaded', () => {
-                                    fetch('http://localhost:8081/TirTirCat/cartController', {
+                                    fetch('cartController', {
                                         method: 'GET',
                                         headers: {
                                             'Content-Type': 'application/json'
@@ -490,11 +444,11 @@
 
                                             // 更新用戶資料顯示
                                             const rNameElement = document.getElementById('r_name');
-                                            rNameElement.value = user_info.name;
+                                            rNameElement.value = user_info.u_name;
                                             const rPhoneElement = document.getElementById('r_phone');
-                                            rPhoneElement.value = user_info.phone;
+                                            rPhoneElement.value = user_info.u_phone;
                                             const rAddressElement = document.getElementById('r_address');
-                                            rAddressElement.value = user_info.addr;
+                                            rAddressElement.value = user_info.u_address;
 
                                             const rInfoElement = document.getElementById('r_info');
                                             rInfoElement.setAttribute("r_uid", user_info.uid);
@@ -512,10 +466,10 @@
                                         cartContent.forEach(item => {
                                             cartHTML += `                                                  
                                             <ul class="summery-contain" id="cartlist">
-                                                <li p_id=${item.p_id} p_m_id=${item.p_m_id}>
+                                                <li p_id=${item.p_id} p_m_id=${item.p_m_id} p_price=${item.p_price}>
                                                     <img id="pic_content_${item.p_id}" src="./assets/images/vegetable/product/1.png"
                                                         class="img-fluid blur-up lazyloaded checkout-image" alt="">
-                                                        <h4 class="mr-3">${item.p_name}</h4>
+                                                        <h4 id="p_name" class="mr-3">${item.p_name}</h4>
                                                         <span class="ml-4">X${item.quantity}</span>
                                                         <h4 class="price">$${item.p_price * item.quantity}</h4>
                                                 </li>
@@ -523,12 +477,12 @@
                                             `;
 
                                             // 立刻回傳商品的p_id給Servlet，以獲取商品照片
-                                            fetch(`http://localhost:8081/TirTirCat/productPic?p_id=${item.p_id}`, {
+                                            fetch(`productPic?p_id=${item.p_id}`, {
                                                 method: 'GET',
                                             })
                                                 .then(photoData => {
                                                     // 設置圖片來源
-                                                    $(`#pic_content_${item.p_id}`).attr('src', `http://localhost:8081/TirTirCat/productPic?p_id=${item.p_id}`);
+                                                    $(`#pic_content_${item.p_id}`).attr('src', `productPic?p_id=${item.p_id}`);
                                                 })
                                                 .catch(error => {
                                                     console.error('錯誤:', error);
@@ -543,6 +497,28 @@
 
 
                                 $(document).ready(function () {
+                                    function checkout() {
+
+                                        $.ajax({
+                                            url: 'checkoutCart',
+                                            method: 'POST',
+                                            dataType: 'json',
+                                            data: JSON.stringify(dataToSend),
+                                            contentType: 'application/json',
+                                            success: function (response) {
+                                                console.log(dataToSend);
+                                                console.log(response);
+
+                                                openModal(response); // 在這裡打開燈箱並設定文字
+                                            },
+                                            error: function (jqXHR, textStatus, errorThrown) {
+                                                console.error('錯誤：', errorThrown);
+                                            }
+                                        });
+                                    }
+
+
+
                                     //-------------------按下結帳按鈕，傳送訂單及收件人資訊給後端-------------------//
                                     // 監聽結帳按鈕的點擊事件
                                     $('#checkout_btn').on('click', function () {
@@ -557,14 +533,18 @@
                                         $('.summery-contain li').each(function () {
                                             const p_id = $(this).attr('p_id');
                                             const p_m_id = $(this).attr('p_m_id');
+                                            const p_price = $(this).attr('p_price'); // 商品單價
+                                            const p_name = $(this).find('#p_name').text().trim();
                                             const quantity = parseInt($(this).find('span').text().trim().replace('X', ''));
-                                            const price = parseFloat($(this).find('.price').text().replace('$', ''));
+                                            const p_total_price = parseFloat($(this).find('.price').text().replace('$', '')); // 商品單價*數量後價格
 
                                             cartList.push({
-                                                p_id: p_id,
-                                                p_m_id: p_m_id,
-                                                quantity: quantity,
-                                                p_price: price
+                                                item_p_id: p_id,
+                                                item_p_m_id: p_m_id,
+                                                item_p_name: p_name,
+                                                item_p_price: p_price,
+                                                item_quantity: quantity,
+                                                p_total_price: p_total_price
                                             });
                                         });
 
@@ -585,50 +565,52 @@
                                             cartlist: cartList
                                         };
 
-                                        // 發送 AJAX 請求
-                                        $.ajax({
-                                            url: 'http://localhost:8081/TirTirCat/checkoutCart',
-                                            method: 'POST',
-                                            dataType: 'json',
-                                            data: JSON.stringify(dataToSend),
-                                            contentType: 'application/json',
-                                            success: function (response) {
-                                                // 在此處理後端回傳的成功回應
-                                                console.log(dataToSend);
-                                                console.log('訂單提交成功：', response);
-                                                // 在這裡可以做其他處理，例如顯示訂單成功的提示、清空購物車等等
-                                                // ...
-                                            },
-                                            error: function (jqXHR, textStatus, errorThrown) {
-                                                // 在此處理 AJAX 請求失敗的情況
-                                                console.error('錯誤：', errorThrown);
-                                                // 在這裡可以做錯誤處理，例如顯示錯誤訊息等等
-                                                // ...
-                                            }
-                                        });
+
+
+                                        // 點擊結帳按鈕後向後端發送訂單資訊
+                                        function checkout() {
+
+                                            $.ajax({
+                                                url: 'checkoutCart',
+                                                method: 'POST',
+                                                dataType: 'json',
+                                                data: JSON.stringify(dataToSend),
+                                                contentType: 'application/json',
+                                                success: function (response) {
+                                                    console.log(dataToSend);
+                                                    console.log(response);
+
+                                                    if (response.status === true) {
+                                                        // 打開燈箱並顯示後端回傳訊息
+                                                        openModal(response.msgs);
+
+                                                        // 等待三秒後跳轉到指定網址
+                                                        setTimeout(function () {
+                                                            window.location.href = 'shop-category.html';
+                                                        }, 3000); // 3000 毫秒，即 3 秒
+
+                                                    } else if (response.status === false) {
+                                                        if (response.msgs.includes("結帳失敗，請重試或聯繫服務人員。")) {
+                                                            openModal(response.msgs);
+                                                        } else {
+                                                            $("#error_msgs").html(`<p style="color: red;">${response.msgs}</p>`);
+                                                        }
+
+                                                    }
+
+                                                },
+                                                error: function (jqXHR, textStatus, errorThrown) {
+                                                    console.error('錯誤：', errorThrown);
+                                                }
+                                            });
+                                        }
+
+                                        checkout();
+
                                     });
                                 });
 
                             </script>
-
-
-
-
-                            <script>
-                                function openModal() {
-                                    var modal = document.getElementById("myModal");
-                                    modal.style.display = "block";
-                                }
-
-                                function closeModal() {
-                                    var modal = document.getElementById("myModal");
-                                    modal.style.display = "none";
-                                }
-                            </script>
-
-
-
-                            <!-- <button class="btn theme-bg-color text-white btn-md w-100 mt-4 fw-bold">Place Order</button> -->
                         </div>
                     </div>
                 </div>

@@ -7,32 +7,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>追蹤清單</title>
     <!-- bootstrap css -->
-    <link id="rtl-link" rel="stylesheet" type="text/css" href="../assets/css/vendors/bootstrap.css">
+    <link id="rtl-link" rel="stylesheet" type="text/css" href="assets/css/vendors/bootstrap.css">
 
     <!-- wow css -->
-    <link rel="stylesheet" href="../assets/css/animate.min.css" />
+    <link rel="stylesheet" href="assets/css/animate.min.css" />
 
     <!-- font-awesome css -->
-    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/font-awesome.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/vendors/font-awesome.css">
 
     <!-- feather icon css -->
-    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/feather-icon.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/vendors/feather-icon.css">
 
     <!-- slick css -->
-    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/slick/slick.css">
-    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/slick/slick-theme.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/vendors/slick/slick.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/vendors/slick/slick-theme.css">
 
     <!-- Iconly css -->
-    <link rel="stylesheet" type="text/css" href="../assets/css/bulk-style.css">
-    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/animate.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/bulk-style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/vendors/animate.css">
 
     <!-- Template css -->
-    <link id="color-link" rel="stylesheet" type="text/css" href="../assets/css/style.css">
+    <link id="color-link" rel="stylesheet" type="text/css" href="assets/css/style.css">
 
     <!-- 自己的css -->
-    <link rel="stylesheet" href="../assets/css/styleGuide.css">
+    <link rel="stylesheet" href="assets/css/styleGuide.css">
     <style>
-        .tra_list > a{
+        .tra_list>a {
             color: #bfb9fc;
         }
     </style>
@@ -53,7 +53,7 @@
                                 </span>
                             </button>
                             <a href="index.html" class="web-logo nav-logo">
-                                <img src="../assets/images/logo/1.png" class="img-fluid blur-up lazyload" alt="">
+                                <img src="assets/images/logo/1.png" class="img-fluid blur-up lazyload" alt="">
                             </a>
                             <div class="rightside-box">
                                 <ul class="right-side-menu">
@@ -83,7 +83,7 @@
                                                     <li class="product-box-contain">
                                                         <div class="drop-cart">
                                                             <a href="product-left-thumbnail.html" class="drop-image">
-                                                                <img src="../assets/images/vegetable/product/1.png"
+                                                                <img src="assets/images/vegetable/product/1.png"
                                                                     class="blur-up lazyload" alt="">
                                                             </a>
 
@@ -102,7 +102,7 @@
                                                     <li class="product-box-contain">
                                                         <div class="drop-cart">
                                                             <a href="product-left-thumbnail.html" class="drop-image">
-                                                                <img src="../assets/images/vegetable/product/2.png"
+                                                                <img src="assets/images/vegetable/product/2.png"
                                                                     class="blur-up lazyload" alt="">
                                                             </a>
 
@@ -155,15 +155,7 @@
                                             <ul class="user-box-name">
                                                 <li class="product-box-contain">
                                                     <i></i>
-                                                    <a href="login.html">登入</a>
-                                                </li>
-
-                                                <li class="product-box-contain">
-                                                    <a href="sign-up.html">註冊</a>
-                                                </li>
-
-                                                <li class="product-box-contain">
-                                                    <a href="forgot.html">忘記密碼</a>
+                                                    <a href="login.html" id="logout">登出</a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -232,20 +224,15 @@
             <div class="col pet_infor h5">
                 <a href="pet.html">毛孩資訊</a>
             </div>
-            <div class="col friend h5">
-                <a href="freind.html">好友列表</a>
-            </div>
+
             <div class="col act_list h5">
                 <a href="trip.html">活動清單</a>
             </div>
             <div class="col tra_list h5">
                 <a href="collect.html">追蹤清單</a>
             </div>
-            <div class="col order h5">
-                <a href="#">訂單</a>
-            </div>
-            <div class="col article h5">
-                <a href="myarticle.html">文章管理</a>
+            <div class="col order_list h5">
+                <a href="myOrder.html">訂單</a>
             </div>
 
         </div>
@@ -273,7 +260,7 @@
                                 class="list-group-item d-flex justify-content-between align-items-center font-weight-bold">
                                 <!-- <div class="w-25">類型</div> -->
                                 <div class="w-50">名稱</div>
-                                <div class="w-50">日期</div>
+                                <div id="date-and-price" class="w-50">日期</div>
                             </li>
                             <li id="item-list-2">
                                 <!-- 項目將在JavaScript中動態生成 -->
@@ -320,7 +307,7 @@
                         <div class="footer-logo">
                             <div class="theme-logo">
                                 <a href="index.html">
-                                    <img src="../assets/images/logo/2.png" class="blur-up lazyload" alt="">
+                                    <img src="assets/images/logo/2.png" class="blur-up lazyload" alt="">
                                 </a>
                             </div>
 
@@ -367,73 +354,116 @@
     </footer>
     <!-- Footer Section End -->
     <!-- latest jquery-->
-    <script src="../assets/js/jquery-3.6.0.min.js"></script>
+    <script src="assets/js/jquery-3.6.0.min.js"></script>
 
     <!-- jquery ui-->
-    <script src="../assets/js/jquery-ui.min.js"></script>
+    <script src="assets/js/jquery-ui.min.js"></script>
 
     <!-- Bootstrap js-->
-    <script src="../assets/js/bootstrap/bootstrap.bundle.min.js"></script>
-    <script src="../assets/js/bootstrap/bootstrap-notify.min.js"></script>
-    <script src="../assets/js/bootstrap/popper.min.js"></script>
+    <script src="assets/js/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/bootstrap/bootstrap-notify.min.js"></script>
+    <script src="assets/js/bootstrap/popper.min.js"></script>
 
     <!-- feather icon js-->
-    <script src="../assets/js/feather/feather.min.js"></script>
-    <script src="../assets/js/feather/feather-icon.js"></script>
+    <script src="assets/js/feather/feather.min.js"></script>
+    <script src="assets/js/feather/feather-icon.js"></script>
 
     <!-- Lazyload Js -->
-    <script src="../assets/js/lazysizes.min.js"></script>
+    <script src="assets/js/lazysizes.min.js"></script>
 
     <!-- Slick js-->
-    <script src="../assets/js/slick/slick.js"></script>
-    <script src="../assets/js/slick/slick-animation.min.js"></script>
-    <script src="../assets/js/slick/custom_slick.js"></script>
+    <script src="assets/js/slick/slick.js"></script>
+    <script src="assets/js/slick/slick-animation.min.js"></script>
+    <script src="assets/js/slick/custom_slick.js"></script>
 
     <!-- Auto Height Js -->
-    <script src="../assets/js/auto-height.js"></script>
+    <script src="assets/js/auto-height.js"></script>
 
     <!-- Timer Js -->
-    <!-- <script src="../assets/js/timer1.js"></script> -->
+    <!-- <script src="assets/js/timer1.js"></script> -->
 
     <!-- Fly Cart Js -->
-    <script src="../assets/js/fly-cart.js"></script>
+    <script src="assets/js/fly-cart.js"></script>
 
     <!-- Quantity js -->
-    <script src="../assets/js/quantity-2.js"></script>
+    <script src="assets/js/quantity-2.js"></script>
 
     <!-- WOW js -->
-    <script src="../assets/js/wow.min.js"></script>
-    <script src="../assets/js/custom-wow.js"></script>
+    <script src="assets/js/wow.min.js"></script>
+    <script src="assets/js/custom-wow.js"></script>
 
     <!-- script js -->
-    <script src="../assets/js/script.js"></script>
+    <script src="assets/js/script.js"></script>
 
     <script>
         // 在DOM加載完成後執行
         document.addEventListener("DOMContentLoaded", function () {
-            var items = [
-                { type: "activity", name: "活動名稱1", date: "2023-07-15" },
-                { type: "product", name: "商品名稱1", date: "2023-07-16" },
-                { type: "activity", name: "活動名稱2", date: "2023-07-18" },
-                // 其他項目數據
-            ];
+            var items = [];
+
+            const username = sessionStorage.getItem("username");
+            const uid = sessionStorage.getItem("uid");
+            $("h5").text(username);
+            const fetchActivity = fetch('tracetrip', {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    uid: uid
+                }),
+            })
+                .then(response => response.json());
+
+            // 商品
+            const fetchProduct = fetch('findmyproduct', {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    uid: uid
+                }),
+            })
+                .then(response => response.json());
+
+            Promise.all([fetchActivity, fetchProduct])
+                .then(([activityData, productData]) => {
+                    items = []; // 清空 items
+
+                    items = items.concat(Array.isArray(activityData.activity) ? activityData.activity : []);
+                    addActivityItemToList(items); // 使用轉換後的數組
+                    items.forEach(function (item) {
+                        item.t1 = "activity";
+                    });
+
+                    items = items.concat(Array.isArray(productData.product) ? productData.product : []);
+                    addProductItemToList(items); // 使用轉換後的數組
+                    items.forEach(function (item) {
+                        item.p1 = "product";
+                    });
+                })
+                .catch(error => {
+                    console.error('發生錯誤：', error);
+                });
+
 
             var filterBtns = document.querySelectorAll(".filter-btn");
             var itemList = document.getElementById("item-list-2");
+            const date_and_price = $("div#date-and-price");
 
             function switchFilter(filter) {
                 // 清空項目列表
                 while (itemList.firstChild) {
-                    itemList.firstChild.remove();
+                    itemList.innerHTML = "";
                 }
 
                 // 根據篩選條件添加相應的項目
                 if (filter === "activity") {
                     // 添加活動項目
-                    addItemsByFilter("activity");
+                    addActivityItemsByFilter("activity");
                 } else if (filter === "product") {
                     // 添加商品項目
-                    addItemsByFilter("product");
+                    addProductItemsByFilter("product");
                 }
             }
 
@@ -441,12 +471,17 @@
             filterBtns.forEach(function (btn) {
                 btn.addEventListener("click", function () {
                     var filter = btn.dataset.filter;
+                    console.log(filter);
                     switchFilter(filter);
                 });
             });
 
             // 新增項目到列表中
-            function addItemToList(item) {
+            function addActivityItemToList(item) {
+                // console.log(item.tactName);
+
+                date_and_price.text("日期");
+
                 var itemElement = document.createElement("li");
                 itemElement.classList.add("list-group-item");
 
@@ -454,18 +489,52 @@
                 itemContent.classList.add("d-flex", "align-items-center", "justify-content-between");
 
                 var itemDate = document.createElement("span");
-                itemDate.textContent = item.date;
+                const time = timeFormat(item.tactTime);
+                if (time === 'NaN-NaN-NaN') {
+                    return
+                }
+                itemDate.textContent = time;
 
                 var itemName = document.createElement("span");
-                itemName.textContent = item.name;
+                itemName.textContent = item.tactName;
 
                 var itemActions = document.createElement("span");
                 itemActions.innerHTML = `
-                    
-                        <a href="#" class="btn btn-sm btn-info me-2" data-action="view" data-item="${item.name}">查看</a>
-                        <button class="btn btn-sm btn-danger" data-action="delete" data-item="${item.name}">刪除</button>
-                    
-                    `;
+                    <a href="#" class="btn btn-sm btn-info me-2" data-action="view" data-item="${item.tactName}" data-id="${item.tactId}" data-type="${item.t1}">查看</a>
+                    <button class="btn btn-sm btn-danger rounded-pill" data-action="delete" data-item="${item.tactName}" data-id="${item.tactId}" data-type="${item.t1}">刪除</button>
+                `;
+
+                itemContent.appendChild(itemName);
+                itemContent.appendChild(itemDate);
+
+                itemElement.appendChild(itemContent);
+                itemContent.appendChild(itemActions);
+
+                itemList.appendChild(itemElement);
+            }
+
+            function addProductItemToList(item) {
+                // console.log(item.pprice);
+
+                date_and_price.text("價格");
+
+                var itemElement = document.createElement("li");
+                itemElement.classList.add("list-group-item");
+
+                var itemContent = document.createElement("div");
+                itemContent.classList.add("d-flex", "align-items-center", "justify-content-between");
+
+                var itemDate = document.createElement("span");
+                itemDate.textContent = item.pprice;
+
+                var itemName = document.createElement("span");
+                itemName.textContent = item.pname;
+
+                var itemActions = document.createElement("span");
+                itemActions.innerHTML = `
+                    <a href="#" class="btn btn-sm btn-info me-2" data-action="view" data-item="${item.pname}" data-id="${item.pId}" data-type="${item.p1}">查看</a>
+                    <button class="btn btn-sm btn-danger rounded-pill" data-action="delete" data-item="${item.pname}" data-id="${item.pId}" data-type="${item.p1}">刪除</button>
+                `;
 
                 itemContent.appendChild(itemName);
                 itemContent.appendChild(itemDate);
@@ -477,13 +546,42 @@
             }
 
             // 根據篩選條件添加項目
-            function addItemsByFilter(filter) {
+            function addActivityItemsByFilter(filter) {
                 var filteredItems = items.filter(function (item) {
-                    return item.type === filter;
+                    // 檢查 items 物件是否有 t1 這個 key
+                    if (item.t1 === "activity") {
+                        return true;
+                    }
+                    return false;
                 });
 
+                // 清空項目列表
+                itemList.innerHTML = "";
+
+                // 添加活動項目
                 filteredItems.forEach(function (item) {
-                    addItemToList(item);
+                    // console.log(item);
+                    addActivityItemToList(item);
+                });
+            }
+
+            // 根據篩選條件添加項目
+            function addProductItemsByFilter(filter) {
+                var filteredItems = items.filter(function (item) {
+                    // 檢查 items 物件是否有 p1 這個 key
+                    if (item.t1 !== "activity" && item.p1 === "product") {
+                        return true;
+                    }
+                    return false;
+                });
+
+                // 清空項目列表
+                itemList.innerHTML = "";
+
+                // 添加商品項目
+                filteredItems.forEach(function (item) {
+                    // console.log(item);
+                    addProductItemToList(item);
                 });
             }
 
@@ -495,19 +593,146 @@
                 var target = event.target;
                 var action = target.dataset.action;
                 var item = target.dataset.item;
-
+                var pid = target.dataset.id;
+                console.log(pid);
+                var type = target.dataset.type;
+                // console.log(type);
                 if (action === "view") {
                     // 查看活動頁面
                     console.log("查看活動：" + item);
+
+                    if (type === "activity") {
+                        console.log("查看活動：" + item);
+
+                        redirectToJoinPage(pid);
+                        // 根據活動 ID 執行跳轉操作
+                        // if (pid) {
+                        //     // 假設您的活動頁面 URL 是 activity.html，這裡以 pid 為參數
+                        //     const activityUrl = `activity.html?id=${pid}`;
+                        //     location.href = activityUrl;
+                        // }
+                    } else if (type === "product") {
+                        console.log("查看商品：" + item);
+                        // 使用 fetch 向後端傳送商品的 p_id 以獲取商品詳細資料
+                        fetch(`shop/productDetail?p_id=${pid}`, {
+                            method: 'GET',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            }
+                        })
+                            .then(response => response.json())
+                            .then(data => {
+                                console.log("商品詳細資料:", data.viewProductDetail);
+                                // 重新導向到 product-4-image.html 頁面，並將 p_id 作為查詢參數傳遞
+                                location.href = `product-4-image.html?p_id=${pid}`;
+                            })
+
+                            .catch(error => {
+                                // 錯誤處理
+                                console.error("請求錯誤:", error);
+                            });
+                        // 根據商品 ID 執行跳轉操作
+                        // if (pid) {
+                        //     // 假設您的商品頁面 URL 是 product.html，這裡以 pid 為參數
+                        //     const productUrl = `product.html?id=${pid}`;
+                        //     location.href = productUrl;
+
+
+                        // }
+                    }
+
                 } else if (action === "delete") {
                     // 刪除項目
                     console.log("刪除項目：" + item);
-                    target.closest(".list-group-item").remove();
+                    const npid = parseInt(pid);
+                    console.log(npid);
+                    console.log(type);
+                    if (type === 'product') {
+                        fetch('deletemyproductlike?pid=' + npid, {
+                            method: "POST",
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                uid: uid,
+                                pid: npid
+                            })
+                        })
+                            .then(responce => responce.json())
+                            .then(data => {
+                                if (data.success === 1) {
+                                    alert("移除成功");
+                                    target.closest(".list-group-item").remove();
+                                }
+                            })
+                    } else if (type === 'activity') {
+                        fetch('deletemytrip?pid=' + npid, {
+                            method: "POST",
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                uid: uid,
+                                pid: npid
+                            })
+                        })
+                            .then(responce => responce.json())
+                            .then(data => {
+                                if (data.success === 1) {
+                                    alert("移除成功");
+                                    target.closest(".list-group-item").remove();
+                                    location.reload();
+                                }
+                            })
+                    }
                 }
             });
-        });
 
+            $("a#logout").on("click", function (e) {
+                e.preventDefault();
+                fetch("logout", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    }
+                })
+                    .then(responce => responce.json())
+                    .then(data => {
+                        if (data.logoutsuccess === 1) {
+
+                            alert("登出成功");
+                            sessionStorage.clear();
+                            location.href = "login.html";
+                        }
+
+                    })
+            })
+        });
+        function timeFormat(timeString) {
+            // 使用Date物件解析日期時間字串
+            const date = new Date(timeString);
+
+            // 取得日期部分
+            const year = date.getFullYear();
+            const month = date.getMonth() + 1; // 注意月份是從0開始的，所以要加1
+            const day = date.getDate();
+
+            // 以所需格式組合日期
+            const formattedDate = `${year}-${month < 10 ? '0' + month : month}-${day < 10 ? '0' + day : day}`;
+
+            // 回傳格式化後的日期
+            return formattedDate;
+        }
+
+        function redirectToJoinPage(t_act_id) {
+            sessionStorage.setItem('t_act_id', t_act_id);
+            const joinPageUrl = `join-events.html?t_act_id=${t_act_id}`;
+            window.open(joinPageUrl, '_blank');
+        }
     </script>
+
+
+
 </body>
 
 </html>

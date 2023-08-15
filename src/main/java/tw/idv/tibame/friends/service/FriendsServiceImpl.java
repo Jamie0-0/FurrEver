@@ -3,10 +3,11 @@ package tw.idv.tibame.friends.service;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import jakarta.transaction.Transactional;
 import tw.idv.tibame.friends.dao.FriendsDao;
 import tw.idv.tibame.friends.vo.Friend;
 import tw.idv.tibame.friends.vo.FriendId;

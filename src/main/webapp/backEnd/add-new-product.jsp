@@ -1,6 +1,6 @@
+<%@page import="tw.idv.tibame.product.model.ProductVO"%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="product.model.*"%>
 
 <%
 ProductVO proVO = (ProductVO) request.getAttribute("proVO");
@@ -13,10 +13,8 @@ ProductVO proVO = (ProductVO) request.getAttribute("proVO");
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description"
-	content="Furrever admin is super flexible, powerful, clean &amp; modern responsive bootstrap 5 admin template with unlimited possibilities.">
-<meta name="keywords"
-	content="admin template, Furrever admin template, dashboard template, flat admin template, responsive admin template, web app">
+<meta name="description" content="Furrever admin is super flexible, powerful, clean &amp; modern responsive bootstrap 5 admin template with unlimited possibilities.">
+<meta name="keywords" content="admin template, Furrever admin template, dashboard template, flat admin template, responsive admin template, web app">
 <meta name="author" content="Tha102G3">
 <link rel="icon"
 	href="<%=request.getContextPath()%>/backEnd/assets/images/favicon.png"
@@ -99,17 +97,6 @@ ProductVO proVO = (ProductVO) request.getAttribute("proVO");
 						</span></li>
 
 						<li class="profile-nav onhover-dropdown pe-0 me-0">
-							<div class="media profile-media">
-								<img class="user-profile rounded-circle"
-									src="<%=request.getContextPath()%>/backEnd/assets/images/users/4.jpg"
-									alt="">
-								<div class="user-name-hide media-body">
-									<span>埃梅·沃爾特</span>
-									<p class="mb-0 font-roboto">
-										行政<i class="middle ri-arrow-down-s-line"></i>
-									</p>
-								</div>
-							</div>
 							<ul class="profile-dropdown onhover-show-div">
 								<li><a href="<%=request.getContextPath()%>/backEnd/order-list.html"> <i
 										data-feather="archive"></i> <span>訂單</span>
@@ -135,20 +122,18 @@ ProductVO proVO = (ProductVO) request.getAttribute("proVO");
 					<div class="logo-wrapper logo-wrapper-center">
 						<a href="<%=request.getContextPath()%>/backEnd/back_index.jsp" data-bs-original-title="" title="">
 							<img class="img-fluid for-white"
-							src="<%=request.getContextPath()%>/backEnd/assets/images/logo/full-white.png"
-							alt="logo">
+							src="<%=request.getContextPath()%>/backEnd/assets/images/logo/full-white.png" alt="logo">
 						</a>
 						<div class="back-btn">
 							<i class="fa fa-angle-left"></i>
 						</div>
 					</div>
 					<div class="logo-icon-wrapper">
-						<a href="<%=request.getContextPath()%>/backEnd/back_index.jsp"> <img
-							class="img-fluid main-logo main-white"
-							src="<%=request.getContextPath()%>/backEnd/assets/images/logo/logo.png"
-							alt="logo"> <img class="img-fluid main-logo main-dark"
-							src="<%=request.getContextPath()%>/backEnd/assets/images/logo/logo-white.png"
-							alt="logo">
+						<a href="<%=request.getContextPath()%>/backEnd/back_index.jsp"> 
+						<img class="img-fluid main-logo main-white"
+							src="<%=request.getContextPath()%>/backEnd/assets/images/logo/logo.png" alt="logo"> 
+						<img class="img-fluid main-logo main-dark"
+							src="<%=request.getContextPath()%>/backEnd/assets/images/logo/logo-white.png" alt="logo">
 						</a>
 					</div>
 					<nav class="sidebar-main">
@@ -165,8 +150,8 @@ ProductVO proVO = (ProductVO) request.getAttribute("proVO");
 									href="<%=request.getContextPath()%>/backEnd/back_index.jsp"> <i class="ri-home-line"></i> <span>主頁</span>
 								</a></li>
 
-								<li class="sidebar-list"><a
-									class="linear-icon-link sidebar-link sidebar-title"
+								<li class="sidebar-list">
+								<a class="linear-icon-link sidebar-link sidebar-title"
 									href="javascript:void(0)"> <i class="ri-store-3-line"></i>
 										<span>產品</span>
 								</a>
@@ -174,7 +159,8 @@ ProductVO proVO = (ProductVO) request.getAttribute("proVO");
 										<li><a href="<%=request.getContextPath()%>/backEnd/products.jsp">所有產品</a></li>
 
 										<li><a href="<%=request.getContextPath()%>/backEnd/add-new-product.jsp">添加產品</a></li>
-									</ul></li>
+									</ul>
+								</li>
 
 								<li class="sidebar-list"><a
 									class="sidebar-link sidebar-title" href="javascript:void(0)">
@@ -182,9 +168,7 @@ ProductVO proVO = (ProductVO) request.getAttribute("proVO");
 								</a>
 									<ul class="sidebar-submenu">
 										<li><a href="<%=request.getContextPath()%>/backEnd/order-list.html">訂單列表</a></li>
-										<li><a href="<%=request.getContextPath()%>/backEnd/order-detail.html">訂單明細</a></li>
 										<li><a href="<%=request.getContextPath()%>/backEnd/order-list2.html">團購訂單</a></li>
-										<li><a href="<%=request.getContextPath()%>/backEnd/order-list3.html">團購訂單明細</a></li>
 									</ul></li>
 
 								<li class="sidebar-list"><a
@@ -195,11 +179,6 @@ ProductVO proVO = (ProductVO) request.getAttribute("proVO");
 									<ul class="sidebar-submenu">
 										<li><a href="<%=request.getContextPath()%>/backEnd/profile-setting.html">個人設定</a></li>
 									</ul></li>
-
-								<li class="sidebar-list"><a
-									class="sidebar-link sidebar-title link-nav" href="<%=request.getContextPath()%>/backEnd/chat.jsp">
-										<i class="fas fa-comments"></i> <span>聊天室</span>
-								</a></li>
 							</ul>
 						</div>
 
@@ -439,14 +418,12 @@ ProductVO proVO = (ProductVO) request.getAttribute("proVO");
 
 	<script>
 		function handleButtonClick() {
-			const editorElement = document
-					.querySelector(".ck-editor__editable");
+			const editorElement = document.querySelector(".ck-editor__editable");
 			const pContent = editorElement.querySelector("p").innerText;
 			const hiddenInput = document.getElementById("p_des_hidden");
 			hiddenInput.value = pContent;
 
 			const selectedValue = document.getElementById("p_class").value;
-			console.log(selectedValue);
 		}
 
 		document.getElementById("p_pic_one").addEventListener(
@@ -522,22 +499,13 @@ ProductVO proVO = (ProductVO) request.getAttribute("proVO");
 				});
 	</script>
 	<script>
-		// 在按鈕被點擊時觸發 submitForm 函數
-		document.getElementById("sendInfo").addEventListener("click",
-				submitForm);
+		document.getElementById("sendInfo").addEventListener("click",submitForm);
 
 		function submitForm() {
-			// 取得 form 表單元素
 			const form = document.querySelector("form[name='form1']");
-
-			// 執行 form 表單的提交動作
 			form.submit();
 		}
 	</script>
-
-
-
-
 </body>
 
 </html>

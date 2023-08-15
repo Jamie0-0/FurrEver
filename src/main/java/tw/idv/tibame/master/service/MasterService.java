@@ -8,4 +8,5 @@ public interface MasterService {
 
 	Integer login(String mEmail, String mPwd);
 
+	Master findMasterName(String mEmail);
 }

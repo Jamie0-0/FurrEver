@@ -273,9 +273,7 @@
             <div class="col pet_infor h5">
                 <a href="pet.html">毛孩資訊</a>
             </div>
-            <div class="col friend h5">
-                <a href="freind.html">好友列表</a>
-            </div>
+
             <div class="col act_list h5">
                 <a href="trip.html">活動清單</a>
             </div>
@@ -283,11 +281,9 @@
                 <a href="collect.html">追蹤清單</a>
             </div>
             <div class="col order h5">
-                <a href="#">訂單</a>
+                <a href="myOrder.html">訂單</a>
             </div>
-            <div class="col article h5">
-                <a href="myarticle.html">文章管理</a>
-            </div>
+
         </div>
     </div>
 
@@ -496,7 +492,7 @@
                 .then(response => response.json())
                 .then(data => {
 
-
+                    console.log(data);
                     const petContainer = $("#pet-container");
                     const petDataArray = data;
                     // console.log(data);
@@ -533,7 +529,8 @@
 
             //  ============登出====================//
 
-            $("a#logout").on("click", function () {
+            $("a#logout").on("click", function (e) {
+                e.preventDefault();
                 fetch("logout", {
                     method: "POST",
                     headers: {
@@ -542,15 +539,16 @@
                 })
                     .then(responce => responce.json())
                     .then(data => {
-                        alert("登出成功");
-                        sessionStorage.clear();
-                        location.href = "login.html";
+                        if (data.logoutsuccess === 1) {
+
+                            alert("登出成功");
+                            sessionStorage.clear();
+                            location.href = "login.html";
+                        }
 
                     })
-                    .catch(error => {
-                        console.log("請求錯誤");
-                    });
             })
+
         });
 
     </script>

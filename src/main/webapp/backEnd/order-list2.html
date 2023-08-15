@@ -104,7 +104,6 @@
             transition: background-color 0.3s ease-in-out;
         }
 
-        /* 點擊時改變背景色 */
         .product-search:focus {
             background-color: lightyellow;
         }
@@ -114,6 +113,10 @@
             text-align: center;
             border: none;
         }
+        
+        #gbTable th:last-child {
+			width: 70px;
+		}
     </style>
 </head>
 
@@ -149,13 +152,6 @@
                         </li>
                         
                         <li class="profile-nav onhover-dropdown pe-0 me-0">
-                            <div class="media profile-media">
-                                <img class="user-profile rounded-circle" src="assets/images/users/4.jpg" alt="">
-                                <div class="user-name-hide media-body">
-                                    <span>埃梅·沃爾特</span>
-                                    <p class="mb-0 font-roboto">行政<i class="middle ri-arrow-down-s-line"></i></p>
-                                </div>
-                            </div>
                             <ul class="profile-dropdown onhover-show-div">
                                 <li>
                                     <a href="order-list.html">
@@ -238,13 +234,7 @@
                                             <a href="order-list.html">訂單列表</a>
                                         </li>
                                         <li>
-                                            <a href="order-detail.html">訂單明細</a>
-                                        </li>
-                                        <li>
                                             <a href="order-list2.html">團購訂單</a>
-                                        </li>
-                                        <li>
-                                            <a href="order-list3.html">團購訂單明細</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -260,13 +250,6 @@
                                             <a href="profile-setting.html"> 個人設定</a>
                                         </li>
                                     </ul>
-                                </li>
-
-                                <li class="sidebar-list">
-                                    <a class="sidebar-link sidebar-title link-nav" href="chat.jsp">
-                                        <i class="fas fa-comments"></i>
-                                        <span>聊天室</span>
-                                    </a>
                                 </li>
                             </ul>
                         </div>
@@ -286,75 +269,46 @@
                                 <div class="card-body">
                                     <div class="title-header option-title d-sm-flex d-block">
                                         <div>
-                                        <h5>團購列表</h5>
-                                        <input class="product-search" type="text" placeholder="團購編號:">
-                                            <select class="product-search">
-                                                <option value="option1">團購狀態</option>
-                                                <option value="option2">未達標</option>
-                                                <option value="option3">已出貨</option>
-                                            </select>
-                                            <button class="search-button"><i class="fas fa-search"></i></button>
-                                        </div>
-                                        
-                                        <div class="right-options">
-                                            <ul>
-                                                <li>
-                                                    <button type="button" class="btn  btn--yes btn-primary">修改</button>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
+	                                        <h5>團購列表</h5>
+	                                            <div>
+													<b style="font-size: 20px;">輸入團購編號:</b> 
+													<input id="gb_id"
+														type="text" name="gb_id"
+														style="width: 70px; height: 35px; border: 2px solid #ccc; border-radius: 5px;"
+														pattern="[0-9]+">
+														
+													<select id="gb_s" size="1" name="gb_s" 
+														style="width: 90px; height: 35px; border: 2px solid #ccc; 
+														border-radius: 5px; padding: 5px; font-size: 16px; 
+														margin-right: 6px;">
+														
+														<option value="2">出貨狀態</option>
+														<option value="0">已出貨</option>
+														<option value="1">未出貨</option>
+													</select>
+													
+													<button class="search-button" onclick="performSearch()">
+														<i class="fas fa-search"></i>
+													</button>
+												</div>
+	                                        </div>
+	                                    </div>
                                     <div>
                                         <div class="table-container">
-                                            <table>
+                                            <table id="gbTable">
                                                 <thead>
-                                                    <tr>
-                                                        <th></th>
-                                                        <th>團購編號</th>
-                                                        <th>團購人數</th>
-                                                        <th>門檻人數</th>
-                                                        <th>商品金額</th>
-                                                        <th>結團日期</th>
-                                                        <th>團購狀態</th>
-                                                        <th>團購連結</th>
-                                                       
-                                                    </tr>
-                                                </thead>
+													<tr>
+														<th>團購編號</th>
+														<th>團購人數</th>
+														<th>門檻人數</th>
+														<th>商品金額</th>
+														<th>結團日期</th>
+														<th>出貨狀態</th>
+														<th>團購連結</th>
+													</tr>
+												</thead>
                                                 <tbody>
-                                                    <tr>
-                                                        <td><input type="checkbox"></td>
-                                                        <td>A001</td>
-                                                        <td>1</td>
-                                                        <td>50</td>
-                                                        <td>500</td>
-                                                        <td>20230101</td>
-                                                        <td>
-                                                            <select class="custom-select">
-                                                                <option value="option1">未處理</option>
-                                                                <option value="option2">出貨</option>
-                                                            </select>
-                                                        </td>
-                                                        <td>
-                                                            <a href="order-list3.html">前往明細</a>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><input type="checkbox"></td>
-                                                        <td>A001</td>
-                                                        <td>1</td>
-                                                        <td>50</td>
-                                                        <td>500</td>
-                                                        <td>20230101</td>
-                                                        <td>
-                                                            <select class="custom-select">
-                                                                <option value="option1">未處理</option>
-                                                                <option value="option2">出貨</option>
-                                                            </select>
-                                                        </td>
-                                                        <td>
-                                                            <a href="order-list3.html">前往明細</a>
-                                                        </td>
-                                                    </tr>
+                                                    
                                                 </tbody>
                                             </table>
                                         </div>
@@ -395,57 +349,6 @@
         </div>
     </div>
 
-    <div class="modal fade theme-modal remove-coupon" id="exampleModalToggle" aria-hidden="true" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header d-block text-center">
-                    <h5 class="modal-title w-100" id="exampleModalLabel22">請確認 ?</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="remove-box">
-                        <p>The permission for the use/group, preview is inherited from the object, object will create a
-                            new permission for this object</p>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-animation btn-md fw-bold" data-bs-dismiss="modal">否</button>
-                    <button type="button" class="btn btn-animation btn-md fw-bold" data-bs-target="#exampleModalToggle2"
-                        data-bs-toggle="modal" data-bs-dismiss="modal">是</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade theme-modal remove-coupon" id="exampleModalToggle2" aria-hidden="true" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title text-center" id="exampleModalLabel12">完成!</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="remove-box text-center">
-                        <div class="wrapper">
-                            <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
-                                <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
-                                <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
-                            </svg>
-                        </div>
-                        <h4 class="text-content">已移除</h4>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <script src="assets/js/jquery-3.6.0.min.js"></script>
     <script src="assets/js/scrollbar/simplebar.js"></script>
     <script src="assets/js/scrollbar/custom.js"></script>
@@ -459,6 +362,175 @@
     <script src="assets/js/bootstrap/bootstrap.bundle.min.js"></script>
     <script src="assets/js/icons/feather-icon/feather.min.js"></script>
     <script src="assets/js/icons/feather-icon/feather-icon.js"></script>
+    <script>
+		function init() {
+			var path = window.location.pathname;
+			var webCtx = path.substring(0, path.indexOf('/', 1));
+
+			$.ajax({
+				url : "http://" + window.location.host + webCtx + "/backEnd/gb-listValue",
+				type : "POST",
+				data : {
+					"p_m_id" : 1
+				},
+				dataType : "json",
+
+				success : function(data) {
+					var table = document.getElementById("gbTable");
+
+					for (let i = 0; i < data.length; i++) {
+						let row = table.querySelector("tbody").insertRow();
+
+						let gb_id = data[i].gb_id;
+						let people = data[i].people;
+						let gb_c_max = data[i].gb_c_max;
+						let gb_s_price = data[i].gb_s_price;
+						let gb_time_end = data[i].gb_time_end;
+						let gb_s = data[i].gb_s;
+
+						row.insertCell().textContent = gb_id;
+						row.insertCell().textContent = people;
+						row.insertCell().textContent = gb_c_max;
+						row.insertCell().textContent = gb_s_price;
+						row.insertCell().textContent = gb_time_end;
+						
+						
+						if (gb_s == 0) {
+							row.insertCell().textContent = "已出貨";
+						} else {
+							row.insertCell().textContent = "未出貨";
+						}
+
+						let emptyCell = row.insertCell();
+
+						let form = document.createElement("form");
+						form.method = "get";
+						form.action = "order-list3.html";
+						form.style.marginBottom = "0px";
+
+						let inputPid = document.createElement("input");
+						inputPid.type = "hidden";
+						inputPid.name = "p_m_id";
+						inputPid.value = 1;//先寫死
+						
+						let inputGbid = document.createElement("input");
+						inputGbid.type = "hidden";
+						inputGbid.name = "gb_id";
+						inputGbid.value = gb_id;
+						
+						let button = document.createElement("button");
+						button.type = "submit";
+						button.className = "btn btntrans";
+
+						let icon = document.createElement("i");
+						icon.className = "fas fa-pen";
+
+						button.appendChild(icon);
+
+						form.appendChild(inputGbid);
+						form.appendChild(inputPid);
+						form.appendChild(button);
+
+						emptyCell.appendChild(form);
+					}
+				},
+				error : function(xhr) {
+					console.log(xhr);
+				},
+				complete : function(xhr) {
+					console.log(xhr);
+				}
+			});
+		}
+		window.onload = function() {
+			init();
+		};
+
+		function performSearch() {
+			var table = document.getElementById("gbTable");
+			var gb_id = document.getElementById("gb_id").value;
+			var gb_s = document.getElementById("gb_s").value;
+
+			var tbody = table.querySelector("tbody");
+			tbody.innerHTML = "";
+
+			var path = window.location.pathname;
+			var webCtx = path.substring(0, path.indexOf('/', 1));
+
+			$.ajax({
+				url : "http://" + window.location.host + webCtx + "/backEnd/gb-Search",
+				type : "POST",
+				data : {
+					"p_m_id" :1,
+					"gb_id" : gb_id,
+					"gb_s" : gb_s
+				},
+				dataType : "json",
+
+				success : function(data) {
+					var table = document.getElementById("gbTable");
+
+					for (let i = 0; i < data.length; i++) {
+						let row = table.querySelector("tbody").insertRow();
+
+						let gb_id = data[i].gb_id;
+						let people = data[i].people;
+						let gb_c_max = data[i].gb_c_max;
+						let gb_s_price = data[i].gb_s_price;
+						let gb_time_end = data[i].gb_time_end;
+						let gb_s = data[i].gb_s;
+
+						row.insertCell().textContent = gb_id;
+						row.insertCell().textContent = people;
+						row.insertCell().textContent = gb_c_max;
+						row.insertCell().textContent = gb_s_price;
+						row.insertCell().textContent = gb_time_end;
+						
+						
+						if (gb_s == 0) {
+							row.insertCell().textContent = "已出貨";
+						} else {
+							row.insertCell().textContent = "未出貨";
+						}
+
+						let emptyCell = row.insertCell();
+
+						let form = document.createElement("form");
+						form.method = "get";
+						form.action = "order-list3.html";
+						form.style.marginBottom = "0px";
+
+						let inputPid = document.createElement("input");
+						inputPid.type = "hidden";
+						inputPid.name = "p_m_id";
+						inputPid.value = 1;//先寫死
+
+						let button = document.createElement("button");
+						button.type = "submit";
+						button.className = "btn btntrans";
+
+						let icon = document.createElement("i");
+						icon.className = "fas fa-pen";
+
+						button.appendChild(icon);
+
+						form.appendChild(inputPid);
+						form.appendChild(button);
+
+						emptyCell.appendChild(form);
+					}
+				},
+				error : function(xhr) {
+					console.log("查無資料");
+					alert("查無資料");
+					console.log(xhr);
+				},
+				complete : function(xhr) {
+					console.log(xhr);
+				}
+			});
+		}
+	</script> 
 </body>
 
 </html>

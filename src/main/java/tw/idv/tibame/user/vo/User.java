@@ -3,16 +3,17 @@ package tw.idv.tibame.user.vo;
 import java.sql.Timestamp;
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Lob;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Lob;
-import jakarta.persistence.Table;
-import jakarta.persistence.Transient;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -60,6 +61,7 @@ public class User {
 	@JsonProperty("uGender")
 	private String uGender;
 
+	@Transient
 	@Column(name = "u_reg", insertable = false)
 	private Timestamp uReg;
 
@@ -74,9 +76,11 @@ public class User {
 	@Transient
 	private Integer uStatus;
 
+	@Transient
 	@Column(name = "gm_id")
 	private Integer gmId;
 
+	@Transient
 	@Column(name = "gm_date")
 	private Timestamp gmDate;
 
@@ -84,9 +88,11 @@ public class User {
 	@JsonProperty("uAbout")
 	private String uAbout;
 
+	@Transient
 	@Column(name = "u_2")
 	private String u2;
 
+	@Transient
 	@Column(name = "u_3")
 	private String u3;
 

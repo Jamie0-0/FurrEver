@@ -3,10 +3,11 @@ package tw.idv.tibame.user.service.impl;
 import java.util.Date;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import jakarta.transaction.Transactional;
 import tw.idv.tibame.user.dao.UserDao;
 import tw.idv.tibame.user.service.UserService;
 import tw.idv.tibame.user.vo.User;
@@ -20,6 +21,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public Integer login(String uEmail, String uPwd) {
 		Integer result = userDao.findByuEmailAndUPwd(uEmail, uPwd);
+		
 		return result;
 	}
 
@@ -61,12 +63,14 @@ public class UserServiceImpl implements UserService {
 		String uAbout = user.getUAbout();
 		byte[] uPic = user.getUPic();
 		Integer uid= user.getUid();
-//		System.out.println(uPic);
-//		System.out.println(uEmail);
+
 		Integer result = userDao.updateByuid(uEmail, uName, uPwd, uPhone, uBirth, uAbout,uPic, uid);
 		
 		return result;
 	}
 
-
+	@Override
+	public User findUserName(String uEmail) {
+		return userDao.findByuEmail(uEmail);
+		}
 }

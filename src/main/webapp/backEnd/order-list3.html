@@ -113,6 +113,15 @@
             text-align: center;
             border: none;
         }
+        
+        
+        
+        
+	    .custom-card-body {
+	        max-height: 400px; /* 调整您希望的高度 */
+	        overflow-y: auto; /* 如果内容超过高度，显示纵向滚动条 */
+	    }
+        
     </style>
 </head>
 
@@ -148,13 +157,6 @@
                         </li>
                         
                         <li class="profile-nav onhover-dropdown pe-0 me-0">
-                            <div class="media profile-media">
-                                <img class="user-profile rounded-circle" src="assets/images/users/4.jpg" alt="">
-                                <div class="user-name-hide media-body">
-                                    <span>埃梅·沃爾特</span>
-                                    <p class="mb-0 font-roboto">行政<i class="middle ri-arrow-down-s-line"></i></p>
-                                </div>
-                            </div>
                             <ul class="profile-dropdown onhover-show-div">
                                 <li>
                                     <a href="order-list.html">
@@ -237,13 +239,7 @@
                                             <a href="order-list.html">訂單列表</a>
                                         </li>
                                         <li>
-                                            <a href="order-detail.html">訂單明細</a>
-                                        </li>
-                                        <li>
                                             <a href="order-list2.html">團購訂單</a>
-                                        </li>
-                                        <li>
-                                            <a href="order-list3.html">團購訂單明細</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -259,13 +255,6 @@
                                             <a href="profile-setting.html"> 個人設定</a>
                                         </li>
                                     </ul>
-                                </li>
-
-                                <li class="sidebar-list">
-                                    <a class="sidebar-link sidebar-title link-nav" href="chat.jsp">
-                                        <i class="fas fa-comments"></i>
-                                        <span>聊天室</span>
-                                    </a>
                                 </li>
                             </ul>
                         </div>
@@ -286,22 +275,12 @@
                                     <div class="card-header-title">
                                         <h4>團購明細</h4>
                                     </div>
-
-                                    <div class="best-selling-box d-sm-flex d-none">
-                                        <div class="dropdown">
-                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                                <li><a class="dropdown-item" href="#">行動</a></li>
-                                                <li><a class="dropdown-item" href="#">額外行動</a></li>
-                                                <li><a class="dropdown-item" href="#">其他</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
                                 </div>
 
                                 <div class="card-body p-0">
                                     <div>
                                         <div class="table-responsive">
-                                            <table>
+                                            <table id="tableBody">
                                                 <thead>
                                                     <tr>
                                                         <th>會員編號</th>
@@ -313,103 +292,7 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
-                                                        <td>1</td>
-                                                        <td>阿貓阿狗</td>
-                                                        <td>5</td>
-                                                        <td>500</td>
-                                                        <td>台北市 阿貓區 阿狗街 14巷 1弄 10號</td>
-                                                        <td>0900111222</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>2</td>
-                                                        <td>阿貓阿狗2</td>
-                                                        <td>5</td>
-                                                        <td>500</td>
-                                                        <td>台北市 阿貓區 阿狗街 14巷 1弄 10號</td>
-                                                        <td>0900111222</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>3</td>
-                                                        <td>阿貓阿狗3</td>
-                                                        <td>5</td>
-                                                        <td>500</td>
-                                                        <td>台北市 阿貓區 阿狗街 14巷 1弄 10號</td>
-                                                        <td>0900111222</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>4</td>
-                                                        <td>阿貓阿狗4</td>
-                                                        <td>5</td>
-                                                        <td>500</td>
-                                                        <td>台北市 阿貓區 阿狗街 14巷 1弄 10號</td>
-                                                        <td>0900111222</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>5</td>
-                                                        <td>阿貓阿狗5</td>
-                                                        <td>5</td>
-                                                        <td>500</td>
-                                                        <td>台北市 阿貓區 阿狗街 14巷 1弄 10號</td>
-                                                        <td>0900111222</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>5</td>
-                                                        <td>阿貓阿狗5</td>
-                                                        <td>5</td>
-                                                        <td>500</td>
-                                                        <td>台北市 阿貓區 阿狗街 14巷 1弄 10號</td>
-                                                        <td>0900111222</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>5</td>
-                                                        <td>阿貓阿狗5</td>
-                                                        <td>5</td>
-                                                        <td>500</td>
-                                                        <td>台北市 阿貓區 阿狗街 14巷 1弄 10號</td>
-                                                        <td>0900111222</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>5</td>
-                                                        <td>阿貓阿狗5</td>
-                                                        <td>5</td>
-                                                        <td>500</td>
-                                                        <td>台北市 阿貓區 阿狗街 14巷 1弄 10號</td>
-                                                        <td>0900111222</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>5</td>
-                                                        <td>阿貓阿狗5</td>
-                                                        <td>5</td>
-                                                        <td>500</td>
-                                                        <td>台北市 阿貓區 阿狗街 14巷 1弄 10號</td>
-                                                        <td>0900111222</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>5</td>
-                                                        <td>阿貓阿狗5</td>
-                                                        <td>5</td>
-                                                        <td>500</td>
-                                                        <td>台北市 阿貓區 阿狗街 14巷 1弄 10號</td>
-                                                        <td>0900111222</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>5</td>
-                                                        <td>阿貓阿狗5</td>
-                                                        <td>5</td>
-                                                        <td>500</td>
-                                                        <td>台北市 阿貓區 阿狗街 14巷 1弄 10號</td>
-                                                        <td>0900111222</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>5</td>
-                                                        <td>阿貓阿狗5</td>
-                                                        <td>5</td>
-                                                        <td>500</td>
-                                                        <td>台北市 阿貓區 阿狗街 14巷 1弄 10號</td>
-                                                        <td>0900111222</td>
-                                                    </tr>
-                                                    
+
                                                 </tbody>
                                             </table>
                                         </div>
@@ -429,15 +312,17 @@
 
                                 <div class="card-body p-0">
                                     <div>
-                                        <div class="table-responsive">
-                                            <h4>商品名稱:貓貓爪</h4>
-                                            <h4>商品類別:貓用品</h4>
-                                            <h4>成團人數:50人</h4>
-                                            <h4>目前人數:55人</h4>
-                                            <h4>產品價格:500元</h4>
+                                        <div class="table-responsive" id="productDetails">
+
                                         </div>
                                     </div>
                                 </div>
+                                
+                                
+                                
+								<div class="button-box">
+									<button type="button" class="btn  btn--yes btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" href="javascript:void(0)" onclick="updateForm()">出貨</button>
+								</div>
                             </div>
                         </div>
                     </div>
@@ -456,73 +341,22 @@
         </div> 
     </div>
 
-    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog  modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <h5 class="modal-title" id="staticBackdropLabel">登出</h5>
-                    <p>是否登出?</p>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    <div class="button-box">
-                        <button type="button" class="btn btn--no" data-bs-dismiss="modal">No</button>
-                        <button type="button" class="btn  btn--yes btn-primary">Yes</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade theme-modal remove-coupon" id="exampleModalToggle" aria-hidden="true" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header d-block text-center">
-                    <h5 class="modal-title w-100" id="exampleModalLabel22">請確認 ?</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="remove-box">
-                        <p>The permission for the use/group, preview is inherited from the object, object will create a
-                            new permission for this object</p>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-animation btn-md fw-bold" data-bs-dismiss="modal">否</button>
-                    <button type="button" class="btn btn-animation btn-md fw-bold" data-bs-target="#exampleModalToggle2"
-                        data-bs-toggle="modal" data-bs-dismiss="modal">是</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade theme-modal remove-coupon" id="exampleModalToggle2" aria-hidden="true" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title text-center" id="exampleModalLabel12">完成!</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="remove-box text-center">
-                        <div class="wrapper">
-                            <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
-                                <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
-                                <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
-                            </svg>
-                        </div>
-                        <h4 class="text-content">已移除</h4>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
+	<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
+		data-bs-keyboard="false" tabindex="-1"
+		aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		<div class="modal-dialog  modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-body">
+					<h5 class="modal-title" id="staticBackdropLabel">修改完成，請盡快出貨</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>
+					<div class="button-box">
+					    <button id="yesButton" type="button" class="btn btn--yes btn-primary">Yes</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
     <script src="assets/js/jquery-3.6.0.min.js"></script>
     <script src="assets/js/scrollbar/simplebar.js"></script>
@@ -537,6 +371,187 @@
     <script src="assets/js/bootstrap/bootstrap.bundle.min.js"></script>
     <script src="assets/js/icons/feather-icon/feather.min.js"></script>
     <script src="assets/js/icons/feather-icon/feather-icon.js"></script>
+    <script>
+    function init() {
+		var urlParams = new URLSearchParams(window.location.search);
+
+		var gb_id = urlParams.get('gb_id');
+		var p_m_id = urlParams.get('p_m_id');
+
+		var path = window.location.pathname;
+		var webCtx = path.substring(0, path.indexOf('/', 1));
+
+		const url = new URL("http://" + window.location.host + webCtx + "/backEnd/gb-memberList");
+		url.searchParams.append("p_m_id", p_m_id);
+		url.searchParams.append("gb_p_id", gb_id);
+		
+		fetch(url, {
+		    method: "POST",
+		    headers: {
+		        "Content-Type": "application/x-www-form-urlencoded",
+		    },
+		})
+		.then((response) => {
+		    if (!response.ok) {
+		        throw new Error('Network response was not ok');
+		    }
+		    return response.json();
+		})
+		.then((data) => {
+		    console.log(data);
+		    
+
+		    const tableBody = document.getElementById("tableBody");
+
+		    data.forEach(item => {
+		        const row = document.createElement("tr");
+
+		        const uidCell = document.createElement("td");
+		        uidCell.textContent = item.uid;
+		        
+		        const uNameCell = document.createElement("td");
+		        uNameCell.textContent = item.u_name;
+		        
+		        const gbPNumCell = document.createElement("td");
+		        gbPNumCell.textContent = item.gb_p_num;
+
+		        const gbTCell = document.createElement("td");
+		        gbTCell.textContent = item.gb_t;
+
+		        const uAddressCell = document.createElement("td");
+		        uAddressCell.textContent = item.u_address;
+
+		        const uPhoneCell = document.createElement("td");
+		        uPhoneCell.textContent = item.u_phone;
+
+
+
+		        row.appendChild(uidCell);
+		        row.appendChild(uNameCell);
+		        row.appendChild(gbPNumCell);
+		        row.appendChild(gbTCell);
+		        row.appendChild(uAddressCell);
+		        row.appendChild(uPhoneCell);
+		        
+
+		        tableBody.appendChild(row);
+		    });
+		})
+		.catch((error) => {
+		    console.log(error);
+		});
+
+		
+		
+		const url2 = new URL("http://" + window.location.host + webCtx + "/backEnd/gb-productList");
+		url2.searchParams.append("p_m_id", p_m_id);
+		url2.searchParams.append("gb_p_id", gb_id);
+		
+		fetch(url2, {
+		    method: "POST",
+		    headers: {
+		        "Content-Type": "application/x-www-form-urlencoded",
+		    },
+		})
+		.then((response) => {
+		    if (!response.ok) {
+		        throw new Error('Network response was not ok');
+		    }
+		    return response.json();
+		})
+		.then((data) => {
+		    console.log(data);
+		    var productDetailsDiv = document.getElementById("productDetails");
+
+		    for (let i = 0; i < data.length; i++) {
+			    let p_name = data[i].p_name;
+			    let gb_c_max = data[i].gb_c_max;
+			    let gb_s_price = data[i].gb_s_price;
+			    let p_type = data[i].p_type;
+			    let people = data[i].people;
+
+			    let status = "";
+			    if(p_type == 1){
+			    	status = "狗商品";
+			    } else {
+			    	status = "貓商品";
+			    }
+
+			    productDetailsDiv.innerHTML = `
+			    	<h4>商品名稱: ${p_name}</h4>
+			        <h4>商品類別: ${status}</h4>
+			        <h4>成團人數: ${gb_c_max}</h4>
+			        <h4>目前人數: ${people}</h4>
+			        <h4>產品價格: ${gb_s_price}</h4>
+			        <h4>p_m_id: ${p_m_id}</h4>
+			        <h4>gb_p_id: ${gb_id}</h4>
+			    `;
+			}
+		    productDetailsDiv.querySelector("h4:nth-child(6)").style.display = "none"; // p_m_id
+		    productDetailsDiv.querySelector("h4:nth-child(7)").style.display = "none"; // gb_p_id
+		})
+		.catch((error) => {
+		    console.log(error);
+		});
+	}
+
+	window.onload = function() {
+		init();
+	};
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+		function updateForm() {
+			const p_m_id_value = document.querySelector("#productDetails h4:nth-child(6)").textContent.split(":")[1].trim();
+		    const gb_p_id_value = document.querySelector("#productDetails h4:nth-child(7)").textContent.split(":")[1].trim();
+
+	        console.log("p_m_id 值為：" + p_m_id_value);
+	        console.log("gb_p_id 值為：" + gb_p_id_value);
+
+			var path = window.location.pathname;
+			var webCtx = path.substring(0, path.indexOf('/', 1));
+
+			const url = new URL("http://" + window.location.host + webCtx + "/backEnd/gb-update");
+			url.searchParams.append("p_m_id", p_m_id_value);
+			url.searchParams.append("gb_p_id", gb_p_id_value);
+			
+			fetch(url, {
+			    method: "POST",
+			    headers: {
+			        "Content-Type": "application/x-www-form-urlencoded",
+			    },
+			})
+			.then((response) => {
+			    if (!response.ok) {
+			        throw new Error('Network response was not ok');
+			    }
+			    return response.json();
+			})
+			.then((data) => {
+				console.log("===================");
+    
+			})
+			.catch((error) => {
+			    console.log(error);
+			});
+		}
+
+		document.getElementById("yesButton").addEventListener("click", function() {
+			window.location.href = "order-list2.html";
+		});
+    </script>
 </body>
 
 </html>

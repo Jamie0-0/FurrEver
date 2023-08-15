@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FurrEver</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <!-- 點擊愛心 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-DasxPLw4GQ/FrG6NJD3p/ou0QnQQ2Gl75SnyF7TV78uobGmKkxE8XQot5bYvTE7wnwh1lWdoBqCENZw3vpoQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+
+<style>
+    body {
+        /* background: #F7F1EE; */
+        background-image: url("/back_imgs/background_3.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    .checkbox {
+        opacity: 0;
+        position: absolute;
+    }
+
+    .label {
+        background-color: #111;
+        border-radius: 50px;
+        cursor: pointer;
+        display: flex;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 5px;
+        position: relative;
+        height: 26px;
+        width: 50px;
+        transform: scale(1.5);
+    }
+
+    .label .ball {
+        background-color: #fff;
+        border-radius: 50%;
+        position: absolute;
+        top: 2px;
+        left: 2px;
+        height: 22px;
+        width: 22px;
+        transform: translateX(0px);
+        transition: transform 0.2s linear;
+    }
+
+    .checkbox:checked+.label .ball {
+        transform: translateX(24px);
+    }
+
+    .bordered {
+        border: 1px solid #ccc; /* 設定編框樣式 */
+        border-radius: 4px; /* 設定圓角 */
+        padding: 4px; /* 設定內部間距 */
+    }
+
+</style>
+
+<body>
+    <!-- navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top" style="border-bottom: 3px solid #202a3d ;">
+        <div class="container-fluid">
+            <div class="collapse navbar-collapse justify-content-between" id="navbarNavDropdown">
+                <!-- logo -->
+                <a class="navbar-brand" href="furrEverIndex.html">
+                    <img src="/jamie_logo/1.png" alt="">
+                </a>
+                <!-- 導覽列 -->
+                <ul class="navbar-nav">
+                    <!--出遊  -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">出遊</a>
+                        <!-- 出遊下拉選單 -->
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li><a class="dropdown-item" href="/events.html">參加活動</a></li>
+                            <li><a class="dropdown-item" href="/host-event-statement.html">發起活動</a></li>
+                        </ul>
+                    </li>
+                    <!-- 團購 -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">團購</a>
+                    </li>
+                    <!-- 商城 -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">商城</a>
+                    </li>
+                    <!-- 交流天地 -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">交流天地</a>
+                    </li>
+                    <!-- 關於我們 -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">關於我們</a>
+                    </li>
+                </ul>
+                <!-- icon -->
+                <ul class="navbar-nav icon">
+                    <!-- user -->
+                    <li class="nav-item2 dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false" style="color:#FFCB76">
+                            <i class="bi bi-person-fill me-2" style="font-size: 25px;"></i>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li><a class="dropdown-item" href="#">個人首頁</a></li>
+                            <li><a class="dropdown-item" href="#">修改密碼</a></li>
+                            <li><a class="dropdown-item" href="#">登出</a></li>
+                        </ul>
+                    </li>
+                    <!-- 小鈴鐺 -->
+                    <li class="nav-item2">
+                        <a class="nav-link active" style="color:#FFCB76" href="#">
+                            <i class="bi bi-bell me-2" style="font-size: 25px;"></i>
+                        </a>
+                    </li>
+                    <!-- 購物車 -->
+                    <li class="nav-item2">
+                        <a class="nav-link" style="color:#FFCB76" href="#">
+                            <i class="bi bi-cart-fill" style="font-size: 25px;"></i>
+                        </a>
+                    </li>
+                    <!-- 聊天室 -->
+                    <li class="nav-item2">
+                        <a class="nav-link" style="color:#FFCB76" href="#">
+                            <i class="bi bi-chat-right-dots" style="font-size: 25px;"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 標題＆篩選 -->
+    <div class="main container mt-5 mb-5">
+        <h3>出遊活動</h3>
+        <!-- 地區 -->
+        <div class="switchLocation container d-flex justify-content-between">
+            <div class="location">
+                <div class="dropdown">
+                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        地區
+                    </a>
+                    <!-- 地區下拉選單 -->
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <li><a class="dropdown-item" href="#">台北市</a></li>
+                        <li><a class="dropdown-item" href="#">新北市</a></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- 貓狗篩選器 -->
+            <div class="switchs">
+                <div class="switch mt-2 me-3">
+                    <div class="one-quarter" id="switch">
+                        <input type="checkbox" class="checkbox" id="chk" />
+                        <label class="label" for="chk">
+                            <i class="fa-solid fa-cat my-auto" style="color: #FFCB76;"></i>
+                            <i class="fa-solid fa-dog my-auto" style="color: #FFCB76;"></i>
+                            <div class="ball"></div>
+                        </label>
+                    </div>
+                </div>
+                <div class="eventswitch mt-4 me-3">
+                    <div class="one-quarter" id="switch">
+                        <input type="checkbox" class="checkbox" id="chkevent" />
+                        <label class="label" for="chkevent">
+                            <i class="bi bi-fire" style="color:#FFCB76"></i>
+                            <i class="bi bi-patch-exclamation-fill" style="color:#FFCB76"></i>
+                            <div class="ball"></div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 熱門活動列表 -->
+    <div class="container">
+            <div class="row g-1 my-5 mx-auto owl-carousel owl-theme mt-0">
+                <div class="col product-item mx-auto bordered">
+                    <div class="product-img">
+                        <img src="/jamie_imags/event1-1.jpg" alt="" class="img-fluid d-block mx-auto">
+                    </div>
+                    <div class="user d-flex justify-content-between">
+                        <a href="#" class="btn" style="color: #FFCB76;">
+                            <i class="fa-solid fa-user" style="font-size: 25px;"></i>
+                            <img src="" alt="">
+                        </a>
+                        <span class="heart-icon" data-id="event1" onclick="toggleHeart(this)" style="font-size: 25px;">
+                            <i class="far fa-heart align-middle" style="font-size: 25px;"></i>
+                            <span class="like-count" id="likeCount1">0</span>
+                        </span>
+                        
+                    </div>
+
+                    <div class="product-info p-3">
+                        <span class="product-type">汪星人聚會</span>
+                        <a href="#" class="d-block text-dark text-decoration-none py-2 product-name"
+                            style="font-size: 25px; font-weight: bold;">登山冒險</a>
+                        <p id="event1" class="text-center fs-4" style="color: #EA5642;background-color: #ece6e6;"></p>
+                        <div class="joinAndPreview d-flex mt-1">
+                            <button type="button " class="col-6 py-2" style="background-color: #FFCB76;color: #292A3d;">
+                                <i class="bi bi-calendar-event-fill"></i>參加
+                            </button>
+                            <button type="button" class="col-6 py-2" style="background-color: #FFCB76;color: #292A3d;">
+                                <i class="fa fa-binoculars"></i> 預覽
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col product-item mx-auto bordered">
+                    <div class="product-img">
+                        <img src="/jamie_imags/event2-1.jpg" alt="" class="img-fluid d-block mx-auto">
+                    </div>
+                    <div class="user d-flex justify-content-between">
+                        <a href="#" class="btn" style="color: #FFCB76;">
+                            <i class="fa-solid fa-user" style="font-size: 25px;"></i>
+                            <img src="" alt="">
+                        </a>
+                        <span class="heart-icon" data-id="event2" onclick="toggleHeart(this)" style="font-size: 25px;">
+                            <i class="far fa-heart align-middle" style="font-size: 25px;"></i>
+                            <span class="like-count" id="likeCount2">0</span>
+                        </span>
+                    </div>
+
+                    <div class="product-info p-3">
+                        <span class="product-type">汪星人聚會</span>
+                        <a href="#" class="d-block text-dark text-decoration-none py-2 product-name"
+                            style="font-size: 25px; font-weight: bold;">海灘派對</a>
+                        <p id="event2" class="text-center fs-4" style="color: #EA5642;background-color: #ece6e6;"></p>
+                        <div class="joinAndPreview d-flex mt-1">
+                            <button type="button " class="col-6 py-2" style="background-color: #FFCB76;color: #292A3d;">
+                                <i class="bi bi-calendar-event-fill"></i>參加
+                            </button>
+                            <button type="button" class="col-6 py-2" style="background-color: #FFCB76;color: #292A3d;">
+                                <i class="fa fa-binoculars"></i> 預覽
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col product-item mx-auto bordered">
+                    <div class="product-img">
+                        <img src="/jamie_imags/event3-1.jpg" alt="" class="img-fluid d-block mx-auto">
+                    </div>
+                    <div class="user d-flex justify-content-between">
+                        <a href="#" class="btn" style="color: #FFCB76;">
+                            <i class="fa-solid fa-user" style="font-size: 25px;"></i>
+                            <img src="" alt="">
+                        </a>
+                        <span class="heart-icon" data-id="event3" onclick="toggleHeart(this)" style="font-size: 25px;">
+                            <i class="far fa-heart align-middle" style="font-size: 25px;"></i>
+                            <span class="like-count" id="likeCount3">0</span>
+                        </span>
+                    </div>
+
+                    <div class="product-info p-3">
+                        <span class="product-type">喵星人聚會</span>
+                        <a href="#" class="d-block text-dark text-decoration-none py-2 product-name"
+                            style="font-size: 25px; font-weight: bold;">台北一日遊</a>
+                        <p id="event3" class="text-center fs-4" style="color: #EA5642;background-color: #ece6e6;"></p>
+                        <div class="joinAndPreview d-flex mt-1">
+                            <button type="button " class="col-6 py-2" style="background-color: #FFCB76;color: #292A3d;">
+                                <i class="bi bi-calendar-event-fill"></i>參加
+                            </button>
+                            <button type="button" class="col-6 py-2" style="background-color: #FFCB76;color: #292A3d;">
+                                <i class="fa fa-binoculars"></i> 預覽
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col product-item mx-auto bordered">
+                    <div class="product-img">
+                        <img src="/jamie_imags/event4-1.jpg" alt="" class="img-fluid d-block mx-auto">
+                    </div>
+                    <div class="user d-flex justify-content-between">
+                        <a href="#" class="btn" style="color: #FFCB76;">
+                            <i class="fa-solid fa-user" style="font-size: 25px;"></i>
+                            <img src="" alt="">
+                        </a>
+                        <span class="heart-icon" data-id="event4" onclick="toggleHeart(this)" style="font-size: 25px;">
+                            <i class="far fa-heart align-middle" style="font-size: 25px;"></i>
+                            <span class="like-count" id="likeCount4">0</span>
+                        </span>
+                    </div>
+
+                    <div class="product-info p-3">
+                        <span class="product-type">喵星人聚會</span>
+                        <a href="#" class="d-block text-dark text-decoration-none py-2 product-name"
+                            style="font-size: 25px; font-weight: bold;">毛孩美食探險</a>
+                        <p id="event4" class="text-center fs-4" style="color: #EA5642;background-color: #ece6e6;"></p>
+                        <div class="joinAndPreview d-flex mt-1">
+                            <button type="button " class="col-6 py-2" style="background-color: #FFCB76;color: #292A3d;">
+                                <i class="bi bi-calendar-event-fill"></i>參加
+                            </button>
+                            <button type="button" class="col-6 py-2" style="background-color: #FFCB76;color: #292A3d;">
+                                <i class="fa fa-binoculars"></i> 預覽
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row g-1 my-5 mx-auto owl-carousel owl-theme mt-0">
+                <div class="col product-item mx-auto bordered">
+                    <div class="product-img">
+                        <img src="/jamie_imags/event1-1.jpg" alt="" class="img-fluid d-block mx-auto">
+                    </div>
+                    <div class="user d-flex justify-content-between">
+                        <a href="#" class="btn" style="color: #FFCB76;">
+                            <i class="fa-solid fa-user" style="font-size: 25px;"></i>
+                            <img src="" alt="">
+                        </a>
+                        <span class="heart-icon" data-id="event5" onclick="toggleHeart(this)" style="font-size: 25px;">
+                            <i class="far fa-heart align-middle" style="font-size: 25px;"></i>
+                            <span class="like-count" id="likeCount5">0</span>
+                        </span>
+                    </div>
+
+                    <div class="product-info p-3">
+                        <span class="product-type">汪星人聚會</span>
+                        <a href="#" class="d-block text-dark text-decoration-none py-2 product-name"
+                            style="font-size: 25px; font-weight: bold;">登山冒險</a>
+                        <p id="event5" class="text-center fs-4" style="color: #EA5642;background-color: #ece6e6;"></p>
+                        <div class="joinAndPreview d-flex mt-1">
+                            <button type="button " class="col-6 py-2" style="background-color: #FFCB76;color: #292A3d;">
+                                <i class="bi bi-calendar-event-fill"></i>參加
+                            </button>
+                            <button type="button" class="col-6 py-2" style="background-color: #FFCB76;color: #292A3d;">
+                                <i class="fa fa-binoculars"></i> 預覽
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col product-item mx-auto bordered">
+                    <div class="product-img">
+                        <img src="/jamie_imags/event2-1.jpg" alt="" class="img-fluid d-block mx-auto">
+                    </div>
+                    <div class="user d-flex justify-content-between">
+                        <a href="#" class="btn" style="color: #FFCB76;">
+                            <i class="fa-solid fa-user" style="font-size: 25px;"></i>
+                            <img src="" alt="">
+                        </a>
+                        <span class="heart-icon" data-id="event6" onclick="toggleHeart(this)" style="font-size: 25px;">
+                            <i class="far fa-heart align-middle" style="font-size: 25px;"></i>
+                            <span class="like-count" id="likeCount6">0</span>
+                        </span>
+                    </div>
+
+                    <div class="product-info p-3">
+                        <span class="product-type">汪星人聚會</span>
+                        <a href="#" class="d-block text-dark text-decoration-none py-2 product-name"
+                            style="font-size: 25px; font-weight: bold;">海灘派對</a>
+                        <p id="event6" class="text-center fs-4" style="color: #EA5642;background-color: #ece6e6;"></p>
+                        <div class="joinAndPreview d-flex mt-1">
+                            <button type="button " class="col-6 py-2" style="background-color: #FFCB76;color: #292A3d;">
+                                <i class="bi bi-calendar-event-fill"></i>參加
+                            </button>
+                            <button type="button" class="col-6 py-2" style="background-color: #FFCB76;color: #292A3d;">
+                                <i class="fa fa-binoculars"></i> 預覽
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col product-item mx-auto bordered">
+                    <div class="product-img">
+                        <img src="/jamie_imags/event3-1.jpg" alt="" class="img-fluid d-block mx-auto">
+                    </div>
+                    <div class="user d-flex justify-content-between">
+                        <a href="#" class="btn" style="color: #FFCB76;">
+                            <i class="fa-solid fa-user" style="font-size: 25px;"></i>
+                            <img src="" alt="">
+                        </a>
+                        <span class="heart-icon" data-id="event7" onclick="toggleHeart(this)" style="font-size: 25px;">
+                            <i class="far fa-heart align-middle" style="font-size: 25px;"></i>
+                            <span class="like-count" id="likeCount7">0</span>
+                        </span>
+                    </div>
+
+                    <div class="product-info p-3">
+                        <span class="product-type">喵星人聚會</span>
+                        <a href="#" class="d-block text-dark text-decoration-none py-2 product-name"
+                            style="font-size: 25px; font-weight: bold;">台北一日遊</a>
+                        <p id="event7" class="text-center fs-4" style="color: #EA5642;background-color: #ece6e6;"></p>
+                        <div class="joinAndPreview d-flex mt-1">
+                            <button type="button " class="col-6 py-2" style="background-color: #FFCB76;color: #292A3d;">
+                                <i class="bi bi-calendar-event-fill"></i>參加
+                            </button>
+                            <button type="button" class="col-6 py-2" style="background-color: #FFCB76;color: #292A3d;">
+                                <i class="fa fa-binoculars"></i> 預覽
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col product-item mx-auto bordered">
+                    <div class="product-img">
+                        <img src="/jamie_imags/event4-1.jpg" alt="" class="img-fluid d-block mx-auto">
+                    </div>
+                    <div class="user d-flex justify-content-between">
+                        <a href="#" class="btn" style="color: #FFCB76;">
+                            <i class="fa-solid fa-user" style="font-size: 25px;"></i>
+                            <img src="" alt="">
+                        </a>
+                        <span class="heart-icon" data-id="event8" onclick="toggleHeart(this)" style="font-size: 25px;">
+                            <i class="far fa-heart align-middle" style="font-size: 25px;"></i>
+                            <span class="like-count" id="likeCount8">0</span>
+                        </span>
+                    </div>
+
+                    <div class="product-info p-3">
+                        <span class="product-type">喵星人聚會</span>
+                        <a href="#" class="d-block text-dark text-decoration-none py-2 product-name"
+                            style="font-size: 25px; font-weight: bold;">毛孩美食探險</a>
+                        <p id="event8" class="text-center fs-4" style="color: #EA5642;background-color: #ece6e6;"></p>
+                        <div class="joinAndPreview d-flex mt-1">
+                            <button type="button " class="col-6 py-2" style="background-color: #FFCB76;color: #292A3d;">
+                                <i class="bi bi-calendar-event-fill"></i>參加
+                            </button>
+                            <button type="button" class="col-6 py-2" style="background-color: #FFCB76;color: #292A3d;">
+                                <i class="fa fa-binoculars"></i> 預覽
+                            </button>
+                        </div>
+                    </div>
+                </div>
+          </div>
+    </div>        
+    <!-- footer -->
+    <div class="footer container d-flex justify-content-between pt-5" style="font-size: 12px;">
+        <div class="contactUs text-center">
+            <h4>聯絡我們</h4>
+            <p>地址：104台北市中山區南京東路三段219號5樓</p>
+            <p>Call (02)2712-0589</p>
+            <p>信箱@gmail.com</p>
+        </div>
+        <div class="furrEver">
+            <img src="/jamie_logo/logo.png" alt="">
+            <p class="mt-2">
+                我們為毛孩與主人設計了一個揪團出遊及團購毛孩<br>
+                用品的交流平台，來吸引主人帶著毛小孩彼此見面<br>
+                交流，促進毛小孩社會化之餘，來創造話題並帶動<br>
+                寵物市場之商機。
+            </p>
+        </div>
+        <div class="disclaimer ">
+            <h4>免責聲明</h4>
+            <p>任何瀏覽網站的人士，須自行承擔一切風險，本網站不會負責任何因瀏覽<br>
+               或使用本網站而引致之損失。本網站不會作出任何默示的擔保。本網站承<br>
+               諾力求網站內容之準確性及完整性，但內容如有錯誤或遺漏，本網站不會<br>
+               承擔任何賠償責任，所有本網站內容，將會隨時更改，而不作另行通知。<br>
+            </p>
+        </div>
+    </div>
+    <div class="copyright text-center pt-3" style="font-size: 10px;">
+        <p>© 2023 All Rights Reserved By Free Html Templates® Distributed By ThemeWagon</p>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://kit.fontawesome.com/755328616c.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8"
+        crossorigin="anonymous"></script>
+  
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        // =======================like&dislike===================//
+        $(document).ready(function() {
+        // 初始化每個愛心圖示的點贊狀態和數量
+            $(".heart-icon").each(function() {
+                const heartIcon = $(this).find("i");
+                const likeCountElement = $(this).find(".like-count");
+                let isLiked = false;
+                let likeCount = 0;
+                updateLikeCount();
+
+                $(this).on("click", function() {
+                    if (isLiked) {
+                        heartIcon.removeClass("fas").addClass("far").css("color", "");
+                        likeCount--;
+                    } else {
+                        heartIcon.removeClass("far").addClass("fas").css("color", "red");
+                        likeCount++;
+                    }
+                    isLiked = !isLiked;
+                    updateLikeCount();
+                });
+
+                function updateLikeCount() {
+                    likeCountElement.text(likeCount);
+                }
+            }); 
+        });
+
+        // =================switch cat or dog=========================//
+        const chk = document.getElementById('chk');
+
+        chk.addEventListener('change', () => {
+            document.body.classList.toggle('dark');
+        });
+
+        // SOCIAL PANEL JS
+        const floating_btn = document.querySelector('.floating-btn');
+        const close_btn = document.querySelector('.close-btn');
+        const social_panel_container = document.querySelector('.social-panel-container');
+
+        floating_btn.addEventListener('click', () => {
+            social_panel_container.classList.toggle('visible')
+        });
+
+        close_btn.addEventListener('click', () => {
+            social_panel_container.classList.remove('visible')
+        });
+        // =================switch cat or dog=========================//
+        const chkevent = document.getElementById('chkevent');
+
+        chk.addEventListener('change', () => {
+            document.body.classList.toggle('dark');
+        });
+
+        // SOCIAL PANEL JS
+        const eventfloating_btn = document.querySelector('.floating-btn');
+        const eventclose_btn = document.querySelector('.close-btn');
+        const eventsocial_panel_container = document.querySelector('.social-panel-container');
+
+        floating_btn.addEventListener('click', () => {
+            social_panel_container.classList.toggle('visible')
+        });
+
+        close_btn.addEventListener('click', () => {
+            social_panel_container.classList.remove('visible')
+        });
+    </script>
+  
+    <script>
+        // ==========================倒計時方法===========================//
+
+        function startCountdown(targetDateId, resultElementId) {
+            var countDownDate = new Date(targetDateId).getTime();
+
+            var x = setInterval(function () {
+                var now = new Date().getTime();
+                var distance = countDownDate - now;
+
+                var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                var resultElement = document.getElementById(resultElementId);
+                if (resultElement) {
+                    resultElement.innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+                }
+
+                if (distance < 0) {
+                    clearInterval(x);
+                    if (resultElement) {
+                        resultElement.innerHTML = "EXPIRED";
+                    }
+                }
+            }, 1000);
+        }
+        // ==========================倒計時方法使用===========================//
+
+        startCountdown("Aug 31, 2023 15:37:25", "event1");
+
+        startCountdown("Aug 31, 2023 15:37:25", "event2");
+
+        startCountdown("Aug 31, 2023 15:37:25", "event3");
+
+        startCountdown("Aug 31, 2023 15:37:25", "event4");
+
+        startCountdown("Aug 31, 2023 15:37:25", "event5");
+
+        startCountdown("Aug 31, 2023 15:37:25", "event6");
+
+        startCountdown("Aug 31, 2023 15:37:25", "event7");
+
+        startCountdown("Aug 31, 2023 15:37:25", "event8");
+
+        startCountdown("Aug 31, 2023 15:37:25", "event9");
+
+        startCountdown("Aug 31, 2023 15:37:25", "event10");
+
+        startCountdown("Aug 31, 2023 15:37:25", "event11");
+
+        startCountdown("Aug 31, 2023 15:37:25", "event12");
+
+        startCountdown("Aug 31, 2023 15:37:25", "event13");
+
+        startCountdown("Aug 31, 2023 15:37:25", "event14");
+        // =======================商品列表==========================//
+        $('.owl-carousel').owlCarousel({
+            loop: true,
+            margin: 0,
+            responsiveClass: true,
+            responsive: {
+                0: {
+                    items: 1,
+                },
+                768: {
+                    items: 2,
+                },
+                1100: {
+                    items: 3,
+                },
+                1400: {
+                    items: 4,
+                    loop: false,
+                }
+            }
+        });
+    </script>
+
+
+</body>
+
+</html>
