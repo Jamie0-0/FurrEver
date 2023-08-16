@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 
@@ -23,15 +25,11 @@ import tw.idv.tibame.product_fe.vo.ProductUser;
 @WebServlet("/cartController")
 public class CartController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	
+	@Autowired
 	private ProductService service;
+	@Autowired
 	private ProductUserDao productUserDao;
-
-	@Override
-	public void init() throws ServletException {
-		service = new ProductServiceImpl();
-		productUserDao = new ProductUserDaoImpl();
-	}
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

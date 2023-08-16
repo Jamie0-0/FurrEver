@@ -25,9 +25,10 @@ import tw.idv.tibame.order.vo.SubOrder;
 import tw.idv.tibame.order.vo.SubProduct;
 import tw.idv.tibame.product_fe.dao.ProductDao;
 import tw.idv.tibame.product_fe.dao.ProductUserDao;
+import tw.idv.tibame.product_fe.vo.Product;
 
 @Service
-public class ProductOrderServiceImpl2 implements ProductOrderService {
+public class ProductOrdersServiceImpl implements ProductOrderService {
 	@PersistenceContext
 	private Session session;
 	@Autowired
@@ -42,13 +43,10 @@ public class ProductOrderServiceImpl2 implements ProductOrderService {
 	private ProductUserDao productUserDao;
 	private List<String> msgs;
 
-	public ProductOrderServiceImpl2() {
+	public ProductOrdersServiceImpl() {
 		msgs = new LinkedList<String>();
 	}
 
-//	private Session getSession() {
-//		return HibernateUtil.getSessionFactory().getCurrentSession();
-//	}
 
 	@Override
 	@Transactional
@@ -169,7 +167,6 @@ public class ProductOrderServiceImpl2 implements ProductOrderService {
 	public void deleteCartFromRedis(HttpSession session) {
 
 		try {
-//			String username = (String) session.getAttribute("username");
 			String username = (String) session.getAttribute("uName");
 //			int uid = productUserDao.selectByUserNameForCart(username).getUid();
 
@@ -190,46 +187,46 @@ public class ProductOrderServiceImpl2 implements ProductOrderService {
 
 	}
 
-//	@Override
-//	public List<ProductOrder> selectByUid(int uid) {
-//		List<ProductOrder> productOrders = productOrderDao.selectAllProductOrderByUid(uid);
-//		List<SubOrder> subOrdersForProductOrder = new ArrayList<>();
-//
-//		for (ProductOrder productOrder : productOrders) {
-//			int order_id = productOrder.getOrder_id();
-//
-////			List<SubOrder> subOrdersForProductOrder = null;
-//
-//			List<SubOrder> subOrders = subOrderDao.selectBySoOrderNum(order_id);
-//			System.out.println(subOrders);
-//			for (SubOrder subOrder : subOrders) {
-//				int so_order_id = subOrder.getSo_order_id();
-//				System.out.println("so_order_id =" + so_order_id);
-//				System.out.println(subOrder);
-//
-////				List<SubOrder> subOrdersForProductOrder = productOrder.getSubOrders();
-////				System.out.println(subOrdersForProductOrder);
-//				subOrdersForProductOrder.add(subOrder);
-//
-//				List<SubProduct> subProductsForSubOrder = new ArrayList<>();
-//
-//				List<SubProduct> subProducts = subProductDao.selectByOrderId(order_id);
-//				for (SubProduct subProduct : subProducts) {
-//					subProductsForSubOrder.add(subProduct);
-//
-//					int p_id = subProduct.getP_p_id();
-//					Product product = productDao.selectPNameByPId(p_id);
-//					subProduct.setProduct(product);
-//
-//				}
-//				subOrder.setSubProducts(subProducts);
-//			}
-//			productOrder.setSubOrders(subOrders);
-//
-//		}
-//
-//		return productOrders;
-//	}
+	@Override
+	public List<ProductOrder> selectByUid(int uid) {
+		List<ProductOrder> productOrders = productOrderDao.selectAllProductOrderByUid(uid);
+		List<SubOrder> subOrdersForProductOrder = new ArrayList<>();
+
+		for (ProductOrder productOrder : productOrders) {
+			int order_id = productOrder.getOrder_id();
+
+//			List<SubOrder> subOrdersForProductOrder = null;
+
+			List<SubOrder> subOrders = subOrderDao.selectBySoOrderNum(order_id);
+			System.out.println(subOrders);
+			for (SubOrder subOrder : subOrders) {
+				int so_order_id = subOrder.getSo_order_id();
+				System.out.println("so_order_id =" + so_order_id);
+				System.out.println(subOrder);
+
+//				List<SubOrder> subOrdersForProductOrder = productOrder.getSubOrders();
+//				System.out.println(subOrdersForProductOrder);
+				subOrdersForProductOrder.add(subOrder);
+
+				List<SubProduct> subProductsForSubOrder = new ArrayList<>();
+
+				List<SubProduct> subProducts = subProductDao.selectByOrderId(order_id);
+				for (SubProduct subProduct : subProducts) {
+					subProductsForSubOrder.add(subProduct);
+
+					int p_id = subProduct.getP_p_id();
+					Product product = productDao.selectPNameByPId(p_id);
+					subProduct.setProduct(product);
+
+				}
+				subOrder.setSubProducts(subProducts);
+			}
+			productOrder.setSubOrders(subOrders);
+
+		}
+
+		return productOrders;
+	}
 
 //	@Override
 //	public boolean createOrders(ProductOrder productOrder, SubOrder subOrder, SubProduct subProduct) {

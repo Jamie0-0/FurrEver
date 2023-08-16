@@ -9,21 +9,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.google.gson.Gson;
 
 import tw.idv.tibame.order.service.ProductOrderService;
-import tw.idv.tibame.order.service.ProductOrderServiceImpl2;
+import tw.idv.tibame.order.service.ProductOrdersServiceImpl;
 import tw.idv.tibame.order.vo.Orders;
 
 @WebServlet("/checkoutCart")
 public class CheckoutCartController extends HttpServlet {
-
+	@Autowired
 	private ProductOrderService service;
-
-	@Override
-	public void init() throws ServletException {
-		service = new ProductOrderServiceImpl2();
-	}
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
