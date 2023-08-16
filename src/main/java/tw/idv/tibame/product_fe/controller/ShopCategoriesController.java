@@ -8,20 +8,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.google.gson.Gson;
 
 import tw.idv.tibame.product_fe.service.ProductService;
-import tw.idv.tibame.product_fe.service.ProductServiceImpl;
 
 @WebServlet("/shop/categories")
 public class ShopCategoriesController extends HttpServlet {
 
+	@Autowired
 	private ProductService service;
-
-	@Override
-	public void init() throws ServletException {
-		service = new ProductServiceImpl();
-	}
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -45,5 +42,15 @@ public class ShopCategoriesController extends HttpServlet {
 		System.out.println(message);
 
 	}
+
+//	@GetMapping("/shop/categories")
+//	public Map<String, Object> selectByKeyWords(@RequestParam String how, @RequestParam String keywords) {
+//		List<Product> list = service.selectByKeyWords(how, keywords);
+//		Map<String, Object> response = new HashMap<>();
+//		response.put("status", "true");
+//		response.put("selectByKeyWords", list);
+//
+//		return response;
+//	}
 
 }
