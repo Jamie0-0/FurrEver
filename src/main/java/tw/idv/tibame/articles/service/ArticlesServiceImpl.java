@@ -18,16 +18,12 @@ import tw.idv.tibame.articles.vo.ArticlesLike;
 
 @Service
 public class ArticlesServiceImpl implements ArticlesService {
-	private final ArticlesDao dao1;
-	private final ArticlesLikeDao dao2;
-	private final RedisTemplate<String, String> redisTemplate;
-
 	@Autowired
-	public ArticlesServiceImpl(ArticlesDao dao1, ArticlesLikeDao dao2, RedisTemplate<String, String> redisTemplate) {
-		this.dao1 = dao1;
-		this.dao2 = dao2;
-		this.redisTemplate = redisTemplate;
-	}
+	private ArticlesDao dao1;
+	@Autowired
+	private ArticlesLikeDao dao2;
+	@Autowired
+	private RedisTemplate<String, String> redisTemplate;
 
 //	@Override
 //	@Transactional

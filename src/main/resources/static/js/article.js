@@ -4,6 +4,9 @@ let imgFiles = null;
 let imgFilesLength = 0;
 let formData = new FormData();
 let urlArtId = 0;
+let storageUId =0;
+let storageName = "Stranger";
+
 
 function fetchComment() {
 	fetch("comment").then(response => response.json()).
@@ -172,6 +175,10 @@ function addUpload() {
 }
 
 function buildArticle() {
+	
+	storageUId = sessionStorage.getItem("uid");
+	storageName = sessionStorage.getItem("username");
+	
 	fetch("article")
 		.then(response => response.json())
 		.then(data => {
@@ -181,18 +188,21 @@ function buildArticle() {
 					$(window).attr('location', 'forum.html');
 				}, 2000);
 			} else {
-				$(".author").text(data.artUser.uname); 
-				$(".author").attr("uid", data.artUserId); 
+				$(".author").text(storageName); 
+				$(".author").attr("uid", storageUId); 
 				$("time.post-time").text(data.artPoTime);
 				$("button.blog-button").attr("artId", data.artId);
 				$("#article-title").text(data.artTitle);
 				$("#article-content").append(data.artContent);
 				$("i.fa-heart").text(data.artLike);
-				$("#ownerAvatar").attr("src", "avatar?uid=" + data.artUserId);
+				$("#ownerAvatar").attr("src", "avatar?uid=" + storageUId);
 				$("#article-report").attr("artId", data.artId)
 				urlArtId = data.artId;
-				console.log("urlArtId"+urlArtId)
-
+				
+				if(storageUId != data.artUserId){
+					$("#article-edit").addClass(" d-none");
+				}
+				
 				// Like
 				$("#article-like").on("click", function (e) {
 					// 避免重複點擊
@@ -219,8 +229,8 @@ function buildArticle() {
 
 				// Share button
 				$("#share-tooltip").on("click", () => {
-
-					let url = "localhost:8080/FurrEver/articleXxx?artId=" + urlArtId;
+					
+					url = window.location.origin + window.location.pathname.split("/").slice(0, -1).join("/") + "/articleXxx?artId=" + urlArtId;
 					navigator.clipboard.writeText(url);
 					alert(`文章網址${url}已複製成功`);
 				})
@@ -253,7 +263,7 @@ $(document).ready(function () {
 			contentType: "application/json", 
 			data: {
 				"comArtId": urlArtId
-				, comUserId: 1
+				, comUserId: storageUId
 				, comContent: markupStr
 			},
 			dataType: "json",
@@ -284,13 +294,11 @@ $(document).ready(function () {
 			tabsize: 2,
 			height: 120,
 			toolbar: [
-				['style', ['style']],
 				['font', ['bold', 'underline', 'clear']],
-				['color', ['color']],
-				['para', ['ul', 'ol', 'paragraph']],
+				['color'],
 				['table', ['table']],
 				['insert', ['link', 'picture', 'video']],
-				['view', ['fullscreen', 'codeview', 'help']]
+				['view', ['fullscreen', 'codeview']]
 			]
 		});
 
@@ -344,7 +352,7 @@ $(document).ready(function () {
 		}
 
 		buildArticle();
-
+ 
 		// 編輯文章
 		let content_value = "";
 		let title_value = "";
@@ -369,13 +377,10 @@ $(document).ready(function () {
 					tabsize: 2,
 					height: 120,
 					toolbar: [
-						['style', ['style']],
 						['font', ['bold', 'underline', 'clear']],
-						['color', ['color']],
-						['para', ['ul', 'ol', 'paragraph']],
-						['table', ['table']],
+						['color'],
 						['insert', ['link', 'picture', 'video']],
-						['view', ['fullscreen', 'codeview', 'help']]
+						['view', ['fullscreen', 'codeview']]
 					]
 				});
 

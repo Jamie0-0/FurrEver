@@ -16,12 +16,9 @@ import tw.idv.tibame.articles.vo.ArticlePic;
 
 @Service
 public class ArticlePicServiceImpl implements ArticlePicService {
-	@Autowired
-	private final ArticlePicDao dao;
 
-	public ArticlePicServiceImpl(ArticlePicDao dao) {
-		this.dao = dao;
-	}
+	@Autowired
+	private ArticlePicDao dao;
 
 	@Override
 	public byte[] selectCarouselPic(Integer artId, Integer picOrder) {

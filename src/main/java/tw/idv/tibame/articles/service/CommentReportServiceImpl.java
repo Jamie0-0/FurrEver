@@ -14,14 +14,10 @@ import tw.idv.tibame.articles.vo.Comment;
 @Service
 public class CommentReportServiceImpl implements CommentReportService {
 
-	private final CommentReportDao dao;
-	private final CommentDao dao1;
-
 	@Autowired
-	public CommentReportServiceImpl(CommentReportDao dao, CommentDao dao1) {
-		this.dao = dao;
-		this.dao1 = dao1;
-	}
+	private CommentReportDao dao;
+	@Autowired
+	private CommentDao dao1;
 
 	@Override
 	@Transactional

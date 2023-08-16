@@ -4,11 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="./images/article1.jpg" type="image/x-icon">
-    <title>交流天地</title>
-
+    <title>friend</title>
     <!-- bootstrap css -->
-    <link rel="stylesheet" href="vendors/bootstrap/css/bootstrap.css">
+    <link id="rtl-link" rel="stylesheet" type="text/css" href="assets/css/vendors/bootstrap.css">
 
     <!-- wow css -->
     <link rel="stylesheet" href="assets/css/animate.min.css" />
@@ -31,12 +29,28 @@
     <link id="color-link" rel="stylesheet" type="text/css" href="assets/css/style.css">
 
     <!-- 自己的css -->
-    
-    <link rel="stylesheet" href="css/all.css">
-    <link rel="stylesheet" href="css/forum.css">
+    <link rel="stylesheet" href="assets/css/styleGuide.css">
+  	<link rel = "stylesheet" href="css/all.css">
+    <style>
+        .friend-list {
+            margin-bottom: 20px;
+        }
+
+        .btn-friend {
+            background-color: #ffcb76;
+        }
+
+        .friend-container {
+            margin-right: 0;
+        }
+
+        .friend > a{
+            color: #bfb9fc;
+        }
+    </style>
 </head>
 
-<body  style="background-image: url('back_imgs/background_3.jpg');">
+<body>
 
     <!-- Header Start -->
     <header class="pb-md-4 pb-0">
@@ -52,7 +66,7 @@
                                 </span>
                             </button>
                             <a href="index.html" class="web-logo nav-logo">
-                                <img src="assets/images/logo/1.png" class="img-fluid blur-up lazyload" alt="">
+                                <img src="../assets/images/logo/1.png" class="img-fluid blur-up lazyload" alt="">
                             </a>
                             <div class="rightside-box">
                                 <ul class="right-side-menu">
@@ -82,7 +96,7 @@
                                                     <li class="product-box-contain">
                                                         <div class="drop-cart">
                                                             <a href="product-left-thumbnail.html" class="drop-image">
-                                                                <img src="./images/article1.jpg"
+                                                                <img src="../assets/images/vegetable/product/1.png"
                                                                     class="blur-up lazyload" alt="">
                                                             </a>
 
@@ -101,7 +115,7 @@
                                                     <li class="product-box-contain">
                                                         <div class="drop-cart">
                                                             <a href="product-left-thumbnail.html" class="drop-image">
-                                                                <img src="./images/article1.jpg"
+                                                                <img src="../assets/images/vegetable/product/2.png"
                                                                     class="blur-up lazyload" alt="">
                                                             </a>
 
@@ -127,7 +141,7 @@
                                                 <div class="button-group">
                                                     <a href="cart.html" class="btn btn-sm cart-button">View Cart</a>
                                                     <a href="checkout.html" class="btn btn-sm cart-button theme-bg-color
-                                                    text-white">Checkout</a>
+                                                text-white">Checkout</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -224,145 +238,68 @@
     </header>
     <!-- Header End -->
 
-    <div class="forum_wrapper">
-        <div class="custom-function-default">
-            <div class="card card-body custom-card-body p-0 mb-2"  id="custom-card-body">
-                <div class="all_function_area d-flex justify-content-between">
-                    <div>
-                        <button type="button" class="btn btn-primary rounded-pill forum-toggle" id="forum-hot">熱門</button>
-                        <button type="button" class="btn btn-primary rounded-pill forum-toggle -off" id="forum-new">最新</button>
-                    </div>
-                    <div class="forum-post position-fixed bottom-0 end-0 bg-transparent">
-                        <form id="post" class="bg-transparent" action="./rule.html">
-                            <div class="d-grid gap-2 d-md-block bg-transparent">
-                                <button class="btn btn-primary rounded-pill mb-2 me-2"  type="submit" >發文</button>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="all_search_area">
-                        <div class="container-fluid p-0">
-                            <form class="d-flex">
-                                <input class="btn-outline-primary form-control me-2 forum_searchbox" type="text" placeholder="搜尋標題" aria-label="Search" id="forum-search-input">
-                                <div class="search-btn-wrap">
-                                    <button class="forum_search-btn" id="forum-search-btn" type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
-                                </div>
-                            </form>
-                        </div>
+    <!-- 列表 -->
+    <div class="container  align-items-center mt-4 member-infor">
+        <div class="row">
+            <div class="col member_infor h5">
+                <a href="update_imfor.html">個人資訊</a>
+            </div>
+            <div class="col pet_infor h5">
+                <a href="pet.html">毛孩資訊</a>
+            </div>
+            <div class="col friend h5">
+                <a href="freind.html">好友列表</a>
+            </div>
+            <div class="col act_list h5">
+                <a href="trip.html">活動清單</a>
+            </div>
+            <div class="col tra_list h5">
+                <a href="collect.html">追蹤清單</a>
+            </div>
+            <div class="col order h5">
+                <a href="#">訂單</a>
+            </div>
+            <div class="col article h5">
+                <a href="myarticle.html">文章管理</a>
+            </div>
+        </div>
+    </div>
+    <!-- 結束列表 -->
+
+    <!-- 好友列表 -->
+    <div class="container friend-container">
+        <div class="row justify-content-center mt-5">
+            <div class="col-md-8">
+                <div class="btn-group mb-3" role="group">
+                    <button type="button" class="btn btn-warning rounded-pill filter-btn"
+                        data-filter="friends">好友</button>
+<!--                     <button type="button" class="btn btn-warning rounded-pill filter-btn" id="invited" -->
+<!--                         data-filter="invited">邀請中</button> -->
+                    <button type="button" class="btn btn-warning rounded-pill filter-btn pending" id="pending"
+                        data-filter="pending">待確認</button>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-3 justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">好友列表</h5>
+                        <ul class="list-group justify-content-center" id="friend-list">
+                            <!-- 好友項目將在JavaScript中動態生成 -->
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="parent_block w-100 justify-content-center">
-            <!-- <aside class="forum-aside">
-                <div class="container-fluid">
-                    <ul class="aside_list">
-                        <li>
-                            <a href="#" class="aside_bar">討論區</a><br>
-                        </li>
-                        <div class="separate"></div>
-                        <li>
-                            <a href="#" class="aside_bar">活動區</a><br>
-                            <img src ="./images/bg2.png" class="w-50">
-                        </li>
-                    </ul>
-                </div>
-            </aside> -->
-            <main class="main w-75">
-                <article class="article">
-					                    <div class="container d-flex justify-content-center align-items-center w-100">
-                        <div class="row w-100" id="article-area">
-                        	<img src="./images/notFound"  class="d-none" id="notFound">
-                        	<div class="col-12 paragraph1">
-                                <div class="card mb-3">
-                                    <div class="row g-0">
-                                        <div class="col-md-4">
-                                            <img class="img-fluid rounded-start article1 w-100 pic-content" onerror="this.src='images/steal.jpg'" style="max-height: 30em; height: 100%;">
-                                        </div>
-                                        <div class="col-md-8">
-                                            <div class="card-body" style="max-height: 30em; height: 100%;">
-                                                <div class="profile row m-0 d-flex align-items-center">
-                                                    <img alt="Avatar" class="avatar rounded-circle img-fluid col">
-                                                    <p class="author col mb-0"></p>
-                                                    <time class="post-time col d-none d-md-block"></time>
-                                                </div>
-                                                <h5 class="card-title" style="font-weight: bold;"></h5>
-                                                <div class="card-text article" style="max-height: 18em ;overflow: hidden;"></div>
-                                                <div class="blog-contain blog-contain-2" style="float:right;">
-                                                    <i class="fa-solid fa-heart me-1"></i>
-                                                    <i class="fa-solid fa-comment me-1"></i>
-                                                     <button class="blog-button">前往文章</button>
-                                                    <ul class="list-group comment-list d-none">
-													</ul>                                                   
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 paragraph2">
-                                <div class="card mb-3">
-                                    <div class="row g-0">
-                                        <div class="col-md-4">
-                                            <img class="img-fluid rounded-start article1 w-100 pic-content" onerror="this.src='images/steal.jpg'" style="max-height: 30em; height: 100%;">
-                                        </div>
-                                        <div class="col-md-8">
-                                            <div class="card-body" style="max-height: 30em">
-                                                <div class="profile row m-0 d-flex align-items-center">
-                                                    <img alt="Avatar" class="avatar rounded-circle img-fluid col">
-                                                    <p class="author col mb-0"></p>
-                                                    <time class="post-time col d-none d-md-block"></time>
-                                                </div>
-                                                <h5 class="card-title" style="font-weight: bold;"></h5>
-                                                <div class="card-text article" style="max-height: 18em ;overflow: hidden;"></div>
-                                                <div class="blog-contain blog-contain-2" style="float:right;">
-                                                    <i class="fa-solid fa-heart me-1"></i>
-                                                    <i class="fa-solid fa-comment me-1"></i>
-                                                     <button class="blog-button">前往文章</button>
-                                                    <ul class="list-group comment-list d-none">
-													</ul>                                               
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 paragraph3">
-                                <div class="card mb-3">
-                                    <div class="row g-0">
-                                        <div class="col-md-4">
-                                            <img class="img-fluid rounded-start article1 w-100 pic-content" onerror="this.src='images/steal.jpg'" style="max-height: 30em; height: 100%;">
-                                        </div>
-                                        <div class="col-md-8">
-                                            <div class="card-body" style="max-height: 30em">
-                                                <div class="profile row m-0 d-flex align-items-center">
-                                                    <img alt="Avatar" class="avatar rounded-circle img-fluid col">
-                                                    <p class="author col mb-0"></p>
-                                                    <time class="post-time col d-none d-md-block"></time>
-                                                </div>
-                                                <h5 class="card-title" style="font-weight: bold;"></h5>
-                                                <div class="card-text article" style="max-height: 18em ;overflow: hidden;"></div>
-                                                <div class="blog-contain blog-contain-2" style="float:right;">
-                                                    <i class="fa-solid fa-heart me-1"></i>
-                                                    <i class="fa-solid fa-comment me-1"></i>
-                                                    <button class="blog-button">前往文章</button>
-                                                    <ul class="list-group comment-list d-none">
-													</ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </article>
-                <div class="btn-toolbar pages justify-content-center" role="toolbar" aria-label="Toolbar with button groups">
-                    <div class="btn-group me-2" role="group" aria-label="Second group" id="forum-page" >
-                    </div>
-                </div>
-            </main>
+        <div class="row mt-3 justify-content-center">
+            <div class="col-md-8">
+                <div class="d-flex justify-content-center" id="pagination"></div>
+            </div>
         </div>
-    </div> <!-- forum_wrapper -->
+    </div>
+    <!--  結束好友列表   -->
+
 
     <!-- Footer Section Start -->
     <footer class="section-t-space">
@@ -393,7 +330,7 @@
                         <div class="footer-logo">
                             <div class="theme-logo">
                                 <a href="index.html">
-                                    <img src="./images/logo/1.png" class="blur-up lazyload" alt="">
+                                    <img src="../assets/images/logo/2.png" class="blur-up lazyload" alt="">
                                 </a>
                             </div>
 
@@ -441,13 +378,13 @@
     <!-- Footer Section End -->
 
     <!-- latest jquery-->
-    <script src="vendors/jquery/jquery-3.7.0.min.js"></script>
+    <script src="assets/js/jquery-3.6.0.min.js"></script>
 
     <!-- jquery ui-->
     <script src="assets/js/jquery-ui.min.js"></script>
 
     <!-- Bootstrap js-->
-    <script src="vendors/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/bootstrap/bootstrap.bundle.min.js"></script>
     <script src="assets/js/bootstrap/bootstrap-notify.min.js"></script>
     <script src="assets/js/bootstrap/popper.min.js"></script>
 
@@ -467,7 +404,7 @@
     <script src="assets/js/auto-height.js"></script>
 
     <!-- Timer Js -->
-    <script src="assets/js/timer1.js"></script>
+    <!-- <script src="../assets/js/timer1.js"></script> -->
 
     <!-- Fly Cart Js -->
     <script src="assets/js/fly-cart.js"></script>
@@ -482,10 +419,159 @@
     <!-- script js -->
     <script src="assets/js/script.js"></script>
 
-    <!-- my own js -->
-    <script src="https://kit.fontawesome.com/bee31715f0.js" crossorigin="anonymous"></script>
-    <script src="js/all.js"></script>
-    <script src="js/webforum.js"></script>
+
+
+    <script>
+        // 在DOM加載完成後執行
+        document.addEventListener("DOMContentLoaded", function () {
+            var perPage = 10;
+            var currentPage = 1;
+            var friends = [];
+
+            var filterBtns = document.querySelectorAll(".filter-btn");
+            var friendList = document.getElementById("friend-list");
+
+            function switchPage(page) {
+                currentPage = page;
+                renderFriendList();
+                renderPagination();
+            }
+
+            // 監聽過濾按鈕的點擊事件
+            filterBtns.forEach(function (btn) {
+                btn.addEventListener("click", function () {
+                    var filter = btn.dataset.filter;
+
+                    // 更新當前分頁為第1頁
+                    currentPage = 1;
+
+                    // 清空好友列表
+                    while (friendList.firstChild) {
+                        friendList.firstChild.remove();
+                    }
+
+                    // 根據過濾條件添加相應的好友項目
+                    if (filter === "friends") {
+                        // 添加好友項目
+                        addFriends();
+                    } else if (filter === "invited") {
+                        // 添加邀請中好友項目
+                        addInvitedFriends();
+                    } else if (filter === "pending") {
+                        // 添加待確認好友項目
+                        addPendingFriends();
+                    }
+                });
+            });
+
+            // 添加好友項目
+            function addFriends() {
+
+                renderFriendList();
+                renderPagination();
+            }
+
+            // 添加邀請中好友項目
+            function addInvitedFriends() {
+                // 仿真數據，您需要根據實際情況進行修改
+
+                renderFriendList();
+                renderPagination();
+            }
+
+            // 添加待確認好友項目
+            function addPendingFriends() {
+  
+   
+
+                renderPagination();
+                addPendingFriendItems();
+
+            }
+
+            // 添加好友項目
+            function addFriendItem(friend) {
+                var friendItem = document.createElement("li");
+                friendItem.classList.add("list-group-item", "d-flex", "justify-content-between", "align-items-center");
+                friendItem.innerHTML = `
+                <img id="profile_photo_preview" class="profile-photo-preview" src="#">
+                <div class="friend-name">${friend.name}</div>
+                <div class="friend-actions">
+                    <a href="#" class="btn btn-sm btn-info mr-2">查看個人檔案</a>
+                    <button class="btn btn-sm btn-danger">刪除</button>
+                </div>
+            `;
+                friendList.appendChild(friendItem);
+            }
+
+            // 添加待確認好友項目
+            function addPendingFriendItems() {
+                friends.forEach(function (friend) {
+                    var friendItem = document.createElement("li");
+                    friendItem.classList.add(
+                        "list-group-item",
+                        "d-flex",
+                        "justify-content-between",
+                        "align-items-center"
+                    );
+                    friendItem.innerHTML = `
+                        <img id="profile_photo_preview" class="profile-photo-preview" src="#">
+                        <div class="friend-name">${friend.name}</div>
+                        <div class="friend-actions">
+                            <a href="#" class="btn btn-sm btn-info mr-2">查看個人檔案</a>
+                            <button class="btn btn-sm btn-success mr-2">接受邀請</button>
+                            <button class="btn btn-sm btn-danger">拒絕邀請</button>
+                        </div>
+                    `;
+                    friendList.appendChild(friendItem);
+                });
+            }
+            // 渲染好友列表
+            function renderFriendList() {
+                var start = (currentPage - 1) * perPage;
+                var end = start + perPage;
+                var friendsToRender = friends.slice(start, end);
+
+                while (friendList.firstChild) {
+                    friendList.firstChild.remove();
+                }
+
+                friendsToRender.forEach(function (friend) {
+                    addFriendItem(friend);
+                });
+            }
+
+            // 渲染分頁
+            function renderPagination() {
+                var totalPages = Math.ceil(friends.length / perPage);
+
+                var pagination = document.getElementById("pagination");
+                while (pagination.firstChild) {
+                    pagination.firstChild.remove();
+                }
+
+                if (totalPages > 1) {
+                    for (var i = 1; i <= totalPages; i++) {
+                        var pageLink = document.createElement("a");
+                        pageLink.classList.add("btn", "btn-sm", "btn-primary", "mx-1");
+                        pageLink.textContent = i;
+                        pageLink.addEventListener("click", function () {
+                            switchPage(parseInt(this.textContent));
+                        });
+
+                        pagination.appendChild(pageLink);
+                    }
+                }
+            }
+
+            // 預設顯示好友列表
+            addFriends();
+        });
+    
+    </script>
+  	<!-- latest jquery-->
+	<script src="vendors/jquery/jquery-3.7.0.min.js"></script>
+    <script src="js/friends.js"></script>
 </body>
 
 </html>

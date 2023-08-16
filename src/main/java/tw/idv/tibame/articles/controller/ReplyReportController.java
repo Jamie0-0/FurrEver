@@ -11,14 +11,10 @@ import tw.idv.tibame.articles.vo.ReplyReport;
 @RestController
 public class ReplyReportController {
 
-	private final ReplyReportService service;
-
 	@Autowired
-	public ReplyReportController(ReplyReportService service) {
-		this.service = service;
-	}
+	private ReplyReportService service;
 
-	@GetMapping("/replyReport") // 後OK
+	@GetMapping("/replyReport")
 	public int replyReport(@RequestBody ReplyReport replyReport) {
 
 		return service.replyReport(replyReport);

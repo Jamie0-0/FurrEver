@@ -13,12 +13,8 @@ import tw.idv.tibame.articles.vo.Article;
 @RestController
 public class TheArticleController {
 
-	private final ArticlesService service; // 也可以不用建構子 Autowired在這裡 有紅字還是可以跑
-
 	@Autowired
-	public TheArticleController(ArticlesService service) {
-		this.service = service;
-	}
+	private ArticlesService service; // 也可以不用建構子 Autowired在這裡 有紅字還是可以跑
 
 	// 由forum.html的繼續閱讀進來
 	@GetMapping("/article")

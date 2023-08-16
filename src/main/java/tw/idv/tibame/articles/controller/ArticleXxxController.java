@@ -8,7 +8,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 public class ArticleXxxController {
 
-	@GetMapping("/articleXxx") // ??
+	@GetMapping("/articleXxx")
 	public String sendtoArticle(@RequestParam Integer artId, RedirectAttributes redirectAttributes) {
 
 		redirectAttributes.addFlashAttribute("artId", artId); // 由於article.html頁面載入會發請求到別的controller

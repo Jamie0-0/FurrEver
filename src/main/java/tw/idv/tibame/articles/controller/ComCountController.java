@@ -10,14 +10,10 @@ import tw.idv.tibame.articles.service.CommentService;
 @RestController
 public class ComCountController {
 
-	private final CommentService service;
-
 	@Autowired
-	public ComCountController(CommentService service) {
-		this.service = service;
-	}
+	private CommentService service;
 
-	@GetMapping("/artComCount") // 後OK
+	@GetMapping("/artComCount")
 	public int selectComCount(@RequestParam Integer comArtId) {
 		return service.selectComCount(comArtId);
 	}
