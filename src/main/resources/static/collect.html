@@ -157,6 +157,9 @@
                                                     <i></i>
                                                     <a href="login.html" id="logout">登出</a>
                                                 </li>
+                                                <li class="product-box-contain">
+                                                    <a href="member_center.html">會員中心</a>
+                                                </li>
                                             </ul>
                                         </div>
                                     </li>
@@ -203,7 +206,7 @@
                                             </li>
 
                                             <li class="nav-item">
-                                                <a class="nav-link" href="/template/front-end/about.html">關於我們</a>
+                                                <a class="nav-link" href="about.html">關於我們</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -607,7 +610,7 @@
                             .then(data => {
                                 console.log("商品詳細資料:", data.viewProductDetail);
                                 // 重新導向到 product-4-image.html 頁面，並將 p_id 作為查詢參數傳遞
-                                location.href = `product-4-image.html?p_id=${pid}`;
+                                location.href = `product-detail.html?p_id=${pid}`;
                             })
 
                             .catch(error => {

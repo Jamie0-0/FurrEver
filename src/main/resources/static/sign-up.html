@@ -673,12 +673,12 @@
 
 
 
-            // ================= 清空錯誤訊息 ======================
+            //  =================   清空錯誤訊息    ======================
             $("#nav-profile-tab").on("click", function () {
                 $("div#error-messages").text("");
             })
 
-            // ================= 註冊廠商資料 ======================
+            //  =================   註冊廠商資料    ======================
 
             $("#create_master_btn").on("click", function () {
 
@@ -859,185 +859,252 @@
                     let allEmpty = true;
 
                     for (let i = 0; i < paragraphs.length; i++) {
-                        if (paragraphs[i].innerText.trim() !== '') { //
-                            console.log(paragraphs[i].innerText); allEmpty = false; break;
+                        if (paragraphs[i].innerText.trim() !== '') {
+                            // console.log(paragraphs[i].innerText);
+                            allEmpty = false;
+                            break;
                         }
-                    } if (allEmpty) {
+                    }
+
+                    if (allEmpty) {
                         fetch("registerMaster", {
-                            method: "POST", headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({
+                            method: "POST",
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
                                 mName: companyName,
-                                mPwd: companyPwd, mGui: companyGui, mBankName: bankId, mBankId: companyAccount, mAddress: companyAddr, mManId:
-                                    companyManId, mManName: companyManName, mEmail: companyManEmail, mPhone: companyManPhone
+                                mPwd: companyPwd,
+                                mGui: companyGui,
+                                mBankName: bankId,
+                                mBankId: companyAccount,
+                                mAddress: companyAddr,
+                                mManId: companyManId,
+                                mManName: companyManName,
+                                mEmail: companyManEmail,
+                                mPhone: companyManPhone
+
                             }),
-                        }).then(response =>
-                            response.json())
-                        .then(data => {
-                            alert("註冊成功，按下確認後，跳到登入畫面");
-                            // setTimeout("location.href='http://localhost:8081/TirTirCat/login.html'",3000); // 3秒後跳轉頁面
-                            // location.href = "login.html";
                         })
-                        .catch(error => {
-                            console.log("請求錯誤");
-                        });
+                            .then(response => response.json())
+                            .then(data => {
+                                alert("註冊成功，按下確認後，跳到登入畫面");
+                                // setTimeout("location.href='http://localhost:8081/TirTirCat/login.html'",3000); // 3秒後跳轉頁面
+                                // location.href = "login.html";
+                            })
+                            .catch(error => {
+                                console.log("請求錯誤");
+                            });
                     } else {
                         var inputs = document.getElementsByTagName("input");
                         for (var i = 0; i < inputs.length; i++) {
-                            let index = i; inputs[i].addEventListener("click", function () {
+                            let index = i;
+                            inputs[i].addEventListener("click", function () {
                                 removeAllErrorMessages();
                             });
-                        } console.log("至少有一個 <p> 標籤有文字內容");
+                        }
+                        console.log("至少有一個 <p> 標籤有文字內容");
                     }
                     // 在外部一次性移除所有錯誤訊息
                     function removeAllErrorMessages() {
-                        for (let i = 0; i < paragraphs.length; i++) { paragraphs[i].innerText = ""; }
+                        for (let i = 0; i < paragraphs.length; i++) {
+                            paragraphs[i].innerText = "";
+                        }
                     }
+
                 }
             });
-            //==============註冊會員資料===========================const
-            datePicker = document.getElementById('member_birth'); const today = new Date(); const
-                year = today.getFullYear(); const month = (today.getMonth() + 1).toString().padStart(2, '0'); //
-            因為月份是從0開始，所以需要 + 1 const day = today.getDate().toString().padStart(2, '0'); const
-                dateString = `${year}-${month}-${day}`; datePicker.max = dateString; datePicker.value = dateString;
-            $("#create_member_btn").on("click", function () {
-                const
-                userInput = $("#member-captchaInput").val().trim(); // 取得使用者輸入的驗證碼 const
-                valistrMsg = document.getElementById("member-valistr_msg"); // 檢查是否輸入了有效的驗證碼 if (userInput==="" ) {
-                valistrMsg.textContent = "驗證碼不能為空！"; valistrMsg.style.color = "red"; return;
-            } fetch("check-captcha", {
-                method: "POST", headers: { "Content-Type": "application/json", }, body: JSON.stringify({
-                    userInput:
-                        userInput,
-                }),
-            }).then((response) => response.json())
-                .then((data) => {
-                    if (data.valid) {
-                        // 驗證碼通過，繼續處理註冊
-                        handleRegistration();
-                    } else {
-                        valistrMsg.textContent = "驗證碼不正確！";
-                        valistrMsg.style.color = "red";
-                    }
-                })
-                .catch((error) => {
-                    console.error("Error checking captcha:", error);
-                });
 
+            // ============== 註冊會員資料  ===========================
+
+            const datePicker = document.getElementById('member_birth');
+            const today = new Date();
+            const year = today.getFullYear();
+            const month = (today.getMonth() + 1).toString().padStart(2, '0'); // 因為月份是從0開始，所以需要+1
+            const day = today.getDate().toString().padStart(2, '0');
+
+            const dateString = `${year}-${month}-${day}`;
+            datePicker.max = dateString;
+            datePicker.value = dateString;
+
+            $("#create_member_btn").on("click", function () {
+
+                const userInput = $("#member-captchaInput").val().trim(); // 取得使用者輸入的驗證碼
+                const valistrMsg = document.getElementById("member-valistr_msg");
+
+                // 檢查是否輸入了有效的驗證碼
+                if (userInput === "") {
+                    valistrMsg.textContent = "驗證碼不能為空！";
+                    valistrMsg.style.color = "red";
+                    return;
+                }
+
+                fetch("check-captcha", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        userInput: userInput,
+                    }),
+                })
+                    .then((response) => response.json())
+                    .then((data) => {
+                        if (data.valid) {
+                            // 驗證碼通過，繼續處理註冊
+                            handleRegistration();
+                        } else {
+                            valistrMsg.textContent = "驗證碼不正確！";
+                            valistrMsg.style.color = "red";
+                        }
+                    })
+                    .catch((error) => {
+                        console.error("Error checking captcha:", error);
+                    });
+
+
+            });
+            function handleRegistration() {
+                let email_el = $("#member_email").val();
+                let pwd_el = $("#member_pwd").val();
+                let pwd2_el = $("#member_pwd2").val();
+                let name_el = $("#member_name").val();
+                let phone_el = $("#member_phone").val();
+                let gender_el = $("#member_gender").val();
+                let birth_el = $("#member_birth").val();
+                let addr_el = $("#member_addr").val();
+                let about_el = $("#aboutMe").val();
+
+
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (email_el.trim() === '' || !emailRegex.test(email_el)) {
+                    document.getElementById('error_email').style.color = "red";
+                    document.getElementById('error_email').innerText = '請輸入有效的電子郵件地址';
+
+                } else {
+                    document.getElementById('error_email').innerText = ''; // 清除錯誤訊息
+                }
+
+                const passwordRegex = /^[A-Za-z0-9!@#$%^&*()_]{6,12}$/;
+                if (pwd_el.trim() === '' || !passwordRegex.test(pwd_el)) {
+                    document.getElementById('error_pwd').style.color = "red";
+                    document.getElementById('error_pwd').innerText = '密碼長度須介於6~12字元，且只能包含英文數字和特殊字元 !@#$%^&*()_';
+
+                } else {
+                    document.getElementById('error_pwd').innerText = ''; // 清除錯誤訊息
+                }
+
+                if (pwd2_el !== pwd_el) {
+                    document.getElementById('error_pwd2').style.color = "red";
+                    document.getElementById('error_pwd2').innerText = '密碼與確認密碼不相符';
+
+                } else {
+                    document.getElementById('error_pwd2').innerText = ''; // 清除錯誤訊息
+                }
+
+                // 正則表達式驗證姓名格式
+                const namePattern = /^[\u4e00-\u9fa5a-zA-Z]+$/;
+                if (!namePattern.test(name_el)) {
+                    document.getElementById('error_name').style.color = "red";
+                    document.getElementById('error_name').innerText = '姓名格式不正確';
+
+                } else {
+                    document.getElementById('error_name').innerText = ''; // 清除錯誤訊息
+                }
+
+                if (phone_el.trim() === '') {
+                    document.getElementById('error_phone').style.color = "red";
+                    document.getElementById('error_phone').innerText = '手機不得為空';
+
+                } else {
+                    document.getElementById('error_phone').innerText = ''; // 清除錯誤訊息
+                }
+
+                // 正則表達式驗證手機格式
+                const phonePattern = /^09\d{8}$/;
+                if (!phonePattern.test(phone_el)) {
+                    document.getElementById('error_phone').style.color = "red";
+                    document.getElementById('error_phone').innerText = '手機格式不正確';
+
+                } else {
+                    document.getElementById('error_phone').innerText = ''; // 清除錯誤訊息
+                }
+
+                if (addr_el.trim() === '') {
+                    document.getElementById('error_addr').style.color = "red";
+                    document.getElementById('error_addr').innerText = '地址不得為空';
+                } else {
+                    document.getElementById('error_addr').innerText = ''; // 清除錯誤訊息
+                }
+
+                // console.log(document.getElementsByTagName('p')[0].innerText);
+
+                const paragraphs = document.querySelectorAll('.error-msg');
+                let allEmpty = true;
+
+                for (let i = 0; i < paragraphs.length; i++) {
+                    if (paragraphs[i].innerText.trim() !== '') {
+                        console.log(paragraphs[i].innerText);
+                        allEmpty = false;
+                        break;
+                    }
+                }
+
+                if (allEmpty) {
+                    fetch("register", {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            uEmail: email_el,
+                            uPwd: pwd_el,
+                            password2: pwd2_el,
+                            uName: name_el,
+                            uPhone: phone_el,
+                            uGender: gender_el,
+                            uBirth: birth_el,
+                            uAddress: addr_el,
+                            uAbout: about_el
+                        })
+                    })
+                        .then(resp => resp.json())
+                        .then(data => {
+
+                            alert("註冊成功，按下確認後，跳到登入畫面");
+                            // setTimeout("location.href='http://localhost:8081/TirTirCat/login.html'",3000); // 3秒後跳轉頁面
+                            location.href = "login.html";
+
+                        })
+                        .catch(error => {
+                            document.getElementById('error_email').style.color = "red";
+                            document.getElementById('error_email').innerText = '帳號重複';
+                        });
+
+                } else {
+                    var inputs = document.getElementsByTagName("input");
+                    for (var i = 0; i < inputs.length; i++) {
+                        let index = i;
+                        inputs[i].addEventListener("click", function () {
+                            removeAllErrorMessages();
+                        });
+                    }
+                    console.log("至少有一個 <p> 標籤有文字內容");
+                }
+                // 在外部一次性移除所有錯誤訊息
+                function removeAllErrorMessages() {
+                    for (let i = 0; i < paragraphs.length; i++) {
+                        paragraphs[i].innerText = "";
+                    }
+                }
+
+            }
 
         });
-        function handleRegistration() {
-            let email_el = $("#member_email").val();
-            let pwd_el = $("#member_pwd").val();
-            let pwd2_el = $("#member_pwd2").val();
-            let name_el = $("#member_name").val();
-            let phone_el = $("#member_phone").val();
-            let gender_el = $("#member_gender").val();
-            let birth_el = $("#member_birth").val();
-            let addr_el = $("#member_addr").val();
-            let about_el = $("#aboutMe").val();
 
 
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (email_el.trim() === '' || !emailRegex.test(email_el)) {
-                document.getElementById('error_email').style.color = "red";
-                document.getElementById('error_email').innerText = '請輸入有效的電子郵件地址';
 
-            } else {
-                document.getElementById('error_email').innerText = ''; // 清除錯誤訊息
-            }
-
-            const passwordRegex = /^[A-Za-z0-9!@#$%^&*()_]{6,12}$/;
-            if (pwd_el.trim() === '' || !passwordRegex.test(pwd_el)) {
-                document.getElementById('error_pwd').style.color = "red";
-                document.getElementById('error_pwd').innerText = '密碼長度須介於6~12字元，且只能包含英文數字和特殊字元 !@#$%^&*()_';
-
-            } else {
-                document.getElementById('error_pwd').innerText = ''; // 清除錯誤訊息
-            }
-
-            if (pwd2_el !== pwd_el) {
-                document.getElementById('error_pwd2').style.color = "red";
-                document.getElementById('error_pwd2').innerText = '密碼與確認密碼不相符';
-
-            } else {
-                document.getElementById('error_pwd2').innerText = ''; // 清除錯誤訊息
-            }
-
-            // 正則表達式驗證姓名格式
-            const namePattern = /^[\u4e00-\u9fa5a-zA-Z]+$/;
-            if (!namePattern.test(name_el)) {
-                document.getElementById('error_name').style.color = "red";
-                document.getElementById('error_name').innerText = '姓名格式不正確';
-
-            } else {
-                document.getElementById('error_name').innerText = ''; // 清除錯誤訊息
-            }
-
-            if (phone_el.trim() === '') {
-                document.getElementById('error_phone').style.color = "red";
-                document.getElementById('error_phone').innerText = '手機不得為空';
-
-            } else {
-                document.getElementById('error_phone').innerText = ''; // 清除錯誤訊息
-            }
-
-            // 正則表達式驗證手機格式
-            const phonePattern = /^09\d{8}$/;
-            if (!phonePattern.test(phone_el)) {
-                document.getElementById('error_phone').style.color = "red";
-                document.getElementById('error_phone').innerText = '手機格式不正確';
-
-            } else {
-                document.getElementById('error_phone').innerText = ''; // 清除錯誤訊息
-            }
-
-            if (addr_el.trim() === '') {
-                document.getElementById('error_addr').style.color = "red";
-                document.getElementById('error_addr').innerText = '地址不得為空';
-            } else {
-                document.getElementById('error_addr').innerText = ''; // 清除錯誤訊息
-            }
-
-            // console.log(document.getElementsByTagName('p')[0].innerText);
-
-            const paragraphs = document.querySelectorAll('.error-msg');
-            let allEmpty = true;
-
-            for (let i = 0; i < paragraphs.length; i++) {
-                if (paragraphs[i].innerText.trim() !== '') {
-                    console.log(paragraphs[i].innerText); allEmpty = false; break;
-                }
-            } if (allEmpty) {
-                fetch("register", {
-                    method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({
-                        uEmail:
-                            email_el, uPwd: pwd_el, password2: pwd2_el, uName: name_el, uPhone: phone_el, uGender: gender_el,
-                        uBirth: birth_el, uAddress: addr_el, uAbout: about_el
-                    })
-                }).then(resp => resp.json())
-                .then(data => {
-
-                    alert("註冊成功，按下確認後，跳到登入畫面");
-                    // setTimeout("location.href='http://localhost:8081/TirTirCat/login.html'",3000); // 3秒後跳轉頁面
-                    location.href = "login.html";
-
-                })
-                .catch(error => {
-                    document.getElementById('error_email').style.color = "red";
-                    document.getElementById('error_email').innerText = '帳號重複';
-                });
-
-            } else {
-                var inputs = document.getElementsByTagName("input");
-                for (var i = 0; i < inputs.length; i++) {
-                    let index = i; inputs[i].addEventListener("click", function
-                        () { removeAllErrorMessages(); });
-                } console.log("至少有一個 <p> 標籤有文字內容");
-            }
-            // 在外部一次性移除所有錯誤訊息
-            function removeAllErrorMessages() {
-                for (let i = 0; i < paragraphs.length; i++) { paragraphs[i].innerText = ""; }
-            }
-        } }); </script>
+    </script>
 </body>
 
 </html>
