@@ -8,19 +8,13 @@ import org.springframework.web.bind.annotation.RestController;
 import tw.idv.tibame.articles.service.ArticlesService;
 
 @RestController
-public class PageCountController{
-	
-     
-    private final ArticlesService service;
+public class PageCountController {
 
-    @Autowired
-    public PageCountController(ArticlesService service) {
-        this.service = service;
-    }
-    
-    
-    	@GetMapping("/forumPage") // 後OK
-    	public int selectPageCount(@RequestParam(defaultValue = "") String searchText){
-    		return service.selectPageCount(searchText);
-    	}
+	@Autowired
+	private ArticlesService service;
+
+	@GetMapping("/forumPage")
+	public int selectPageCount(@RequestParam(defaultValue = "") String searchText) {
+		return service.selectPageCount(searchText);
+	}
 }

@@ -11,13 +11,9 @@ import tw.idv.tibame.articles.service.AvatarService;
 @RestController
 public class AvatarController {
 
-	private final AvatarService service;
-
 	@Autowired
-	public AvatarController(AvatarService service) {
-		this.service = service;
-	}
-	// 後OK
+	private AvatarService service;
+
 	@GetMapping(value = "/avatar", produces = MediaType.IMAGE_GIF_VALUE)
 	public byte[] selectAvatar(@RequestParam Integer uid) {
 		return service.selectAvatar(uid);

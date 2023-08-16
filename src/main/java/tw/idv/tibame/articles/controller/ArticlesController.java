@@ -18,14 +18,10 @@ import tw.idv.tibame.articles.vo.Article;
 @RestController
 public class ArticlesController {
 
-	private final ArticlesService service;
-
 	@Autowired
-	public ArticlesController(ArticlesService service) {
-		this.service = service;
-	}
+	private ArticlesService service;
 
-	@GetMapping("/forum/hot") // 前端要改 後OK 可抓文章、留言、發文章的人
+	@GetMapping("/forum/hot")
 	public List<Article> getHotArticles(@RequestParam(name = "page", defaultValue = "1") int page,
 			@RequestParam(name = "size", defaultValue = "3") int size) {
 		Pageable pageable = PageRequest.of(page - 1, size);
@@ -34,13 +30,13 @@ public class ArticlesController {
 		return hotArticlesList;
 	}
 
-	@GetMapping("/forum/getPic") // 後OK
+	@GetMapping("/forum/getPic")
 	public byte[] selectPic(@RequestParam Integer artId) {
 
 		return service.selectPic(artId);
 	}
 
-	@GetMapping("/forum/new") // 前端要改 後OK 可抓文章、留言、發文章的人
+	@GetMapping("/forum/new")
 	public List<Article> getNewArticles(@RequestParam(defaultValue = "1") int page,
 			@RequestParam(name = "size", defaultValue = "3") int size) {
 		System.out.println("page=" + page);
@@ -51,13 +47,13 @@ public class ArticlesController {
 		return newArticlesList;
 	}
 
-	@GetMapping("/forum/search") // 前端要改 後OK
+	@GetMapping("/forum/search")
 	public List<Article> search(@RequestParam String searchText) {
 
 		return service.search(searchText.trim());
 	}
 
-	@GetMapping("/goToArticle") // ??
+	@GetMapping("/goToArticle")
 	public String forwardToComment(HttpSession httpSession, @RequestParam Integer artId) {
 
 		httpSession.setAttribute("artId", artId);

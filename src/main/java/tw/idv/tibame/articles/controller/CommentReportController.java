@@ -11,14 +11,10 @@ import tw.idv.tibame.articles.vo.ComReport;
 @RestController
 public class CommentReportController {
 
-	private final CommentReportService service;
-
 	@Autowired
-	public CommentReportController(CommentReportService service) {
-		this.service = service;
-	}
+	private CommentReportService service;
 
-	@GetMapping("/commentReport") // 後OK
+	@GetMapping("/commentReport")
 	public int commentReport(@RequestBody ComReport comReport) {
 
 		return service.comReport(comReport);

@@ -11,12 +11,8 @@ import tw.idv.tibame.articles.vo.Reply;
 @Controller
 public class ReplyInsertController {
 
-	private final ReplyService service;
-
 	@Autowired
-	public ReplyInsertController(ReplyService service) {
-		this.service = service;
-	}
+	private ReplyService service;
 
 	@PostMapping("/replyInsert") // 後OK 前端form表單就不能用RequestBody接
 	public String insertReply(@RequestParam String replyContent, @RequestParam Integer replyComId,

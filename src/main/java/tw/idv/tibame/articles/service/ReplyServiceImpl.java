@@ -10,27 +10,22 @@ import tw.idv.tibame.articles.vo.Reply;
 
 @Service
 public class ReplyServiceImpl implements ReplyService {
-	
-	private final ReplyDao dao;
-	
+
 	@Autowired
-	public ReplyServiceImpl(ReplyDao dao) {
-		this.dao = dao;
-	}
+	private ReplyDao dao;
 
 	@Override
 	public List<Reply> selectReply(Integer replyComId) {
-		
+
 		return dao.findByReplyComId(replyComId);
 	}
 
 	@Override
 	public int insertReply(Reply reply) {
-		
+
 		dao.save(reply);
-		
+
 		return 1;
 	}
-	
-	
+
 }

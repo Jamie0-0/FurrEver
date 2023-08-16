@@ -12,12 +12,8 @@ import tw.idv.tibame.articles.vo.Comment;
 
 @RestController
 public class CommentController {
-	private final CommentServiceImpl service;
-
 	@Autowired
-	public CommentController(CommentServiceImpl service) {
-		this.service = service;
-	}
+	private CommentServiceImpl service;
 
 	@GetMapping("/comment") // 後OK
 	public List<Comment> selectComment(@SessionAttribute Integer artId) {

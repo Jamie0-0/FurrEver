@@ -12,14 +12,10 @@ import tw.idv.tibame.articles.vo.Comment;
 @Service
 public class CommentServiceImpl implements CommentService {
 
-	private final RedisTemplate<String, String> redisTemplate;
-	private final CommentDao dao;
-
 	@Autowired
-	public CommentServiceImpl(CommentDao dao, RedisTemplate<String, String> redisTemplate) {
-		this.redisTemplate = redisTemplate;
-		this.dao = dao;
-	}
+	private RedisTemplate<String, String> redisTemplate;
+	@Autowired
+	private CommentDao dao;
 
 	public List<Comment> findByComArtId(Integer comArtId) {
 		return dao.findByComArtId(comArtId);
@@ -71,11 +67,6 @@ public class CommentServiceImpl implements CommentService {
 
 	@Override
 	public Comment insertComment(Comment comment) {
-		System.out.println("----Service----------------");
-		System.out.println(comment.getComArtId());
-		System.out.println(comment.getComUserId());
-		System.out.println(comment.getComContent());
-		System.out.println("----Service----------------");
 
 		return dao.save(comment);
 	}
