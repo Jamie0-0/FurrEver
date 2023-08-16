@@ -1,4 +1,4 @@
-package tw.idv.tibame.filter;
+package tw.idv.tibame.core.util;
 
 import java.awt.Color;
 import java.awt.Font;
