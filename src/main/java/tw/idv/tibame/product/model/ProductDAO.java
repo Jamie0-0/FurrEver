@@ -34,11 +34,9 @@ public class ProductDAO implements ProductDAO_interface {
 
 	private String INSERT_STMT = "INSERT INTO product (p_m_id,p_name,p_price,p_stock,p_type,p_class,p_des,p_status,p_1,p_2,p_3,p_upload_time,p_pic_one,p_pic_two,p_pic_three,p_pic_four) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";;
 	private static final String GET_ONE_STMT = "SELECT * FROM product where p_id = ? and p_m_id=?";
-<<<<<<< HEAD
+
 	private String GET_ONE_STMT2 = "";
-=======
-	private String GET_ONE_STMT2 = "SELECT * FROM FurrEver.product";
->>>>>>> ec6b8275dcb92e957d2ce9fff8cfd21797afb32a
+
 	private static final String DELETE = "DELETE FROM product where p_id=? and p_m_id=?";
 	private String UPDATE = "UPDATE product set p_name=?,p_price=?,p_stock=?,p_type=?,p_class=?,p_des=?,p_status=?, p_upload_time=?";
 	private static final String GET_ALL_STMT = "SELECT * FROM product where p_m_id=? order by p_id";
@@ -219,11 +217,7 @@ public class ProductDAO implements ProductDAO_interface {
 												.setOrder_r_phone(rs.getString(2))
 												.setOrder_r_addr(rs.getString(3))
 												.setOrder_t(rs.getString(4))
-<<<<<<< HEAD
 												.setOrder_pay(rs.getString(5))
-=======
-												.setOrder_pay(rs.getInt(5))
->>>>>>> ec6b8275dcb92e957d2ce9fff8cfd21797afb32a
 												.setU_pic(p1)
 												.build();
 				list.add(masterPicVO2);
@@ -632,10 +626,7 @@ public class ProductDAO implements ProductDAO_interface {
 
 	@Override
 	public List<ProductVO> findByPrimaryKey2(Integer p_id,Integer p_status,Integer p_class,Integer mid) {
-<<<<<<< HEAD
 		GET_ONE_STMT2 = "SELECT * FROM FurrEver.product";
-=======
->>>>>>> ec6b8275dcb92e957d2ce9fff8cfd21797afb32a
 		List<ProductVO> list = new ArrayList<ProductVO>();
 		ProductVO productVO = null;
 		Connection con = null;

@@ -4,9 +4,9 @@ public class MasterService {
 
 	private MasterDao_interface dao;
 
-	public MasterService() {
-		dao = new MasterDao();
-	}
+//	public MasterService() {
+//		dao = new MasterDao();
+//	}
 	
 
 	public MasterVO updatePro(Integer m_id,String m_name

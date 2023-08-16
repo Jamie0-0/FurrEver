@@ -4,16 +4,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-<<<<<<< HEAD
 
-@Service
-public class PMappingService {
-=======
 
 @Service
 public class PMappingService {
 
->>>>>>> ec6b8275dcb92e957d2ce9fff8cfd21797afb32a
 	@Autowired
 	private PMappingDAO_interface dao;
 
