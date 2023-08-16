@@ -188,15 +188,15 @@
                                             </li>
 
                                             <li class="nav-item dropdown">
-                                                <a class="nav-link" href="#">團購</a>
+                                                <a class="nav-link" href="gbshop.html">團購</a>
                                             </li>
 
                                             <li class="nav-item dropdown">
-                                                <a class="nav-link" href="#">商城</a>
+                                                <a class="nav-link" href="shop-category.html">商城</a>
                                             </li>
 
                                             <li class="nav-item dropdown">
-                                                <a class="nav-link" href="#">交流天地</a>
+                                                <a class="nav-link" href="forum.html">交流天地</a>
                                             </li>
 
                                             <li class="nav-item">
@@ -318,7 +318,62 @@
         </div>
     </div>
 
+    <!-- Footer Section Start -->
+    <footer class="section-t-space">
+        <div class="container-fluid-lg">
+            <div class="main-footer section-b-space section-t-space">
+                <div class="row g-md-4 g-3">
+                    <div class="col-xl-4 col-lg-3 col-sm-6">
+                        <div class="footer-title">
+                            <h4>聯絡我們</h4>
+                        </div>
 
+                        <div class="footer-contact">
+                            <ul class="address">
+                                <li>
+                                    <i data-feather="home"></i>
+                                    <a
+                                        href="https://www.google.com/maps/place/TibaMe+%E5%85%A8%E6%96%B9%E4%BD%8D%E6%95%B8%E4%BD%8D%E8%A1%8C%E9%8A%B7%E5%AF%A6%E6%88%B0%E9%A4%8A%E6%88%90%E7%8F%AD(%E5%8F%B0%E5%8C%97)/@25.0521328,121.540678,17z/data=!3m2!4b1!5s0x3442abddfc0bc85f:0x547998e4a2421286!4m6!3m5!1s0x346823c18fcb9855:0x784fb0d91b7fc01f!8m2!3d25.052128!4d121.5432529!16s%2Fg%2F11b_0002l9?authuser=0&entry=ttu">104台北市中山區南京東路三段219號5樓</a>
+                                </li>
+                                <li>
+                                    <i data-feather="mail"></i>
+                                    <a href="javascript:void(0)">support@gmail.com</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-4 col-lg-3 col-sm-6">
+                        <div class="footer-logo">
+                            <div class="theme-logo">
+                                <a href="index.html">
+                                    <img src="assets/images/logo/2.png" class="blur-up lazyload" alt="">
+                                </a>
+                            </div>
+
+                            <div class="footer-logo-contain">
+                                <p>
+                                    我們為毛孩與主人設計了一個揪團出遊及團購毛孩用品的交流平台，來吸引主人帶著毛小孩彼此見面交流，促進毛小孩社會化之餘，來創造話題並帶動寵物市場之商機。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-4 col-lg-3 col-md-4 col-sm-6">
+                        <div class="footer-title">
+                            <h4>免責聲明</h4>
+                        </div>
+
+                        <p>任何瀏覽網站的人士，須自行承擔一切風險，本網站不會負責任何因瀏覽<br>
+                            或使用本網站而引致之損失。本網站不會作出任何默示的擔保。本網站承<br>
+                            諾力求網站內容之準確性及完整性，但內容如有錯誤或遺漏，本網站不會<br>
+                            承擔任何賠償責任，所有本網站內容，將會隨時更改，而不作另行通知。<br>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
     <!-- Bg overlay Start -->
     <div class="bg-overlay"></div>
     <!-- Bg overlay End -->
@@ -365,15 +420,11 @@
     <!-- script js -->
     <script src="assets/js/script.js"></script>
 
-    <div class="onhover-div onhover-div-login">
-        <ul class="user-box-name">
-            <!-- 動態生成的 HTML 內容將插入這裡 -->
-        </ul>
-    </div>
 
     <script>
         $(function () {
             const username = sessionStorage.getItem("username");
+            $("h5").text(username);
 
             const ul_login = $(`<ul class="user-box-name">`);
 
@@ -405,7 +456,7 @@
             }
 
             // 插入動態生成的 HTML 內容
-            $(".user-box-name").replaceWith(ul_login);
+            $("ul.user-box-name").replaceWith(ul_login);
         });
     </script>
 
