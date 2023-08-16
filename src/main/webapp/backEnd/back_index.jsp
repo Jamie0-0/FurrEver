@@ -17,13 +17,10 @@ request.setAttribute("payStatusSvc", payStatusSvc);
 
 ProductVO iValue = dao.indexValue((Integer)session.getAttribute("mid"));
 
-<<<<<<< HEAD
+
 List<MasterPicVO> list1 = dao.indexNatrix1((Integer)session.getAttribute("mid"));
 List<MasterPicVO2> list2 = dao.indexNatrix2((Integer)session.getAttribute("mid"));
-=======
-List<MasterPicVO> list1 = dao.indexNatrix1(1);
-List<MasterPicVO2> list2 = dao.indexNatrix2(1);
->>>>>>> ec6b8275dcb92e957d2ce9fff8cfd21797afb32a
+
 request.setAttribute("list1", list1);
 request.setAttribute("list2", list2);
 %>

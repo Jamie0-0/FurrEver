@@ -3,26 +3,17 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="tw.idv.tibame.product.model.*"%>
-<<<<<<< HEAD
-<%@page import="tw.idv.tibame.pMapping.model.PMappingService"%>
-<%@page import="tw.idv.tibame.pType.model.PTypeService"%>
-<%@page import="tw.idv.tibame.pStatus.model.PStatusService"%>
-=======
-
 <%@page import="tw.idv.tibame.pType.model.PTypeService"%>
 <%@page import="tw.idv.tibame.pStatus.model.PStatusService"%>
 <%@page import="tw.idv.tibame.pMapping.model.PMappingService"%>
 
->>>>>>> ec6b8275dcb92e957d2ce9fff8cfd21797afb32a
+
 <%
 ProductVO proVO = (ProductVO) request.getAttribute("proVO");
 
 ApplicationContext applicationContext = WebApplicationContextUtils.getWebApplicationContext(application);
 
-<<<<<<< HEAD
-=======
 
->>>>>>> ec6b8275dcb92e957d2ce9fff8cfd21797afb32a
 PStatusService pStatusSvc = applicationContext.getBean(PStatusService.class);
 request.setAttribute("pStatusSvc", pStatusSvc);
 
