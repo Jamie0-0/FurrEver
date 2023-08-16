@@ -123,9 +123,16 @@ bin/src/main/java/tw/idv/tibame/articles/vo/Reply$ReplyBuilder.class
 bin/src/main/java/tw/idv/tibame/articles/vo/Reply.class
 bin/src/main/java/tw/idv/tibame/articles/vo/ReplyReport$ReplyReportBuilder.class
 bin/src/main/java/tw/idv/tibame/articles/vo/ReplyReport.class
+<<<<<<< HEAD
 bin/src/main/java/tw/idv/tibame/core/util/CaptchaController.class
 bin/src/main/java/tw/idv/tibame/core/util/CommonUtil.class
 bin/src/main/java/tw/idv/tibame/core/util/Constants.class
+=======
+bin/src/main/java/tw/idv/tibame/core/filter/LoginFilter.class
+bin/src/main/java/tw/idv/tibame/core/util/CommonUtil.class
+bin/src/main/java/tw/idv/tibame/core/util/Constants.class
+bin/src/main/java/tw/idv/tibame/filter/CaptchaController.class
+>>>>>>> ec6b8275dcb92e957d2ce9fff8cfd21797afb32a
 bin/src/main/java/tw/idv/tibame/filter/LoginFilter.class
 bin/src/main/java/tw/idv/tibame/friends/controller/FriendsController.class
 bin/src/main/java/tw/idv/tibame/friends/dao/FriendsDao.class
@@ -134,6 +141,7 @@ bin/src/main/java/tw/idv/tibame/friends/service/FriendsServiceImpl.class
 bin/src/main/java/tw/idv/tibame/friends/vo/Friend$FriendBuilder.class
 bin/src/main/java/tw/idv/tibame/friends/vo/Friend.class
 bin/src/main/java/tw/idv/tibame/friends/vo/FriendId.class
+<<<<<<< HEAD
 bin/src/main/java/tw/idv/tibame/gb/controller/ChoiceServlet.class
 bin/src/main/java/tw/idv/tibame/gb/controller/GbOrderAchieveServlet.class
 bin/src/main/java/tw/idv/tibame/gb/controller/GbServlet.class
@@ -148,6 +156,8 @@ bin/src/main/java/tw/idv/tibame/gb/vo/GbOrderVO.class
 bin/src/main/java/tw/idv/tibame/gb/vo/GbVO.class
 bin/src/main/java/tw/idv/tibame/gb/vo/ProductAndMasterVO.class
 bin/src/main/java/tw/idv/tibame/gb/vo/ProductVO.class
+=======
+>>>>>>> ec6b8275dcb92e957d2ce9fff8cfd21797afb32a
 bin/src/main/java/tw/idv/tibame/master/controller/LoginMasterController.class
 bin/src/main/java/tw/idv/tibame/master/controller/LogoutMasterController.class
 bin/src/main/java/tw/idv/tibame/master/controller/RegisterMasterController.class
@@ -159,7 +169,10 @@ bin/src/main/java/tw/idv/tibame/myOrders/controller/MyOrderController.class
 bin/src/main/java/tw/idv/tibame/myOrders/dao/MyGbDao.class
 bin/src/main/java/tw/idv/tibame/myOrders/dao/myOrderDao.class
 bin/src/main/java/tw/idv/tibame/myOrders/service/MyOrderService.class
+<<<<<<< HEAD
 bin/src/main/java/tw/idv/tibame/myOrders/service/impl/MyOrderServiceImpl.class
+=======
+>>>>>>> ec6b8275dcb92e957d2ce9fff8cfd21797afb32a
 bin/src/main/java/tw/idv/tibame/myOrders/vo/MyGb.class
 bin/src/main/java/tw/idv/tibame/myOrders/vo/MyGBOrder.class
 bin/src/main/java/tw/idv/tibame/myOrders/vo/MyProductOrder.class
@@ -206,7 +219,11 @@ bin/src/main/java/tw/idv/tibame/order/dao/SubOrderDaoImpl.class
 bin/src/main/java/tw/idv/tibame/order/dao/SubProductDao.class
 bin/src/main/java/tw/idv/tibame/order/dao/SubProductDaoImpl.class
 bin/src/main/java/tw/idv/tibame/order/service/ProductOrderService.class
+<<<<<<< HEAD
 bin/src/main/java/tw/idv/tibame/order/service/ProductOrdersServiceImpl.class
+=======
+bin/src/main/java/tw/idv/tibame/order/service/ProductOrderServiceImpl2.class
+>>>>>>> ec6b8275dcb92e957d2ce9fff8cfd21797afb32a
 bin/src/main/java/tw/idv/tibame/order/vo/CartItem.class
 bin/src/main/java/tw/idv/tibame/order/vo/Orders.class
 bin/src/main/java/tw/idv/tibame/order/vo/ProductOrder.class

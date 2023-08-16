@@ -12,6 +12,10 @@ public class ProductService {
 	@Autowired
 	private ProductDAO dao;
 
+	public ProductService() {
+		dao = new ProductDAO();
+	}
+
 	public List<ProductVO> searchLatest() {
 		return dao.searchLatest();
 	}

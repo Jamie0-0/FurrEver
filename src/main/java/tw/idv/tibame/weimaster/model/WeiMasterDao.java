@@ -10,6 +10,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+<<<<<<< HEAD:src/main/java/tw/idv/tibame/weimaster/model/WeiMasterDao.java
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -17,6 +18,19 @@ import org.springframework.stereotype.Repository;
 public class WeiMasterDao implements MasterDao_interface{
 	@Autowired
 	private DataSource ds;	
+=======
+public class MasterDao implements MasterDao_interface {
+	
+	private static DataSource ds = null;
+	static {
+		try {
+			Context ctx = new InitialContext();
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/tha102");
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
+	}
+>>>>>>> ec6b8275dcb92e957d2ce9fff8cfd21797afb32a:src/main/java/tw/idv/tibame/weimaster/model/MasterDao.java
 
 	private static final String GET_ONE_STMT = "SELECT * FROM master where m_id = ?";
 	private String UPDATE = "UPDATE master set m_name=?,m_gui=?"

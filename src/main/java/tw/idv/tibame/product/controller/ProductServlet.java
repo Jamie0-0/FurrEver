@@ -27,6 +27,7 @@ import tw.idv.tibame.tools.Tools;
 @MultipartConfig(maxFileSize = 1024 * 1024 * 10, // 10MB
 		maxRequestSize = 1024 * 1024 * 10 // 10MB
 )
+<<<<<<< HEAD
 
 @WebServlet("/pro.do")
 public class ProductServlet extends HttpServlet {
@@ -34,11 +35,16 @@ public class ProductServlet extends HttpServlet {
 	@Autowired
 	private ProductService service;
 	@Override
+=======
+@WebServlet("/pro.do")
+public class ProductServlet extends HttpServlet {
+	Connection con;
+
+>>>>>>> ec6b8275dcb92e957d2ce9fff8cfd21797afb32a
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		doPost(req, res);
 	}
 
-	@Override
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		res.setCharacterEncoding("UTF-8");
@@ -63,6 +69,7 @@ public class ProductServlet extends HttpServlet {
 			Integer p_id = Integer.valueOf(str);
 			Integer p_status = Integer.valueOf(req.getParameter("p_status"));
 			Integer p_class = Integer.valueOf(req.getParameter("p_class"));
+			Integer mid = (Integer)session.getAttribute("mid");
 
 			Integer mid = (Integer)session.getAttribute("mid");
 
@@ -76,8 +83,13 @@ public class ProductServlet extends HttpServlet {
 			}
 
 			// 開始查詢資料
+<<<<<<< HEAD
 //			ProductService proSvc = new ProductService();
 			List productVO = service.getOnePro2(p_id, p_status, p_class,mid);
+=======
+			ProductService proSvc = new ProductService();
+			List productVO = proSvc.getOnePro2(p_id, p_status, p_class,mid);
+>>>>>>> ec6b8275dcb92e957d2ce9fff8cfd21797afb32a
 			if (productVO == null) {
 				errorMsgs.add("查無資料，以全部查詢替代");
 			}
@@ -109,9 +121,15 @@ public class ProductServlet extends HttpServlet {
 			String p_status = req.getParameter("p_status");
 
 			// 開始查詢資料
+<<<<<<< HEAD
 //			ProductService proSvc = new ProductService();
 
 			ProductVO proVO = service.getOnePro(p_id,mid);
+=======
+			ProductService proSvc = new ProductService();
+
+			ProductVO proVO = proSvc.getOnePro(p_id,mid);
+>>>>>>> ec6b8275dcb92e957d2ce9fff8cfd21797afb32a
 
 			// 將位元資料流轉換為 Base64 編碼
 			String p1 = "";
@@ -225,8 +243,13 @@ public class ProductServlet extends HttpServlet {
 			filecontent4.read(p_pic_four);
 
 			//查詢資料庫是否有紀錄
+<<<<<<< HEAD
 //			ProductService proSvc2 = new ProductService();
 			ProductVO productVO1 = service.getOnePro(p_id,mid);
+=======
+			ProductService proSvc2 = new ProductService();
+			ProductVO productVO1 = proSvc2.getOnePro(p_id,mid);
+>>>>>>> ec6b8275dcb92e957d2ce9fff8cfd21797afb32a
 			Integer p_idSearch = productVO1.getP_id();
 
 			if(p_idSearch == null || p_idSearch == 0) {
@@ -294,6 +317,7 @@ public class ProductServlet extends HttpServlet {
 			}
 
 			//開始修改資料
+<<<<<<< HEAD
 //			ProductService proSvc = new ProductService();
 			proVO = service.updatePro(mid,p_name, Integer.parseInt(p_price), Integer.parseInt(p_stock), p_type, p_class,
 					p_des, p_status, p_id, p_pic_one, p_pic_two, p_pic_three, p_pic_four);
@@ -301,6 +325,15 @@ public class ProductServlet extends HttpServlet {
 			//修改完成,準備轉交
 //			ProductService proSvc1 = new ProductService();
 			List productVO = service.getOnePro2(p_id, p_status, p_class,mid);
+=======
+			ProductService proSvc = new ProductService();
+			proVO = proSvc.updatePro(mid,p_name, Integer.parseInt(p_price), Integer.parseInt(p_stock), p_type, p_class,
+					p_des, p_status, p_id, p_pic_one, p_pic_two, p_pic_three, p_pic_four);
+
+			//修改完成,準備轉交
+			ProductService proSvc1 = new ProductService();
+			List productVO = proSvc1.getOnePro2(p_id, p_status, p_class,mid);
+>>>>>>> ec6b8275dcb92e957d2ce9fff8cfd21797afb32a
 			ArrayList<ProductVO> list = (ArrayList<ProductVO>) productVO;
 
 			// 查詢完成,準備轉交
@@ -421,14 +454,23 @@ public class ProductServlet extends HttpServlet {
 			}
 
 			//開始新增資料
+<<<<<<< HEAD
 //			ProductService proSvc = new ProductService();
 			proVO = service.addPro(p_m_id,p_name,
+=======
+			ProductService proSvc = new ProductService();
+			proVO = proSvc.addPro(p_m_id,p_name,
+>>>>>>> ec6b8275dcb92e957d2ce9fff8cfd21797afb32a
 					Integer.parseInt(p_price), Integer.parseInt(p_stock),p_type,
 					p_class,p_des,
 					p_pic_one,p_pic_two,p_pic_three,p_pic_four);
 
 			//新增完成,查出新商品
+<<<<<<< HEAD
 			List productVO = service.searchLatest();
+=======
+			List productVO = proSvc.searchLatest();
+>>>>>>> ec6b8275dcb92e957d2ce9fff8cfd21797afb32a
 			ArrayList<ProductVO> list = (ArrayList<ProductVO>) productVO;
 			req.setAttribute("list", list);
 
@@ -448,14 +490,23 @@ public class ProductServlet extends HttpServlet {
 			// 開始刪除資料
 //			ProductService proSvc = new ProductService();
 			try {
+<<<<<<< HEAD
 				service.deletePro(p_id,mid);
+=======
+				proSvc.deletePro(p_id,mid);
+>>>>>>> ec6b8275dcb92e957d2ce9fff8cfd21797afb32a
 			} catch (Exception e){
 				List<String> errorMsgs = new LinkedList<String>();
 				req.setAttribute("errorMsgs", errorMsgs);
 				errorMsgs.add("此筆資料已有消費紀錄，不能刪除");
 				
+<<<<<<< HEAD
 //				ProductService proSvc1 = new ProductService();
 				ArrayList<ProductVO> list = (ArrayList<ProductVO>) service.getAll();
+=======
+				ProductService proSvc1 = new ProductService();
+				ArrayList<ProductVO> list = (ArrayList<ProductVO>) proSvc1.getAll();
+>>>>>>> ec6b8275dcb92e957d2ce9fff8cfd21797afb32a
 				req.setAttribute("list", list);
 				
 				String url2 = "/backEnd/products.jsp";
