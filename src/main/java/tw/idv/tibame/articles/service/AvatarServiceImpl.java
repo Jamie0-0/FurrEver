@@ -8,12 +8,8 @@ import tw.idv.tibame.articles.dao.ArtUserDao;
 @Service
 public class AvatarServiceImpl implements AvatarService {
 
-	private final ArtUserDao artUserDao;
-
 	@Autowired
-	public AvatarServiceImpl(ArtUserDao artUserDao) {
-		this.artUserDao = artUserDao;
-	}
+	private ArtUserDao artUserDao;
 
 	@Override
 	public byte[] selectAvatar(Integer uid) {

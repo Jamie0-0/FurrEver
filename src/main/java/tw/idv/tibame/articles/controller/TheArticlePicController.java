@@ -11,12 +11,8 @@ import tw.idv.tibame.articles.service.ArticlePicService;
 @RestController
 public class TheArticlePicController {
 
-	private final ArticlePicService service;
-
 	@Autowired
-	public TheArticlePicController(ArticlePicService service) {
-		this.service = service;
-	}
+	private ArticlePicService service;
 
 	@GetMapping("/carousel")
 	public byte[] selectCarouselPic(@SessionAttribute Integer artId, @RequestParam Integer picOrder) {
