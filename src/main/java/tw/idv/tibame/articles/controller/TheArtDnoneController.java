@@ -10,16 +10,12 @@ import tw.idv.tibame.articles.service.ArticlesService;
 @RestController
 public class TheArtDnoneController {
 
-	private final ArticlesService service;
-
 	@Autowired
-	public TheArtDnoneController(ArticlesService service) {
-		this.service = service;
-	}
+	private ArticlesService service;
 
-	@GetMapping("/artDnone") // 有session=後ok
+	@GetMapping("/artDnone")
 	public long selectCountById(@SessionAttribute Integer artId) {
-		artId = 1;
+
 		long count = service.selectCountById(artId);
 
 		return count;
