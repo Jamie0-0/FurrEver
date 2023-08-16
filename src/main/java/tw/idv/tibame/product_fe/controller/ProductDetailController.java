@@ -11,24 +11,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.google.gson.Gson;
 
 import tw.idv.tibame.product_fe.service.ProductLikeService;
-import tw.idv.tibame.product_fe.service.ProductLikeServiceImpl;
 import tw.idv.tibame.product_fe.service.ProductService;
-import tw.idv.tibame.product_fe.service.ProductServiceImpl;
 
 @WebServlet("/shop/productDetail")
 public class ProductDetailController extends HttpServlet {
 
+	@Autowired
 	private ProductService service;
+	@Autowired
 	private ProductLikeService plService;
-
-	@Override
-	public void init() throws ServletException {
-		service = new ProductServiceImpl();
-		plService = new ProductLikeServiceImpl();
-	}
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
