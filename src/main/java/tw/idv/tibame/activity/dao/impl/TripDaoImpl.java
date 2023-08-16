@@ -1,164 +1,29 @@
 package tw.idv.tibame.activity.dao.impl;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import tw.idv.tibame.activity.dao.TripDao;
 import tw.idv.tibame.activity.vo.Trip;
 
-public class TripDaoImpl implements TripDao{
+@Repository
+public class TripDaoImpl implements TripDao {
     //連線持目前有問題(20行)
-    private static DataSource ds;
+    @Autowired
+    private DataSource ds;
 
-    //彬華JDBC寫死的DriverManager寫法(23-25行)
-    private final static String url="jdbc:mysql://localhost:3306/Furrever?serverTimezone=Asia/Taipei";
-    private final static String user="root";
-    private final static String password="password";
-
-    //連線持目前有問題(28-34行)
-    static {
-        try {
-            ds = (DataSource) new InitialContext().lookup("java:comp/env/jdbc/FurrEver");
-        } catch (NamingException e) {
-            e.printStackTrace();
-        }
-    }
-
-    //測試當前程式用
-    public static void main(String[] args) {
-
-//		try {
-//			InputStream in = new FileInputStream("");
-//			int aa  = in.available();
-//			byte[] bytes = new byte[aa];
-//
-//			in.read(bytes);
-//
-//			in.close();
-//
-//			Trip trip =new Trip();
-//			trip.setT_act_id(1);
-//			trip.setT_act_pic_one(bytes);
-//
-//
-//		} catch (FileNotFoundException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-
-
-
-
-
-
-
-
-        //show所有資料的功能測試
-//		List<Trip> ll = new TripDaoImpl().selectAll();
-//		for(Trip tp : ll) {
-//			System.out.println(tp);
-//		}
-        //show活動種類(狗或貓)篩選器測試，1是狗、2是貓
-//		Trip tt = new TripDaoImpl().selectByActType(2);
-//        	System.out.println(tt.toString());
-        //show最熱門活動篩選器測試
-//    	List<Trip> ll = new TripDaoImpl().selectHotAct();
-//    	for(Trip tp : ll) {
-//    		System.out.println(tp);
-//    	}
-        //show最新活動篩選器測試
-        List<Trip> ll = new TripDaoImpl().selectNewAct();
-        for(Trip tp : ll) {
-            System.out.println(tp);
-        }
-        //show活動地區(新北市或台北市)篩選器測試，1是taipei、2是newtaipei
-//      Trip tt = new TripDaoImpl().selectByActCity(2);
-//        	System.out.println(tt.toString());
-
-//		//新增活動測試
-//        String sql = "INSERT INTO trip (uid, t_act_type, t_act_name, t_act_desc, t_act_city, t_act_loc, t_act_time, t_act_ppl, t_act_pic_one, t_act_pic_two, t_act_bdg, t_act_status)\n"
-//        		+ "VALUES (?, ?, ?, ?, ?, ?, ?, ? ,? ,?, ?, ?);";
-//        Trip tt =new Trip();
-//
-//        tt.setUid(1);
-//        tt.setT_act_type(2);
-//        tt.setT_act_name("Pet Food Adventure");
-//        tt.setT_act_desc("Get ready to embark on a one-of-a-kind Pet Restaurant Adventure, where delectable treats and heartwarming moments with our furry companions await you.");
-//        tt.setT_act_city(2);
-//        tt.setT_act_loc("newtaipei");
-//        tt.setT_act_time("2023-08-29 18:00:00");
-//        tt.setT_act_ppl(40);
-//        tt.setT_act_pic_one(null);
-//        tt.setT_act_pic_two(null);
-//        tt.setT_act_bdg(2500);
-//        tt.setT_act_status("1");
-//
-//        Integer ii = new TripDaoImpl().insertAct(tt);
-//	    System.out.println(ii);
-
-        //修改活動測試
-// 		String sql = "update trip "
-//		+ "set t_act_type = ?, t_act_name = ?, t_act_desc = ?, t_act_city = ?, t_act_loc = ?, t_act_time = ?, t_act_ppl = ?,
-//		t_act_pic_one = ?, t_act_pic_two = ?, t_act_bdg = ?, t_act_status = ?"
-//		+ "where t_act_id = ?;";
-//		Trip tt =new Trip();
-//
-//		tt.setT_act_type(2);
-//		tt.setT_act_name("jason");
-//		tt.setT_act_desc("try try");
-//		tt.setT_act_city(1);
-//		tt.setT_act_loc("taipei");
-//		tt.setT_act_time("2023-06-25 11:00:00");
-//		tt.setT_act_ppl(10);
-//		tt.setT_act_pic_one(null);
-//		tt.setT_act_pic_two(null);
-//		tt.setT_act_bdg(1000);
-//		tt.setT_act_status("1");
-//		tt.setT_act_id(4);
-//
-//		Integer ll =new TripDaoImpl().updateAct(tt);
-
-        //活動到期下架測試，顯示0表示隱藏、1
-//		Trip tt =new Trip();
-//
-//	    tt.setT_act_status("1");
-//		tt.setT_act_id(5);
-//
-//		Integer ll =new TripDaoImpl().updateActDeadLine(tt);
-//
-//		System.out.println(ll);
-
-    }
-
-    //使用Servlet，需將DriverManager改為Data Source，調整如下
-    //-> Connection conn = ds.getConnection();
-    //push到git時記得把main方法整個拿掉呦！
-
-    //呈現所有資料的功能
     @Override
     public List<Trip> selectAll() {
         final String sql = "select * from FurrEver.trip";
-        try (
-                Connection conn = DriverManager.getConnection(url,user,password);
-//				Connection conn =  ds.getConnection();
-                PreparedStatement pstmt = conn.prepareStatement(sql);
-                ResultSet rs = pstmt.executeQuery()) {
+        try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql); ResultSet rs = pstmt.executeQuery()) {
             List<Trip> list = new ArrayList<>();
             while (rs.next()) {
                 Trip trip = new Trip();
@@ -191,13 +56,9 @@ public class TripDaoImpl implements TripDao{
     @Override
     public Trip selectById(Integer t_act_id) {
         final String sql = "select * from FurrEver.trip where t_act_id = ?";
-        try (
-                Connection conn = DriverManager.getConnection(url,user,password);
-//				Connection conn =  ds.getConnection();
-                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, t_act_id);
-            try (
-                    ResultSet rs = pstmt.executeQuery()) {
+            try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
                     Trip trip = new Trip();
                     trip.setT_act_id(rs.getInt("t_act_id"));
@@ -226,14 +87,8 @@ public class TripDaoImpl implements TripDao{
     //查詢最熱門活動
     @Override
     public List<Trip> selectHotAct() {
-        final String sql = "select tr.*,count(*) from trip tr  \n"
-                + "join participant pt on tr.t_act_id = pt.t_act_id\n"
-                + "group by tr.t_act_id order by count(*) desc ";
-        try (
-                Connection conn = DriverManager.getConnection(url,user,password);
-//				Connection conn =  ds.getConnection();
-                PreparedStatement pstmt = conn.prepareStatement(sql);
-                ResultSet rs = pstmt.executeQuery()) {
+        final String sql = "select tr.*,count(*) from trip tr  \n" + "join participant pt on tr.t_act_id = pt.t_act_id\n" + "group by tr.t_act_id order by count(*) desc ";
+        try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql); ResultSet rs = pstmt.executeQuery()) {
             List<Trip> list = new ArrayList<>();
             while (rs.next()) {
                 Trip trip = new Trip();
@@ -264,13 +119,8 @@ public class TripDaoImpl implements TripDao{
     //查詢最新活動
     @Override
     public List<Trip> selectNewAct() {
-        final String sql = "select * from trip tr  \n"
-                + "order by tr.t_act_time desc";
-        try (
-                Connection conn = DriverManager.getConnection(url,user,password);
-//				Connection conn =  ds.getConnection();
-                PreparedStatement pstmt = conn.prepareStatement(sql);
-                ResultSet rs = pstmt.executeQuery()) {
+        final String sql = "select * from trip tr  \n" + "order by tr.t_act_time desc";
+        try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql); ResultSet rs = pstmt.executeQuery()) {
             List<Trip> list = new ArrayList<>();
             while (rs.next()) {
                 Trip trip = new Trip();
@@ -302,12 +152,8 @@ public class TripDaoImpl implements TripDao{
     //新增活動內容
     @Override
     public Integer insertAct(Trip trip) {
-        final String sql = "INSERT INTO trip (uid, t_act_type, t_act_name, t_act_desc, t_act_city, t_act_loc, t_act_time, t_act_ppl, t_act_pic_one, t_act_bdg, t_act_status)"
-                + "VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        try (
-//			Connection conn = DriverManager.getConnection(url,user,password);
-                Connection conn =  ds.getConnection();
-                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        final String sql = "INSERT INTO trip (uid, t_act_type, t_act_name, t_act_desc, t_act_city, t_act_loc, t_act_time, t_act_ppl, t_act_pic_one, t_act_bdg, t_act_status)" + "VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, 1);
             pstmt.setInt(2, trip.getT_act_type());
             pstmt.setString(3, trip.getT_act_name());
@@ -332,14 +178,9 @@ public class TripDaoImpl implements TripDao{
     @Override
     public Integer updateAct(Trip trip) {
         int rowCount = 0;
-        String sql = "update trip "
-                + "set t_act_type = ?, t_act_name = ?, t_act_desc = ?, t_act_city = ?, t_act_loc = ?, t_act_time = ?, t_act_ppl = ?, t_act_pic_one = ?, t_act_pic_two = ?, t_act_bdg = ?"
-                + "where t_act_id = ?;";
+        String sql = "update trip " + "set t_act_type = ?, t_act_name = ?, t_act_desc = ?, t_act_city = ?, t_act_loc = ?, t_act_time = ?, t_act_ppl = ?, t_act_pic_one = ?, t_act_pic_two = ?, t_act_bdg = ?" + "where t_act_id = ?;";
 
-        try (
-                Connection conn = DriverManager.getConnection(url,user,password);
-//			 Connection conn =  ds.getConnection();
-                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, trip.getT_act_type());
             pstmt.setString(2, trip.getT_act_name());
             pstmt.setString(3, trip.getT_act_desc());
@@ -363,17 +204,12 @@ public class TripDaoImpl implements TripDao{
     @Override
     public Integer updateActDeadLine(Trip trip) {
         int rowCount = 0;
-        String sql = "update trip "
-                + "set t_act_status = ? "
-                + "where t_act_id = ?;";
-        try (
-                Connection conn = DriverManager.getConnection(url,user,password);
-//			 Connection conn =  ds.getConnection();
-                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        String sql = "update trip " + "set t_act_status = ? " + "where t_act_id = ?;";
+        try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, trip.getT_act_status());
             pstmt.setInt(2, trip.getT_act_id());
             rowCount = pstmt.executeUpdate();
-            return 	rowCount;//記得要return rowCount，不然會直接到return到399行的return rowCount = -1;
+            return rowCount;//記得要return rowCount，不然會直接到return到399行的return rowCount = -1;
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -385,13 +221,9 @@ public class TripDaoImpl implements TripDao{
     @Override
     public Trip selectActPic(Integer t_act_id) {
         final String sql = "select * from FurrEver.trip where t_act_id = ?";
-        try (
-                Connection conn = DriverManager.getConnection(url,user,password);
-//				Connection conn =  ds.getConnection();
-                PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, t_act_id);
-            try (
-                    ResultSet rs = pstmt.executeQuery()) {
+            try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
                     Trip trip = new Trip();
                     trip.setT_act_id(rs.getInt("t_act_id"));
@@ -409,10 +241,7 @@ public class TripDaoImpl implements TripDao{
     @Override
     public List<Trip> selectByActType(Integer t_act_type) {
         final String sql = "select * from FurrEver.trip where t_act_type = ?";
-        try (
-                Connection conn = DriverManager.getConnection(url,user,password);
-//				Connection conn =  ds.getConnection();
-                PreparedStatement pstmt = conn.prepareStatement(sql);){
+        try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql);) {
 
             pstmt.setInt(1, t_act_type);
             ResultSet rs = pstmt.executeQuery();
@@ -442,14 +271,12 @@ public class TripDaoImpl implements TripDao{
         }
         return null;
     }
+
     //查詢活動地區下拉式選單(台北、新北市)
     @Override
     public List<Trip> selectActCity(Integer t_act_city) {
         final String sql = "select * from FurrEver.trip where t_act_city = ?";
-        try (
-                Connection conn = DriverManager.getConnection(url,user,password);
-//				Connection conn =  ds.getConnection();
-                PreparedStatement pstmt = conn.prepareStatement(sql);){
+        try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql);) {
 
             pstmt.setInt(1, t_act_city);
             ResultSet rs = pstmt.executeQuery();

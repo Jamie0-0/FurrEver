@@ -1,31 +1,20 @@
 package tw.idv.tibame.activity.service.impl;
 
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import tw.idv.tibame.activity.dao.ParticipantDao;
 import tw.idv.tibame.activity.dao.TripDao;
-import tw.idv.tibame.activity.dao.impl.TripDaoImpl;
 import tw.idv.tibame.activity.service.TripService;
 import tw.idv.tibame.activity.vo.Trip;
 
-
+@Service
 public class TripServiceImpl implements TripService {
-
+    @Autowired
     private TripDao tripdao;
+    @Autowired
     private ParticipantDao participantdao;
-
-//	public static void main(String[] args) {
-//
-//		List<Trip> trips =new TripServiceImpl().showActCity(1);
-//
-//		for(Trip trip: trips) {
-//			System.out.println(trip);
-//		}
-//
-//	}
-
-    public TripServiceImpl() {
-        tripdao = new TripDaoImpl();
-    }
 
     //show所有活動
     @Override
