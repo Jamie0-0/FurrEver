@@ -19,45 +19,50 @@ public class ProductJDBCDAO implements ProductDAO_interface {
 
 	private static final String GET_ALL_STMT = "SELECT * FROM product where p_m_id=? order by p_id";
 
-	@Override
-	public ProductVO indexValue(Integer p_m_id) {
+	
+    @Override
+    public ProductVO indexValue(Integer p_m_id) {
 
-		return null;
-	}
+    	return null;
+    }
+    
+    @Override
+    public List<MasterPicVO> indexNatrix1(Integer p_m_id){
 
-	@Override
-	public List<MasterPicVO> indexNatrix1(Integer p_m_id) {
+    	return null;
+    }
 
-		return null;
-	}
-
-	@Override
-	public List<MasterPicVO2> indexNatrix2() {
-
-		return null;
-	}
+    @Override
+    public List<MasterPicVO2> indexNatrix2(Integer mid){
+    	
+    	
+    	
+    	return null;
+    }
 
 	@Override
 	public List<ProductVO> searchLatest() {
-
+		
 		return null;
 	}
 
+	
+	
 	@Override
 	public void insert(ProductVO productVO) {
 
 	}
-
+	
 	@Override
 	public void update(ProductVO productVO) {
 
 	}
-
+	
 	@Override
-	public void delete(Integer getP_id) {
+	public void delete(Integer getP_id,Integer mid) {
 
 	}
-
+	
 	@Override
 	public List<ProductVO> getAll() {
 		List<ProductVO> list = new ArrayList<ProductVO>();
@@ -76,15 +81,26 @@ public class ProductJDBCDAO implements ProductDAO_interface {
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				productVO = new ProductVO.Builder().setP_id(rs.getInt("p_id")).setP_m_id(rs.getInt("p_m_id"))
-						.setP_name(rs.getString("p_name")).setP_price(rs.getInt("p_price"))
-						.setP_stock(rs.getInt("p_stock")).setP_count(rs.getInt("p_count"))
-						.setP_type(rs.getInt("p_type")).setP_class(rs.getInt("p_class"))
-						.setP_upload_time(rs.getTimestamp("p_upload_time").toLocalDateTime())
-						.setP_des(rs.getString("p_des")).setP_status(rs.getInt("p_status"))
-						.setP_pic_one(rs.getBytes("p_pic_one")).setP_pic_two(rs.getBytes("p_pic_two"))
-						.setP_pic_three(rs.getBytes("p_pic_three")).setP_pic_four(rs.getBytes("p_pic_four"))
-						.setP_1(rs.getString("p_1")).setP_2(rs.getString("p_2")).setP_3(rs.getString("p_3")).build();
+				productVO = new ProductVO.Builder()
+											.setP_id(rs.getInt("p_id"))
+											.setP_m_id(rs.getInt("p_m_id"))
+											.setP_name(rs.getString("p_name"))
+											.setP_price(rs.getInt("p_price"))
+											.setP_stock(rs.getInt("p_stock"))
+											.setP_count(rs.getInt("p_count"))
+											.setP_type(rs.getInt("p_type"))
+											.setP_class(rs.getInt("p_class"))
+											.setP_upload_time(rs.getTimestamp("p_upload_time").toLocalDateTime())
+											.setP_des(rs.getString("p_des"))
+											.setP_status(rs.getInt("p_status"))
+											.setP_pic_one(rs.getBytes("p_pic_one"))
+											.setP_pic_two(rs.getBytes("p_pic_two"))
+											.setP_pic_three(rs.getBytes("p_pic_three"))
+											.setP_pic_four(rs.getBytes("p_pic_four"))
+											.setP_1(rs.getString("p_1"))
+											.setP_2(rs.getString("p_2"))
+											.setP_3(rs.getString("p_3"))
+											.build();
 				list.add(productVO);
 			}
 
@@ -117,14 +133,13 @@ public class ProductJDBCDAO implements ProductDAO_interface {
 		}
 		return list;
 	}
-
+	
 	@Override
-	public ProductVO findByPrimaryKey(Integer p_id) {
+	public ProductVO findByPrimaryKey(Integer p_id,Integer mid) {
 		return null;
 	}
-
-	@Override
-	public List<ProductVO> findByPrimaryKey2(Integer p_id, Integer p_status, Integer p_class) {
+	
+	public List<ProductVO> findByPrimaryKey2(Integer p_id,Integer p_status,Integer p_class,Integer mid) {
 		return null;
 	}
 }

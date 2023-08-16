@@ -1,8 +1,15 @@
 package tw.idv.tibame.weimaster.model;
 
-public class MasterService {
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-	private MasterDao_interface dao;
+import tw.idv.tibame.weimaster.model.WeiMasterDao;
+
+@Service
+public class WeiMasterService {
+
+	@Autowired
+	private WeiMasterDao dao;
 
 //	public MasterService() {
 //		dao = new MasterDao();

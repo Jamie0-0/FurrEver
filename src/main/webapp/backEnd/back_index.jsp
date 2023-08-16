@@ -15,10 +15,12 @@ ProductDAO dao = applicationContext.getBean(ProductDAO.class);
 PayStatusService payStatusSvc = applicationContext.getBean(PayStatusService.class);
 request.setAttribute("payStatusSvc", payStatusSvc);
 
-ProductVO iValue = dao.indexValue(1);
+ProductVO iValue = dao.indexValue((Integer)session.getAttribute("mid"));
 
-List<MasterPicVO> list1 = dao.indexNatrix1(1);
-List<MasterPicVO2> list2 = dao.indexNatrix2();
+
+List<MasterPicVO> list1 = dao.indexNatrix1((Integer)session.getAttribute("mid"));
+List<MasterPicVO2> list2 = dao.indexNatrix2((Integer)session.getAttribute("mid"));
+
 request.setAttribute("list1", list1);
 request.setAttribute("list2", list2);
 %>
@@ -414,7 +416,7 @@ request.setAttribute("list2", list2);
 <%--   																	<jsp:useBean id="payStatusSvc" scope="page" --%>
 <%--   																	class="tw.idv.tibame.payStatus.model.PayStatusService" /> --%>
  																	<c:forEach var="payStatusVO" items="${payStatusSvc.all}">
- 																		<h5>${productVO2.order_pay.equals(payStatusVO.pa_id) ? payStatusVO.pa_name : ''}</h5>
+ 																		<h5>${productVO2.order_pay == payStatusVO.pa_id ? payStatusVO.pa_name : ''}</h5>
  																	</c:forEach>
 																</div> 
 															</td>

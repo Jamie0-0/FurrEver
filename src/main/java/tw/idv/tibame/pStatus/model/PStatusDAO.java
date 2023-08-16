@@ -12,16 +12,22 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+@Repository
 public class PStatusDAO implements PStatusDAO_interface {
-	private static DataSource ds = null;
-	static {
-		try {
-			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/tha102");
-		} catch (NamingException e) {
-			e.printStackTrace();
-		}
-	}
+	@Autowired
+	private DataSource ds;
+//	private static DataSource ds = null;
+//	static {
+//		try {
+//			Context ctx = new InitialContext();
+//			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/tha102");
+//		} catch (NamingException e) {
+//			e.printStackTrace();
+//		}
+//	}
 
 	private static final String INSERT_STMT = "INSERT INTO pStatus (ps_name) VALUES (?)";
 	private static final String GET_ALL_STMT = "SELECT ps_id , ps_name FROM pStatus";
