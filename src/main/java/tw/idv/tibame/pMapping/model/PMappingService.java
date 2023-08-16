@@ -2,8 +2,12 @@ package tw.idv.tibame.pMapping.model;
 
 import java.util.List;
 
-public class PMappingService {
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
+public class PMappingService {
+	@Autowired
 	private PMappingDAO_interface dao;
 
 	public PMappingService() {

@@ -10,21 +10,19 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-public class MasterDao implements MasterDao_interface {
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
-	private static DataSource ds = null;
-	static {
-		try {
-			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/tha102");
-		} catch (NamingException e) {
-			e.printStackTrace();
-		}
-	}
+@Repository
+public class WeiMasterDao implements MasterDao_interface{
+	@Autowired
+	private DataSource ds;	
 
 	private static final String GET_ONE_STMT = "SELECT * FROM master where m_id = ?";
-	private String UPDATE = "UPDATE master set m_name=?,m_gui=?" + ",m_bank_id=?,m_address=?,m_man_id=?"
-			+ ", m_man_name=?, m_email=?, m_phone=? " + " where m_id=?";
+	private String UPDATE = "UPDATE master set m_name=?,m_gui=?"
+						+ ",m_bank_id=?,m_address=?,m_man_id=?"
+						+ ", m_man_name=?, m_email=?, m_phone=? "
+						+ " where m_id=?";
 
 	@Override
 	public void update(MasterVO masterVO) {
@@ -67,6 +65,7 @@ public class MasterDao implements MasterDao_interface {
 		}
 	}
 
+	
 	@Override
 	public MasterVO findByPrimaryKey(Integer m_id) {
 		MasterVO masterVO = null;
@@ -83,11 +82,17 @@ public class MasterDao implements MasterDao_interface {
 
 			// 這裡是查到的值，須將所有欄位值放進去
 			while (rs.next()) {
-				masterVO = new MasterVO.Builder().setM_id(rs.getInt("m_id")).setM_name(rs.getString("m_name"))
-						.setM_gui(rs.getString("m_gui")).setM_bank_id(rs.getString("m_bank_id"))
-						.setM_address(rs.getString("m_address")).setM_man_id(rs.getString("m_man_id"))
-						.setM_man_name(rs.getString("m_man_name")).setM_email(rs.getString("m_email"))
-						.setM_phone(rs.getString("m_phone")).build();
+				masterVO = new MasterVO.Builder()
+										.setM_id(rs.getInt("m_id"))
+										.setM_name(rs.getString("m_name"))
+										.setM_gui(rs.getString("m_gui"))
+										.setM_bank_id(rs.getString("m_bank_id"))
+										.setM_address(rs.getString("m_address"))
+										.setM_man_id(rs.getString("m_man_id"))
+										.setM_man_name(rs.getString("m_man_name"))
+										.setM_email(rs.getString("m_email"))
+										.setM_phone(rs.getString("m_phone"))
+										.build();
 			}
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
@@ -116,5 +121,4 @@ public class MasterDao implements MasterDao_interface {
 		}
 		return masterVO;
 	}
-
 }

@@ -1,5 +1,13 @@
+<%@page import="org.springframework.web.context.support.WebApplicationContextUtils"%>
+<%@page import="org.springframework.context.ApplicationContext"%>
+
 <%@page import="tw.idv.tibame.product.model.ProductJDBCDAO"%>
 <%@page import="tw.idv.tibame.product.model.ProductVO"%>
+<%@page import="tw.idv.tibame.pType.model.PTypeService"%>
+<%@page import="tw.idv.tibame.pStatus.model.PStatusService"%>
+<%@page import="tw.idv.tibame.pMapping.model.PMappingService"%>
+
+
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
@@ -10,10 +18,24 @@ List<ProductVO> list = (List<ProductVO>) request.getAttribute("list");
 
 if (list == null) {
 	ProductJDBCDAO dao = new ProductJDBCDAO();
-		list = dao.getAll();
-		
-	}
-	pageContext.setAttribute("list", list);
+	list = dao.getAll();
+	
+}
+pageContext.setAttribute("list", list);
+
+ApplicationContext applicationContext = WebApplicationContextUtils.getWebApplicationContext(application);
+
+PStatusService pStatusSvc = applicationContext.getBean(PStatusService.class);
+request.setAttribute("pStatusSvc", pStatusSvc);
+
+
+PMappingService pMapSvc = applicationContext.getBean(PMappingService.class);
+request.setAttribute("pMapSvc", pMapSvc);
+
+PTypeService pTypeSvc = applicationContext.getBean(PTypeService.class);
+request.setAttribute("pTypeSvc", pTypeSvc);
+
+
 %>
 
 <!DOCTYPE html>
@@ -369,8 +391,8 @@ select {
 														style="width: 70px; height: 35px; border: 2px solid #ccc; border-radius: 5px;"
 														pattern="[0-9]+">
 
-													<jsp:useBean id="pMapSvc" scope="page"
-														class="pMapping.model.PMappingService" />
+<%-- 													<jsp:useBean id="pMapSvc" scope="page" --%>
+<%-- 														class="pMapping.model.PMappingService" /> --%>
 													<select id="p_class" size="1" name="p_class"
 														style="width: 90px; height: 35px; border: 2px solid #ccc; border-radius: 5px; padding: 5px; font-size: 16px; margin-right: 6px;">
 														<option value="0">輸入類別</option>
@@ -380,8 +402,8 @@ select {
 														</c:forEach>
 													</select>
 
-													<jsp:useBean id="pStatusSvc" scope="page"
-														class="pStatus.model.PStatusService" />
+<%-- 													<jsp:useBean id="pStatusSvc" scope="page" --%>
+<%-- 														class="pStatus.model.PStatusService" /> --%>
 													<select id="p_status" size="1" name="p_status"
 														style="width: 90px; height: 35px; border: 2px solid #ccc; border-radius: 5px; padding: 5px; font-size: 16px;">
 														<option value="0">輸入狀態</option>
@@ -442,8 +464,8 @@ select {
 														<td>${productVO.p_stock}</td>
 														<td>${productVO.p_count}</td>
 
-														<jsp:useBean id="pTypeSvc" scope="page"
-															class="pType.model.PTypeService" />
+<%-- 														<jsp:useBean id="pTypeSvc" scope="page" --%>
+<%-- 															class="pType.model.PTypeService" /> --%>
 														<td><c:forEach var="pTypeVO"
 																items="${pTypeSvc.getAll()}">
 																<c:if test="${productVO.p_type == pTypeVO.pt_id}">

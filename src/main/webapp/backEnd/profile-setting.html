@@ -334,6 +334,7 @@ body {
 	// 
 	
 		function init() {
+			var m_id = sessionStorage.getItem("mid");
  			var path = window.location.pathname;
  			var webCtx = path.substring(0, path.indexOf('/', 1));
 
@@ -342,7 +343,7 @@ body {
 				type : "POST",
 				data : {
 					"action" : "getOneSearch",
-					"m_id" : "1"
+					"m_id" : m_id
 				},
 				dataType : "json",
 
@@ -448,9 +449,9 @@ body {
 		    return;
 		  }
 
-		  var regex = /^[a-zA-Z\u4e00-\u9fa5]*$/;
+		  var regex = /^[a-zA-Z0-9\u4e00-\u9fa5]*$/;
 		  if (!regex.test(m_man_name)) {
-			  alert("姓名只能包含英文和中文。");
+			  alert("姓名只能包含英文、中文和數字。");
 			  return;
 		  }
 
@@ -598,9 +599,9 @@ body {
 			  return;
 			}
 			
-			var regex = /^[a-zA-Z\u4e00-\u9fa5]*$/;
+			var regex = /^[a-zA-Z0-9\u4e00-\u9fa5]*$/;
 			if (!regex.test(m_man_nameT)) {
-			 alert("姓名只能包含英文和中文。");
+			 alert("姓名只能包含英文、中文和數字。");
 			 return;
 			}
 			
@@ -625,7 +626,7 @@ body {
 			 return;
 			}
 
-            let m_id = "1";
+			let m_id = sessionStorage.getItem("mid");
             let m_name = document.getElementById("m_name").value;
             let m_gui = document.getElementById("m_gui").value;
             let m_bank_id = document.getElementById("m_bank_id").value;

@@ -15,10 +15,10 @@ ProductDAO dao = applicationContext.getBean(ProductDAO.class);
 PayStatusService payStatusSvc = applicationContext.getBean(PayStatusService.class);
 request.setAttribute("payStatusSvc", payStatusSvc);
 
-ProductVO iValue = dao.indexValue(1);
+ProductVO iValue = dao.indexValue((Integer)session.getAttribute("mid"));
 
-List<MasterPicVO> list1 = dao.indexNatrix1(1);
-List<MasterPicVO2> list2 = dao.indexNatrix2();
+List<MasterPicVO> list1 = dao.indexNatrix1((Integer)session.getAttribute("mid"));
+List<MasterPicVO2> list2 = dao.indexNatrix2((Integer)session.getAttribute("mid"));
 request.setAttribute("list1", list1);
 request.setAttribute("list2", list2);
 %>

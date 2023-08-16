@@ -1,10 +1,10 @@
 package tw.idv.tibame.weimaster.model;
 
 public class MasterVO2 {
-	private Integer m_id;
-	private String m_name;
-	private String m_pwd;
-	private String m_gui;
+    private Integer m_id;
+    private String m_name;
+    private String m_pwd;
+    private String m_gui;
 	private String m_bank_name;
 	private String m_bank_id;
 	private String m_address;
@@ -54,15 +54,15 @@ public class MasterVO2 {
 	public String getM_email() {
 		return m_email;
 	}
-
+	
 	public String getM_phone() {
 		return m_phone;
 	}
-
+	
 	public Integer getM_status() {
 		return m_status;
 	}
-
+	
 	public Integer getGm_id() {
 		return gm_id;
 	}
@@ -86,12 +86,12 @@ public class MasterVO2 {
 		m_status = builder.m_status;
 		gm_id = builder.gm_id;
 	}
-
+	
 	public static class Builder {
-		private Integer m_id = 0;
-		private String m_name = "";
-		private String m_pwd = "";
-		private String m_gui = "";
+	    private Integer m_id = 0;
+	    private String m_name = "";
+	    private String m_pwd = "";
+	    private String m_gui = "";
 		private String m_bank_name = "";
 		private String m_bank_id = "";
 		private String m_address = "";
@@ -106,7 +106,7 @@ public class MasterVO2 {
 			this.m_id = m_id;
 			return this;
 		}
-
+		
 		public MasterVO2.Builder setM_name(String m_name) {
 			this.m_name = m_name;
 			return this;
@@ -116,22 +116,22 @@ public class MasterVO2 {
 			this.m_pwd = m_pwd;
 			return this;
 		}
-
+		
 		public MasterVO2.Builder setM_gui(String m_gui) {
 			this.m_gui = m_gui;
 			return this;
 		}
-
+		
 		public MasterVO2.Builder setM_bank_name(String m_bank_name) {
 			this.m_bank_name = m_bank_name;
 			return this;
 		}
-
+		
 		public MasterVO2.Builder setM_bank_id(String m_bank_id) {
 			this.m_bank_id = m_bank_id;
 			return this;
 		}
-
+		
 		public MasterVO2.Builder setM_address(String m_address) {
 			this.m_address = m_address;
 			return this;
@@ -141,27 +141,27 @@ public class MasterVO2 {
 			this.m_man_id = m_man_id;
 			return this;
 		}
-
+		
 		public MasterVO2.Builder setM_man_name(String m_man_name) {
 			this.m_man_name = m_man_name;
 			return this;
 		}
-
+		
 		public MasterVO2.Builder setM_email(String m_email) {
 			this.m_email = m_email;
 			return this;
 		}
-
+		
 		public MasterVO2.Builder setM_phone(String m_phone) {
 			this.m_phone = m_phone;
 			return this;
 		}
-
+		
 		public MasterVO2.Builder setM_status(Integer m_status) {
 			this.m_status = m_status;
 			return this;
 		}
-
+		
 		public MasterVO2.Builder setGm_id(Integer gm_id) {
 			this.gm_id = gm_id;
 			return this;

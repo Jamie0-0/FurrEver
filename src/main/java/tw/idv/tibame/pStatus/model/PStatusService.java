@@ -2,8 +2,12 @@ package tw.idv.tibame.pStatus.model;
 
 import java.util.List;
 
-public class PStatusService {
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
+public class PStatusService {
+	@Autowired
 	private PStatusDAO_interface dao;
 
 	public PStatusService() {
