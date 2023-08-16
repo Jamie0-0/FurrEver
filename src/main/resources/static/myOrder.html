@@ -5,41 +5,75 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>文章清單</title>
+    <title>編輯會員資料</title>
     <!-- bootstrap css -->
-    <link id="rtl-link" rel="stylesheet" type="text/css" href="../assets/css/vendors/bootstrap.css">
+    <link id="rtl-link" rel="stylesheet" type="text/css" href="assets/css/vendors/bootstrap.css">
 
     <!-- wow css -->
-    <link rel="stylesheet" href="../assets/css/animate.min.css" />
+    <link rel="stylesheet" href="assets/css/animate.min.css" />
 
     <!-- font-awesome css -->
-    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/font-awesome.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/vendors/font-awesome.css">
 
     <!-- feather icon css -->
-    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/feather-icon.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/vendors/feather-icon.css">
 
     <!-- slick css -->
-    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/slick/slick.css">
-    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/slick/slick-theme.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/vendors/slick/slick.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/vendors/slick/slick-theme.css">
 
     <!-- Iconly css -->
-    <link rel="stylesheet" type="text/css" href="../assets/css/bulk-style.css">
-    <link rel="stylesheet" type="text/css" href="../assets/css/vendors/animate.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/bulk-style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/vendors/animate.css">
 
     <!-- Template css -->
-    <link id="color-link" rel="stylesheet" type="text/css" href="../assets/css/style.css">
+    <link id="color-link" rel="stylesheet" type="text/css" href="assets/css/style.css">
 
     <!-- 自己的css -->
-    <link rel="stylesheet" href="../assets/css/styleGuide.css">
+    <link rel="stylesheet" href="assets/css/styleGuide.css">
 
     <style>
-        .article > a {
-            color: #bfb9fc;
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        h3 {
+            margin: 5px;
+        }
+
+        .order {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 10px 0;
+        }
+
+        .order-info-container {
+            display: flex;
+        }
+
+        .order-info-content {
+            flex: 1;
+            margin-right: 20px;
+        }
+
+        .order-item-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .order-item-list li {
+            margin-bottom: 5px;
+        }
+
+        .return-button {
+            margin-top: 5px;
+            display: block;
         }
     </style>
 </head>
 
 <body>
+
     <!-- Header Start -->
     <header class="pb-md-4 pb-0">
         <div class="top-nav top-header sticky-header">
@@ -54,7 +88,7 @@
                                 </span>
                             </button>
                             <a href="index.html" class="web-logo nav-logo">
-                                <img src="../assets/images/logo/1.png" class="img-fluid blur-up lazyload" alt="">
+                                <img src="assets/images/logo/1.png" class="img-fluid blur-up lazyload" alt="">
                             </a>
                             <div class="rightside-box">
                                 <ul class="right-side-menu">
@@ -84,7 +118,7 @@
                                                     <li class="product-box-contain">
                                                         <div class="drop-cart">
                                                             <a href="product-left-thumbnail.html" class="drop-image">
-                                                                <img src="../assets/images/vegetable/product/1.png"
+                                                                <img src="assets/images/vegetable/product/1.png"
                                                                     class="blur-up lazyload" alt="">
                                                             </a>
 
@@ -103,7 +137,7 @@
                                                     <li class="product-box-contain">
                                                         <div class="drop-cart">
                                                             <a href="product-left-thumbnail.html" class="drop-image">
-                                                                <img src="../assets/images/vegetable/product/2.png"
+                                                                <img src="assets/images/vegetable/product/2.png"
                                                                     class="blur-up lazyload" alt="">
                                                             </a>
 
@@ -156,15 +190,10 @@
                                             <ul class="user-box-name">
                                                 <li class="product-box-contain">
                                                     <i></i>
-                                                    <a href="login.html">登入</a>
+                                                    <a href="login.html" id="logout">登出</a>
                                                 </li>
-
                                                 <li class="product-box-contain">
-                                                    <a href="sign-up.html">註冊</a>
-                                                </li>
-
-                                                <li class="product-box-contain">
-                                                    <a href="forgot.html">忘記密碼</a>
+                                                    <a href="member_center.html">會員中心</a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -212,7 +241,7 @@
                                             </li>
 
                                             <li class="nav-item">
-                                                <a class="nav-link" href="/template/front-end/about.html">關於我們</a>
+                                                <a class="nav-link" href="about.html">關於我們</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -225,7 +254,6 @@
         </div>
     </header>
 
-    <!--start  列表  -->
     <div class="container  align-items-center mt-4 member-infor">
         <div class="row">
             <div class="col member_infor h5">
@@ -234,98 +262,26 @@
             <div class="col pet_infor h5">
                 <a href="pet.html">毛孩資訊</a>
             </div>
-            <div class="col friend h5">
-                <a href="freind.html">好友列表</a>
-            </div>
             <div class="col act_list h5">
                 <a href="trip.html">活動清單</a>
             </div>
             <div class="col tra_list h5">
                 <a href="collect.html">追蹤清單</a>
             </div>
-            <div class="col order h5">
-                <a href="order.html">訂單</a>
-            </div>
-            <div class="col article h5">
-                <a href="myarticle.html">文章管理</a>
+            <div class="col order_list h5">
+                <a href="myOrder.html">訂單</a>
             </div>
         </div>
     </div>
-    <hr>
-    <!-- end 列表 -->
 
-    <!-- start article -->
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-6 ">
-                <h2 class="text-center">我的文章</h2>
-                <div class="row left-side mt-3">
-                    <div class="col-3">
-                        <h3>刪除文章</h3>
-                        <ul class="mt-2">
-                            <li class="d-block mt-2"><button>刪除</button></li>
-                            <li class="d-block mt-2"><button>刪除</button></li>
-                            <li class="d-block mt-2"><button>刪除</button></li>
-                        </ul>                        
-                    </div>
-                    <div class="col-3">
-                        <h3>文章連結</h3>
-                        <ul class="mt-2">
-                            <li class="d-block mt-2"><a href="#" class="h5">文章名稱</a></li>
-                            <li class="d-block mt-2"><a href="#" class="h5">文章名稱</a></li>
-                            <li class="d-block mt-2"><a href="#" class="h5">文章名稱</a></li>
-                        </ul>                        
-                    </div>
-                    <div class="col-3">
-                        <h3>按讚數</h3>
-                        <ul class="mt-2">
-                            <li class="d-block mt-2">10</li>
-                            <li class="d-block mt-2">10</li>
-                            <li class="d-block mt-2">10</li>
-                        </ul>  
-                    </div>
-                    <div class="col-3">
-                        <h3>留言數</h3>
-                        <ul class="mt-2">
-                            <li class="d-block mt-2">10</li>
-                            <li class="d-block mt-2">10</li>
-                            <li class="d-block mt-2">10</li>
-                        </ul>  
-                    </div>
-                </div>
-            </div>
-            <div class="col-6">
-                <h2 class="text-center">我的留言</h2>
-                <div class="row right-side mt-3">
-                    <div class="col-4">
-                        <h3>刪除留言</h3>
-                        <ul class="mt-2">
-                            <li class="d-block mt-2"><button>刪除</button></li>
-                            <li class="d-block mt-2"><button>刪除</button></li>
-                            <li class="d-block mt-2"><button>刪除</button></li>
-                        </ul>
-                    </div>
-                    <div class="col-4">
-                        <h3>文章連結</h3>
-                        <ul class="mt-2">
-                            <li class="d-block mt-2"><a href="#" class="h5">文章名稱</a></li>
-                            <li class="d-block mt-2"><a href="#" class="h5">文章名稱</a></li>
-                            <li class="d-block mt-2"><a href="#" class="h5">文章名稱</a></li>
-                        </ul>                        
-                    </div>
-                    <div class="col-4">
-                        <h3>留言內容</h3>
-                        <ul class="mt-2">
-                            <li class="d-block mt-2">xxxxxxxxxxxxxxxxxxxxxx</li>
-                            <li class="d-block mt-2">xxxxxxxxxxxxxxxxxxxxxx</li>
-                            <li class="d-block mt-2">xxxxxxxxxxxxxxxxxxxxxx</li>
-                        </ul>  
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--  end  article -->
+    <hr>
+
+    <label for="orderType" class="h5 mx-5">篩選訂單類型：</label>
+    <select id="orderType" class="h5">
+        <option value="retail">零售</option>
+        <option value="group">團購</option>
+    </select>
+    <div id="orderList" class="container rounded"></div>
 
     <!-- Footer Section Start -->
     <footer class="section-t-space">
@@ -356,7 +312,7 @@
                         <div class="footer-logo">
                             <div class="theme-logo">
                                 <a href="index.html">
-                                    <img src="../assets/images/logo/2.png" class="blur-up lazyload" alt="">
+                                    <img src="assets/images/logo/2.png" class="blur-up lazyload" alt="">
                                 </a>
                             </div>
 
@@ -373,115 +329,281 @@
                             <h4>免責聲明</h4>
                         </div>
 
-                        <div class="footer-contain">
-                            <ul>
-                                <li>
-                                    <a href="shop-left-sidebar.html" class="text-content">Vegetables & Fruit</a>
-                                </li>
-                                <li>
-                                    <a href="shop-left-sidebar.html" class="text-content">Beverages</a>
-                                </li>
-                                <li>
-                                    <a href="shop-left-sidebar.html" class="text-content">Meats & Seafood</a>
-                                </li>
-                                <li>
-                                    <a href="shop-left-sidebar.html" class="text-content">Frozen Foods</a>
-                                </li>
-                                <li>
-                                    <a href="shop-left-sidebar.html" class="text-content">Biscuits & Snacks</a>
-                                </li>
-                                <li>
-                                    <a href="shop-left-sidebar.html" class="text-content">Grocery & Staples</a>
-                                </li>
-                            </ul>
-                        </div>
+                        <p>任何瀏覽網站的人士，須自行承擔一切風險，本網站不會負責任何因瀏覽<br>
+                            或使用本網站而引致之損失。本網站不會作出任何默示的擔保。本網站承<br>
+                            諾力求網站內容之準確性及完整性，但內容如有錯誤或遺漏，本網站不會<br>
+                            承擔任何賠償責任，所有本網站內容，將會隨時更改，而不作另行通知。<br>
+                        </p>
                     </div>
-
                 </div>
             </div>
         </div>
     </footer>
+
     <!-- Footer Section End -->
     <!-- latest jquery-->
-    <script src="../assets/js/jquery-3.6.0.min.js"></script>
+    <script src="assets/js/jquery-3.6.0.min.js"></script>
 
     <!-- jquery ui-->
-    <script src="../assets/js/jquery-ui.min.js"></script>
+    <script src="assets/js/jquery-ui.min.js"></script>
 
     <!-- Bootstrap js-->
-    <script src="../assets/js/bootstrap/bootstrap.bundle.min.js"></script>
-    <script src="../assets/js/bootstrap/bootstrap-notify.min.js"></script>
-    <script src="../assets/js/bootstrap/popper.min.js"></script>
+    <script src="assets/js/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/bootstrap/bootstrap-notify.min.js"></script>
+    <script src="assets/js/bootstrap/popper.min.js"></script>
 
     <!-- feather icon js-->
-    <script src="../assets/js/feather/feather.min.js"></script>
-    <script src="../assets/js/feather/feather-icon.js"></script>
+    <script src="assets/js/feather/feather.min.js"></script>
+    <script src="assets/js/feather/feather-icon.js"></script>
 
     <!-- Lazyload Js -->
-    <script src="../assets/js/lazysizes.min.js"></script>
+    <script src="assets/js/lazysizes.min.js"></script>
 
     <!-- Slick js-->
-    <script src="../assets/js/slick/slick.js"></script>
-    <script src="../assets/js/slick/slick-animation.min.js"></script>
-    <script src="../assets/js/slick/custom_slick.js"></script>
+    <script src="assets/js/slick/slick.js"></script>
+    <script src="assets/js/slick/slick-animation.min.js"></script>
+    <script src="assets/js/slick/custom_slick.js"></script>
 
     <!-- Auto Height Js -->
-    <script src="../assets/js/auto-height.js"></script>
+    <script src="assets/js/auto-height.js"></script>
 
     <!-- Timer Js -->
-    <!-- <script src="../assets/js/timer1.js"></script> -->
+    <!-- <script src="assets/js/timer1.js"></script> -->
 
     <!-- Fly Cart Js -->
-    <script src="../assets/js/fly-cart.js"></script>
+    <script src="assets/js/fly-cart.js"></script>
 
     <!-- Quantity js -->
-    <script src="../assets/js/quantity-2.js"></script>
+    <script src="assets/js/quantity-2.js"></script>
 
     <!-- WOW js -->
-    <script src="../assets/js/wow.min.js"></script>
-    <script src="../assets/js/custom-wow.js"></script>
+    <script src="assets/js/wow.min.js"></script>
+    <script src="assets/js/custom-wow.js"></script>
 
     <!-- script js -->
-    <script src="../assets/js/script.js"></script>
+    <script src="assets/js/script.js"></script>
 
     <script>
-    // 假設有一個包含文章資料的陣列
-            var articles = [
-            {name: "文章 1", likes: 10, comments: 5 },
-            {name: "文章 2", likes: 20, comments: 8 },
-            // 其他文章資料
-            ];
+        function createOrderList(ordersData) {
+            const orderList = document.getElementById("orderList");
+            orderList.innerHTML = "";
 
-            // 獲取文章列表的容器元素
-            var articleList = document.getElementById("article-list");
+            ordersData.forEach(orderData => {
+                const orderDiv = document.createElement("div");
+                orderDiv.classList.add("order");
 
-            // 使用迴圈動態生成文章資料的表格行
-            for (var i = 0; i < articles.length; i++) {
-        var article = articles[i];
+                const orderInfoDiv = document.createElement("div");
+                orderInfoDiv.classList.add("order-info-container");
 
-            var row = document.createElement("tr");
-            var nameCell = document.createElement("td");
-            var likesCell = document.createElement("td");
-            var commentsCell = document.createElement("td");
-            var actionCell = document.createElement("td");
+                const leftDiv = document.createElement("div");
+                leftDiv.classList.add("order-info-content");
 
-            nameCell.textContent = article.name;
-            likesCell.textContent = article.likes;
-            commentsCell.textContent = article.comments;
+                const orderIdH3 = document.createElement("h3");
+                orderIdH3.classList.add("h4");
+                orderIdH3.textContent = "訂單編號：" + orderData.orderId;
+                leftDiv.appendChild(orderIdH3);
 
-            var deleteButton = document.createElement("button");
-            deleteButton.textContent = "刪除";
-            deleteButton.classList.add("btn", "btn-danger", "btn-sm");
+                const itemList = document.createElement("ul");
+                itemList.classList.add("order-item-list");
 
-            actionCell.appendChild(deleteButton);
+                orderData.subOrders[0].subProducts.forEach(subProduct => {
+                    const itemLi = document.createElement("li");
+                    itemLi.classList.add("h5");
+                    itemLi.textContent = "商品名稱：" + subProduct.pmname + "，商品單價：" + subProduct.pmprice + "，數量：" + subProduct.pmstock;
+                    itemList.appendChild(itemLi);
+                });
 
-            row.appendChild(nameCell);
-            row.appendChild(likesCell);
-            row.appendChild(commentsCell);
-            row.appendChild(actionCell);
+                leftDiv.appendChild(itemList);
+                orderInfoDiv.appendChild(leftDiv);
 
-            articleList.appendChild(row);
-    }
+                const rightDiv = document.createElement("div");
+                rightDiv.classList.add("order-info-content");
+
+                let productStatus = '';
+                if (orderData.orderShippingStatus === '0') {
+                    productStatus = "已出貨";
+                }
+                else {
+                    productStatus = "未出貨"
+                }
+
+                const statusH3 = document.createElement("h3");
+                orderIdH3.classList.add("h4");
+                statusH3.textContent = "訂單狀態：" + productStatus;
+                rightDiv.appendChild(statusH3);
+
+                const totalH3 = document.createElement("h3");
+                totalH3.textContent = "總金額：" + orderData.orderTotalAmount;
+                rightDiv.appendChild(totalH3);
+
+
+
+                const returnButton = document.createElement("button");
+                returnButton.classList.add("return-button", "float-end");
+                returnButton.textContent = "我要退貨";
+                rightDiv.appendChild(returnButton);
+
+                orderInfoDiv.appendChild(rightDiv);
+                orderDiv.appendChild(orderInfoDiv);
+                orderList.appendChild(orderDiv);
+            });
+        }
+
+        function createGBOrderList(ordersData) {
+            const orderList = document.getElementById("orderList");
+            orderList.innerHTML = "";
+
+            ordersData.forEach(orderData => {
+                console.log(orderData);
+                const orderDiv = document.createElement("div");
+                orderDiv.classList.add("order");
+
+                const orderInfoDiv = document.createElement("div");
+                orderInfoDiv.classList.add("order-info-container");
+
+                const leftDiv = document.createElement("div");
+                leftDiv.classList.add("order-info-content");
+
+                const orderIdH3 = document.createElement("h3");
+                orderIdH3.classList.add("h4");
+                orderIdH3.textContent = "團購訂單編號：" + orderData.gbId;
+                leftDiv.appendChild(orderIdH3);
+
+                const itemList = document.createElement("ul");
+                itemList.classList.add("order-item-list");
+
+
+                const itemLi = document.createElement("li");
+                itemLi.classList.add("h5");
+                itemLi.textContent = "商品名稱：" + orderData.product.pname + "，商品特價：" + orderData.gbSPrice + "，數量：" + orderData.gbOrders[0].gbPNum;
+                itemList.appendChild(itemLi);
+
+
+
+
+                leftDiv.appendChild(itemList);
+                orderInfoDiv.appendChild(leftDiv);
+
+                const rightDiv = document.createElement("div");
+                rightDiv.classList.add("order-info-content");
+
+                let productStatus = '';
+                if (orderData.gbStatus === 0) {
+                    productStatus = "已出貨";
+                }
+                else {
+                    productStatus = "未出貨"
+                }
+
+                const statusH3 = document.createElement("h3");
+                statusH3.textContent = "訂單狀態：" + productStatus;
+                rightDiv.appendChild(statusH3);
+
+                const totalH3 = document.createElement("h3");
+                totalH3.textContent = "總金額：" + orderData.gbOrders[0].gbT;
+                rightDiv.appendChild(totalH3);
+
+                const status = document.createElement("h3");
+
+                if (orderData.gbStatus === 0) {
+                    status.textContent = "團購狀態:已成團";
+                }
+                else if (orderData.gbStatus === 1) {
+                    status.textContent = "團購狀態:未成團";
+                }
+                rightDiv.appendChild(status);
+
+                const returnButton = document.createElement("button");
+                returnButton.classList.add("return-button", "float-end");
+                returnButton.textContent = "我要退貨";
+                rightDiv.appendChild(returnButton);
+
+                orderInfoDiv.appendChild(rightDiv);
+                orderDiv.appendChild(orderInfoDiv);
+                orderList.appendChild(orderDiv);
+            });
+
+        }
+
+
+
+
+
+
+
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const uid = sessionStorage.getItem("uid");
+            const usernmae = sessionStorage.getItem("username");
+            $("h5").text(usernmae);
+
+            const orderTypeSelect = document.getElementById("orderType");
+            orderTypeSelect.addEventListener("change", function () {
+                const selectedType = orderTypeSelect.value;
+
+                if (selectedType === "retail") {
+                    fetch('myorder', {
+                        method: "POST",
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                    })
+                        .then((responce) => responce.json())
+                        .then((data) => {
+                            // console.log(data);
+                            createOrderList(data);
+                        });
+                } else if (selectedType === "group") {
+                    fetch('mygborder', {
+                        method: "POST",
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                    })
+                        .then((responce) => responce.json())
+                        .then((data) => {
+                            // console.log(data);
+                            createGBOrderList(data);
+                        });
+                }
+            });
+            // 默认显示零售订单数据
+            fetch('myorder', {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    // console.log(data);
+                    createOrderList(data);
+                });
+
+
+
+            $("a#logout").on("click", function (e) {
+                e.preventDefault();
+                fetch("logout", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    }
+                })
+                    .then(responce => responce.json())
+                    .then(data => {
+                        if (data.logoutsuccess === 1) {
+
+                            alert("登出成功");
+                            sessionStorage.clear();
+                            location.href = "login.html";
+                        }
+
+                    })
+            })
+        });
+
+
     </script>
 </body>
 

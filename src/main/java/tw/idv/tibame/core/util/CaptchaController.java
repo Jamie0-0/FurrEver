@@ -1,9 +1,8 @@
-package tw.idv.tibame.filter;
+package tw.idv.tibame.core.util;
 
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
-import java.awt.GraphicsEnvironment;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.HashMap;
@@ -26,14 +25,12 @@ public class CaptchaController {
 	@GetMapping(value = "generate-captcha", produces = MediaType.IMAGE_PNG_VALUE)
 	public void generateCaptcha(HttpServletResponse response, HttpSession session) throws IOException {
 		int width = 200;
-	    int height = 60;
-	    int fontSize = 40; // 增大字型大小
-
+		int height = 60;
+		int fontSize = 40; // 增大字型大小
 
 		BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 		Graphics2D g2d = image.createGraphics();
 
-		Random random = new Random();
 		String captcha = generateRandomString(4, "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890");
 		session.setAttribute("captchaText", captcha);
 		for (int i = 0; i < captcha.length(); i++) {
@@ -56,11 +53,11 @@ public class CaptchaController {
 		String userInput = requestBody.get("userInput");
 
 		String captchaText = (String) session.getAttribute("captchaText"); // 从 session 中获取生成的验证码
-		
+
 		System.out.println(captchaText);
-		
+
 		boolean isValid = captchaText != null && captchaText.equalsIgnoreCase(userInput);
-		
+
 		response.put("valid", isValid);
 		System.out.println(isValid);
 		return response;
@@ -82,7 +79,7 @@ public class CaptchaController {
 	}
 
 	private String getRandomFontName() {
-		String[] fontNames = GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames();
+		String[] fontNames = { "Arial", "Times New Roman", "Courier New"};
 		Random random = new Random();
 		return fontNames[random.nextInt(fontNames.length)];
 	}

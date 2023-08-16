@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.google.gson.Gson;
 
 import tw.idv.tibame.product_fe.service.ProductLikeService;
@@ -17,12 +19,8 @@ import tw.idv.tibame.product_fe.service.ProductLikeServiceImpl;
 
 @WebServlet("/shop/productDetail/productLike")
 public class ProductLikeController extends HttpServlet {
+	@Autowired
 	private ProductLikeService service;
-
-	@Override
-	public void init() throws ServletException {
-		service = new ProductLikeServiceImpl();
-	}
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

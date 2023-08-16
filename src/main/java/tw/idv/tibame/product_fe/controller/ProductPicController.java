@@ -13,23 +13,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import tw.idv.tibame.product_fe.dao.ProductDao;
 import tw.idv.tibame.product_fe.service.ProductService;
-import tw.idv.tibame.product_fe.service.ProductServiceImpl;
 
 @WebServlet("/productPic")
 public class ProductPicController extends HttpServlet {
 	@Autowired
-	private ProductDao dao;
 	private ProductService service;
-
-	@Override
-	public void init() throws ServletException {
-		service = new ProductServiceImpl();
-	}
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		int p_id = Integer.parseInt(req.getParameter("p_id"));
-		byte[] pic_content = dao.selectPicByPid(p_id);
+		byte[] pic_content = service.getPicByPid(p_id);
 
 		resp.setContentType("image/gif, image/jpeg, image/png");
 		ServletOutputStream out = resp.getOutputStream();

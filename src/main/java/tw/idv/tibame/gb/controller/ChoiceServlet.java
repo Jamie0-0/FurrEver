@@ -1,6 +1,7 @@
-package tw.idv.tibame.product_fe.controller;
+package tw.idv.tibame.gb.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,28 +13,32 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.google.gson.Gson;
 
-import tw.idv.tibame.product_fe.service.ProductService;
+import tw.idv.tibame.gb.dao.GBDao;
+import tw.idv.tibame.gb.vo.GbAndProductVO;
 
-@WebServlet("/shop/categories")
-public class ShopCategoriesController extends HttpServlet {
+@WebServlet("/choise")
+public class ChoiceServlet extends HttpServlet {
+
+	private static final long serialVersionUID = 5314977473749785269L;
 
 	@Autowired
-	private ProductService service;
+	private GBDao dao;
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-		resp.setContentType("application/json");
-		resp.setCharacterEncoding("UTF-8");
-		req.setCharacterEncoding("UTF-8");
+		req.setCharacterEncoding("utf-8");
+		resp.setContentType("application/json; charset=UTF-8");
 
 		Gson gson = new Gson();
 
 		String how = req.getParameter("how");
 		String keywords = req.getParameter("keywords");
 
-		var list = service.selectByKeyWords(how, keywords);
+		System.out.println(how);
+		System.out.println(keywords);
 
+		List<GbAndProductVO> list = dao.selectByKeyWords(how, keywords);
+		System.out.println(list);
 		String message = gson.toJson("");
 
 		message = "{\"status\":\"true\",\"selectByKeyWords\":" + gson.toJson(list) + "}";
@@ -42,15 +47,4 @@ public class ShopCategoriesController extends HttpServlet {
 		System.out.println(message);
 
 	}
-
-//	@GetMapping("/shop/categories")
-//	public Map<String, Object> selectByKeyWords(@RequestParam String how, @RequestParam String keywords) {
-//		List<Product> list = service.selectByKeyWords(how, keywords);
-//		Map<String, Object> response = new HashMap<>();
-//		response.put("status", "true");
-//		response.put("selectByKeyWords", list);
-//
-//		return response;
-//	}
-
 }

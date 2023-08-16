@@ -18,6 +18,8 @@ public interface ProductService {
 	List<Product> selectByKeyWords(String how, String keywords);
 
 	Product viewProductDetail(Integer p_id);
+	
+	byte[] getPicByPid(Integer p_id);
 
 	List<String> getMsgs();
 
@@ -31,12 +33,12 @@ public interface ProductService {
 
 	int getCartSubTotal(Map<Integer, Integer> cartList);
 
-	JsonArray getCartListJSON(Map<Integer, Integer> cartList); // cartcontroller用這個?
+	JsonArray getCartListJSON(Map<Integer, Integer> cartList); 
 
 	void saveCartToRedis(HttpSession session, int uid);
 
 	void deleteCartItemFromRedis(HttpSession session, int uid, int p_id);
 
 	HashMap<Integer, Integer> getCartListMapForMember(HttpSession session, int uid);
-//	String getCartListAndTotalJSON(Map<Integer, Integer> cartList); //cartcontroller用這個?
+
 }

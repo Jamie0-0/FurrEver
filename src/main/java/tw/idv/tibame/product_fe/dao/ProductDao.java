@@ -14,8 +14,6 @@ public interface ProductDao {
 
 	List<Product> selectByPClass(String p_class); // 選玩具, 食物, 用品
 
-//	List<Product> selectByPTypeAndPClass(String p_type, String p_class); // 同時選寵物及商品類別 還是用service一次呼叫上面兩個?
-
 	int selectPStockByPid(Integer p_id); // 購買數量不可超過庫存, 否則無法加入+顯示錯誤訊息
 
 	Product selectByPId(Integer p_id); // 商品詳細頁面用
