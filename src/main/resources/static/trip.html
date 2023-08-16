@@ -162,6 +162,9 @@
                                                     <i></i>
                                                     <a href="login.html" id="logout">登出</a>
                                                 </li>
+                                                <li class="product-box-contain">
+                                                    <a href="member_center.html">會員中心</a>
+                                                </li>
                                             </ul>
                                         </div>
                                     </li>
@@ -208,7 +211,7 @@
                                             </li>
 
                                             <li class="nav-item">
-                                                <a class="nav-link" href="/template/front-end/about.html">關於我們</a>
+                                                <a class="nav-link" href="about.html">關於我們</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -310,28 +313,11 @@
                             <h4>免責聲明</h4>
                         </div>
 
-                        <div class="footer-contain">
-                            <ul>
-                                <li>
-                                    <a href="shop-left-sidebar.html" class="text-content">Vegetables & Fruit</a>
-                                </li>
-                                <li>
-                                    <a href="shop-left-sidebar.html" class="text-content">Beverages</a>
-                                </li>
-                                <li>
-                                    <a href="shop-left-sidebar.html" class="text-content">Meats & Seafood</a>
-                                </li>
-                                <li>
-                                    <a href="shop-left-sidebar.html" class="text-content">Frozen Foods</a>
-                                </li>
-                                <li>
-                                    <a href="shop-left-sidebar.html" class="text-content">Biscuits & Snacks</a>
-                                </li>
-                                <li>
-                                    <a href="shop-left-sidebar.html" class="text-content">Grocery & Staples</a>
-                                </li>
-                            </ul>
-                        </div>
+                        <p>任何瀏覽網站的人士，須自行承擔一切風險，本網站不會負責任何因瀏覽<br>
+                            或使用本網站而引致之損失。本網站不會作出任何默示的擔保。本網站承<br>
+                            諾力求網站內容之準確性及完整性，但內容如有錯誤或遺漏，本網站不會<br>
+                            承擔任何賠償責任，所有本網站內容，將會隨時更改，而不作另行通知。<br>
+                        </p>
                     </div>
 
                 </div>
@@ -560,13 +546,9 @@
                     viewButton.addEventListener("click", () => {
                         // 在這裡處理查看活動頁面的操作
 
-                        alert("查看活動頁面:", activity.tactName);
+                        // alert("查看活動頁面:", activity.tactName);
 
-                        // 假設您的活動頁面 URL 是 activity.html，並且 activityId 是活動的 ID
-                        const activityUrl = `activity.html?id=${activity.tActId}`;
-
-                        // 使用location.href 跳轉至活動頁面
-                        location.href = activityUrl;
+                        redirectToJoinPage(activity.tactId)
                     });
                     activityElement.appendChild(viewButton);
                 }
@@ -699,6 +681,13 @@
 
                 })
         })
+
+        function redirectToJoinPage(t_act_id) {
+            sessionStorage.setItem('t_act_id', t_act_id);
+            const joinPageUrl = `join-events.html?t_act_id=${t_act_id}`;
+            window.open(joinPageUrl, '_blank');
+        }
+
 
 
     </script>

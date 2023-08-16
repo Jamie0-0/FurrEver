@@ -48,7 +48,7 @@ public class LoginMasterController {
 		String location = (String) session.getAttribute("location");
 
 		if (location == null || location.isBlank()) {
-			location = "/index.html";
+			location = "";
 		}
 
 		session.removeAttribute("location");

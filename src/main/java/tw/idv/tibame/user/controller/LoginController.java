@@ -33,17 +33,16 @@ public class LoginController {
 		}
 		session.setAttribute("uid", loginUser);
 		session.setAttribute("uName", userName);
+
+		// 獲取之前儲存的造訪頁面的 URL
 		String location = (String) session.getAttribute("location");
-		
-		System.out.println(location);
-		
+
+		// 如果沒有之前的造訪頁面 URL，將它設為預設值（例如首頁）
 		if (location == null || location.isBlank()) {
 			location = "";
 		}
-//		else {
-//			location = "index.html";
-//		}
-
+		System.out.println(location);
+		// 清除之前儲存的造訪頁面 URL
 		session.removeAttribute("location");
 
 		Map<String, Object> response = new HashMap<>();
@@ -52,4 +51,5 @@ public class LoginController {
 		response.put("userName", userName);
 		return ResponseEntity.ok(response);
 	}
+
 }

@@ -534,28 +534,11 @@
                             <h4>免責聲明</h4>
                         </div>
 
-                        <div class="footer-contain">
-                            <ul>
-                                <li>
-                                    <a href="shop-left-sidebar.html" class="text-content">Vegetables & Fruit</a>
-                                </li>
-                                <li>
-                                    <a href="shop-left-sidebar.html" class="text-content">Beverages</a>
-                                </li>
-                                <li>
-                                    <a href="shop-left-sidebar.html" class="text-content">Meats & Seafood</a>
-                                </li>
-                                <li>
-                                    <a href="shop-left-sidebar.html" class="text-content">Frozen Foods</a>
-                                </li>
-                                <li>
-                                    <a href="shop-left-sidebar.html" class="text-content">Biscuits & Snacks</a>
-                                </li>
-                                <li>
-                                    <a href="shop-left-sidebar.html" class="text-content">Grocery & Staples</a>
-                                </li>
-                            </ul>
-                        </div>
+                        <p>任何瀏覽網站的人士，須自行承擔一切風險，本網站不會負責任何因瀏覽<br>
+                            或使用本網站而引致之損失。本網站不會作出任何默示的擔保。本網站承<br>
+                            諾力求網站內容之準確性及完整性，但內容如有錯誤或遺漏，本網站不會<br>
+                            承擔任何賠償責任，所有本網站內容，將會隨時更改，而不作另行通知。<br>
+                        </p>
                     </div>
 
                 </div>
@@ -585,7 +568,6 @@
 
     <!-- script js -->
     <script src="assets/js/script.js"></script>
-
     <script>
         $(function () {
 
@@ -658,6 +640,7 @@
 
                     valistrMsg.textContent = "驗證碼不能為空！";
                     valistrMsg.style.color = "red";
+                    return;
                 } else {
 
                     fetch("check-captcha", {
@@ -679,7 +662,7 @@
 
                                 valistrMsg.textContent = "驗證碼不正確！";
                                 valistrMsg.style.color = "red";
-
+                                return;
                             }
                         })
                         .catch((error) => {
@@ -698,200 +681,237 @@
             //  =================   註冊廠商資料    ======================
 
             $("#create_master_btn").on("click", function () {
-                // console.log("123");
-                let companyGui = $("#company-gui").val();
-                let companyName = $("#company-name").val();
-                let companyPwd = $("#company-pwd").val();
-                let companyPwd2 = $("#company-pwd2").val();
-                let bankId = $("select[name='bank-id']").val();
-                let companyAccount = $("#company-account").val();
-                let companyAddr = $("#company-addr").val();
-                let companyManId = $("#company-manId").val();
-                let companyManName = $("#company-mann-name").val();
-                let companyManEmail = $("#company-man-email").val();
-                let companyManPhone = $("#company-man-phone").val();
 
-                if (companyGui === "") {
-                    $("#error_gui").text("廠商帳號(統一編號)不可為空！").css("color", "red");
-                } else {
-                    $('error_gui').text = ''; // 清除錯誤訊息
-                }
+                const companyInput = $("#company-captchaInput").val().trim(); // 取得使用者輸入的驗證碼
+                const valistrMsg = document.getElementById("company-valistr_msg");
 
-                if (companyName === "") {
-                    $("#error_company_name").text("公司名稱不可為空！").css("color", "red");
-                } else {
-                    $('error_company_name').text = ''; // 清除錯誤訊息
+                // 檢查是否輸入了有效的驗證碼
+                if (companyInput === "") {
+                    valistrMsg.textContent = "驗證碼不能為空！";
+                    valistrMsg.style.color = "red";
+                    return;
                 }
-
-                let passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
-
-                if (!passwordRegex.test(companyPwd)) {
-                    $("#error_com_pwd").text("密碼必須至少包含8個字符，並且包含至少一個大寫字母、一個小寫字母和一個數字").css("color", "red");
-                } else if (companyPwd === "") {
-                    $("#error_com_pwd").text("密碼不可空白").css("color", "red");
-                } else {
-                    $('error_com_pwd').text = ''; // 清除錯誤訊息
-                }
-
-                if (companyPwd2 === "") {
-                    $("#error_com_pwd2").text("密碼不可為空").css("color", "red");
-                } else if (companyPwd !== companyPwd2) {
-                    $("#error_com_pwd2").text("兩次輸入的密碼不相同").css("color", "red");
-                } else {
-                    $('error_com_pwd2').text = ''; // 清除錯誤訊息
-                }
-
-                let accountPattern = /^[0-9]{6,}$/; // 正則表達式：6位以上的數字
-                // 檢查銀行帳號是否為空
-                if (companyAccount === "") {
-                    $("#error_com_account").text("銀行帳號不可為空").css("color", "red");
-                    ;
-                } else if (!accountPattern.test(companyAccount)) {
-                    // 檢查是否符合正則表達式
-                    $("#error_com_account").text("銀行帳號格式不正確").css("color", "red");
-                    ;
-                } else {
-                    $('error_com_account').text = ''; // 清除錯誤訊息
-                }
-
-                if (companyAddr.trim() === "") {
-                    $("#error_com_addr").text("廠商地址不可為空白").css("color", "red");
-                    ;
-                } else {
-                    $('error_com_addr').text = ''; // 清除錯誤訊息
-                }
-
-                if (companyManId.trim() === "") {
-                    $("#error_com_manId").text("負責人身份證字號不可為空白").css("color", "red");
-                } else {
-                    // 正則表達式驗證
-                    let regex = /^[A-Z]\d{9}$/;
-                    if (!regex.test(companyManId)) {
-                        $("#error_com_manId").text("負責人身份證字號格式不正確").css("color", "red");
-                    }
-                    $('error_com_manId').text = ''; // 清除錯誤訊息
-                }
-
-                if (companyManName.trim() === "") {
-                    $("#error_com_mName").text("聯絡人姓名不可為空白").css("color", "red");
-                } else {
-                    // 正則表達式驗證
-                    let regex = /^[\u4e00-\u9fa5a-zA-Z]+$/;
-                    if (!regex.test(companyManName)) {
-                        $("#error_com_mName").text("聯絡人姓名格式不正確").css("color", "red");
-                    }
-                    $('error_com_mName').text = ''; // 清除錯誤訊息
-                }
-
-                if (companyManEmail.trim() === "") {
-                    $("#error_com_mEmail").text("聯絡人E-mail不可為空白").css("color", "red");
-                } else {
-                    // 正則表達式驗證
-                    let regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-                    if (!regex.test(companyManEmail)) {
-                        $("#error_com_mEmail").text("聯絡人E-mail格式不正確").css("color", "red");
-                    }
-                    $('error_com_mEmail').text = ''; // 清除錯誤訊息
-                }
-
-                if (companyManPhone.trim() === "") {
-                    $("#error_com_mPhone").text("聯絡人電話不可為空白").css("color", "red");
-                } else {
-                    // 正則表達式驗證
-                    let regex = /^[0-9]{10}$/;
-                    if (!regex.test(companyManPhone)) {
-                        $("#error_com_mPhone").text("聯絡人電話格式不正確").css("color", "red");
-                    }
-                    $('error_com_mPhone').text = ''; // 清除錯誤訊息
-                }
-
-
-                // console.log(bankId);
-                if (bankId === "003 交通銀行") {
-                    bankId = '1';
-                }
-                else if (bankId === "004 台灣銀行") {
-                    bankId = '2';
-                }
-                else if (bankId === "005 土地銀行") {
-                    bankId = '3';
-                }
-                else if (bankId === "007 第一銀行") {
-                    bankId = '4';
-                }
-                else if (bankId === "008 華南銀行") {
-                    bankId = '5';
-                }
-                else if (bankId === "011 上海銀行") {
-                    bankId = '6';
-                }
-                else if (bankId === "012 富邦銀行") {
-                    bankId = '7';
-                }
-                else if (bankId === "013 國泰世華") {
-                    bankId = '8';
-                } else if (bankId === "700 中華郵政") {
-                    bankId = '9';
-                } else if (bankId === "805 遠東銀行") {
-                    bankId = '10';
-                } else if (bankId === "808 玉山銀行") {
-                    bankId = '11';
-                }
-                const paragraphs = document.querySelectorAll('.error-msg');
-                let allEmpty = true;
-
-                for (let i = 0; i < paragraphs.length; i++) {
-                    if (paragraphs[i].innerText.trim() !== '') {
-                        // console.log(paragraphs[i].innerText);
-                        allEmpty = false;
-                        break;
-                    }
-                }
-
-                if (allEmpty) {
-                    fetch("registerMaster", {
-                        method: "POST",
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            mName: companyName,
-                            mPwd: companyPwd,
-                            mGui: companyGui,
-                            mBankName: bankId,
-                            mBankId: companyAccount,
-                            mAddress: companyAddr,
-                            mManId: companyManId,
-                            mManName: companyManName,
-                            mEmail: companyManEmail,
-                            mPhone: companyManPhone
-
-                        }),
+                // 進行驗證碼的後端驗證
+                fetch("check-captcha", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        userInput: companyInput,
+                    }),
+                })
+                    .then((response) => response.json())
+                    .then((data) => {
+                        if (data.valid) {
+                            // 驗證碼通過，繼續處理註冊
+                            handleCompanyRegistration();
+                        } else {
+                            valistrMsg.textContent = "驗證碼不正確！";
+                            valistrMsg.style.color = "red";
+                        }
                     })
-                        .then(response => response.json())
-                        .then(data => {
-                            alert("註冊成功，按下確認後，跳到登入畫面");
-                            // setTimeout("location.href='http://localhost:8081/TirTirCat/login.html'",3000); // 3秒後跳轉頁面
-                            // location.href = "login.html";
-                        })
-                        .catch(error => {
-                            console.log("請求錯誤");
-                        });
-                } else {
-                    var inputs = document.getElementsByTagName("input");
-                    for (var i = 0; i < inputs.length; i++) {
-                        let index = i;
-                        inputs[i].addEventListener("click", function () {
-                            removeAllErrorMessages();
-                        });
+                    .catch((error) => {
+                        console.error("Error checking captcha:", error);
+                    });
+
+                function handleCompanyRegistration() {
+                    // console.log("123");
+                    let companyGui = $("#company-gui").val();
+                    let companyName = $("#company-name").val();
+                    let companyPwd = $("#company-pwd").val();
+                    let companyPwd2 = $("#company-pwd2").val();
+                    let bankId = $("select[name='bank-id']").val();
+                    let companyAccount = $("#company-account").val();
+                    let companyAddr = $("#company-addr").val();
+                    let companyManId = $("#company-manId").val();
+                    let companyManName = $("#company-mann-name").val();
+                    let companyManEmail = $("#company-man-email").val();
+                    let companyManPhone = $("#company-man-phone").val();
+
+                    if (companyGui === "") {
+                        $("#error_gui").text("廠商帳號(統一編號)不可為空！").css("color", "red");
+                    } else {
+                        $('error_gui').text = ''; // 清除錯誤訊息
                     }
-                    console.log("至少有一個 <p> 標籤有文字內容");
-                }
-                // 在外部一次性移除所有錯誤訊息
-                function removeAllErrorMessages() {
+
+                    if (companyName === "") {
+                        $("#error_company_name").text("公司名稱不可為空！").css("color", "red");
+                    } else {
+                        $('error_company_name').text = ''; // 清除錯誤訊息
+                    }
+
+                    let passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
+
+                    if (!passwordRegex.test(companyPwd)) {
+                        $("#error_com_pwd").text("密碼必須至少包含8個字符，並且包含至少一個大寫字母、一個小寫字母和一個數字").css("color", "red");
+                    } else if (companyPwd === "") {
+                        $("#error_com_pwd").text("密碼不可空白").css("color", "red");
+                    } else {
+                        $('error_com_pwd').text = ''; // 清除錯誤訊息
+                    }
+
+                    if (companyPwd2 === "") {
+                        $("#error_com_pwd2").text("密碼不可為空").css("color", "red");
+                    } else if (companyPwd !== companyPwd2) {
+                        $("#error_com_pwd2").text("兩次輸入的密碼不相同").css("color", "red");
+                    } else {
+                        $('error_com_pwd2').text = ''; // 清除錯誤訊息
+                    }
+
+                    let accountPattern = /^[0-9]{6,}$/; // 正則表達式：6位以上的數字
+                    // 檢查銀行帳號是否為空
+                    if (companyAccount === "") {
+                        $("#error_com_account").text("銀行帳號不可為空").css("color", "red");
+                        ;
+                    } else if (!accountPattern.test(companyAccount)) {
+                        // 檢查是否符合正則表達式
+                        $("#error_com_account").text("銀行帳號格式不正確").css("color", "red");
+                        ;
+                    } else {
+                        $('error_com_account').text = ''; // 清除錯誤訊息
+                    }
+
+                    if (companyAddr.trim() === "") {
+                        $("#error_com_addr").text("廠商地址不可為空白").css("color", "red");
+                        ;
+                    } else {
+                        $('error_com_addr').text = ''; // 清除錯誤訊息
+                    }
+
+                    if (companyManId.trim() === "") {
+                        $("#error_com_manId").text("負責人身份證字號不可為空白").css("color", "red");
+                    } else {
+                        // 正則表達式驗證
+                        let regex = /^[A-Z]\d{9}$/;
+                        if (!regex.test(companyManId)) {
+                            $("#error_com_manId").text("負責人身份證字號格式不正確").css("color", "red");
+                        }
+                        $('error_com_manId').text = ''; // 清除錯誤訊息
+                    }
+
+                    if (companyManName.trim() === "") {
+                        $("#error_com_mName").text("聯絡人姓名不可為空白").css("color", "red");
+                    } else {
+                        // 正則表達式驗證
+                        let regex = /^[\u4e00-\u9fa5a-zA-Z]+$/;
+                        if (!regex.test(companyManName)) {
+                            $("#error_com_mName").text("聯絡人姓名格式不正確").css("color", "red");
+                        }
+                        $('error_com_mName').text = ''; // 清除錯誤訊息
+                    }
+
+                    if (companyManEmail.trim() === "") {
+                        $("#error_com_mEmail").text("聯絡人E-mail不可為空白").css("color", "red");
+                    } else {
+                        // 正則表達式驗證
+                        let regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+                        if (!regex.test(companyManEmail)) {
+                            $("#error_com_mEmail").text("聯絡人E-mail格式不正確").css("color", "red");
+                        }
+                        $('error_com_mEmail').text = ''; // 清除錯誤訊息
+                    }
+
+                    if (companyManPhone.trim() === "") {
+                        $("#error_com_mPhone").text("聯絡人電話不可為空白").css("color", "red");
+                    } else {
+                        // 正則表達式驗證
+                        let regex = /^[0-9]{10}$/;
+                        if (!regex.test(companyManPhone)) {
+                            $("#error_com_mPhone").text("聯絡人電話格式不正確").css("color", "red");
+                        }
+                        $('error_com_mPhone').text = ''; // 清除錯誤訊息
+                    }
+
+
+                    // console.log(bankId);
+                    if (bankId === "003 交通銀行") {
+                        bankId = '1';
+                    }
+                    else if (bankId === "004 台灣銀行") {
+                        bankId = '2';
+                    }
+                    else if (bankId === "005 土地銀行") {
+                        bankId = '3';
+                    }
+                    else if (bankId === "007 第一銀行") {
+                        bankId = '4';
+                    }
+                    else if (bankId === "008 華南銀行") {
+                        bankId = '5';
+                    }
+                    else if (bankId === "011 上海銀行") {
+                        bankId = '6';
+                    }
+                    else if (bankId === "012 富邦銀行") {
+                        bankId = '7';
+                    }
+                    else if (bankId === "013 國泰世華") {
+                        bankId = '8';
+                    } else if (bankId === "700 中華郵政") {
+                        bankId = '9';
+                    } else if (bankId === "805 遠東銀行") {
+                        bankId = '10';
+                    } else if (bankId === "808 玉山銀行") {
+                        bankId = '11';
+                    }
+                    const paragraphs = document.querySelectorAll('.error-msg');
+                    let allEmpty = true;
+
                     for (let i = 0; i < paragraphs.length; i++) {
-                        paragraphs[i].innerText = "";
+                        if (paragraphs[i].innerText.trim() !== '') {
+                            // console.log(paragraphs[i].innerText);
+                            allEmpty = false;
+                            break;
+                        }
                     }
+
+                    if (allEmpty) {
+                        fetch("registerMaster", {
+                            method: "POST",
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                mName: companyName,
+                                mPwd: companyPwd,
+                                mGui: companyGui,
+                                mBankName: bankId,
+                                mBankId: companyAccount,
+                                mAddress: companyAddr,
+                                mManId: companyManId,
+                                mManName: companyManName,
+                                mEmail: companyManEmail,
+                                mPhone: companyManPhone
+
+                            }),
+                        })
+                            .then(response => response.json())
+                            .then(data => {
+                                alert("註冊成功，按下確認後，跳到登入畫面");
+                                // setTimeout("location.href='http://localhost:8081/TirTirCat/login.html'",3000); // 3秒後跳轉頁面
+                                // location.href = "login.html";
+                            })
+                            .catch(error => {
+                                console.log("請求錯誤");
+                            });
+                    } else {
+                        var inputs = document.getElementsByTagName("input");
+                        for (var i = 0; i < inputs.length; i++) {
+                            let index = i;
+                            inputs[i].addEventListener("click", function () {
+                                removeAllErrorMessages();
+                            });
+                        }
+                        console.log("至少有一個 <p> 標籤有文字內容");
+                    }
+                    // 在外部一次性移除所有錯誤訊息
+                    function removeAllErrorMessages() {
+                        for (let i = 0; i < paragraphs.length; i++) {
+                            paragraphs[i].innerText = "";
+                        }
+                    }
+
                 }
             });
 
@@ -908,6 +928,43 @@
             datePicker.value = dateString;
 
             $("#create_member_btn").on("click", function () {
+
+                const userInput = $("#member-captchaInput").val().trim(); // 取得使用者輸入的驗證碼
+                const valistrMsg = document.getElementById("member-valistr_msg");
+
+                // 檢查是否輸入了有效的驗證碼
+                if (userInput === "") {
+                    valistrMsg.textContent = "驗證碼不能為空！";
+                    valistrMsg.style.color = "red";
+                    return;
+                }
+
+                fetch("check-captcha", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        userInput: userInput,
+                    }),
+                })
+                    .then((response) => response.json())
+                    .then((data) => {
+                        if (data.valid) {
+                            // 驗證碼通過，繼續處理註冊
+                            handleRegistration();
+                        } else {
+                            valistrMsg.textContent = "驗證碼不正確！";
+                            valistrMsg.style.color = "red";
+                        }
+                    })
+                    .catch((error) => {
+                        console.error("Error checking captcha:", error);
+                    });
+
+
+            });
+            function handleRegistration() {
                 let email_el = $("#member_email").val();
                 let pwd_el = $("#member_pwd").val();
                 let pwd2_el = $("#member_pwd2").val();
@@ -1023,6 +1080,7 @@
                             document.getElementById('error_email').style.color = "red";
                             document.getElementById('error_email').innerText = '帳號重複';
                         });
+
                 } else {
                     var inputs = document.getElementsByTagName("input");
                     for (var i = 0; i < inputs.length; i++) {
@@ -1039,7 +1097,9 @@
                         paragraphs[i].innerText = "";
                     }
                 }
-            });
+
+            }
+
         });
 
 
