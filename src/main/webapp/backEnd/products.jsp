@@ -264,6 +264,11 @@ select {
 						</span></li>
 						
 						<li class="profile-nav onhover-dropdown pe-0 me-0">
+                            <div class="media profile-media">
+                                <img class="user-profile rounded-circle" src="assets/images/users/4.jpg" alt="">
+                                <div class="user-name-hide media-body">
+                                </div>
+                            </div>
 							<ul class="profile-dropdown onhover-show-div">
 								<li><a
 									href="<%=request.getContextPath()%>/backEnd/order-list.html">
@@ -273,10 +278,9 @@ select {
 									href="<%=request.getContextPath()%>/backEnd/profile-setting.html">
 										<i data-feather="settings"></i> <span>設置</span>
 								</a></li>
-								<li><a data-bs-toggle="modal"
-									data-bs-target="#staticBackdrop" href="javascript:void(0)">
-										<i data-feather="log-out"></i> <span>登出</span>
-								</a></li>
+								<li class="product-box-contain">
+								    <a href="#" id="logout"><i data-feather="log-out"></i><span>登出</span></a>
+								</li>
 							</ul>
 						</li>
 					</ul>
@@ -401,9 +405,6 @@ select {
 																${productVO.p_class==pMappingVO.pm_id ? 'selected' : ''}>${pMappingVO.pm_name}</option>
 														</c:forEach>
 													</select>
-
-<%-- 													<jsp:useBean id="pStatusSvc" scope="page" --%>
-<%-- 														class="pStatus.model.PStatusService" /> --%>
 													<select id="p_status" size="1" name="p_status"
 														style="width: 90px; height: 35px; border: 2px solid #ccc; border-radius: 5px; padding: 5px; font-size: 16px;">
 														<option value="0">輸入狀態</option>
@@ -464,8 +465,6 @@ select {
 														<td>${productVO.p_stock}</td>
 														<td>${productVO.p_count}</td>
 
-<%-- 														<jsp:useBean id="pTypeSvc" scope="page" --%>
-<%-- 															class="pType.model.PTypeService" /> --%>
 														<td><c:forEach var="pTypeVO"
 																items="${pTypeSvc.getAll()}">
 																<c:if test="${productVO.p_type == pTypeVO.pt_id}">
@@ -620,6 +619,31 @@ select {
 
 			}
 		}
+		
+		
+		//  ============登出====================//
+		var path = window.location.pathname;
+		var webCtx = path.substring(0, path.indexOf('/', 1));
+		const url = new URL("http://" + window.location.host + webCtx + "/logout");
+		
+	    $("a#logout").on("click", function (e) {
+	        e.preventDefault();
+	        fetch(url, {
+	            method: "POST",
+	            headers: {
+	                "Content-Type": "application/json",
+	            }
+	        })
+            .then(responce => responce.json())
+            .then(data => {
+                if (data.logoutsuccess === 1) {
+                    alert("登出成功");
+                    sessionStorage.clear();
+                    location.href = "http://" + window.location.host + webCtx + "/login.html";
+                }
+
+            })
+	    })
 	</script>
 	<script
 		src="<%=request.getContextPath()%>/backEnd/assets/js/bootstrap/bootstrap.bundle.min.js"></script>
