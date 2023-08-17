@@ -1,6 +1,6 @@
-.article_wrapper{
-    background-color: #F6F0ED;
-}
+/*.article_wrapper{*/
+/*    background-color: #F6F0ED;*/
+/*}*/
 
 div.parent_block main.main p.article{
     display: -webkit-box;
@@ -10,10 +10,6 @@ div.parent_block main.main p.article{
     word-break:normal;
     white-space:pre-warp;
     word-wrap:break-word;
-}
-
-.list-group-item, .modal-footer{
-    background-color: #F6F0ED !important;
 }
 
 /* CSS 媒體查詢，當螢幕寬度小於 768px 時套用 */
