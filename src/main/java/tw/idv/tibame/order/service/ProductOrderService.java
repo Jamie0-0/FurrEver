@@ -1,5 +1,6 @@
 package tw.idv.tibame.order.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -13,10 +14,8 @@ public interface ProductOrderService {
 
 	List<String> getMsgs();
 
-	void deleteCartFromRedis(HttpSession session);
+	void deleteCartFromRedis(int uid, String username, HashMap<Integer, Integer> cartList);
 
 	List<ProductOrder> selectByUid(int uid);
-
-//	boolean createOrders(ProductOrder productOrder, SubOrder subOrder, SubProduct subProduct); // 測試用
 
 }

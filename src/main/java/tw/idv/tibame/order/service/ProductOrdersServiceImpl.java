@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.persistence.PersistenceContext;
-import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 
 import org.hibernate.Session;
@@ -24,7 +23,6 @@ import tw.idv.tibame.order.vo.ProductOrder;
 import tw.idv.tibame.order.vo.SubOrder;
 import tw.idv.tibame.order.vo.SubProduct;
 import tw.idv.tibame.product_fe.dao.ProductDao;
-import tw.idv.tibame.product_fe.dao.ProductUserDao;
 import tw.idv.tibame.product_fe.vo.Product;
 
 @Service
@@ -39,8 +37,6 @@ public class ProductOrdersServiceImpl implements ProductOrderService {
 	private SubProductDao subProductDao;
 	@Autowired
 	private ProductDao productDao;
-	@Autowired
-	private ProductUserDao productUserDao;
 	private List<String> msgs;
 
 	public ProductOrdersServiceImpl() {
@@ -162,20 +158,14 @@ public class ProductOrdersServiceImpl implements ProductOrderService {
 	public List<String> getMsgs() {
 		return msgs;
 	}
-
+	
 	@Override
-	public void deleteCartFromRedis(HttpSession session) {
+	public void deleteCartFromRedis(int uid, String username, HashMap<Integer, Integer> cartList) {
 
 		try {
-			String username = (String) session.getAttribute("uName");
-//			int uid = productUserDao.selectByUserNameForCart(username).getUid();
 
-			int uid = (int) session.getAttribute("uid");
 			String u_id = String.valueOf(uid);
-
 			productOrderDao.deleteKeys(u_id);
-
-			HashMap<Integer, Integer> cartList = (HashMap<Integer, Integer>) session.getAttribute("cartList");
 			cartList.clear();
 
 		} catch (JedisConnectionException e) {
@@ -187,6 +177,7 @@ public class ProductOrdersServiceImpl implements ProductOrderService {
 
 	}
 
+
 	@Override
 	public List<ProductOrder> selectByUid(int uid) {
 		List<ProductOrder> productOrders = productOrderDao.selectAllProductOrderByUid(uid);
@@ -195,8 +186,6 @@ public class ProductOrdersServiceImpl implements ProductOrderService {
 		for (ProductOrder productOrder : productOrders) {
 			int order_id = productOrder.getOrder_id();
 
-//			List<SubOrder> subOrdersForProductOrder = null;
-
 			List<SubOrder> subOrders = subOrderDao.selectBySoOrderNum(order_id);
 			System.out.println(subOrders);
 			for (SubOrder subOrder : subOrders) {
@@ -204,8 +193,6 @@ public class ProductOrdersServiceImpl implements ProductOrderService {
 				System.out.println("so_order_id =" + so_order_id);
 				System.out.println(subOrder);
 
-//				List<SubOrder> subOrdersForProductOrder = productOrder.getSubOrders();
-//				System.out.println(subOrdersForProductOrder);
 				subOrdersForProductOrder.add(subOrder);
 
 				List<SubProduct> subProductsForSubOrder = new ArrayList<>();
@@ -227,24 +214,5 @@ public class ProductOrdersServiceImpl implements ProductOrderService {
 
 		return productOrders;
 	}
-
-//	@Override
-//	public boolean createOrders(ProductOrder productOrder, SubOrder subOrder, SubProduct subProduct) {
-//		// 測試用
-//		Transaction transaction = getSession().getTransaction();
-//		try {
-//			transaction.begin();
-//			int order_id = productOrderDao.insertProductOrder(productOrder); // 母訂單編號
-//			subOrder.setSo_order_num(order_id); // 正確設置so_order_num
-//			int so_order_num = subOrderDao.insertSubOrder(subOrder); // 子訂單編號
-//			subProduct.setOrder_id(so_order_num);
-//			subProductDao.insertSubProduct(subProduct);
-//			transaction.commit();
-//		} catch (Exception e) {
-//			transaction.rollback();
-//			e.printStackTrace();
-//		}
-//		return true;
-//	}
 
 }
