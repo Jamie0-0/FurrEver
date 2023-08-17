@@ -43,7 +43,7 @@ public class ProductDAO implements ProductDAO_interface {
 			+ "union\r\n"
 			+ "select 0 as 'a',0 as 'b',0 as 'c',count(distinct order_r_name) as 'd'\r\n"
 			+ "FROM FurrEver.product_order a,FurrEver.sub_order b\r\n"
-			+ "where a.order_id = b.so_order_id\r\n"
+			+ "where a.order_id = b.so_order_num\r\n"
 			+ "and so_m_id = ?\r\n"
 			+ ") as allvalue\r\n";
 	
@@ -58,7 +58,7 @@ public class ProductDAO implements ProductDAO_interface {
 	
 	private static final String GET_TOP_ORD = "	SELECT order_r_name,order_r_phone,order_r_addr,order_t,order_pay,u_pic\r\n"
 			+ "	FROM FurrEver.product_order,FurrEver.sub_order,user\r\n"
-			+ "	where order_id = so_order_id\r\n"
+			+ "	where order_id = so_order_num\r\n"
 			+ " and so_m_id = ?\r\n"
 			+ "	and uid = order_uid\r\n"
 			+ "	order by order_id limit 3";
