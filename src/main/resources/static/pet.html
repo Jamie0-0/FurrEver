@@ -31,6 +31,10 @@
     <!-- 自己的css -->
     <link rel="stylesheet" href="assets/css/styleGuide.css">
     <style>
+        a {
+            color: black;
+        }
+
         .pet-container {
             max-width: 800px;
         }
@@ -47,7 +51,7 @@
         }
 
         .pet_infor>a {
-            color: #bfb9fc;
+            color: red;
         }
 
         #save-pet {
@@ -56,7 +60,7 @@
     </style>
 </head>
 
-<body>
+<body background="back_imgs/background_3.jpg">
     <!-- Header Start -->
     <header class="pb-md-4 pb-0">
         <div class="top-nav top-header sticky-header">
@@ -289,18 +293,21 @@
                     <div class="col-sm-9">
                         <input type="text" class="form-control" name="petName" placeholder="輸入寵物姓名" required>
                     </div>
+                    <p id="error-petname" class="error-msg"></p>
                 </div>
                 <div class="row mb-3">
                     <label for="petBreed" class="col-sm-3 col-form-label">寵物品種：</label>
                     <div class="col-sm-9">
                         <input type="text" class="form-control" name="petBreed" placeholder="輸入寵物品種" required>
                     </div>
+                    <p id="error-petbreed" class="error-msg"></p>
                 </div>
                 <div class="row mb-3">
                     <label for="petAge" class="col-sm-3 col-form-label">寵物年齡：</label>
                     <div class="col-sm-9">
                         <input type="text" class="form-control" name="petAge" placeholder="輸入寵物年齡 必須介於0~30之間" required>
                     </div>
+                    <p id="error-petage" class="error-msg"></p>
                 </div>
                 <div class="row mb-3">
                     <label for="petGender" class="col-sm-3 col-form-label">寵物性別：</label>
@@ -329,6 +336,7 @@
                 <div class="text-center">
                     <input type="file" id="petPhoto" accept="image/*">
                 </div>
+                <p id="error-petpic" class="error-msg"></p>
             </div>
             <div class="text-center">
                 <span class="add-pet-btn"><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"
@@ -444,22 +452,8 @@
 
     <script>
         $(document).ready(function () {
-            let user_account_el = $("h5");
-
-            fetch("showUserInfor", {
-                method: "POST",
-                dataType: "json",
-
-            })
-                .then(response => response.json())
-                .then(data => {
-
-                    user_account_el.text(data.uName); // 假設伺服器回傳的資料中有 username 欄位，將其顯示在網頁上
-
-                })
-                .catch(error => {
-                    console.log("請求錯誤");
-                });
+            const username = sessionStorage.getItem("username");
+            $("h5").text(username);
 
             // 設定動態產生區塊的計數器   
             let dynamicPetCount = 1;
@@ -491,18 +485,21 @@
                                     <div class="col-sm-9">
                                         <input type="text" class="form-control" name="petName" placeholder="輸入寵物姓名" required>
                                     </div>
+                                    <p id="error-petname" class="error-msg"></p>
                                 </div>
                                 <div class="row mb-3">
                                     <label for="petBreed" class="col-sm-3 col-form-label">寵物品種：</label>
                                     <div class="col-sm-9">
                                         <input type="text" class="form-control" name="petBreed" placeholder="輸入寵物品種" required>
                                     </div>
+                                    <p id="error-petbreed" class="error-msg"></p>
                                 </div>
                                 <div class="row mb-3">
                                     <label for="petAge" class="col-sm-3 col-form-label">寵物年齡：</label>
                                     <div class="col-sm-9">
                                         <input type="text" class="form-control" name="petAge" placeholder="輸入寵物年齡 必須介於0~30之間" required> 
                                     </div>
+                                    <p id="error-petage" class="error-msg"></p>
                                 </div>
                                 <div class="row mb-3">
                                     <label for="petGender" class="col-sm-3 col-form-label">寵物性別：</label>
@@ -568,26 +565,7 @@
             }
         });
 
-        //當登出被點擊時
-        $("a#logout").on("click", function (e) {
-            e.preventDefault();
-            fetch("logout", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                }
-            })
-                .then(responce => responce.json())
-                .then(data => {
-                    if (data.logoutsuccess === 1) {
 
-                        alert("登出成功");
-                        sessionStorage.clear();
-                        location.href = "login.html";
-                    }
-
-                })
-        })
 
         const chineseOrEnglishRegex = /^[\u4e00-\u9fa5a-zA-Z]+$/;
         // 當按鈕被點擊時觸發抓取資料的函式
@@ -595,6 +573,8 @@
 
             let uid = sessionStorage.getItem("uid");
             var allPetData = [];
+
+            var isValid = true;
 
             const petType_el = $("input[name='petType']:checked").val()
             const petName_el = $("input[name='petName']").val()
@@ -604,23 +584,36 @@
             const petPerson_el = $("select[name='petPersonality']").val()
             const petPic_el = $("#previewImage").attr("src") // 假設預覽圖片的id為previewImage
 
-            if (petName_el.trim() === "" || petBreed_el.trim() === "" || petAge_el.trim() === "" || petPic_el.trim() === "") {
-                alert("請完整填寫全部寵物資訊");
+            const errorPetName = document.getElementById("error-petname");
+            errorPetName.style.color = "red";
+            const errorPetBreed = document.getElementById("error-petbreed");
+            errorPetBreed.style.color = "red";
+            const errorPetAge = document.getElementById("error-petage");
+            errorPetAge.style.color = "red";
+
+            if (petName_el.trim() === "") {
+                errorPetName.textContent = "寵物姓名不能為空";
+                isValid = false;
+            } else {
+                errorPetName.textContent = "";
             }
 
-            if (!chineseOrEnglishRegex.test(petBreed_el)) {
-                alert("寵物品種必須是中文或英文");
+            // 檢查寵物品種是否為空
+            if (petBreed_el.trim() === "") {
+                errorPetBreed.textContent = "寵物品種不能為空";
+                isValid = false;
+            } else {
+                errorPetBreed.textContent = "";
             }
 
-            if (isNaN(petAge_el)) {
-                alert("年齡必須是數字");
+            // 檢查寵物年齡是否在有效範圍內
+            if (petAge_el.trim() === "" || isNaN(petAge_el) || parseInt(petAge_el) < 0 || parseInt(petAge_el) > 30) {
+                errorPetAge.textContent = "寵物年齡必須介於0到30之間";
+                isValid = false;
+            } else {
+                errorPetAge.textContent = "";
             }
 
-            const petAgeNumber = parseInt(petAge_el, 10);
-
-            if (petAgeNumber < 0 || petAgeNumber > 30) {
-                alert("年齡必須介於0~30之間");
-            }
             const petTypeValue = petType_el === "貓" ? 1 : 2;
             const petPersonValue = petPerson_el === "活潑" ? 1 : 2;
             const petSexValue = petSex_el === "公" ? '0' : '1';
@@ -656,6 +649,8 @@
                 const petSexValue = petGender === "公" ? '0' : '1';
                 const base64UserPic = petPhoto.split(',')[1];     //擷取"data:image/jpeg;base64,"後面的值
 
+
+
                 if (!petName || !petBreed || !petAge || !petPhoto) {
                     alert("請填寫所有欄位");
                 }
@@ -685,26 +680,28 @@
                     petUid: uid
                 });
             });
+            if (isValid) {
 
-            fetch("addPet", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(
-                    allPetData
-                ),
-            })
-                .then(responce => responce.json())
-                .then(data => {
-                    console.log(data);
-                    alert("新增成功");
-                    location.href = "member_center.html";
+
+                fetch("addPet", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(
+                        allPetData
+                    ),
                 })
-                .catch(error => {
-                    console.log("請求錯誤");
-                });
-
+                    .then(responce => responce.json())
+                    .then(data => {
+                        console.log(data);
+                        alert("新增成功");
+                        location.href = "member_center.html";
+                    })
+                    .catch(error => {
+                        console.log("請求錯誤");
+                    });
+            }
             $("a#logout").on("click", function () {
                 fetch("logout", {
                     method: "POST",

@@ -48,13 +48,13 @@ public class MySubProduct {
     @Column(name = "sub3")
     private String sub3;
     
-    @ManyToOne
-    @JsonBackReference
-    @JoinColumn(name = "order_id", insertable = false, updatable = false)
-    private MySubOrder subOrder;
-
-    @ManyToOne
-    @JsonBackReference
-    @JoinColumn(name = "p_p_id", insertable = false, updatable = false)
-    private MyProduct product;
+//    @ManyToOne
+//    @JsonBackReference
+//    @JoinColumn(name = "order_id", insertable = false, updatable = false)
+//    private MySubOrder subOrder;
+//
+//    @ManyToOne
+//    @JsonBackReference
+//    @JoinColumn(name = "p_p_id", insertable = false, updatable = false)
+//    private MyProduct product;
 }
