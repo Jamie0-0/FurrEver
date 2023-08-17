@@ -40,8 +40,7 @@
      <link rel="stylesheet" href="assets/css/owl.theme.default.css">
      <!-- custom css -->
      <!-- <link rel="stylesheet" href="style.css"> -->
-     <!-- 點擊愛心 -->
-     
+     <!-- 點擊愛心 --> 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     
 
@@ -251,10 +250,10 @@
                                                data-bs-toggle="dropdown">出遊</a>
                                             <ul class="dropdown-menu">
                                                 <li>
-                                                    <a class="dropdown-item" href="#">舉辦活動</a>
+                                                    <a class="dropdown-item" href="host-event.html">舉辦活動</a>
                                                 </li>
                                                 <li>
-                                                    <a class="dropdown-item" href="#">參加活動</a>
+                                                    <a class="dropdown-item" href="events.html">參加活動</a>
                                                 </li>
                                             </ul>
                                         </li>
@@ -882,10 +881,11 @@
                             } else if (item.t_act_type === 2) {
                                 item.t_act_type = '喵星人聚會';
                             }
+                        const timeFormat_el = timeFormat(item.t_act_time);    
                         productInfo.innerHTML = `
                             <span class="product-type">${item.t_act_type}</span>
                             <a href="#" class="d-block text-dark text-decoration-none py-2 product-name" style="font-size: 25px; font-weight: bold;">${item.t_act_name}</a>
-                            <p id="${item.t_act_id}" class="text-center fs-4" style="color: #EA5642;background-color: #ece6e6;">${item.t_act_time}</p>
+                            <p id="${item.t_act_id}" class="text-center fs-4" style="color: #EA5642;background-color: #ece6e6;">${timeFormat_el}</p>
                             <div class="joinAndPreview d-flex mt-1">
                                 <button type="button" class="col-6 py-2" style="background-color: #FFCB76;color: #292A3d;">
                                     <i class="bi bi-calendar-event-fill"></i>參加
@@ -984,10 +984,11 @@
                             } else if (item.t_act_type === 2) {
                                 item.t_act_type = '喵星人聚會';
                             }
+                            const timeFormat_el = timeFormat(item.t_act_time);    
                             productInfo.innerHTML = `
                                 <span class="product-type">${item.t_act_type}</span>
                                 <a href="#" class="d-block text-dark text-decoration-none py-2 product-name" style="font-size: 25px; font-weight: bold;">${item.t_act_name}</a>
-                                <p id="${item.t_act_id}" class="text-center fs-4" style="color: #EA5642;background-color: #ece6e6;">${item.t_act_time}</p>
+                                <p id="${item.t_act_id}" class="text-center fs-4" style="color: #EA5642;background-color: #ece6e6;">${timeFormat_el}</p>
                                 <div class="joinAndPreview d-flex mt-1">
                                     <button type="button" class="col-6 py-2" style="background-color: #FFCB76;color: #292A3d;">
                                         <i class="bi bi-calendar-event-fill"></i>參加
@@ -1092,10 +1093,11 @@
                             } else if (item.t_act_type === 2) {
                                 item.t_act_type = '喵星人聚會';
                             }
+                            const timeFormat_el = timeFormat(item.t_act_time); 
                             productInfo.innerHTML = `
                                 <span class="product-type">${item.t_act_type}</span>
                                 <a href="#" class="d-block text-dark text-decoration-none py-2 product-name" style="font-size: 25px; font-weight: bold;">${item.t_act_name}</a>
-                                <p id="${item.t_act_id}" class="text-center fs-4" style="color: #EA5642;background-color: #ece6e6;">${item.t_act_time}</p>
+                                <p id="${item.t_act_id}" class="text-center fs-4" style="color: #EA5642;background-color: #ece6e6;">${timeFormat_el}</p>
                                 <div class="joinAndPreview d-flex mt-1">
                                     <button type="button" class="col-6 py-2" style="background-color: #FFCB76;color: #292A3d;">
                                         <i class="bi bi-calendar-event-fill"></i>參加
@@ -1206,10 +1208,11 @@
                             } else if (item.t_act_type === 2) {
                                 item.t_act_type = '喵星人聚會';
                             }
+                            const timeFormat_el = timeFormat(item.t_act_time); 
                             productInfo.innerHTML = `
                                 <span class="product-type">${item.t_act_type}</span>
                                 <a href="#" class="d-block text-dark text-decoration-none py-2 product-name" style="font-size: 25px; font-weight: bold;">${item.t_act_name}</a>
-                                <p id="${item.t_act_id}" class="text-center fs-4" style="color: #EA5642;background-color: #ece6e6;">${item.t_act_time}</p>
+                                <p id="${item.t_act_id}" class="text-center fs-4" style="color: #EA5642;background-color: #ece6e6;">${timeFormat_el}</p>
                                 <div class="joinAndPreview d-flex mt-1">
                                     <button type="button" class="col-6 py-2" style="background-color: #FFCB76;color: #292A3d;">
                                         <i class="bi bi-calendar-event-fill"></i>參加
