@@ -110,7 +110,7 @@ request.setAttribute("pMapSvc", pMapSvc);
 
 						<li class="profile-nav onhover-dropdown pe-0 me-0">
                             <div class="media profile-media">
-                                <img class="user-profile rounded-circle" src="assets/images/users/4.jpg" alt="">
+                                <img class="user-profile rounded-circle" src="<%=request.getContextPath()%>/backEnd/assets/images/users/4.jpg" alt="">
                                 <div class="user-name-hide media-body">
                                 </div>
                             </div>
