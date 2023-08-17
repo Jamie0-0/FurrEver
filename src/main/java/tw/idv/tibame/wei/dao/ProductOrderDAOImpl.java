@@ -154,13 +154,13 @@ public class ProductOrderDAOImpl implements ProductOrderDAO{
 
 	@Override
 	public List<GbOrder> getGbOrderById(Integer p_m_id) {
-		String sql = "select a.gb_id,count(*) as people,gb_c_max,gb_s_price,gb_time_end,gb_s"
+		String sql = "select b.gb_id,count(*) as people,gb_c_max,gb_s_price,gb_time_end,gb_s"
 				+ " from gb_order a,gb b,product"
-				+ " where a.gb_id = b.gb_id"
+				+ " where a.gb_order_id = b.gb_id"
 				+ " and b.gb_p_id=p_id"
 				+ " and p_m_id = :p_m_id"
 				+ " and gb_satus = 0"
-				+ " group by a.gb_id,gb_c_max";
+				+ " group by b.gb_id,gb_s_price,gb_time_end,gb_s";
 
 	    MapSqlParameterSource paramMap = new MapSqlParameterSource();
 	    paramMap.addValue("p_m_id", p_m_id);
