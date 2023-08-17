@@ -31,7 +31,7 @@ public class ProductOrderDAOImpl implements ProductOrderDAO{
 		String sql="select * "
 				+ " from FurrEver.product_order"
 				+ " where order_id in ("
-				+ " select so_order_id"
+				+ " select so_order_num"
 				+ " from sub_order"
 				+ " where so_m_id= :so_m_id)";
 		
@@ -54,12 +54,12 @@ public class ProductOrderDAOImpl implements ProductOrderDAO{
 		String sql="select * "
 				+ " from FurrEver.product_order"
 				+ " where order_id in ("
-				+ " select so_order_id"
+				+ " select so_order_num"
 				+ " from sub_order"
 				+ " where so_m_id= "+String.valueOf(so_m_id)+"";
 
 		if(order_id != null && String.valueOf(order_id).length() > 0) {
-			sql = sql + " and order_id = "+String.valueOf(order_id)+"";
+			sql = sql + " and so_order_num = "+String.valueOf(order_id)+"";
 		}
 
 		if(order_s == 2) {
@@ -86,8 +86,8 @@ public class ProductOrderDAOImpl implements ProductOrderDAO{
 	            + " AND order_uid = :order_uid"
 	            + " AND a.order_s = :order_s"
 	            + " AND a.order_id = :order_id"
-	            + " AND a.order_id = so_order_id"
-	            + " AND b.so_order_id = c.order_id"
+	            + " AND a.order_id = so_order_num"
+	            + " AND b.so_order_num = c.order_id"
 	            + " AND p_id = p_p_id";
 
 	    MapSqlParameterSource paramMap = new MapSqlParameterSource();
@@ -114,8 +114,8 @@ public class ProductOrderDAOImpl implements ProductOrderDAO{
 	    		+ " AND order_uid = :order_uid"
 	    		+ " AND a.order_s = :order_s"
 	    		+ " AND a.order_id = :order_id"
-	    		+ " AND a.order_id = so_order_id"
-	    		+ " AND b.so_order_id = c.order_id"
+	    		+ " AND a.order_id = so_order_num"
+	    		+ " AND b.so_order_num = c.order_id"
 	    		+ " AND p_id = p_p_id"
 	    		+ " group by order_r_name,order_dfee,order_r_addr,order_r_phone,order_pay";
 
