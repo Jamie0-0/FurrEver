@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import tw.idv.tibame.activity.service.TripService;
 import tw.idv.tibame.activity.service.impl.TripServiceImpl;
 import tw.idv.tibame.activity.vo.Trip;
@@ -21,12 +22,8 @@ import tw.idv.tibame.activity.vo.Trip;
 public class HostEventController extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private static final Gson gson = new Gson();
+    @Autowired
     private TripService tripservice;
-
-    @Override
-    public void init() throws ServletException {
-        tripservice = new TripServiceImpl();
-    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
