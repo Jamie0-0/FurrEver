@@ -22,23 +22,13 @@ public class ProductDAO implements ProductDAO_interface {
 	@Autowired
 	private DataSource ds;
 
-//	private static DataSource ds = null;
-//	static {
-//		try {
-//			Context ctx = new InitialContext();
-//			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/tha102");
-//		} catch (NamingException e) {
-//			e.printStackTrace();
-//		}
-//	}
-
-	private String INSERT_STMT = "INSERT INTO product (p_m_id,p_name,p_price,p_stock,p_type,p_class,p_des,p_status,p_1,p_2,p_3,p_upload_time,p_pic_one,p_pic_two,p_pic_three,p_pic_four) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";;
+	private String INSERT_STMT = "";
 	private static final String GET_ONE_STMT = "SELECT * FROM product where p_id = ? and p_m_id=?";
 
 	private String GET_ONE_STMT2 = "";
 
 	private static final String DELETE = "DELETE FROM product where p_id=? and p_m_id=?";
-	private String UPDATE = "UPDATE product set p_name=?,p_price=?,p_stock=?,p_type=?,p_class=?,p_des=?,p_status=?, p_upload_time=?";
+	private String UPDATE = "";
 	private static final String GET_ALL_STMT = "SELECT * FROM product where p_m_id=? order by p_id";
 	private static final String GET_NEW_PRO = "SELECT * FROM product order by p_upload_time desc limit 1";
 	private static final String GET_NEW_info = "select sum(a) as 'a',sum(b) as 'b',sum(c) as 'c',sum(d) as 'd' \r\n"
@@ -53,7 +43,7 @@ public class ProductDAO implements ProductDAO_interface {
 			+ "union\r\n"
 			+ "select 0 as 'a',0 as 'b',0 as 'c',count(distinct order_r_name) as 'd'\r\n"
 			+ "FROM FurrEver.product_order a,FurrEver.sub_order b\r\n"
-			+ "where a.order_id = b.so_order_id\r\n"
+			+ "where a.order_id = b.so_order_num\r\n"
 			+ "and so_m_id = ?\r\n"
 			+ ") as allvalue\r\n";
 	
@@ -68,7 +58,7 @@ public class ProductDAO implements ProductDAO_interface {
 	
 	private static final String GET_TOP_ORD = "	SELECT order_r_name,order_r_phone,order_r_addr,order_t,order_pay,u_pic\r\n"
 			+ "	FROM FurrEver.product_order,FurrEver.sub_order,user\r\n"
-			+ "	where order_id = so_order_id\r\n"
+			+ "	where order_id = so_order_num\r\n"
 			+ " and so_m_id = ?\r\n"
 			+ "	and uid = order_uid\r\n"
 			+ "	order by order_id limit 3";
@@ -324,6 +314,7 @@ public class ProductDAO implements ProductDAO_interface {
 
 	@Override
 	public void insert(ProductVO productVO) {
+		INSERT_STMT = "INSERT INTO product (p_m_id,p_name,p_price,p_stock,p_type,p_class,p_des,p_status,p_1,p_2,p_3,p_upload_time,p_pic_one,p_pic_two,p_pic_three,p_pic_four) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		Connection con = null;
 		PreparedStatement pstmt = null;
 
@@ -380,6 +371,7 @@ public class ProductDAO implements ProductDAO_interface {
 	public void update(ProductVO productVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
+		UPDATE = "UPDATE product set p_name=?,p_price=?,p_stock=?,p_type=?,p_class=?,p_des=?,p_status=?, p_upload_time=?";
 
 		try {
 			con = ds.getConnection();
@@ -681,7 +673,7 @@ public class ProductDAO implements ProductDAO_interface {
 					pstmt.setInt(i+2, mid);
 				}
 			}
-			System.out.println("pstmt======"+pstmt.toString());
+
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {

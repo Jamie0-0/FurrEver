@@ -31,7 +31,7 @@ public class ProductOrderDAOImpl implements ProductOrderDAO{
 		String sql="select * "
 				+ " from FurrEver.product_order"
 				+ " where order_id in ("
-				+ " select so_order_id"
+				+ " select so_order_num"
 				+ " from sub_order"
 				+ " where so_m_id= :so_m_id)";
 		
@@ -54,12 +54,12 @@ public class ProductOrderDAOImpl implements ProductOrderDAO{
 		String sql="select * "
 				+ " from FurrEver.product_order"
 				+ " where order_id in ("
-				+ " select so_order_id"
+				+ " select so_order_num"
 				+ " from sub_order"
 				+ " where so_m_id= "+String.valueOf(so_m_id)+"";
 
 		if(order_id != null && String.valueOf(order_id).length() > 0) {
-			sql = sql + " and order_id = "+String.valueOf(order_id)+"";
+			sql = sql + " and so_order_num = "+String.valueOf(order_id)+"";
 		}
 
 		if(order_s == 2) {
@@ -86,8 +86,8 @@ public class ProductOrderDAOImpl implements ProductOrderDAO{
 	            + " AND order_uid = :order_uid"
 	            + " AND a.order_s = :order_s"
 	            + " AND a.order_id = :order_id"
-	            + " AND a.order_id = so_order_id"
-	            + " AND b.so_order_id = c.order_id"
+	            + " AND a.order_id = so_order_num"
+	            + " AND b.so_order_num = c.order_id"
 	            + " AND p_id = p_p_id";
 
 	    MapSqlParameterSource paramMap = new MapSqlParameterSource();
@@ -114,8 +114,8 @@ public class ProductOrderDAOImpl implements ProductOrderDAO{
 	    		+ " AND order_uid = :order_uid"
 	    		+ " AND a.order_s = :order_s"
 	    		+ " AND a.order_id = :order_id"
-	    		+ " AND a.order_id = so_order_id"
-	    		+ " AND b.so_order_id = c.order_id"
+	    		+ " AND a.order_id = so_order_num"
+	    		+ " AND b.so_order_num = c.order_id"
 	    		+ " AND p_id = p_p_id"
 	    		+ " group by order_r_name,order_dfee,order_r_addr,order_r_phone,order_pay";
 
@@ -154,13 +154,13 @@ public class ProductOrderDAOImpl implements ProductOrderDAO{
 
 	@Override
 	public List<GbOrder> getGbOrderById(Integer p_m_id) {
-		String sql = "select a.gb_id,count(*) as people,gb_c_max,gb_s_price,gb_time_end,gb_s"
+		String sql = "select b.gb_id,count(*) as people,gb_c_max,gb_s_price,gb_time_end,gb_s"
 				+ " from gb_order a,gb b,product"
-				+ " where a.gb_id = b.gb_id"
+				+ " where a.gb_order_id = b.gb_id"
 				+ " and b.gb_p_id=p_id"
 				+ " and p_m_id = :p_m_id"
 				+ " and gb_satus = 0"
-				+ " group by a.gb_id,gb_c_max";
+				+ " group by b.gb_id,gb_s_price,gb_time_end,gb_s";
 
 	    MapSqlParameterSource paramMap = new MapSqlParameterSource();
 	    paramMap.addValue("p_m_id", p_m_id);
