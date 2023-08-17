@@ -703,10 +703,11 @@
                             $(document).ready(function () {
                                 // 使用 fetch 請求資料庫資料筆數
                                 fetch('shop', {
-                                    method: 'GET',
+                                    method: 'POST',
                                     headers: {
                                         'Content-Type': 'application/json'
-                                    }
+                                    },
+                                    body: JSON.stringify
                                 })
                                     .then(response => response.json())
                                     .then(data => {
