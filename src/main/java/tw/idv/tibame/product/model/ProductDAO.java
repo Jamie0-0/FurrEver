@@ -47,12 +47,12 @@ public class ProductDAO implements ProductDAO_interface {
 			+ "and so_m_id = ?\r\n"
 			+ ") as allvalue\r\n";
 	
-	private static final String GET_TOP_PRO = "SELECT p_name,sum(p_m_stock) as 'a',sum(p_m_price)as 'b',p_pic_one \r\n"
+	private static final String GET_TOP_PRO = "SELECT p_name,sum(p_m_stock) as 'a',sum(p_m_stock)*p_m_price as 'b',p_pic_one \r\n"
 			+ "FROM FurrEver.sub_order,FurrEver.sub_product,FurrEver.product\r\n"
 			+ "where so_order_id = order_id\r\n"
 			+ "and p_p_id = p_id\r\n"
 			+ "and p_m_id = ?\r\n"
-			+ "group by p_p_id\r\n"
+			+ "group by p_p_id,p_name,p_m_price\r\n"
 			+ "order by 2 desc limit 3";
 	
 	
@@ -331,7 +331,7 @@ public class ProductDAO implements ProductDAO_interface {
 			pstmt.setInt(5, productVO.getP_type());
 			pstmt.setInt(6, productVO.getP_class());
 			pstmt.setString(7, productVO.getP_des());
-			pstmt.setInt(8, 2);//要等於2
+			pstmt.setInt(8, 1);//要等於2
 			pstmt.setString(9, productVO.getP_1());
 			pstmt.setString(10, productVO.getP_2());
 			pstmt.setString(11, productVO.getP_3());
