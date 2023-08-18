@@ -2,32 +2,33 @@ package tw.idv.tibame.weimaster.model;
 
 public class MasterPicVO2 {
 	private String order_r_name;
-	private String order_r_phone;
-	private String order_r_addr;
+    private String order_r_phone;
+    private String order_r_addr;
 	private String order_t;
-	private Integer order_pay;
+	private String order_pay;
 	private String u_pic;
+	
 
 	public String getOrder_r_name() {
 		return order_r_name;
 	}
-
+    
 	public String getOrder_r_phone() {
 		return order_r_phone;
 	}
-
+	
 	public String getOrder_r_addr() {
 		return order_r_addr;
 	}
-
+	
 	public String getOrder_t() {
 		return order_t;
 	}
-
-	public Integer getOrder_pay() {
+	
+	public String getOrder_pay() {
 		return order_pay;
 	}
-
+	
 	public String getU_pic() {
 		return u_pic;
 	}
@@ -46,12 +47,14 @@ public class MasterPicVO2 {
 	}
 
 	public static class Builder {
-		private String order_r_name = "";
-		private String order_r_phone = "";
-		private String order_r_addr = "";
-		private String order_t = "";
-		private Integer order_pay = -1;
-		private String u_pic = "";
+	    private String order_r_name = "";
+	    private String order_r_phone = "";
+	    private String order_r_addr = "";
+	    private String order_t = "";
+	    private String order_pay = "";
+	    private String u_pic = "";
+	    
+	    
 
 		public MasterPicVO2.Builder setOrder_r_name(String order_r_name) {
 			this.order_r_name = order_r_name;
@@ -62,27 +65,27 @@ public class MasterPicVO2 {
 			this.order_r_phone = order_r_phone;
 			return this;
 		}
-
+		
 		public MasterPicVO2.Builder setOrder_r_addr(String order_r_addr) {
 			this.order_r_addr = order_r_addr;
 			return this;
 		}
-
+		
 		public MasterPicVO2.Builder setOrder_t(String order_t) {
 			this.order_t = order_t;
 			return this;
 		}
-
-		public MasterPicVO2.Builder setOrder_pay(Integer order_pay) {
+		
+		public MasterPicVO2.Builder setOrder_pay(String order_pay) {
 			this.order_pay = order_pay;
 			return this;
 		}
-
+		
 		public MasterPicVO2.Builder setU_pic(String u_pic) {
 			this.u_pic = u_pic;
 			return this;
 		}
-
+		
 		public MasterPicVO2 build() {
 			return new MasterPicVO2(this);
 		}

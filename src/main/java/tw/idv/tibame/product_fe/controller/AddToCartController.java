@@ -16,7 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.google.gson.Gson;
 
 import tw.idv.tibame.product_fe.service.ProductService;
-import tw.idv.tibame.product_fe.service.ProductServiceImpl;
 
 @WebServlet("/addToCart")
 public class AddToCartController extends HttpServlet {
@@ -33,24 +32,23 @@ public class AddToCartController extends HttpServlet {
 
 		String username = (String) session.getAttribute("uName");
 		int uid = 0;
+		
+		HashMap<Integer, Integer> cartList = (HashMap<Integer, Integer>) session.getAttribute("cartList");
 
-		HashMap<Integer, Integer> cartList = null;
-
-		if (username == null) {
-			cartList = (HashMap<Integer, Integer>) session.getAttribute("cartList");
-		} else if (username != null) {
+		if (username != null) {
 			uid = (int) session.getAttribute("uid");
-			cartList = service.getCartListMapForMember(session, uid);
+			cartList = service.getCartListMapForMember(cartList, uid);
 		}
 
 		String p_id_string = req.getParameter("p_id");
 		String quantity_string = req.getParameter("quantity");
 		System.out.println("add之前的原本的CartList =" + cartList);
 
-		service.addToCart(req, p_id_string, quantity_string, cartList);
-
+		cartList = service.addToCart(p_id_string, quantity_string, cartList);
+		req.getSession().setAttribute("cartList", cartList);
+		
 		if (username != null) {
-			service.saveCartToRedis(session, uid);
+			service.saveCartToRedis(cartList, uid);
 		}
 
 		// 檢查欲增加數量有沒有大於商品庫存數量, 有的話直接回傳錯誤訊息就結束
@@ -65,7 +63,7 @@ public class AddToCartController extends HttpServlet {
 
 		String newCartList = gson.toJson(session.getAttribute("cartList"));
 
-		String message = "{\"msgs\":" + gson.toJson(msgs) + ",\"cartlist\":" + gson.toJson(newCartList) + "}";
+		String message = "{\"msgs\":" + gson.toJson(msgs) + ",\"cartlist\":" + gson.toJson(cartList) + "}";
 		System.out.println(message);
 
 	}

@@ -99,106 +99,6 @@
                                         </div>
                                     </li>
 
-                                    <script>
-                                        // 當網頁載入完成後，向後端獲取購物車內容
-                                        window.addEventListener('DOMContentLoaded', () => {
-                                            fetch('cartController', {
-                                                method: 'GET',
-                                                headers: {
-                                                    'Content-Type': 'application/json'
-                                                }
-                                            })
-                                                .then(response => response.json())
-                                                .then(data => {
-                                                    // 如果回傳的是一個陣列，且陣列內容為 "您的購物車是空的"
-                                                    if (data == "您的購物車是空的") {
-                                                        // 購物車是空的情況
-                                                        console.log(data);
-                                                        const cart_container = document.getElementById("cart-list");
-                                                        cart_container.innerHTML = `<p style="text-align: center;">${data}</p>`;
-
-                                                        // // Disable the "去結帳" button
-                                                        // const checkoutBtn = document.getElementById("checkoutBtn");
-                                                        // checkoutBtn.disabled = true;
-
-                                                    } else if (data.cartList.length > 0) {
-                                                        console.log(data);
-                                                        // 購物車中有商品的情況
-                                                        // 取得購物車內容
-                                                        const cartContent = data.cartList;
-                                                        // // 取得小計和總額
-                                                        // const subtotal = data.subtotal;
-                                                        // const total = data.total;
-
-                                                        // 將購物車內容顯示在前端
-                                                        displayCartItemsHover(cartContent);
-                                                        // // 顯示小計和總額
-                                                        // updateSubTotalAndTotal(subtotal, total);
-
-                                                        // // Enable the "去結帳" button
-                                                        // const checkoutBtn = document.getElementById("checkoutBtn");
-                                                        // checkoutBtn.disabled = false;
-
-
-                                                    }
-
-                                                })
-                                                .catch(error => {
-                                                    console.error('Error:', error);
-                                                });
-
-                                            // 顯示購物車內容
-                                            function displayCartItemsHover(cartContent) {
-                                                const cart_container = document.getElementById("cart-list");
-                                                let cartHTML = '';
-
-                                                cartContent.forEach(item => {
-                                                    cartHTML += `
-                                                <li class="product-box-contain">
-                                                        <div class="drop-cart">
-                                                            <a href="product-left-thumbnail.html" class="drop-image">
-                                                                <img id="pic_content_${item.p_id} src="./assets/images/vegetable/product/1.png"
-                                                                    class="blur-up lazyload" alt="">
-                                                            </a>
-
-                                                            <div class="drop-contain">
-                                                                <a href="product-left-thumbnail.html">
-                                                                    <h5>${item.p_name}</h5>
-                                                                </a>
-                                                                <h6><span>${item.quantity} x</span> $${item.p_price}</h6>
-                                                                <button class="close-button close_button">
-                                                                    <i class="fa-solid fa-xmark"></i>
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                `;
-
-                                                    // 立刻回傳商品的p_id給Servlet，以獲取商品照片
-                                                    fetch(`productPic?p_id=${item.p_id}`, {
-                                                        method: 'GET',
-                                                    })
-                                                        .then(photoData => {
-                                                            // console.log(item.p_id);
-                                                            // console.log(photoData);
-
-                                                            // 使用jQuery設置圖片來源
-                                                            $(`#pic_content_${item.p_id}`).attr('src', `productPic?p_id=${item.p_id}`);
-                                                            console.log($(`#pic_content_${item.p_id}`));
-                                                        })
-                                                        .catch(error => {
-                                                            console.error('錯誤:', error);
-                                                        });
-
-                                                });
-
-                                                cart_container.innerHTML = cartHTML;
-
-                                            }
-                                        });
-
-                                    </script>
-
                                     <!-- 聊天室 -->
                                     <li class="right-side">
                                         <a href="#" class="btn p-0 position-relative header-wishlist">
@@ -294,38 +194,10 @@
     <!-- mobile fix menu start -->
     <div class="mobile-menu d-md-none d-block mobile-cart">
         <ul>
-            <li class="active">
-                <a href="index.html">
-                    <i class="iconly-Home icli"></i>
-                    <span>Home</span>
-                </a>
-            </li>
-
-            <li class="mobile-category">
-                <a href="javascript:void(0)">
-                    <i class="iconly-Category icli js-link"></i>
-                    <span>Category</span>
-                </a>
-            </li>
-
-            <li>
-                <a href="search.html" class="search-box">
-                    <i class="iconly-Search icli"></i>
-                    <span>Search</span>
-                </a>
-            </li>
-
-            <li>
-                <a href="wishlist.html" class="notifi-wishlist">
-                    <i class="iconly-Heart icli"></i>
-                    <span>My Wish</span>
-                </a>
-            </li>
-
             <li>
                 <a href="cart.html">
                     <i class="iconly-Bag-2 icli fly-cate"></i>
-                    <span>Cart</span>
+                    <span>購物車</span>
                 </a>
             </li>
         </ul>
@@ -609,43 +481,38 @@
                                                 method: 'GET',
                                                 dataType: 'json', // 指定接收JSON格式的回應
                                                 success: function (data) {
-                                                    if (data.status === true) {
-                                                        if (data.cartlist !== "{}") {
-                                                            // 刪除成功且購物車內還有其他商品的情況
 
-                                                            // 確定後端已成功刪除商品後再從前端刪除商品行
-                                                            productBox.remove();
+                                                    if (Object.keys(data.cartlist).length > 0){
+                                                        // 刪除成功且購物車內還有其他商品的情況
 
-                                                            // 從後端回傳的資料中提取小計和總額
-                                                            const subtotal = data.subtotal;
-                                                            const total = data.total;
+                                                        // 確定後端已成功刪除商品後再從前端刪除商品行
+                                                        productBox.remove();
 
-                                                            // 更新小計和總額的顯示
-                                                            updateSubTotalAndTotal(subtotal, total);
-                                                        } else {
-                                                            // 刪除成功但購物車內沒有商品了的情況
+                                                        // 從後端回傳的資料中提取小計和總額
+                                                        const subtotal = data.subtotal;
+                                                        const total = data.total;
 
-                                                            // 移除商品行
-                                                            productBox.remove();
-
-                                                            // 從後端回傳的資料中提取小計和總額
-                                                            const subtotal = data.subtotal;
-                                                            const total = data.total;
-                                                            // 更新小計和總額的顯示
-                                                            updateSubTotalAndTotal(subtotal, total);
-
-                                                            // 顯示購物車為空的訊息
-                                                            const list_tbody_container = document.getElementById("list_tbody");
-                                                            list_tbody_container.innerText = "您的購物車是空的";
-
-                                                            // Disable the "去結帳" button
-                                                            const checkoutBtn = document.getElementById("checkoutBtn");
-                                                            checkoutBtn.disabled = true;
-                                                        }
+                                                        // 更新小計和總額的顯示
+                                                        updateSubTotalAndTotal(subtotal, total);
                                                     } else {
-                                                        // 顯示後端回傳的錯誤訊息或處理其他狀況
-                                                        console.log(data);
-                                                        return;
+                                                        // 刪除成功但購物車內沒有商品了的情況
+
+                                                        // 移除商品行
+                                                        productBox.remove();
+
+                                                        // 從後端回傳的資料中提取小計和總額
+                                                        const subtotal = data.subtotal;
+                                                        const total = data.total;
+                                                        // 更新小計和總額的顯示
+                                                        updateSubTotalAndTotal(subtotal, total);
+
+                                                        // 顯示購物車為空的訊息
+                                                        const list_tbody_container = document.getElementById("list_tbody");
+                                                        list_tbody_container.innerText = "您的購物車是空的";
+
+                                                        // Disable the "去結帳" button
+                                                        const checkoutBtn = document.getElementById("checkoutBtn");
+                                                        checkoutBtn.disabled = true;
                                                     }
                                                 },
                                                 error: function (jqXHR, textStatus, errorThrown) {
@@ -754,28 +621,11 @@
                             <h4>免責聲明</h4>
                         </div>
 
-                        <div class="footer-contain">
-                            <ul>
-                                <li>
-                                    <a href="shop-left-sidebar.html" class="text-content">Vegetables & Fruit</a>
-                                </li>
-                                <li>
-                                    <a href="shop-left-sidebar.html" class="text-content">Beverages</a>
-                                </li>
-                                <li>
-                                    <a href="shop-left-sidebar.html" class="text-content">Meats & Seafood</a>
-                                </li>
-                                <li>
-                                    <a href="shop-left-sidebar.html" class="text-content">Frozen Foods</a>
-                                </li>
-                                <li>
-                                    <a href="shop-left-sidebar.html" class="text-content">Biscuits & Snacks</a>
-                                </li>
-                                <li>
-                                    <a href="shop-left-sidebar.html" class="text-content">Grocery & Staples</a>
-                                </li>
-                            </ul>
-                        </div>
+                        <p>任何瀏覽網站的人士，須自行承擔一切風險，本網站不會負責任何因瀏覽<br>
+                            或使用本網站而引致之損失。本網站不會作出任何默示的擔保。本網站承<br>
+                            諾力求網站內容之準確性及完整性，但內容如有錯誤或遺漏，本網站不會<br>
+                            承擔任何賠償責任，所有本網站內容，將會隨時更改，而不作另行通知。<br>
+                        </p>
                     </div>
 
                 </div>

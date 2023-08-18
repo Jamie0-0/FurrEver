@@ -16,14 +16,6 @@ import org.springframework.stereotype.Repository;
 public class PayStatusDAO implements PayStatusDAO_interface {
 	@Autowired
 	private DataSource ds;
-//	static {
-//		try {
-//			Context ctx = new InitialContext();
-//			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/tha102");
-//		} catch (NamingException e) {
-//			e.printStackTrace();
-//		}
-//	}
 
 	private static final String GET_ALL_STMT = "SELECT pa_id , pa_name FROM paystatus";
 

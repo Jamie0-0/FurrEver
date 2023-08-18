@@ -15,10 +15,12 @@ ProductDAO dao = applicationContext.getBean(ProductDAO.class);
 PayStatusService payStatusSvc = applicationContext.getBean(PayStatusService.class);
 request.setAttribute("payStatusSvc", payStatusSvc);
 
-ProductVO iValue = dao.indexValue(1);
+ProductVO iValue = dao.indexValue((Integer)session.getAttribute("mid"));
 
-List<MasterPicVO> list1 = dao.indexNatrix1(1);
-List<MasterPicVO2> list2 = dao.indexNatrix2();
+
+List<MasterPicVO> list1 = dao.indexNatrix1((Integer)session.getAttribute("mid"));
+List<MasterPicVO2> list2 = dao.indexNatrix2((Integer)session.getAttribute("mid"));
+
 request.setAttribute("list1", list1);
 request.setAttribute("list2", list2);
 %>
@@ -106,19 +108,25 @@ request.setAttribute("list2", list2);
 
 						
 						<li class="profile-nav onhover-dropdown pe-0 me-0">
+                            <div class="media profile-media">
+                                <img class="user-profile rounded-circle" src="<%=request.getContextPath()%>/backEnd/assets/images/users/4.jpg" alt="">
+                                <div class="user-name-hide media-body">
+                                </div>
+                            </div>
 							<ul class="profile-dropdown onhover-show-div">
 								<li><a
 									href="<%=request.getContextPath()%>/backEnd/order-list.html">
 										<i data-feather="archive"></i> <span>訂單</span>
 								</a></li>
-								<li><a
-									href="<%=request.getContextPath()%>/backEnd/profile-setting.html">
+								<li>
+									<a href="<%=request.getContextPath()%>/backEnd/profile-setting.html">
 										<i data-feather="settings"></i> <span>設置</span>
-								</a></li>
-								<li><a data-bs-toggle="modal"
-									data-bs-target="#staticBackdrop" href="javascript:void(0)">
-										<i data-feather="log-out"></i> <span>登出</span>
-								</a></li>
+									</a>
+								</li>
+
+								<li class="product-box-contain">
+								    <a href="#" id="logout"><i data-feather="log-out"></i><span>登出</span></a>
+								</li>
 							</ul>
 						</li>
 					</ul>
@@ -129,7 +137,6 @@ request.setAttribute("list2", list2);
 
 		<div class="page-body-wrapper">
 			<div class="sidebar-wrapper">
-<!-- 				<div id="sidebarEffect"></div> -->
 				<div>
 					<div class="logo-wrapper logo-wrapper-center">
 						<a href="<%=request.getContextPath()%>/backEnd/back_index.jsp"
@@ -411,10 +418,8 @@ request.setAttribute("list2", list2);
 															<td>
 																<div class="product-detail-box">
 																	<h6>付款狀態</h6>
-<%--   																	<jsp:useBean id="payStatusSvc" scope="page" --%>
-<%--   																	class="tw.idv.tibame.payStatus.model.PayStatusService" /> --%>
  																	<c:forEach var="payStatusVO" items="${payStatusSvc.all}">
- 																		<h5>${productVO2.order_pay.equals(payStatusVO.pa_id) ? payStatusVO.pa_name : ''}</h5>
+ 																		<h5>${productVO2.order_pay == payStatusVO.pa_id ? payStatusVO.pa_name : ''}</h5>
  																	</c:forEach>
 																</div> 
 															</td>
@@ -499,6 +504,31 @@ request.setAttribute("list2", list2);
 		src="<%=request.getContextPath()%>/backEnd/assets/js/icons/feather-icon/feather.min.js"></script>
 	<script
 		src="<%=request.getContextPath()%>/backEnd/assets/js/icons/feather-icon/feather-icon.js"></script>
+	<script>
+		//  ============登出====================//
+		var path = window.location.pathname;
+		var webCtx = path.substring(0, path.indexOf('/', 1));
+		const url = new URL("http://" + window.location.host + webCtx + "/logout");
+		
+	    $("a#logout").on("click", function (e) {
+	        e.preventDefault();
+	        fetch(url, {
+	            method: "POST",
+	            headers: {
+	                "Content-Type": "application/json",
+	            }
+	        })
+            .then(responce => responce.json())
+            .then(data => {
+                if (data.logoutsuccess === 1) {
+                    alert("登出成功");
+                    sessionStorage.clear();
+                    location.href = "http://" + window.location.host + webCtx + "/login.html";
+                }
+
+            })
+	    })
+	</script>
 </body>
 
 </html>

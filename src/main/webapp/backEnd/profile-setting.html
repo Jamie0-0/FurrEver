@@ -115,6 +115,11 @@ body {
 						</span></li>
 
 						<li class="profile-nav onhover-dropdown pe-0 me-0">
+                            <div class="media profile-media">
+                                <img class="user-profile rounded-circle" src="assets/images/users/4.jpg" alt="">
+                                <div class="user-name-hide media-body">
+                                </div>
+                            </div>
 							<ul class="profile-dropdown onhover-show-div">
 								<li><a href="order-list.html"> <i
 										data-feather="archive"></i> <span>訂單</span>
@@ -122,10 +127,8 @@ body {
 								<li><a href="profile-setting.html"> <i
 										data-feather="settings"></i> <span>設置</span>
 								</a></li>
-								<li>
-									<a data-bs-toggle="modal" id="logoutLink">
-											<i data-feather="log-out"></i> <span>登出</span>
-									</a>
+								<li class="product-box-contain">
+								    <a href="#" id="logout"><i data-feather="log-out"></i><span>登出</span></a>
 								</li>
 							</ul>
 						</li>
@@ -334,6 +337,7 @@ body {
 	// 
 	
 		function init() {
+			var m_id = sessionStorage.getItem("mid");
  			var path = window.location.pathname;
  			var webCtx = path.substring(0, path.indexOf('/', 1));
 
@@ -342,7 +346,7 @@ body {
 				type : "POST",
 				data : {
 					"action" : "getOneSearch",
-					"m_id" : "1"
+					"m_id" : m_id
 				},
 				dataType : "json",
 
@@ -448,9 +452,9 @@ body {
 		    return;
 		  }
 
-		  var regex = /^[a-zA-Z\u4e00-\u9fa5]*$/;
+		  var regex = /^[a-zA-Z0-9\u4e00-\u9fa5]*$/;
 		  if (!regex.test(m_man_name)) {
-			  alert("姓名只能包含英文和中文。");
+			  alert("姓名只能包含英文、中文和數字。");
 			  return;
 		  }
 
@@ -598,9 +602,9 @@ body {
 			  return;
 			}
 			
-			var regex = /^[a-zA-Z\u4e00-\u9fa5]*$/;
+			var regex = /^[a-zA-Z0-9\u4e00-\u9fa5]*$/;
 			if (!regex.test(m_man_nameT)) {
-			 alert("姓名只能包含英文和中文。");
+			 alert("姓名只能包含英文、中文和數字。");
 			 return;
 			}
 			
@@ -625,7 +629,7 @@ body {
 			 return;
 			}
 
-            let m_id = "1";
+			let m_id = sessionStorage.getItem("mid");
             let m_name = document.getElementById("m_name").value;
             let m_gui = document.getElementById("m_gui").value;
             let m_bank_id = document.getElementById("m_bank_id").value;
@@ -673,6 +677,32 @@ body {
 		    var modal = document.getElementById("customModal");
 		    modal.style.display = "none";
 		}
+		
+		
+		
+				//  ============登出====================//
+		var path = window.location.pathname;
+		var webCtx = path.substring(0, path.indexOf('/', 1));
+		const url = new URL("http://" + window.location.host + webCtx + "/logout");
+		
+	    $("a#logout").on("click", function (e) {
+	        e.preventDefault();
+	        fetch(url, {
+	            method: "POST",
+	            headers: {
+	                "Content-Type": "application/json",
+	            }
+	        })
+            .then(responce => responce.json())
+            .then(data => {
+                if (data.logoutsuccess === 1) {
+                    alert("登出成功");
+                    sessionStorage.clear();
+                    location.href = "http://" + window.location.host + webCtx + "/login.html";
+                }
+
+            })
+	    })
 	</script>
 </body>
 
