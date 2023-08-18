@@ -33,7 +33,7 @@ public class TestWriteBlob {
 			
 			for(int i = 0;i < 11;i++){
 				pstmt = con.prepareStatement("update product set p_pic_two=? where p_id=?");
-				InputStream is = getPictureStream("C:/test/FurrEver/src/main/webapp/backEnd/productImages/p"+String.valueOf(i+1)+".jpg");
+				InputStream is = getPictureStream("C:/test/FurrEver/src/main/webapp/backEnd/productImages/p"+String.valueOf(i+1)+"2.jpg");
 				pstmt.setBinaryStream(1, is);
 				pstmt.setInt(2, i+1);
 				pstmt.executeUpdate();	
@@ -42,7 +42,7 @@ public class TestWriteBlob {
 			
 			for(int i = 0;i < 11;i++){
 				pstmt = con.prepareStatement("update product set p_pic_three=? where p_id=?");
-				InputStream is = getPictureStream("C:/test/FurrEver/src/main/webapp/backEnd/productImages/p"+String.valueOf(i+1)+".jpg");
+				InputStream is = getPictureStream("C:/test/FurrEver/src/main/webapp/backEnd/productImages/p"+String.valueOf(i+1)+"3.jpg");
 				pstmt.setBinaryStream(1, is);
 				pstmt.setInt(2, i+1);
 				pstmt.executeUpdate();	
@@ -51,7 +51,7 @@ public class TestWriteBlob {
 			
 			for(int i = 0;i < 11;i++){
 				pstmt = con.prepareStatement("update product set p_pic_four=? where p_id=?");
-				InputStream is = getPictureStream("C:/test/FurrEver/src/main/webapp/backEnd/productImages/p"+String.valueOf(i+1)+".jpg");
+				InputStream is = getPictureStream("C:/test/FurrEver/src/main/webapp/backEnd/productImages/p"+String.valueOf(i+1)+"4.jpg");
 				pstmt.setBinaryStream(1, is);
 				pstmt.setInt(2, i+1);
 				pstmt.executeUpdate();	
