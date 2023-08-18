@@ -1,6 +1,10 @@
 package tw.idv.tibame.master.service.impl;
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+
 import javax.transaction.Transactional;
+import javax.xml.bind.DatatypeConverter;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -20,6 +24,16 @@ public class MasterServiceImpl implements MasterService{
 	public Master register(Master master) {
 		Master result = masterDao.findBymEmail(master.getMEmail());
 		if (result == null) {
+			String mPwd = "";
+			try {
+				MessageDigest md = MessageDigest.getInstance("SHA-256");
+				md.update(master.getMPwd().getBytes(StandardCharsets.UTF_8));
+				byte[] digest = md.digest();
+				mPwd = DatatypeConverter.printHexBinary(digest).toUpperCase();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			master.setMPwd(mPwd);
 			return masterDao.save(master);
 		}
 		return null;
@@ -27,7 +41,16 @@ public class MasterServiceImpl implements MasterService{
 
 	@Override
 	public Integer login(String mEmail, String mPwd) {
+		try {
+			MessageDigest md = MessageDigest.getInstance("SHA-256");
+			md.update(mPwd.getBytes(StandardCharsets.UTF_8));
+			byte[] digest = md.digest();
+			mPwd = DatatypeConverter.printHexBinary(digest).toUpperCase();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		Integer result = masterDao.findBymEmailAndmPwd(mEmail, mPwd);
+		
 		return result;
 	}
 

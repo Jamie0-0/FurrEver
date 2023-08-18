@@ -509,9 +509,10 @@
                     notifyButton.addEventListener("click", () => {
                         // 在這裡處理發送成團通知的操作
                         const tid = activity.tactId;
+                        console.log(tid);
                         if (confirm("確定發送通知?")) {
                             alert("已發送成團通知給參加者:", activity.tactName);
-                            fetch('changetripstatus?tActId' + tid, {
+                            fetch('changetripstatus?tActId=' + tid, {
                                 method: "POST",
                                 headers: {
                                     'Content-Type': 'application/json'
