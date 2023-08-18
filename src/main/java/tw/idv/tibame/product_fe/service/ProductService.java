@@ -23,22 +23,22 @@ public interface ProductService {
 
 	List<String> getMsgs();
 
-	void addToCart(HttpServletRequest req, String p_id, String quantity, Map<Integer, Integer> cartList);
-
+	HashMap<Integer, Integer> addToCart(String p_id, String quantity, Map<Integer, Integer> cartList);
+	
 	Map<Product, Integer> getCartList(Map<Integer, Integer> cartList);
-
-	void updateCart(HttpServletRequest req, int p_id, int quantity, Map<Integer, Integer> cartList);
-
-	boolean deleteProductInCart(HttpServletRequest req, int p_id, Map<Integer, Integer> cartList);
+	
+	HashMap<Integer, Integer> updateCart(int p_id, int quantity, Map<Integer, Integer> cartList);
+	
+	HashMap<Integer, Integer> deleteProductInCart(int p_id, Map<Integer, Integer> cartList);
 
 	int getCartSubTotal(Map<Integer, Integer> cartList);
 
-	JsonArray getCartListJSON(Map<Integer, Integer> cartList); 
+	JsonArray getCartListJSON(Map<Integer, Integer> cartList);
+	
+	void saveCartToRedis(HashMap<Integer, Integer> cartList, int uid);
 
-	void saveCartToRedis(HttpSession session, int uid);
-
-	void deleteCartItemFromRedis(HttpSession session, int uid, int p_id);
-
-	HashMap<Integer, Integer> getCartListMapForMember(HttpSession session, int uid);
+	void deleteCartItemFromRedis(HashMap<Integer, Integer> cartList, int uid, int p_id);
+	
+	HashMap<Integer, Integer> getCartListMapForMember(HashMap<Integer, Integer> cartList, int uid);
 
 }

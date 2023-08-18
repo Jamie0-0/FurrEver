@@ -271,38 +271,10 @@
     <!-- mobile fix menu start -->
     <div class="mobile-menu d-md-none d-block mobile-cart">
         <ul>
-            <li class="active">
-                <a href="index.html">
-                    <i class="iconly-Home icli"></i>
-                    <span>Home</span>
-                </a>
-            </li>
-
-            <li class="mobile-category">
-                <a href="javascript:void(0)">
-                    <i class="iconly-Category icli js-link"></i>
-                    <span>Category</span>
-                </a>
-            </li>
-
-            <li>
-                <a href="search.html" class="search-box">
-                    <i class="iconly-Search icli"></i>
-                    <span>Search</span>
-                </a>
-            </li>
-
-            <li>
-                <a href="wishlist.html" class="notifi-wishlist">
-                    <i class="iconly-Heart icli"></i>
-                    <span>My Wish</span>
-                </a>
-            </li>
-
             <li>
                 <a href="cart.html">
                     <i class="iconly-Bag-2 icli fly-cate"></i>
-                    <span>Cart</span>
+                    <span>購物車</span>
                 </a>
             </li>
         </ul>
@@ -504,7 +476,7 @@
                 <div class="col-custome-9">
                     <div class="show-button">
                         <div class="filter-button d-inline-block d-lg-none">
-                            <a><i class="fa-solid fa-filter"></i> Filter Menu</a>
+                            <a><i class="fa-solid fa-filter"></i>篩選商品</a>
                         </div>
                         <!-- 狗貓按鈕 -->
                         <div class="mb-5" style="display: flex; justify-content: end; height: 45px">
@@ -731,10 +703,11 @@
                             $(document).ready(function () {
                                 // 使用 fetch 請求資料庫資料筆數
                                 fetch('shop', {
-                                    method: 'GET',
+                                    method: 'POST',
                                     headers: {
                                         'Content-Type': 'application/json'
-                                    }
+                                    },
+                                    body: JSON.stringify
                                 })
                                     .then(response => response.json())
                                     .then(data => {

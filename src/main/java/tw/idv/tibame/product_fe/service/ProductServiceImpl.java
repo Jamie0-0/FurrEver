@@ -7,9 +7,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -66,8 +63,7 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public void addToCart(HttpServletRequest req, String p_id_string, String quantity_string,
-			Map<Integer, Integer> cartList) {
+	public HashMap<Integer, Integer> addToCart(String p_id_string, String quantity_string, Map<Integer, Integer> cartList) {
 		msgs.clear();
 
 		int p_id = 0;
@@ -78,22 +74,22 @@ public class ProductServiceImpl implements ProductService {
 			quantity = Integer.parseInt(quantity_string);
 		} catch (NumberFormatException e) {
 			msgs.add("購買數量只可為數字");
-			return;
+			return (HashMap<Integer, Integer>) cartList;
 		}
 
 		if (quantity == 0) {
 			msgs.add("購買數量不可為0");
-			return;
+			return (HashMap<Integer, Integer>) cartList;
 		} else if (quantity < 0) {
 			msgs.add("購買數量不可為負數");
-			return;
+			return (HashMap<Integer, Integer>) cartList;
 		}
 
 		/////// 先檢查欲增加數量有沒有大於商品庫存數量!
 		int p_stock = dao.selectPStockByPid(p_id);
 		if (quantity > p_stock) {
 			msgs.add("購買數量不可超過商品數量!");
-			return;
+			return (HashMap<Integer, Integer>) cartList;
 		}
 
 		boolean productExists = false;
@@ -101,9 +97,10 @@ public class ProductServiceImpl implements ProductService {
 		if (cartList == null) {
 			cartList = new HashMap<Integer, Integer>();
 			cartList.put(p_id, quantity);
-			req.getSession().setAttribute("cartList", cartList);
+			
+			HashMap<Integer, Integer> newCartList = (HashMap<Integer, Integer>) cartList;
 			System.out.println("原本購物車為空, addToCart方法內的購物車cartListmap = " + cartList);
-			return;
+			return newCartList;
 		}
 
 		// 若有原本購物車有東西, 取出購物車清單內所有p_id_in_cart
@@ -122,7 +119,7 @@ public class ProductServiceImpl implements ProductService {
 
 				if ((p_quantity_in_cart + quantity) > p_stock) {
 					msgs.add("購買數量不可超過商品數量!");
-					return;
+					return (HashMap<Integer, Integer>) cartList;
 				}
 				cartList.put(p_id, (p_quantity_in_cart + quantity));
 				productExists = true;
@@ -136,11 +133,14 @@ public class ProductServiceImpl implements ProductService {
 			// 若購物車尚無該商品, 則增加商品及數量
 			cartList.put(p_id, quantity);
 		}
+		
+		HashMap<Integer, Integer> newCartList = (HashMap<Integer, Integer>) cartList;
 
-		req.getSession().setAttribute("cartList", cartList);
 		System.out.println("原本購物車有東西, 更新後addToCart方法內的購物車cartListmap = " + cartList);
 
+		return newCartList;
 	}
+	
 
 	@Override
 	public Map<Product, Integer> getCartList(Map<Integer, Integer> cartList) {
@@ -175,34 +175,40 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public void updateCart(HttpServletRequest req, int p_id, int quantity, Map<Integer, Integer> cartList) {
+	public HashMap<Integer, Integer> updateCart(int p_id, int quantity, Map<Integer, Integer> cartList) {
 		msgs.clear();
 
 		/////// 先檢查欲增加數量有沒有大於商品庫存數量!
 		int p_stock = dao.selectPStockByPid(p_id);
 		if (quantity > p_stock) {
 			msgs.add("購買數量不可超過商品數量!");
-			return;
+			return (HashMap<Integer, Integer>) cartList;
 		}
 
 		cartList.put(p_id, quantity);
-
-		req.getSession().setAttribute("cartList", cartList);
+		
+		HashMap<Integer, Integer> newCartList = (HashMap<Integer, Integer>) cartList;
 
 		System.out.println("原本購物車有東西, 更新後updateCart方法內的購物車cartListmap = " + cartList);
 
+		return newCartList;
 	}
+	
 
 	@Override
-	public boolean deleteProductInCart(HttpServletRequest req, int p_id, Map<Integer, Integer> cartList) {
+	public HashMap<Integer, Integer> deleteProductInCart(int p_id, Map<Integer, Integer> cartList) {
 		msgs.clear();
 
 		Integer isRemoved = cartList.remove(p_id);
 
-		req.getSession().setAttribute("cartList", cartList);
-		System.out.println("原本購物車有東西, 更新後deleteCart方法內的購物車cartListmap = " + cartList);
+		if (isRemoved != null) {
+			System.out.println("原本購物車有東西, 更新後deleteCart方法內的購物車cartListmap = " + cartList);
+			return (HashMap<Integer, Integer>) cartList;
+		} else {
+			System.out.println("刪除購物車商品失敗");
+			return (HashMap<Integer, Integer>) cartList;
+		}
 
-		return (isRemoved != null);
 
 	}
 
@@ -226,7 +232,6 @@ public class ProductServiceImpl implements ProductService {
 
 		return subtotal;
 	}
-
 
 	@Override
 	public JsonArray getCartListJSON(Map<Integer, Integer> cartList) {
@@ -278,9 +283,8 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public void saveCartToRedis(HttpSession session, int uid) {
+	public void saveCartToRedis(HashMap<Integer, Integer> cartList, int uid) {
 		try {
-			HashMap<Integer, Integer> cartList = (HashMap<Integer, Integer>) session.getAttribute("cartList");
 			Map<String, String> cartListString = ProductUtil.mapIntToString(cartList);
 			productJedisDao.setCartList(cartListString, uid);
 		} catch (JedisConnectionException e) {
@@ -291,11 +295,10 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public void deleteCartItemFromRedis(HttpSession session, int uid, int p_id) {
+	public void deleteCartItemFromRedis(HashMap<Integer, Integer> cartList, int uid, int p_id) {
 		String pid = String.valueOf(p_id);
 
 		try {
-			HashMap<Integer, Integer> cartList = (HashMap<Integer, Integer>) session.getAttribute("cartList");
 			Map<String, String> cartListString = ProductUtil.mapIntToString(cartList);
 			productJedisDao.deleteCartItem(cartListString, uid, pid);
 		} catch (JedisConnectionException e) {
@@ -306,14 +309,11 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public HashMap<Integer, Integer> getCartListMapForMember(HttpSession session, int uid) {
-		HashMap<Integer, Integer> cartList = null;
+	public HashMap<Integer, Integer> getCartListMapForMember(HashMap<Integer, Integer> cartList, int uid) {
 
 		Map<String, String> reddisCartList = productJedisDao.getReddisCartList(uid);
 
-		if (reddisCartList.isEmpty()) {
-			cartList = (HashMap<Integer, Integer>) session.getAttribute("cartList");
-		} else if (!reddisCartList.isEmpty()) {
+		if (!reddisCartList.isEmpty()) {
 			cartList = ProductUtil.mapStringCastToInt(reddisCartList);
 		}
 
@@ -322,9 +322,9 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public byte[] getPicByPid(Integer p_id) {
-	
+
 		byte[] pic = dao.selectPicByPid(p_id);
-		
+
 		if (pic == null) {
 			System.out.println("商品圖片抓取失敗");
 			return null;

@@ -1,6 +1,7 @@
 package tw.idv.tibame.order.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -42,7 +43,10 @@ public class CheckoutCartController extends HttpServlet {
 //			cartList.clear();
 
 			////// redis版 購物車清空
-			service.deleteCartFromRedis(session);
+			String username = (String) session.getAttribute("uName");
+			int uid = (int) session.getAttribute("uid");
+			HashMap<Integer, Integer> cartList = (HashMap<Integer, Integer>) session.getAttribute("cartList");
+			service.deleteCartFromRedis(uid, username, cartList);
 		}
 
 		String message = "{\"status\":" + gson.toJson(orderIsEstabished) + ",\"msgs\":" + gson.toJson(service.getMsgs())

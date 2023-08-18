@@ -15,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.google.gson.Gson;
 
 import tw.idv.tibame.product_fe.service.ProductService;
-import tw.idv.tibame.product_fe.service.ProductServiceImpl;
 
 @WebServlet("/deleteFromCart")
 public class DeleteFromCartController extends HttpServlet {
@@ -33,14 +32,12 @@ public class DeleteFromCartController extends HttpServlet {
 
 		String username = (String) session.getAttribute("uName");
 		int uid = 0;
+		
+		HashMap<Integer, Integer> cartList = (HashMap<Integer, Integer>) session.getAttribute("cartList");
 
-		HashMap<Integer, Integer> cartList = null;
-
-		if (username == null) {
-			cartList = (HashMap<Integer, Integer>) session.getAttribute("cartList");
-		} else if (username != null) {
+		if (username != null) {
 			uid = (int) session.getAttribute("uid");
-			cartList = service.getCartListMapForMember(session, uid);
+			cartList = service.getCartListMapForMember(cartList, uid);
 		}
 
 		int p_id = Integer.parseInt(req.getParameter("p_id"));
@@ -48,17 +45,18 @@ public class DeleteFromCartController extends HttpServlet {
 		System.out.println("delete的p_id = " + p_id);
 		System.out.println("delete之前的原本的CartList =" + cartList);
 
-		boolean isRemoved = service.deleteProductInCart(req, p_id, cartList);
-
+		HashMap<Integer, Integer> newCartList = service.deleteProductInCart(p_id, cartList);
+		req.getSession().setAttribute("cartList", newCartList);
+		
+		
 		if (username != null) {
-			service.deleteCartItemFromRedis(session, uid, p_id);
+			service.deleteCartItemFromRedis(newCartList, uid, p_id);
 		}
 
 		int subtotal = service.getCartSubTotal(cartList);
-		String newCartList = gson.toJson(session.getAttribute("cartList"));
-
-		String message = "{\"status\":" + gson.toJson(isRemoved) + ",\"cartlist\":" + gson.toJson(newCartList)
-				+ ",\"subtotal\":" + subtotal + ",\"total\":" + (subtotal + 120) + "}"; // 運費固定120
+		
+		String message = "{\"cartlist\":" + gson.toJson(newCartList)
+		+ ",\"subtotal\":" + subtotal + ",\"total\":" + (subtotal + 120) + "}"; // 運費固定120
 
 		resp.getWriter().write(message);
 
