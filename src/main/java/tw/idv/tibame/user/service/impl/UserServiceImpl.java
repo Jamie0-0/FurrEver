@@ -66,7 +66,7 @@ public class UserServiceImpl implements UserService {
 		Optional<User> userOptional = userDao.findById(uid);
 		if (userOptional.isPresent()) {
 			// 如果找到了用戶，則返回該用戶對象
-			userOptional.get().setUPwd("");
+//			userOptional.get().setUPwd("");
 			return userOptional.get();
 		}
 		return null;
@@ -77,21 +77,15 @@ public class UserServiceImpl implements UserService {
 	public Integer updateUser(User user) {
 		String uEmail = user.getUEmail();
 		String uName = user.getUName();
-		String uPwd = "";
-		try {
-			MessageDigest md = MessageDigest.getInstance("SHA-256");
-			md.update(user.getUPwd().getBytes(StandardCharsets.UTF_8));
-			byte[] digest = md.digest();
-			uPwd = DatatypeConverter.printHexBinary(digest).toUpperCase();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		String uPwd = hashPassword(user.getUPwd());	
+		
 		String uPhone = user.getUPhone();
 		Date uBirth = user.getUBirth();
 		String uAbout = user.getUAbout();
 		byte[] uPic = user.getUPic();
 		Integer uid = user.getUid();
 
+		
 		Integer result = userDao.updateByuid(uEmail, uName, uPwd, uPhone, uBirth, uAbout, uPic, uid);
 
 		return result;
@@ -100,5 +94,19 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User findUserName(String uEmail) {
 		return userDao.findByuEmail(uEmail);
+	}
+
+	
+
+	private String hashPassword(String password) {
+		try {
+			MessageDigest md = MessageDigest.getInstance("SHA-256");
+			md.update(password.getBytes(StandardCharsets.UTF_8));
+			byte[] digest = md.digest();
+			return DatatypeConverter.printHexBinary(digest).toUpperCase();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "";
+		}
 	}
 }

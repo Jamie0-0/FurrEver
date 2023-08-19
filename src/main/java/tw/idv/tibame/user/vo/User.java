@@ -96,4 +96,5 @@ public class User {
 	@Column(name = "u_3")
 	private String u3;
 
+
 }
