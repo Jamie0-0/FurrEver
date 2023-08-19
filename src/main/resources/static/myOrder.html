@@ -113,67 +113,11 @@
                                     </li>
                                     <!-- 購物車 -->
                                     <li class="right-side">
-                                        <div class="onhover-dropdown header-badge">
+                                        <div>
                                             <button type="button" class="btn p-0 position-relative header-wishlist">
-                                                <i data-feather="shopping-cart"></i>
-                                                <span class="position-absolute top-0 start-100 translate-middle badge">2
-                                                    <span class="visually-hidden">unread messages</span>
-                                                </span>
+                                                <a href="cart.html"><i data-feather="shopping-cart"></i>
+                                                </a>
                                             </button>
-
-                                            <div class="onhover-div">
-                                                <ul class="cart-list">
-                                                    <li class="product-box-contain">
-                                                        <div class="drop-cart">
-                                                            <a href="product-left-thumbnail.html" class="drop-image">
-                                                                <img src="assets/images/vegetable/product/1.png"
-                                                                    class="blur-up lazyload" alt="">
-                                                            </a>
-
-                                                            <div class="drop-contain">
-                                                                <a href="product-left-thumbnail.html">
-                                                                    <h5>Fantasy Crunchy Choco Chip Cookies</h5>
-                                                                </a>
-                                                                <h6><span>1 x</span> $80.58</h6>
-                                                                <button class="close-button close_button">
-                                                                    <i class="fa-solid fa-xmark"></i>
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-
-                                                    <li class="product-box-contain">
-                                                        <div class="drop-cart">
-                                                            <a href="product-left-thumbnail.html" class="drop-image">
-                                                                <img src="assets/images/vegetable/product/2.png"
-                                                                    class="blur-up lazyload" alt="">
-                                                            </a>
-
-                                                            <div class="drop-contain">
-                                                                <a href="product-left-thumbnail.html">
-                                                                    <h5>Peanut Butter Bite Premium Butter Cookies 600 g
-                                                                    </h5>
-                                                                </a>
-                                                                <h6><span>1 x</span> $25.68</h6>
-                                                                <button class="close-button close_button">
-                                                                    <i class="fa-solid fa-xmark"></i>
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-
-                                                <div class="price-box">
-                                                    <h5>Total :</h5>
-                                                    <h4 class="theme-color fw-bold">$106.58</h4>
-                                                </div>
-
-                                                <div class="button-group">
-                                                    <a href="cart.html" class="btn btn-sm cart-button">View Cart</a>
-                                                    <a href="checkout.html" class="btn btn-sm cart-button theme-bg-color
-                                                    text-white">Checkout</a>
-                                                </div>
-                                            </div>
                                         </div>
                                     </li>
                                     <!-- 聊天室 -->
@@ -468,9 +412,9 @@
         function createGBOrderList(ordersData) {
             const orderList = document.getElementById("orderList");
             orderList.innerHTML = "";
-
+            console.log(ordersData);
             ordersData.forEach(orderData => {
-                console.log(orderData);
+                // console.log(orderData);
                 const orderDiv = document.createElement("div");
                 orderDiv.classList.add("order");
 
@@ -479,15 +423,17 @@
 
                 const leftDiv = document.createElement("div");
                 leftDiv.classList.add("order-info-content");
+                orderData.gbOrders.forEach(gborder => {
+                    const orderIdH3 = document.createElement("h3");  
+                    console.log(gborder.gbId);
+                    orderIdH3.classList.add("h4");
+                    orderIdH3.textContent = "團購訂單編號：" + gborder.gbId;
+                    leftDiv.appendChild(orderIdH3);
 
-                const orderIdH3 = document.createElement("h3");
-                orderIdH3.classList.add("h4");
-                orderIdH3.textContent = "團購訂單編號：" + orderData.gbId;
-                leftDiv.appendChild(orderIdH3);
+                })
 
                 const itemList = document.createElement("ul");
                 itemList.classList.add("order-item-list");
-
 
                 const itemLi = document.createElement("li");
                 itemLi.classList.add("h5");
@@ -516,18 +462,21 @@
                 rightDiv.appendChild(statusH3);
 
                 const totalH3 = document.createElement("h3");
-                totalH3.textContent = "總金額：" + orderData.gbOrders[0].gbT;
+                orderData.gbOrders.forEach(gborder =>{
+                totalH3.textContent = "總金額：" + gborder.gbT;
                 rightDiv.appendChild(totalH3);
-
+                })
                 const status = document.createElement("h3");
+                orderData.gbOrders.forEach(gborder =>{
 
-                if (orderData.gbStatus === 0) {
-                    status.textContent = "團購狀態:已成團";
-                }
-                else if (orderData.gbStatus === 1) {
-                    status.textContent = "團購狀態:未成團";
-                }
-                rightDiv.appendChild(status);
+                    if (gborder.gbS === '0') {
+                        status.textContent = "團購狀態:已成團";
+                    }
+                    else if (gborder.gbS === '1') {
+                        status.textContent = "團購狀態:未成團";
+                    }
+                    rightDiv.appendChild(status);
+                })
 
                 const returnButton = document.createElement("button");
                 returnButton.classList.add("return-button", "float-end");
@@ -583,7 +532,7 @@
                         });
                 }
             });
-            // 默认显示零售订单数据
+
             fetch('myorder', {
                 method: "POST",
                 headers: {
