@@ -1,15 +1,15 @@
 package tw.idv.tibame.weimaster.model;
 
 public class MasterPicVO {
-	private Integer b;
-	private Integer c;
-	private String p_name;
+    private Integer b;
+    private Integer c;
+    private String p_name;
 	private String p_pic_one;
 
 	public Integer getB() {
 		return b;
 	}
-
+    
 	public Integer getC() {
 		return c;
 	}
@@ -17,6 +17,7 @@ public class MasterPicVO {
 	public String getP_name() {
 		return p_name;
 	}
+
 
 	public String getP_pic_one() {
 		return p_pic_one;
@@ -32,23 +33,23 @@ public class MasterPicVO {
 		p_name = builder.p_name;
 		p_pic_one = builder.p_pic_one;
 	}
-
+	
 	public static class Builder {
-		private Integer b = 0;
-		private Integer c = 0;
-		private String p_name = "";
-		private String p_pic_one = null;
+	    private Integer b = 0;
+	    private Integer c = 0;
+	    private String p_name = "";
+		private String  p_pic_one = null;
 
 		public MasterPicVO.Builder setB(Integer b) {
 			this.b = b;
 			return this;
 		}
-
+		
 		public MasterPicVO.Builder setC(Integer c) {
 			this.c = c;
 			return this;
 		}
-
+		
 		public MasterPicVO.Builder setP_name(String p_name) {
 			this.p_name = p_name;
 			return this;

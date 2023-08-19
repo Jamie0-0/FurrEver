@@ -22,4 +22,6 @@ public interface UserDao extends CrudRepository<User, Integer> {
 	@Query(value = "update USER set u_email =?1, u_name=?2, u_pwd=?3, u_phone=?4, u_birth=?5, u_about=?6, u_pic =?7 where uid =?8", nativeQuery = true)
 	Integer updateByuid(@Param("uEmail") String uEmail, @Param("uName") String uName, @Param("uPwd") String uPwd, @Param("uPhone") String uPhone, @Param("uBirth") Date uBirth, @Param("uAbout") String uAbout, @Param("uPic") byte[] uPic, @Param("uid") Integer uid);
 
+	User findPasswordByUid(Integer uid);
+
 }

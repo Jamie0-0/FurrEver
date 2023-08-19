@@ -25,7 +25,6 @@ public class LoginMasterController {
 
 	@GetMapping("/{mEmail}/{mPwd}")
 	public ResponseEntity<?> login(HttpSession session, @PathVariable String mEmail, @PathVariable String mPwd) {
-//		System.out.println(mEmail);
 		Integer loginMaster = masterService.login(mEmail, mPwd);
 		String companyName = "";
 		Map<String, Object> response = new HashMap<>();

@@ -152,6 +152,11 @@
                         </li>
                         
                         <li class="profile-nav onhover-dropdown pe-0 me-0">
+                            <div class="media profile-media">
+                                <img class="user-profile rounded-circle" src="assets/images/users/4.jpg" alt="">
+                                <div class="user-name-hide media-body">
+                                </div>
+                            </div>
                             <ul class="profile-dropdown onhover-show-div">
                                 <li>
                                     <a href="order-list.html">
@@ -165,13 +170,9 @@
                                         <span>設置</span>
                                     </a>
                                 </li>
-                                <li>
-                                    <a data-bs-toggle="modal" data-bs-target="#staticBackdrop"
-                                        href="javascript:void(0)">
-                                        <i data-feather="log-out"></i>
-                                        <span>登出</span>
-                                    </a>
-                                </li>
+								<li class="product-box-contain">
+								    <a href="#" id="logout"><i data-feather="log-out"></i><span>登出</span></a>
+								</li>
                             </ul>
                         </li>
                     </ul>
@@ -364,6 +365,7 @@
     <script src="assets/js/icons/feather-icon/feather-icon.js"></script>
     <script>
 		function init() {
+			var m_id = sessionStorage.getItem("mid");
 			var path = window.location.pathname;
 			var webCtx = path.substring(0, path.indexOf('/', 1));
 
@@ -371,7 +373,7 @@
 				url : "http://" + window.location.host + webCtx + "/backEnd/gb-listValue",
 				type : "POST",
 				data : {
-					"p_m_id" : 1
+					"p_m_id" : m_id
 				},
 				dataType : "json",
 
@@ -411,7 +413,7 @@
 						let inputPid = document.createElement("input");
 						inputPid.type = "hidden";
 						inputPid.name = "p_m_id";
-						inputPid.value = 1;//先寫死
+						inputPid.value = m_id;
 						
 						let inputGbid = document.createElement("input");
 						inputGbid.type = "hidden";
@@ -447,6 +449,7 @@
 		};
 
 		function performSearch() {
+			var m_id = sessionStorage.getItem("mid");
 			var table = document.getElementById("gbTable");
 			var gb_id = document.getElementById("gb_id").value;
 			var gb_s = document.getElementById("gb_s").value;
@@ -461,7 +464,7 @@
 				url : "http://" + window.location.host + webCtx + "/backEnd/gb-Search",
 				type : "POST",
 				data : {
-					"p_m_id" :1,
+					"p_m_id" :m_id,
 					"gb_id" : gb_id,
 					"gb_s" : gb_s
 				},
@@ -503,7 +506,12 @@
 						let inputPid = document.createElement("input");
 						inputPid.type = "hidden";
 						inputPid.name = "p_m_id";
-						inputPid.value = 1;//先寫死
+						inputPid.value = m_id;//先寫死
+						
+						let inputGbid = document.createElement("input");
+						inputGbid.type = "hidden";
+						inputGbid.name = "gb_id";
+						inputGbid.value = gb_id;
 
 						let button = document.createElement("button");
 						button.type = "submit";
@@ -515,6 +523,7 @@
 						button.appendChild(icon);
 
 						form.appendChild(inputPid);
+						form.appendChild(inputGbid);
 						form.appendChild(button);
 
 						emptyCell.appendChild(form);
@@ -530,6 +539,30 @@
 				}
 			});
 		}
+		
+				//  ============登出====================//
+		var path = window.location.pathname;
+		var webCtx = path.substring(0, path.indexOf('/', 1));
+		const url = new URL("http://" + window.location.host + webCtx + "/logout");
+		
+	    $("a#logout").on("click", function (e) {
+	        e.preventDefault();
+	        fetch(url, {
+	            method: "POST",
+	            headers: {
+	                "Content-Type": "application/json",
+	            }
+	        })
+            .then(responce => responce.json())
+            .then(data => {
+                if (data.logoutsuccess === 1) {
+                    alert("登出成功");
+                    sessionStorage.clear();
+                    location.href = "http://" + window.location.host + webCtx + "/login.html";
+                }
+
+            })
+	    })
 	</script> 
 </body>
 

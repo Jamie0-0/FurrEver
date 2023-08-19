@@ -1,9 +1,21 @@
+<%@page import="org.springframework.web.context.support.WebApplicationContextUtils"%>
+<%@page import="org.springframework.context.ApplicationContext"%>
 <%@page import="tw.idv.tibame.product.model.ProductVO"%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@page import="tw.idv.tibame.pType.model.PTypeService"%>
+<%@page import="tw.idv.tibame.pMapping.model.PMappingService"%>
 
 <%
 ProductVO proVO = (ProductVO) request.getAttribute("proVO");
+
+ApplicationContext applicationContext = WebApplicationContextUtils.getWebApplicationContext(application);
+
+PTypeService pTypeSvc = applicationContext.getBean(PTypeService.class);
+request.setAttribute("pTypeSvc", pTypeSvc);
+
+PMappingService pMapSvc = applicationContext.getBean(PMappingService.class);
+request.setAttribute("pMapSvc", pMapSvc);
 %>
 
 <!DOCTYPE html>
@@ -97,6 +109,11 @@ ProductVO proVO = (ProductVO) request.getAttribute("proVO");
 						</span></li>
 
 						<li class="profile-nav onhover-dropdown pe-0 me-0">
+                            <div class="media profile-media">
+                                <img class="user-profile rounded-circle" src="<%=request.getContextPath()%>/backEnd/assets/images/users/4.jpg" alt="">
+                                <div class="user-name-hide media-body">
+                                </div>
+                            </div>
 							<ul class="profile-dropdown onhover-show-div">
 								<li><a href="<%=request.getContextPath()%>/backEnd/order-list.html"> <i
 										data-feather="archive"></i> <span>訂單</span>
@@ -104,10 +121,9 @@ ProductVO proVO = (ProductVO) request.getAttribute("proVO");
 								<li><a href="<%=request.getContextPath()%>/backEnd/profile-setting.html"> <i
 										data-feather="settings"></i> <span>設置</span>
 								</a></li>
-								<li><a data-bs-toggle="modal"
-									data-bs-target="#staticBackdrop" href="javascript:void(0)">
-										<i data-feather="log-out"></i> <span>登出</span>
-								</a></li>
+								<li class="product-box-contain">
+								    <a href="#" id="logout"><i data-feather="log-out"></i><span>登出</span></a>
+								</li>
 							</ul>
 						</li>
 					</ul>
@@ -241,8 +257,6 @@ ProductVO proVO = (ProductVO) request.getAttribute("proVO");
 												<div class="mb-4 row align-items-center">
 													<label class="form-label-title col-sm-3 mb-0">貓狗商品</label>
 													<div class="col-sm-9">
-														<jsp:useBean id="pTypeSvc" scope="page"
-															class="pType.model.PTypeService" />
 														<select size="1" name="p_type">
 															<c:forEach var="pTypeVO" items="${pTypeSvc.getAll()}">
 																<option value="${pTypeVO.pt_id}"
@@ -255,8 +269,6 @@ ProductVO proVO = (ProductVO) request.getAttribute("proVO");
 												<div class="mb-4 row align-items-center">
 													<label class="form-label-title col-sm-3 mb-0">商品類別</label>
 													<div class="col-sm-9">
-														<jsp:useBean id="pMapSvc" scope="page"
-															class="pMapping.model.PMappingService" />
 														<select size="1" name="p_class" id="p_class">
 															<c:forEach var="pMappingVO" items="${pMapSvc.getAll()}">
 																<option value="${pMappingVO.pm_id}"
@@ -505,6 +517,32 @@ ProductVO proVO = (ProductVO) request.getAttribute("proVO");
 			const form = document.querySelector("form[name='form1']");
 			form.submit();
 		}
+		
+
+		//  ============登出====================//
+		var path = window.location.pathname;
+		var webCtx = path.substring(0, path.indexOf('/', 1));
+		const url = new URL("http://" + window.location.host + webCtx + "/logout");
+		
+	    $("a#logout").on("click", function (e) {
+	        e.preventDefault();
+	        fetch(url, {
+	            method: "POST",
+	            headers: {
+	                "Content-Type": "application/json",
+	            }
+	        })
+            .then(responce => responce.json())
+            .then(data => {
+                if (data.logoutsuccess === 1) {
+                    alert("登出成功");
+                    sessionStorage.clear();
+                    location.href = "http://" + window.location.host + webCtx + "/login.html";
+                }
+
+            })
+	    })
+
 	</script>
 </body>
 
