@@ -48,6 +48,37 @@
 
     <style>
         /* 自己加的 */
+        body {
+            background-image: url("back_imgs/background_3.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+
+        #breadcrumb-content {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .breadscrumb-section .breadscrumb-order .order-box .order-image .checkmark__check {
+            background-color: rgba(255, 255, 255, 0.3);
+            fill: none
+        }
+
+        /* #main-content {
+            background-color: rgba(255, 255, 255, 0.5);
+        } */
+
+       section.product-section {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+
+
+
+
+
+
+
+
         .modal {
             display: none;
             /* 預設隱藏燈箱 */
@@ -264,7 +295,7 @@
     <!-- mobile fix menu end -->
 
     <!-- Breadcrumb Section Start -->
-    <section class="breadscrumb-section pt-0">
+    <section id="breadcrumb-content" class="breadscrumb-section pt-0">
         <div class="container-fluid-lg">
             <div class="row">
                 <div class="col-12">
@@ -290,7 +321,7 @@
 
     <!-- Product Left Sidebar Start -->
     <section class="product-section">
-        <div class="container-fluid-lg">
+        <div id="main-content" class="container-fluid-lg">
             <div class="row g-4">
                 <div class="col-xl-6">
                     <div class="product-left-box">
