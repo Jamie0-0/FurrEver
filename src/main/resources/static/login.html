@@ -338,13 +338,13 @@
 				let pwd_el = $("#password").val();
 				let loginType = document.querySelector('input[name="loginType"]:checked').value;
 
-				console.log(loginType);
+				// console.log(loginType);
 
 				const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 				if (email_el.trim() === '' || !emailRegex.test(email_el)) {
 					document.getElementById('error_email').style.color = "red";
 					document.getElementById('error_email').innerText = '請輸入有效的電子郵件地址';
-
+					return;
 				} else {
 					document.getElementById('error_email').innerText = ''; // 清除錯誤訊息
 				}
@@ -353,7 +353,7 @@
 				if (pwd_el.trim() === '' || !passwordRegex.test(pwd_el)) {
 					document.getElementById('error_pwd').style.color = "red";
 					document.getElementById('error_pwd').innerText = '密碼長度須介於6~12字元，且只能包含英文數字和特殊字元 !@#$%^&*()_';
-
+					return;
 				} else {
 					document.getElementById('error_pwd').innerText = ''; // 清除錯誤訊息
 				}
