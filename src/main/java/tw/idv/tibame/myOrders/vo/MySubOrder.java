@@ -13,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.AllArgsConstructor;
@@ -62,6 +63,11 @@ public class MySubOrder implements Serializable{
 	
 	@OneToMany
 	@JsonManagedReference
-	@JoinColumn(name = "order_id", referencedColumnName = "so_order_num")
+	@JoinColumn(name = "order_id", referencedColumnName = "so_order_id")
     private List<MySubProduct> subProducts;
+	
+//	@ManyToOne
+//	@JsonBackReference
+//	@JoinColumn(name = "so_order_num", insertable = false, updatable = false)
+//	private MyProductOrder myProductOrder;
 }

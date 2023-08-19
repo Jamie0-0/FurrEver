@@ -8,8 +8,6 @@ public interface UserService {
 	
 	User register(User user);
 	
-	User edit(User user);
-	
 	User findUser(Integer uid);
 	
 	Integer updateUser(User user);

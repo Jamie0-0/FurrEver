@@ -52,7 +52,6 @@ public class MyTripServiceImpl implements MyTripService {
 	@Override
 	@Transactional
 	public Integer deleteMyTripLike(Integer uid, Integer tActId) {
-		System.out.println("tActId:" + tActId);
 		return actLikeDao.deledeleteByTActIdAndUid(tActId, uid);
 
 	}
@@ -70,6 +69,12 @@ public class MyTripServiceImpl implements MyTripService {
 	@Override
 	public List<MyTrip> selectHistoryJoinTrip(Integer uid) {
 		return tripJdbcDao.findJoinHistoryTripByUid(uid);
+	}
+
+	@Transactional
+	@Override
+	public Integer changeStatus(Integer tActId) {
+		return tripDao.updateBypActId(tActId);
 	}
 
 }

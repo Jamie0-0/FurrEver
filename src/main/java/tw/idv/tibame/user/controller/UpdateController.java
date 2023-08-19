@@ -17,21 +17,23 @@ import tw.idv.tibame.user.vo.User;
 @RestController
 @RequestMapping("updatemember")
 public class UpdateController {
-	
+
 	@Autowired
 	private UserService userService;
-	
+
 	@PostMapping
-	public ResponseEntity<?> update(@RequestBody User user){
+	public ResponseEntity<?> update(@RequestBody User user) {
 		int result = userService.updateUser(user);
+
 		Map<String, Object> response = new HashMap<>();
-		
-		if(result > 0) {
+
+		if (result > 0) {
 			response.put("status", "success");
 			return ResponseEntity.ok(response);
 		}
 		response.put("status", "error");
 		return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
-		
 	}
+	
+	
 }

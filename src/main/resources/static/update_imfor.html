@@ -33,6 +33,10 @@
     <link rel="stylesheet" href="assets/css/styleGuide.css">
 
     <style>
+        a {
+            color: black;
+        }
+
         .change-infor {
             display: flex;
             justify-content: center;
@@ -91,12 +95,12 @@
         }
 
         .member_infor>a {
-            color: #bfb9fc;
+            color: red;
         }
     </style>
 </head>
 
-<body>
+<body background="back_imgs/background_3.jpg">
 
     <!-- Header Start -->
     <header class="pb-md-4 pb-0">
@@ -129,67 +133,11 @@
                                     </li>
                                     <!-- 購物車 -->
                                     <li class="right-side">
-                                        <div class="onhover-dropdown header-badge">
+                                        <div>
                                             <button type="button" class="btn p-0 position-relative header-wishlist">
-                                                <i data-feather="shopping-cart"></i>
-                                                <span class="position-absolute top-0 start-100 translate-middle badge">2
-                                                    <span class="visually-hidden">unread messages</span>
-                                                </span>
+                                                <a href="cart.html"><i data-feather="shopping-cart"></i>
+                                                </a>
                                             </button>
-
-                                            <div class="onhover-div">
-                                                <ul class="cart-list">
-                                                    <li class="product-box-contain">
-                                                        <div class="drop-cart">
-                                                            <a href="product-left-thumbnail.html" class="drop-image">
-                                                                <img src="assets/images/vegetable/product/1.png"
-                                                                    class="blur-up lazyload" alt="">
-                                                            </a>
-
-                                                            <div class="drop-contain">
-                                                                <a href="product-left-thumbnail.html">
-                                                                    <h5>Fantasy Crunchy Choco Chip Cookies</h5>
-                                                                </a>
-                                                                <h6><span>1 x</span> $80.58</h6>
-                                                                <button class="close-button close_button">
-                                                                    <i class="fa-solid fa-xmark"></i>
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-
-                                                    <li class="product-box-contain">
-                                                        <div class="drop-cart">
-                                                            <a href="product-left-thumbnail.html" class="drop-image">
-                                                                <img src="assets/images/vegetable/product/2.png"
-                                                                    class="blur-up lazyload" alt="">
-                                                            </a>
-
-                                                            <div class="drop-contain">
-                                                                <a href="product-left-thumbnail.html">
-                                                                    <h5>Peanut Butter Bite Premium Butter Cookies 600 g
-                                                                    </h5>
-                                                                </a>
-                                                                <h6><span>1 x</span> $25.68</h6>
-                                                                <button class="close-button close_button">
-                                                                    <i class="fa-solid fa-xmark"></i>
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-
-                                                <div class="price-box">
-                                                    <h5>Total :</h5>
-                                                    <h4 class="theme-color fw-bold">$106.58</h4>
-                                                </div>
-
-                                                <div class="button-group">
-                                                    <a href="cart.html" class="btn btn-sm cart-button">View Cart</a>
-                                                    <a href="checkout.html" class="btn btn-sm cart-button theme-bg-color
-                                                    text-white">Checkout</a>
-                                                </div>
-                                            </div>
                                         </div>
                                     </li>
                                     <!-- 聊天室 -->
@@ -441,7 +389,35 @@
     <script src="assets/js/script.js"></script>
     <script>
         $(function () {
+            fetch("showUserInfor", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
 
+                }),
+            })
+                .then(responce => responce.json())
+                .then(data => {
+                    console.log(data);
+
+                    const formattedDate = parseDateFromString(data.uBirth);
+                    console.log(data.uName);
+                    user_account_el.text(data.uName);
+                    email_el.val(data.uEmail);
+                    name_el.val(data.uName);
+                    password_el.val(data.uPwd);
+                    about_el.val(data.uAbout);
+                    phone_el.val(data.uPhone);
+                    birth_el.val(formattedDate);
+                    uPic_el.attr("src", "data:image/jpeg;base64," + data.upic);
+
+
+                })
+                .catch(error => {
+
+                });
 
             let user_account_el = $("h5.user_account");
             let email_el = $("input#email");
@@ -472,62 +448,76 @@
             })
 
             $("button#save").on("click", function () {
-                const userPic_el = $("img#profile_photo_preview").attr("src");
-                const base64UserPic = userPic_el.split(',')[1];     //擷取"data:image/jpeg;base64,"後面的值
-                fetch("updatemember", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({
-                        uEmail: email_el.val(),
-                        uName: name_el.val(),
-                        uPwd: password_el.val(),
-                        uPhone: phone_el.val(),
-                        uAbout: about_el.val(),
-                        uBirth: birth_el.val(),
-                        upic: base64UserPic,
-                        uId: sessionStorage.getItem("uid")
-                    }),
-                })
-                    .then(responce => responce.json())
-                    .then(data => {
-                        if (data.status === 'success') {
-                            alert("修改成功");
-                        }
-                        else if (data.status === 'error') {
-                            alert("修改失敗");
-                        }
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                const passwordRegex = /^[A-Za-z0-9!@#$%^&*()_]{6,12}$/;
+                const namePattern = /^[\u4e00-\u9fa5a-zA-Z]+$/;
+                const phonePattern = /^09\d{8}$/;
+
+                const emailIsValid = emailRegex.test(email_el.val().trim());
+                const passwordIsValid = passwordRegex.test(password_el.val().trim());
+                const nameIsValid = namePattern.test(name_el.val());
+                const phoneIsValid = phonePattern.test(phone_el.val());
+
+                if (!emailIsValid) {
+                    document.getElementById('error_email').style.color = "red";
+                    document.getElementById('error_email').innerText = '請輸入有效的電子郵件地址';
+                } else {
+                    document.getElementById('error_email').innerText = '';
+                }
+
+                if (!passwordIsValid) {
+                    document.getElementById('error_pwd').style.color = "red";
+                    document.getElementById('error_pwd').innerText = '密碼長度須介於6~12字元，且只能包含英文數字和特殊字元 !@#$%^&*()_';
+                } else {
+                    document.getElementById('error_pwd').innerText = '';
+                }
+
+                if (!nameIsValid) {
+                    document.getElementById('error_name').style.color = "red";
+                    document.getElementById('error_name').innerText = '姓名格式不正確';
+                } else {
+                    document.getElementById('error_name').innerText = '';
+                }
+
+                if (!phoneIsValid) {
+                    document.getElementById('error_phone').style.color = "red";
+                    document.getElementById('error_phone').innerText = '手機格式不正確';
+                } else {
+                    document.getElementById('error_phone').innerText = '';
+                }
+
+                if (emailIsValid && passwordIsValid && nameIsValid && phoneIsValid) {
+
+                    const userPic_el = $("img#profile_photo_preview").attr("src");
+                    const base64UserPic = userPic_el.split(',')[1];     //擷取"data:image/jpeg;base64,"後面的值
+                    fetch("updatemember", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                            uEmail: email_el.val(),
+                            uName: name_el.val(),
+                            uPwd: password_el.val(),
+                            uPhone: phone_el.val(),
+                            uAbout: about_el.val(),
+                            uBirth: birth_el.val(),
+                            upic: base64UserPic,
+                            uId: sessionStorage.getItem("uid")
+                        }),
                     })
+                        .then(responce => responce.json())
+                        .then(data => {
+                            if (data.status === 'success') {
+                                alert("修改成功");
+                            }
+                            else if (data.status === 'error') {
+                                alert("修改失敗");
+                            }
+                        })
+                }
             })
-            fetch("showUserInfor", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
 
-                }),
-            })
-                .then(responce => responce.json())
-                .then(data => {
-                    console.log(data);
-
-                    const formattedDate = parseDateFromString(data.uBirth);
-                    console.log(data.uName);
-                    user_account_el.text(data.uName);
-                    email_el.val(data.uEmail);
-                    name_el.val(data.uName);
-                    password_el.val(data.uPwd);
-                    phone_el.val(data.uPhone);
-                    birth_el.val(formattedDate);
-                    uPic_el.attr("src", "data:image/jpeg;base64," + data.upic);
-
-
-                })
-                .catch(error => {
-
-                });
             $("button#update").on("click", function () {
                 const today = new Date();
                 const year = today.getFullYear();
@@ -550,55 +540,55 @@
                 about_el.prop("disabled", false);
                 upPic_el.prop("disabled", false);
 
-                $("input#email").on("blur", function () {
-                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                    if (email_el.val().trim() === '' || !emailRegex.test(email_el.val())) {
-                        document.getElementById('error_email').style.color = "red";
-                        document.getElementById('error_email').innerText = '請輸入有效的電子郵件地址';
-                    } else {
-                        document.getElementById('error_email').innerText = ''; // 清除錯誤訊息
-                    }
-                });
-                $("input#password").on("blur", function () {
-                    const passwordRegex = /^[A-Za-z0-9!@#$%^&*()_]{6,12}$/;
-                    if (password_el.val().trim() === '' || !passwordRegex.test(password_el.val())) {
-                        document.getElementById('error_pwd').style.color = "red";
-                        document.getElementById('error_pwd').innerText = '密碼長度須介於6~12字元，且只能包含英文數字和特殊字元 !@#$%^&*()_';
+            //     $("input#email").on("blur", function () {
+            //         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            //         if (email_el.val().trim() === '' || !emailRegex.test(email_el.val())) {
+            //             document.getElementById('error_email').style.color = "red";
+            //             document.getElementById('error_email').innerText = '請輸入有效的電子郵件地址';
+            //         } else {
+            //             document.getElementById('error_email').innerText = ''; // 清除錯誤訊息
+            //         }
+            //     });
+            //     $("input#password").on("blur", function () {
+            //         const passwordRegex = /^[A-Za-z0-9!@#$%^&*()_]{6,12}$/;
+            //         if (password_el.val().trim() === '' || !passwordRegex.test(password_el.val())) {
+            //             document.getElementById('error_pwd').style.color = "red";
+            //             document.getElementById('error_pwd').innerText = '密碼長度須介於6~12字元，且只能包含英文數字和特殊字元 !@#$%^&*()_';
 
-                    } else {
-                        document.getElementById('error_pwd').innerText = ''; // 清除錯誤訊息
-                    }
-                })
-                $("input#name").on("blur", function () {
-                    const namePattern = /^[\u4e00-\u9fa5a-zA-Z]+$/;
-                    if (!namePattern.test(name_el.val())) {
-                        document.getElementById('error_name').style.color = "red";
-                        document.getElementById('error_name').innerText = '姓名格式不正確';
+            //         } else {
+            //             document.getElementById('error_pwd').innerText = ''; // 清除錯誤訊息
+            //         }
+            //     })
+            //     $("input#name").on("blur", function () {
+            //         const namePattern = /^[\u4e00-\u9fa5a-zA-Z]+$/;
+            //         if (!namePattern.test(name_el.val())) {
+            //             document.getElementById('error_name').style.color = "red";
+            //             document.getElementById('error_name').innerText = '姓名格式不正確';
 
-                    } else {
-                        document.getElementById('error_name').innerText = ''; // 清除錯誤訊息
-                    }
-                })
+            //         } else {
+            //             document.getElementById('error_name').innerText = ''; // 清除錯誤訊息
+            //         }
+            //     })
 
-                $("input#phone").on("blur", function () {
-                    if (phone_el.val().trim() === '') {
-                        document.getElementById('error_phone').style.color = "red";
-                        document.getElementById('error_phone').innerText = '手機不得為空';
+            //     $("input#phone").on("blur", function () {
+            //         if (phone_el.val().trim() === '') {
+            //             document.getElementById('error_phone').style.color = "red";
+            //             document.getElementById('error_phone').innerText = '手機不得為空';
 
-                    } else {
-                        document.getElementById('error_phone').innerText = ''; // 清除錯誤訊息
-                    }
+            //         } else {
+            //             document.getElementById('error_phone').innerText = ''; // 清除錯誤訊息
+            //         }
 
-                    // 正則表達式驗證手機格式
-                    const phonePattern = /^09\d{8}$/;
-                    if (!phonePattern.test(phone_el.val())) {
-                        document.getElementById('error_phone').style.color = "red";
-                        document.getElementById('error_phone').innerText = '手機格式不正確';
-                        return;
-                    } else {
-                        document.getElementById('error_phone').innerText = ''; // 清除錯誤訊息
-                    }
-                })
+            //         // 正則表達式驗證手機格式
+            //         const phonePattern = /^09\d{8}$/;
+            //         if (!phonePattern.test(phone_el.val())) {
+            //             document.getElementById('error_phone').style.color = "red";
+            //             document.getElementById('error_phone').innerText = '手機格式不正確';
+            //             return;
+            //         } else {
+            //             document.getElementById('error_phone').innerText = ''; // 清除錯誤訊息
+            //         }
+            //     })
             })
 
             // 定義函式 parseDateFromString，用於將日期字串格式化為 "yyyy-MM-dd" 的形式
