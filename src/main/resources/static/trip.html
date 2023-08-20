@@ -380,14 +380,16 @@
         }
 
         function showInProgressActivities() {
+            const tActId  = sessionStorage.getItem("t_act_id");
+            console.log(tActId);
             activitiesContainer.innerHTML = "";
-            fetch('findjointrip', {
+            fetch('findjointrip?tActId=' + 1, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    uid: uid
+                    tActId: tActId
                 }
                 ),
             })
@@ -405,7 +407,7 @@
                 .catch(error => {
                     console.error('發生錯誤：', error);
                 });
-            // showActivities(inProgressActivitiesData, true, false, false, true);
+
         }
 
         function showParticipationHistory() {
