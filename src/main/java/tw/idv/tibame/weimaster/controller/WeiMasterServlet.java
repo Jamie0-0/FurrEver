@@ -48,8 +48,6 @@ public class WeiMasterServlet extends HttpServlet {
 			String m_phone = String.valueOf(req.getParameter("m_phone"));
 
 			//更新資料庫
-//			MasterService masSvc = new MasterService();
-
 			service.updatePro(m_id,m_name
 					,m_gui,m_bank_id,m_address
 					,m_man_id,m_man_name,m_email,m_phone);
@@ -63,7 +61,6 @@ public class WeiMasterServlet extends HttpServlet {
 		if ("getOneSearch".equals(action)) {
 			
 			//查詢資料
-//			MasterService masSvc = new MasterService();
 			Integer m_id = (Integer)session.getAttribute("mid");
 			MasterVO mVO = service.getOnePro(m_id);
 

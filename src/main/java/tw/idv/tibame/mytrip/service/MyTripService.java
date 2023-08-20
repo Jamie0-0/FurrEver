@@ -21,4 +21,6 @@ public interface MyTripService {
 	List<MyTrip> selectJoinTrip(Integer uid);
 	
 	List<MyTrip> selectHistoryJoinTrip(Integer uid);
+	
+	Integer changeStatus(Integer tActId);
 }

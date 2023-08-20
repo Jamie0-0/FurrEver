@@ -36,9 +36,15 @@
 	<!-- 自己的css -->
 	<link rel="stylesheet" href="assets/css/styleGuide.css">
 
+	<style>
+		.breadscrumb-section{
+			opacity: 0%;
+		}
+	</style>
+
 </head>
 
-<body>
+<body background="./back_imgs/background_3.jpg">
 	<!-- Header Start -->
 	<header class="pb-md-4 pb-0">
 		<div class="top-nav top-header sticky-header">
@@ -63,75 +69,15 @@
 												<i class="fas fa-bell fa-2x fas-icon"></i>
 											</div>
 										</a></li>
-									<!-- 購物車 -->
-									<li class="right-side">
-										<div class="onhover-dropdown header-badge">
-											<button type="button" class="btn p-0 position-relative header-wishlist">
-												<i data-feather="shopping-cart"></i> <span
-													class="position-absolute top-0 start-100 translate-middle badge">2
-													<span class="visually-hidden">unread messages</span>
-												</span>
-											</button>
-
-											<div class="onhover-div">
-												<ul class="cart-list">
-													<li class="product-box-contain">
-														<div class="drop-cart">
-															<a href="product-left-thumbnail.html" class="drop-image">
-																<img src="assets/images/vegetable/product/1.png"
-																	class="blur-up lazyload" alt="">
-															</a>
-
-															<div class="drop-contain">
-																<a href="product-left-thumbnail.html">
-																	<h5>Fantasy Crunchy Choco Chip Cookies</h5>
-																</a>
-																<h6>
-																	<span>1 x</span> $80.58
-																</h6>
-																<button class="close-button close_button">
-																	<i class="fa-solid fa-xmark"></i>
-																</button>
-															</div>
-														</div>
-													</li>
-
-													<li class="product-box-contain">
-														<div class="drop-cart">
-															<a href="product-left-thumbnail.html" class="drop-image">
-																<img src="assets/images/vegetable/product/2.png"
-																	class="blur-up lazyload" alt="">
-															</a>
-
-															<div class="drop-contain">
-																<a href="product-left-thumbnail.html">
-																	<h5>Peanut Butter Bite Premium Butter Cookies 600
-																		g</h5>
-																</a>
-																<h6>
-																	<span>1 x</span> $25.68
-																</h6>
-																<button class="close-button close_button">
-																	<i class="fa-solid fa-xmark"></i>
-																</button>
-															</div>
-														</div>
-													</li>
-												</ul>
-
-												<div class="price-box">
-													<h5>Total :</h5>
-													<h4 class="theme-color fw-bold">$106.58</h4>
-												</div>
-
-												<div class="button-group">
-													<a href="cart.html" class="btn btn-sm cart-button">View
-														Cart</a> <a href="checkout.html" class="btn btn-sm cart-button theme-bg-color
-                                                    text-white">Checkout</a>
-												</div>
-											</div>
-										</div>
-									</li>
+									 <!-- 購物車 -->
+									 <li class="right-side">
+                                        <div>
+                                            <button type="button" class="btn p-0 position-relative header-wishlist">
+                                                <a href="cart.html"><i data-feather="shopping-cart"></i>
+                                                </a>
+                                            </button>
+                                        </div>
+                                    </li>
 									<!-- 聊天室 -->
 									<li class="right-side"><a href="#"
 											class="btn p-0 position-relative header-wishlist"> <i
@@ -392,13 +338,13 @@
 				let pwd_el = $("#password").val();
 				let loginType = document.querySelector('input[name="loginType"]:checked').value;
 
-				console.log(loginType);
+				// console.log(loginType);
 
 				const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 				if (email_el.trim() === '' || !emailRegex.test(email_el)) {
 					document.getElementById('error_email').style.color = "red";
 					document.getElementById('error_email').innerText = '請輸入有效的電子郵件地址';
-
+					return;
 				} else {
 					document.getElementById('error_email').innerText = ''; // 清除錯誤訊息
 				}
@@ -407,7 +353,7 @@
 				if (pwd_el.trim() === '' || !passwordRegex.test(pwd_el)) {
 					document.getElementById('error_pwd').style.color = "red";
 					document.getElementById('error_pwd').innerText = '密碼長度須介於6~12字元，且只能包含英文數字和特殊字元 !@#$%^&*()_';
-
+					return;
 				} else {
 					document.getElementById('error_pwd').innerText = ''; // 清除錯誤訊息
 				}

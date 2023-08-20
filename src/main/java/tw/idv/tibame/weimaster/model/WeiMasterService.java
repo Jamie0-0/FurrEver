@@ -11,11 +11,6 @@ public class WeiMasterService {
 	@Autowired
 	private WeiMasterDao dao;
 
-//	public MasterService() {
-//		dao = new MasterDao();
-//	}
-	
-
 	public MasterVO updatePro(Integer m_id,String m_name
 			,String m_gui,String m_bank_id,String m_address
 			,String m_man_id,String m_man_name,String m_email,String m_phone){

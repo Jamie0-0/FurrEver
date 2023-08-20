@@ -31,11 +31,10 @@ import tw.idv.tibame.tools.Tools;
 
 @WebServlet("/pro.do")
 public class ProductServlet extends HttpServlet {
-//	Connection con;
 	@Autowired
 	private ProductService service;
-	@Override
 
+	@Override
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		doPost(req, res);
 	}
@@ -77,8 +76,6 @@ public class ProductServlet extends HttpServlet {
 			}
 
 			// 開始查詢資料
-
-//			ProductService proSvc = new ProductService();
 			List productVO = service.getOnePro2(p_id, p_status, p_class,mid);
 
 			if (productVO == null) {
@@ -112,11 +109,7 @@ public class ProductServlet extends HttpServlet {
 			String p_status = req.getParameter("p_status");
 
 			// 開始查詢資料
-
-//			ProductService proSvc = new ProductService();
-
 			ProductVO proVO = service.getOnePro(p_id,mid);
-
 
 			// 將位元資料流轉換為 Base64 編碼
 			String p1 = "";
@@ -230,8 +223,6 @@ public class ProductServlet extends HttpServlet {
 			filecontent4.read(p_pic_four);
 
 			//查詢資料庫是否有紀錄
-
-//			ProductService proSvc2 = new ProductService();
 			ProductVO productVO1 = service.getOnePro(p_id,mid);
 
 			Integer p_idSearch = productVO1.getP_id();
@@ -301,13 +292,10 @@ public class ProductServlet extends HttpServlet {
 			}
 
 			//開始修改資料
-
-//			ProductService proSvc = new ProductService();
 			proVO = service.updatePro(mid,p_name, Integer.parseInt(p_price), Integer.parseInt(p_stock), p_type, p_class,
 					p_des, p_status, p_id, p_pic_one, p_pic_two, p_pic_three, p_pic_four);
 
 			//修改完成,準備轉交
-//			ProductService proSvc1 = new ProductService();
 			List productVO = service.getOnePro2(p_id, p_status, p_class,mid);
 
 			ArrayList<ProductVO> list = (ArrayList<ProductVO>) productVO;
@@ -439,7 +427,6 @@ public class ProductServlet extends HttpServlet {
 					p_pic_one,p_pic_two,p_pic_three,p_pic_four);
 
 			//新增完成,查出新商品
-
 			List productVO = service.searchLatest();
 
 			ArrayList<ProductVO> list = (ArrayList<ProductVO>) productVO;
@@ -459,18 +446,14 @@ public class ProductServlet extends HttpServlet {
 			Integer mid = (Integer)session.getAttribute("mid");
 
 			// 開始刪除資料
-//			ProductService proSvc = new ProductService();
 			try {
-
 				service.deletePro(p_id,mid);
 
 			} catch (Exception e){
 				List<String> errorMsgs = new LinkedList<String>();
 				req.setAttribute("errorMsgs", errorMsgs);
 				errorMsgs.add("此筆資料已有消費紀錄，不能刪除");
-				
 
-//				ProductService proSvc1 = new ProductService();
 				ArrayList<ProductVO> list = (ArrayList<ProductVO>) service.getAll();
 
 				req.setAttribute("list", list);

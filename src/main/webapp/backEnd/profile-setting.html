@@ -115,6 +115,11 @@ body {
 						</span></li>
 
 						<li class="profile-nav onhover-dropdown pe-0 me-0">
+                            <div class="media profile-media">
+                                <img class="user-profile rounded-circle" src="assets/images/users/4.jpg" alt="">
+                                <div class="user-name-hide media-body">
+                                </div>
+                            </div>
 							<ul class="profile-dropdown onhover-show-div">
 								<li><a href="order-list.html"> <i
 										data-feather="archive"></i> <span>訂單</span>
@@ -122,10 +127,8 @@ body {
 								<li><a href="profile-setting.html"> <i
 										data-feather="settings"></i> <span>設置</span>
 								</a></li>
-								<li>
-									<a data-bs-toggle="modal" id="logoutLink">
-											<i data-feather="log-out"></i> <span>登出</span>
-									</a>
+								<li class="product-box-contain">
+								    <a href="#" id="logout"><i data-feather="log-out"></i><span>登出</span></a>
 								</li>
 							</ul>
 						</li>
@@ -674,6 +677,32 @@ body {
 		    var modal = document.getElementById("customModal");
 		    modal.style.display = "none";
 		}
+		
+		
+		
+				//  ============登出====================//
+		var path = window.location.pathname;
+		var webCtx = path.substring(0, path.indexOf('/', 1));
+		const url = new URL("http://" + window.location.host + webCtx + "/logout");
+		
+	    $("a#logout").on("click", function (e) {
+	        e.preventDefault();
+	        fetch(url, {
+	            method: "POST",
+	            headers: {
+	                "Content-Type": "application/json",
+	            }
+	        })
+            .then(responce => responce.json())
+            .then(data => {
+                if (data.logoutsuccess === 1) {
+                    alert("登出成功");
+                    sessionStorage.clear();
+                    location.href = "http://" + window.location.host + webCtx + "/login.html";
+                }
+
+            })
+	    })
 	</script>
 </body>
 

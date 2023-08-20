@@ -27,10 +27,13 @@ public class LoginController {
 	public ResponseEntity<?> login(HttpSession session, @PathVariable String uEmail, @PathVariable String uPwd) {
 		Integer loginUser = userService.login(uEmail, uPwd);
 		User userlist = userService.findUserName(uEmail);
-		String userName = userlist.getUName();
-		if (loginUser == null) {
+		String userName="";
+		if (loginUser == null || userlist == null) {
 			return new ResponseEntity<>("查無帳號或密碼錯誤", HttpStatus.BAD_REQUEST);
+		} else {
+			userName = userlist.getUName();
 		}
+
 		session.setAttribute("uid", loginUser);
 		session.setAttribute("uName", userName);
 
