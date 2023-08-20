@@ -17,7 +17,7 @@ function fetchComment() {
 				comTotal = data.length;
 				const responseItem = `
 			<div class="com_wrapper_inner">
-				<div class="card w-100">
+				<div class="card w-100 bg-transparent">
 					<div class="comment-report position-absolute top-0 end-0 me-1">
 						<i type="button" class="fa-solid fa-flag com-report" comId="${data[i].comId}"
 							data-bs-toggle="modal" data-bs-target="#staticBackdrop"></i>
@@ -26,18 +26,18 @@ function fetchComment() {
 						<div class="row message_author">
 							<div class="col-12">
 								<ul
-									class="list-group list-group-horizontal d-flex justify-content-start">
-									<li class="list-group-item border-0">
+									class="list-group list-group-horizontal d-flex justify-content-start bg-transparent">
+									<li class="list-group-item border-0 bg-transparent">
 										<img alt="Avatar" class="avatar rounded-circle img-fluid"
 											src="avatar?uid=${data[i].comUserId}">
 									</li>
-									<li class="list-group-item border-0 com_username">
+									<li class="list-group-item border-0 com_username bg-transparent">
 										${data[i].artUser.uname}
 									</li>
-									<li class="list-group-item com_time border-0 d-none d-md-block">
+									<li class="list-group-item com_time border-0 d-none d-md-block bg-transparent">
 										${data[i].comDateTime}
 									</li>
-									<li class="list-group-item com-content border-0 card-text fw-bold fs-5 my-2">
+									<li class="list-group-item com-content border-0 card-text fw-bold fs-5 my-2 bg-transparent">
 										${data[i].comContent}
 									</li>
 								</ul>
@@ -67,8 +67,8 @@ function fetchComment() {
 					//  添加reply的留言區塊
 					const replybutt = `
 								<form action="replyInsert" method="post">
-									<input name="replyContent" type="text" class="card-text w-100" placeholder="留言">
-									<div class="post-button-list2">
+									<input name="replyContent" type="text" class="card-text w-100 bg-transparent" placeholder="留言">
+									<div class="post-button-list2 bg-transparent">
 										<button class="card-link btn btn-secondary post-button"
 											type="submit" style="float:right;">回覆</button>
 									</div>
@@ -90,7 +90,7 @@ function fetchComment() {
 							for (let k = 0; k < data.length; k++) {
 								const replyItem = `
 <div class="col-11 offset-1">
-    <div class="card">
+    <div class="card bg-transparent">
         <div class="post-reply w-100 position-relative">
             <div class="border-0 row">
                 <div class="border-0 col-2 col-sm-2">
@@ -209,7 +209,7 @@ function buildArticle() {
 					e.stopPropagation();
 					$(this).css("pointer-events", "none");
 
-					fetch(`artLike?artId=${data.artId}&uid=3`)
+					fetch(`artLike?artId=${data.artId}`)
 						.then(response => response.json())
 						.then(data => {
 							if (data === -1) {
@@ -272,7 +272,9 @@ $(document).ready(function () {
 					$("#com_wrapper").empty();
 					$('.note-editable').empty();
 					$("#article-content").empty();
-					buildArticle();
+					location.reload();
+
+					//buildArticle();
 				} else {
 					alert("新增留言失敗");
 				}
@@ -290,13 +292,13 @@ $(document).ready(function () {
 
 		$("#upload_img_label").after('<button type="button" class="btn btn-primary position-absolute end-0 top-0" id="post-new">送出</button>')
 		$('#summernote1').summernote({
+			backgroundColor: '#F7F1EE',
 			placeholder: '請輸入文章內容',
 			tabsize: 2,
 			height: 120,
 			toolbar: [
 				['font', ['bold', 'underline', 'clear']],
 				['color'],
-				['table', ['table']],
 				['insert', ['link', 'picture', 'video']],
 				['view', ['fullscreen', 'codeview']]
 			]
@@ -373,6 +375,7 @@ $(document).ready(function () {
 				$(this).text("送出");
 
 				$('#summernote1').summernote({
+					backgroundColor: '#F7F1EE',
 					placeholder: '請輸入文章內容',
 					tabsize: 2,
 					height: 120,
@@ -422,8 +425,8 @@ $(document).ready(function () {
 								$(".note-editor").eq(0).remove();
 								$("#upload_img_label").addClass(" d-none")
 								$(".forSummer2").toggleClass(" d-none");
-								buildArticle();
-
+							//buildArticle();
+								location.reload();
 							} else {
 								alert("更新失敗")
 
@@ -440,17 +443,10 @@ $(document).ready(function () {
 });
 
 
-
-// article comment button
-$("#article-comment").on("click", function () {
-	console.log("跳到留言");
-});
-
 // comment report button 事件委派到父元素
 $("#com_wrapper").on("click", "i.com-report", function (e) {
 	e.stopPropagation();
 	let comId = $(this).attr("comId");
-	console.log(comId);
 	$("#report-submit").attr("comId", comId);
 	$("#report-submit").attr("artId", 0);
 	$("#report-submit").attr("replyId", 0);
@@ -483,7 +479,7 @@ $("#report-submit").on("click", function () {
 			crepComId: comId,
 			rrepReplyId: replyId,
 			repReason: selectedReason,
-			uid: "1"   // 暫定1 應為登入者id
+			uid: storageUId
 		},
 		dataType: "json",
 		beforesend: function () {

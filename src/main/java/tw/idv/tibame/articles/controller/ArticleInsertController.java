@@ -28,9 +28,7 @@ public class ArticleInsertController {
 			@RequestParam String artTitle, @RequestParam String artContent,
 			@RequestParam(required = false) Integer artLike,
 			@RequestParam(required = false) List<MultipartFile> images) {
-
-		System.out.println(artTitle);
-		System.out.println(artContent);
+		System.out.println("發文人" + uid);
 		List<byte[]> imageList = new ArrayList<>();
 		if (images != null) {
 			for (MultipartFile image : images) {
