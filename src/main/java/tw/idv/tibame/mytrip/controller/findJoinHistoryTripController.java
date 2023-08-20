@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,6 +27,7 @@ public class findJoinHistoryTripController {
 	@PostMapping
 	public ResponseEntity<?> findHistorytrip(HttpSession session) {
 		Integer uid = (Integer) session.getAttribute("uid");
+//		System.out.println(tActId);
 		Map<String, Object> response = new HashMap<>();
 		if (uid != null) {
 			List<MyTrip> triplist = tripService.selectHistoryJoinTrip(uid);

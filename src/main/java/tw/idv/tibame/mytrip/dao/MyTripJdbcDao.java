@@ -49,17 +49,17 @@ public class MyTripJdbcDao {
 		return trips;
 	}
 
-	public List<MyTrip> findJoinTripByUid(Integer uid) {
-		String sql = "SELECT p.uid, trip.t_act_id, trip.t_act_name, trip.t_act_status, trip.t_act_time, trip.t_act_ppl, trip.t_1, IFNULL(COUNT(p.uid), 0) as count "
+	public List<MyTrip> findJoinTripByUid(Integer tActId) {
+		String sql = "SELECT  trip.t_act_id, trip.t_act_name, trip.t_act_status, trip.t_act_time, trip.t_act_ppl, trip.t_1, IFNULL(COUNT(p.uid), 0) as count "
 				+ "	FROM trip as trip LEFT JOIN participant as p "
 				+ "	ON trip.t_act_id = p.t_act_id "
-				+ "	WHERE p.uid = :uid "
+				+ "	WHERE p.t_act_id  = :tActId "
 				+ " AND p.uid_join = '0' "
 				+ " AND (trip.t_act_status = '0' OR trip.t_act_status = '1') AND trip.t_act_time > CURDATE() "
 				+ "	GROUP BY trip.uid, trip.t_act_id, trip.t_act_name, trip.t_act_status, trip.t_act_time, trip.t_act_ppl, trip.t_1 ";
 
 		MapSqlParameterSource paramMap = new MapSqlParameterSource();
-		paramMap.addValue("uid", uid);
+		paramMap.addValue("tActId", tActId);
 
 		List<MyTrip> trips = namedParameterJdbcTemplate.query(sql, paramMap, new BeanPropertyRowMapper<>(MyTrip.class));
 		return trips;
