@@ -34,8 +34,8 @@ public class ArticlesServiceImpl implements ArticlesService {
 
 	@Override
 	@Transactional
-	public Integer insertArticle(Integer artId, int i, String artTitle, String artContent, Integer artLike) {
-		Article article = Article.builder().artId(artId).artUserId(2).artTitle(artTitle).artContent(artContent)
+	public Integer insertArticle(Integer artId, int uid, String artTitle, String artContent, Integer artLike) {
+		Article article = Article.builder().artId(artId).artUserId(uid).artTitle(artTitle).artContent(artContent)
 				.artLike(artLike).build();
 
 		Article existingArticle = new Article();

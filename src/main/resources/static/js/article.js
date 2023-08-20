@@ -209,7 +209,7 @@ function buildArticle() {
 					e.stopPropagation();
 					$(this).css("pointer-events", "none");
 
-					fetch(`artLike?artId=${data.artId}&uid=3`)
+					fetch(`artLike?artId=${data.artId}`)
 						.then(response => response.json())
 						.then(data => {
 							if (data === -1) {
@@ -272,7 +272,9 @@ $(document).ready(function () {
 					$("#com_wrapper").empty();
 					$('.note-editable').empty();
 					$("#article-content").empty();
-					buildArticle();
+					location.reload();
+
+					//buildArticle();
 				} else {
 					alert("新增留言失敗");
 				}
@@ -297,7 +299,6 @@ $(document).ready(function () {
 			toolbar: [
 				['font', ['bold', 'underline', 'clear']],
 				['color'],
-				['table', ['table']],
 				['insert', ['link', 'picture', 'video']],
 				['view', ['fullscreen', 'codeview']]
 			]
@@ -424,8 +425,8 @@ $(document).ready(function () {
 								$(".note-editor").eq(0).remove();
 								$("#upload_img_label").addClass(" d-none")
 								$(".forSummer2").toggleClass(" d-none");
-								buildArticle();
-
+							//buildArticle();
+								location.reload();
 							} else {
 								alert("更新失敗")
 
@@ -442,17 +443,10 @@ $(document).ready(function () {
 });
 
 
-
-// article comment button
-$("#article-comment").on("click", function () {
-	console.log("跳到留言");
-});
-
 // comment report button 事件委派到父元素
 $("#com_wrapper").on("click", "i.com-report", function (e) {
 	e.stopPropagation();
 	let comId = $(this).attr("comId");
-	console.log(comId);
 	$("#report-submit").attr("comId", comId);
 	$("#report-submit").attr("artId", 0);
 	$("#report-submit").attr("replyId", 0);
@@ -485,7 +479,7 @@ $("#report-submit").on("click", function () {
 			crepComId: comId,
 			rrepReplyId: replyId,
 			repReason: selectedReason,
-			uid: "1"   // 暫定1 應為登入者id
+			uid: storageUId
 		},
 		dataType: "json",
 		beforesend: function () {
