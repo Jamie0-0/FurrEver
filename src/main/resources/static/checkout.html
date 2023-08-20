@@ -44,6 +44,21 @@
 
 
     <style>
+        body {
+            background-image: url("back_imgs/background_3.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        #breadcrumb-content {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .breadscrumb-section .breadscrumb-order .order-box .order-image .checkmark__check {
+            background-color: rgba(255, 255, 255, 0.3);
+            fill: none
+        }   
+
         /* 自己加的 */
         .modal {
             display: none;
@@ -214,38 +229,10 @@
     <!-- mobile fix menu start -->
     <div class="mobile-menu d-md-none d-block mobile-cart">
         <ul>
-            <li class="active">
-                <a href="index.html">
-                    <i class="iconly-Home icli"></i>
-                    <span>Home</span>
-                </a>
-            </li>
-
-            <li class="mobile-category">
-                <a href="javascript:void(0)">
-                    <i class="iconly-Category icli js-link"></i>
-                    <span>Category</span>
-                </a>
-            </li>
-
-            <li>
-                <a href="search.html" class="search-box">
-                    <i class="iconly-Search icli"></i>
-                    <span>Search</span>
-                </a>
-            </li>
-
-            <li>
-                <a href="wishlist.html" class="notifi-wishlist">
-                    <i class="iconly-Heart icli"></i>
-                    <span>My Wish</span>
-                </a>
-            </li>
-
             <li>
                 <a href="cart.html">
                     <i class="iconly-Bag-2 icli fly-cate"></i>
-                    <span>Cart</span>
+                    <span>購物車</span>
                 </a>
             </li>
         </ul>
@@ -253,7 +240,7 @@
     <!-- mobile fix menu end -->
 
     <!-- Breadcrumb Section Start -->
-    <section class="breadscrumb-section pt-0">
+    <section id="breadcrumb-content" class="breadscrumb-section pt-0">
         <div class="container-fluid-lg">
             <div class="row">
                 <div class="col-12">
@@ -659,28 +646,11 @@
                             <h4>免責聲明</h4>
                         </div>
 
-                        <div class="footer-contain">
-                            <ul>
-                                <li>
-                                    <a href="shop-left-sidebar.html" class="text-content">Vegetables & Fruit</a>
-                                </li>
-                                <li>
-                                    <a href="shop-left-sidebar.html" class="text-content">Beverages</a>
-                                </li>
-                                <li>
-                                    <a href="shop-left-sidebar.html" class="text-content">Meats & Seafood</a>
-                                </li>
-                                <li>
-                                    <a href="shop-left-sidebar.html" class="text-content">Frozen Foods</a>
-                                </li>
-                                <li>
-                                    <a href="shop-left-sidebar.html" class="text-content">Biscuits & Snacks</a>
-                                </li>
-                                <li>
-                                    <a href="shop-left-sidebar.html" class="text-content">Grocery & Staples</a>
-                                </li>
-                            </ul>
-                        </div>
+                        <p>任何瀏覽網站的人士，須自行承擔一切風險，本網站不會負責任何因瀏覽<br>
+                            或使用本網站而引致之損失。本網站不會作出任何默示的擔保。本網站承<br>
+                            諾力求網站內容之準確性及完整性，但內容如有錯誤或遺漏，本網站不會<br>
+                            承擔任何賠償責任，所有本網站內容，將會隨時更改，而不作另行通知。<br>
+                        </p>
                     </div>
 
                 </div>

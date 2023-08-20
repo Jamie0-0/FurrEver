@@ -51,13 +51,80 @@
             --theme-color1: #ffd591;
         }
 
+
+
+
+        body {
+            background-image: url("back_imgs/background_3.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .product-box-3 {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-item {
+            border: 1.4px solid #ffb843;
+            /* color: #ffb843; */
+        }
+
+
+        #breadcrumb-content {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .breadscrumb-section .breadscrumb-order .order-box .order-image .checkmark__check {
+            background-color: rgba(255, 255, 255, 0.3);
+            fill: none
+        }
+
+        .productKind{
+            background-color: rgba(255, 255, 255, 0.1);    
+        }
+
+        button#pclass_supplies.nav-link, button#pclass_food.nav-link,button#pclass_toy.nav-link{
+            /* background-color: rgba(255, 255, 255, 0.2);     */
+            background-color: #F7F1EE;
+            color: #ffb843;
+            font-size: 16px;
+            font-weight: 550;
+        }
+
+        button#pclass_supplies.nav-link.active, button#pclass_food.nav-link.active,button#pclass_toy.nav-link.active{
+            /* background-color: rgba(255, 255, 255, 0.2);     */
+            /* background-color: #F7F1EE; */
+            color: #F7F1EE;
+        }
+
+        #main-content {
+            padding-top: 30px;
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+
+
+
+
         .btn_switch {
-            border: 1.5px solid #ffcb76;
+            border: 1.5px solid #ffb843;
             display: inline-block;
             padding: 10px;
             position: relative;
             text-align: center;
             transition: background 600ms ease, color 600ms ease;
+            
+            font-weight: 520;
         }
 
         input[type="radio"].toggle {
@@ -69,11 +136,11 @@
 
                 &:hover {
                     background: none;
-                    color: #ffcb76;
+                    color: #f68500;
                 }
 
                 &:after {
-                    background: #ffcb76;
+                    background: #f68500;
                     content: "";
                     height: 100%;
                     position: absolute;
@@ -86,7 +153,7 @@
 
             &.toggle-left+label {
                 border-right: 0;
-                color: #ffcb76;
+                color: #ffb843;
 
                 &:after {
                     left: 100%
@@ -95,7 +162,7 @@
 
             &.toggle-right+label {
                 margin-left: -5px;
-                color: #ffcb76;
+                color: #ffb843;
 
                 &:after {
                     left: -100%;
@@ -240,7 +307,7 @@
                                                     </li>
                                                 </ul>
                                             </li>
-                                            
+
                                             <li class="nav-item dropdown">
                                                 <a class="nav-link" href="gbshop.html">團購</a>
                                             </li>
@@ -271,38 +338,10 @@
     <!-- mobile fix menu start -->
     <div class="mobile-menu d-md-none d-block mobile-cart">
         <ul>
-            <li class="active">
-                <a href="index.html">
-                    <i class="iconly-Home icli"></i>
-                    <span>Home</span>
-                </a>
-            </li>
-
-            <li class="mobile-category">
-                <a href="javascript:void(0)">
-                    <i class="iconly-Category icli js-link"></i>
-                    <span>Category</span>
-                </a>
-            </li>
-
-            <li>
-                <a href="search.html" class="search-box">
-                    <i class="iconly-Search icli"></i>
-                    <span>Search</span>
-                </a>
-            </li>
-
-            <li>
-                <a href="wishlist.html" class="notifi-wishlist">
-                    <i class="iconly-Heart icli"></i>
-                    <span>My Wish</span>
-                </a>
-            </li>
-
             <li>
                 <a href="cart.html">
                     <i class="iconly-Bag-2 icli fly-cate"></i>
-                    <span>Cart</span>
+                    <span>購物車</span>
                 </a>
             </li>
         </ul>
@@ -310,7 +349,7 @@
     <!-- mobile fix menu end -->
 
     <!-- Breadcrumb Section Start -->
-    <section class="breadscrumb-section pt-0">
+    <section id="breadcrumb-content" class="breadscrumb-section pt-0">
         <div class="container-fluid-lg">
             <div class="row">
                 <div class="col-12">
@@ -335,7 +374,7 @@
 
     <!-- Shop Section Start -->
     <section class="section-b-space shop-section">
-        <div class="container-fluid-lg">
+        <div id="main-content" class="container-fluid-lg">
             <div class="row">
                 <div class="col-custome-3">
                     <div class="left-box wow fadeInUp">
@@ -504,17 +543,17 @@
                 <div class="col-custome-9">
                     <div class="show-button">
                         <div class="filter-button d-inline-block d-lg-none">
-                            <a><i class="fa-solid fa-filter"></i> Filter Menu</a>
+                            <a><i class="fa-solid fa-filter"></i>篩選商品</a>
                         </div>
                         <!-- 狗貓按鈕 -->
                         <div class="mb-5" style="display: flex; justify-content: end; height: 45px">
                             <div class="productKind">
                                 <input id="toggle-on" class="toggle toggle-left" name="toggle" value="false"
                                     type="radio" checked>
-                                <label for="toggle-on" class="btn_switch">狗</label>
+                                <label for="toggle-on" class="btn_switch" style="padding-bottom: 12px;">狗</label>
                                 <input id="toggle-off" class="toggle toggle-right" name="toggle" value="true"
                                     type="radio">
-                                <label for="toggle-off" class="btn_switch">貓</label>
+                                <label for="toggle-off" class="btn_switch" style="padding-bottom: 12px;">貓</label>
                             </div>
                             <!-- 搜尋框 -->
                             <div class="search-box mb-5" style="width: 40%; margin-left: auto; ">
@@ -731,10 +770,11 @@
                             $(document).ready(function () {
                                 // 使用 fetch 請求資料庫資料筆數
                                 fetch('shop', {
-                                    method: 'GET',
+                                    method: 'POST',
                                     headers: {
                                         'Content-Type': 'application/json'
-                                    }
+                                    },
+                                    body: JSON.stringify
                                 })
                                     .then(response => response.json())
                                     .then(data => {
@@ -1004,7 +1044,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
 
     <script>
-        $(function(){
+        $(function () {
             const username = sessionStorage.getItem("username");
             $("h5").text(username);
 

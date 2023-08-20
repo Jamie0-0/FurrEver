@@ -24,17 +24,14 @@ public class ProductUtil {
 				}
 			}
 			System.out.println("轉完的int購物車=" + intMap);
-			return intMap;
-		} else if (stringMap == null) {
-			return intMap; // 給新的空的
+
 		}
 
-		return null;
+		return intMap;
 
 	}
 
 	public static Map<String, String> mapIntToString(HashMap<Integer, Integer> intMap) {
-		System.out.println("mapIntToString開始, 要轉的intMap =" + intMap);
 		Map<String, String> stringMap = new HashMap<>();
 
 		if (stringMap != null) {
@@ -52,11 +49,10 @@ public class ProductUtil {
 				}
 			}
 			System.out.println("轉完的string購物車=" + stringMap);
-			return stringMap;
-		} else if (intMap == null) {
-			return stringMap;
+
 		}
-		return null;
+
+		return stringMap;
 
 	}
 }

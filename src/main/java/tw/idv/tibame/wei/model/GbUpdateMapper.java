@@ -15,7 +15,7 @@ public interface GbUpdateMapper {
 			+ " where p_m_id = #{p_m_id}"
 			+ " and b.gb_p_id=p_id "
 			+ " )"
-			+ " and a.gb_id = #{gb_p_id}"
+			+ " and a.gb_order_id = #{gb_p_id}"
 			+ " and gb_s = '1'")
 	void updateData(@Param("p_m_id") Integer p_m_id, @Param("gb_p_id") Integer gb_p_id);
 }

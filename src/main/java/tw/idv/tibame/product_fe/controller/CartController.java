@@ -45,14 +45,12 @@ public class CartController extends HttpServlet {
 		int uid = 0;
 		ProductUser productUser = new ProductUser();
 
-		HashMap<Integer, Integer> cartList = null;
+		HashMap<Integer, Integer> cartList = (HashMap<Integer, Integer>) session.getAttribute("cartList");
 
-		if (username == null) {
-			cartList = (HashMap<Integer, Integer>) session.getAttribute("cartList");
-		} else if (username != null) {
+		if (username != null) {
 			productUser = productUserDao.selectByUserNameForCart(username);
 			uid = (int) session.getAttribute("uid");
-			cartList = service.getCartListMapForMember(session, uid);
+			cartList = service.getCartListMapForMember(cartList, uid);
 		}
 
 		JsonArray cartArray = service.getCartListJSON(cartList);

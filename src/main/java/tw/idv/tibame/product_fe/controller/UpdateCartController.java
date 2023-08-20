@@ -16,7 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.google.gson.Gson;
 
 import tw.idv.tibame.product_fe.service.ProductService;
-import tw.idv.tibame.product_fe.service.ProductServiceImpl;
 
 @WebServlet("/updateCart")
 public class UpdateCartController extends HttpServlet {
@@ -34,25 +33,24 @@ public class UpdateCartController extends HttpServlet {
 		String username = (String) session.getAttribute("uName");
 		int uid = 0;
 
-		HashMap<Integer, Integer> cartList = null;
+		HashMap<Integer, Integer> cartList = (HashMap<Integer, Integer>) session.getAttribute("cartList");
 
-		if (username == null) {
-			cartList = (HashMap<Integer, Integer>) session.getAttribute("cartList");
-		} else if (username != null) {
+		if (username != null) {
 			uid = (int) session.getAttribute("uid");
-			cartList = service.getCartListMapForMember(session, uid);
+			cartList = service.getCartListMapForMember(cartList, uid);
 		}
-
+		
 		int p_id = Integer.parseInt(req.getParameter("p_id"));
 		int quantity = Integer.parseInt(req.getParameter("quantity"));
 		System.out.println("update的p_id = " + p_id);
 		System.out.println("update的quantity = " + quantity);
 
 		System.out.println("update之前的原本的CartList =" + cartList);
-		service.updateCart(req, p_id, quantity, cartList);
+		cartList = service.updateCart(p_id, quantity, cartList);
+		req.getSession().setAttribute("cartList", cartList);
 
 		if (username != null) {
-			service.saveCartToRedis(session, uid);
+			service.saveCartToRedis(cartList, uid);
 		}
 
 		// 檢查欲增加數量有沒有大於商品庫存數量, 有的話直接回傳錯誤訊息就結束
@@ -63,9 +61,7 @@ public class UpdateCartController extends HttpServlet {
 		}
 
 		int subtotal = service.getCartSubTotal(cartList);
-		String newCartList = gson.toJson(session.getAttribute("cartList"));
-
-		String message = "{\"status\":\"true\",\"cartlist\":" + gson.toJson(newCartList) + ",\"subtotal\":" + subtotal
+		String message = "{\"status\":\"true\",\"cartlist\":" + gson.toJson(cartList) + ",\"subtotal\":" + subtotal
 				+ ",\"total\":" + (subtotal + 120) + "}"; // 運費固定120
 
 		resp.getWriter().write(message);
