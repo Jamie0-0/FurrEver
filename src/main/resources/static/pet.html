@@ -74,7 +74,7 @@
                                     <i class="fa-solid fa-bars"></i>
                                 </span>
                             </button>
-                            <a href="index.html" class="web-logo nav-logo">
+                            <a href="furrEverIndex.html" class="web-logo nav-logo">
                                 <img src="assets/images/logo/1.png" class="img-fluid blur-up lazyload" alt="">
                             </a>
                             <div class="rightside-box">
@@ -90,15 +90,15 @@
                                             </div>
                                         </a>
                                     </li>
-                                 <!-- 購物車 -->
-                                 <li class="right-side">
-                                    <div>
-                                        <button type="button" class="btn p-0 position-relative header-wishlist">
-                                            <a href="cart.html"><i data-feather="shopping-cart"></i>
-                                            </a>
-                                        </button>
-                                    </div>
-                                </li>
+                                    <!-- 購物車 -->
+                                    <li class="right-side">
+                                        <div>
+                                            <button type="button" class="btn p-0 position-relative header-wishlist">
+                                                <a href="cart.html"><i data-feather="shopping-cart"></i>
+                                                </a>
+                                            </button>
+                                        </div>
+                                    </li>
                                     <!-- 聊天室 -->
                                     <li class="right-side">
                                         <a href="#" class="btn p-0 position-relative header-wishlist">
@@ -151,10 +151,11 @@
                                                     data-bs-toggle="dropdown">出遊</a>
                                                 <ul class="dropdown-menu">
                                                     <li>
-                                                        <a class="dropdown-item" href="#">舉辦活動</a>
+                                                        <a class="dropdown-item"
+                                                            href="host-event-statement.html">舉辦活動</a>
                                                     </li>
                                                     <li>
-                                                        <a class="dropdown-item" href="#">參加活動</a>
+                                                        <a class="dropdown-item" href="events.html">參加活動</a>
                                                     </li>
                                                 </ul>
                                             </li>
@@ -324,7 +325,7 @@
                     <div class="col-xl-4 col-lg-3 col-sm-6">
                         <div class="footer-logo">
                             <div class="theme-logo">
-                                <a href="index.html">
+                                <a href="furrEverIndex.html">
                                     <img src="assets/images/logo/2.png" class="blur-up lazyload" alt="">
                                 </a>
                             </div>
@@ -646,23 +647,27 @@
                         console.log("請求錯誤");
                     });
             }
-            $("a#logout").on("click", function () {
-                fetch("logout", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    }
-                })
-                    .then(responce => responce.json())
-                    .then(data => {
+
+        });
+        $("a#logout").on("click", function (e) {
+            e.preventDefault();
+            fetch("logout", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                }
+            })
+                .then(responce => responce.json())
+                .then(data => {
+                    if (data.logoutsuccess === 1) {
+
                         alert("登出成功");
                         sessionStorage.clear();
                         location.href = "login.html";
+                    }
 
-                    })
-            })
-
-        });
+                })
+        })
     </script>
 </body>
 

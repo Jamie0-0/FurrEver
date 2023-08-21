@@ -24,7 +24,7 @@ public class AddPetController {
 	
 	@PostMapping
 	public ResponseEntity<?> add(@RequestBody List<Pet> petlist) {
-//		System.out.println(petlist);
+
 		List<Pet> addedPets = new ArrayList<>();
 		for (Pet pet2 : petlist) {
 			Pet result = petService.add(pet2);
