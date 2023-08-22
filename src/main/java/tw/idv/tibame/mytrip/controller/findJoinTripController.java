@@ -10,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import tw.idv.tibame.mytrip.service.MyTripService;
@@ -24,11 +26,12 @@ public class findJoinTripController {
 	private MyTripService tripService;
 
 	@PostMapping
-	public ResponseEntity<?> findHistorytrip(HttpSession session) {
+	public ResponseEntity<?> findJointrip(HttpSession session , @RequestParam Integer tActId) {
 		Integer uid = (Integer) session.getAttribute("uid");
+		System.out.println(tActId);
 		Map<String, Object> response = new HashMap<>();
 		if (uid != null) {
-			List<MyTrip> triplist = tripService.selectJoinTrip(uid);
+			List<MyTrip> triplist = tripService.selectJoinTrip(tActId);
 			if (triplist.isEmpty()) {
 				response.put("noAct",0);
 				return ResponseEntity.ok(response);

@@ -66,7 +66,6 @@ public class UserServiceImpl implements UserService {
 		Optional<User> userOptional = userDao.findById(uid);
 		if (userOptional.isPresent()) {
 			// 如果找到了用戶，則返回該用戶對象
-//			userOptional.get().setUPwd("");
 			return userOptional.get();
 		}
 		return null;

@@ -24,10 +24,10 @@ public class FindPetController {
 	@PostMapping
 	public ResponseEntity<?> findPet(HttpSession session) {
 		Integer uid = (Integer) session.getAttribute("uid");
-		System.out.println(uid);
+
 		if (uid != null) {
 			List<Pet> petlist = petService.findAllByPetUid(uid);
-			System.out.println("123");
+
 			return ResponseEntity.ok(petlist);
 
 		} else {

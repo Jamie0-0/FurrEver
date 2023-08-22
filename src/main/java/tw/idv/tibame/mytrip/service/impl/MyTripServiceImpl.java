@@ -62,8 +62,8 @@ public class MyTripServiceImpl implements MyTripService {
 	}
 
 	@Override
-	public List<MyTrip> selectJoinTrip(Integer uid) {
-		return tripJdbcDao.findJoinTripByUid(uid);
+	public List<MyTrip> selectJoinTrip(Integer tActId) {
+		return tripJdbcDao.findJoinTripByUid(tActId);
 	}
 
 	@Override

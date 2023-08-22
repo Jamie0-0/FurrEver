@@ -30,13 +30,5 @@ public class MemberCenter {
 		return new ResponseEntity<>("查無會員資料", HttpStatus.BAD_REQUEST);
 	}
 
-//	@GetMapping("memberCentr/friend")
-//	public ResponseEntity<?> OtherUser(HttpSession session, @RequestParam Integer fuid) {
-//		Integer uid = (Integer) session.getAttribute("uid");
-//		if (uid != null) {
-//			User user = service.findUser(uid);
-//			return new ResponseEntity<User>(user, HttpStatus.OK);
-//		}
-//
-//	}
+
 }
